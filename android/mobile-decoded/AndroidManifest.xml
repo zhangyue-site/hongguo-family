@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:compileSdkVersion="35" android:compileSdkVersionCodename="15" package="cn.yue.hongguo.mobile" platformBuildVersionCode="35" platformBuildVersionName="15">
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-feature android:name="android.software.leanback" android:required="false"/>
+    <uses-feature android:name="android.hardware.touchscreen" android:required="false"/>
+    <application android:allowBackup="false" android:banner="@drawable/banner" android:extractNativeLibs="true" android:icon="@drawable/icon" android:label="红果·手机适配" android:theme="@style/AppTheme" android:usesCleartextTraffic="true">
+        <provider android:authorities="cn.yue.hongguo.mobile.update" android:exported="false" android:grantUriPermissions="true" android:name="cn.hongguo.tv.UpdateProvider"/>
+        <activity android:configChanges="keyboardHidden|orientation|screenSize" android:exported="true" android:name="cn.hongguo.tv.MobileActivity" android:resizeableActivity="true" android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+    </application>
+</manifest>

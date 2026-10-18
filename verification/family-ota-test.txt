@@ -1,0 +1,11 @@
+2026-10-18 Asia/Shanghai
+Phone + TV 0.2.0-family-beta versionCode2, B5 certificate verified on106.
+NAS guest copy read back all file SHA256, passed.
+Public HTTPS mobile and tv manifest + full APK size/SHA256, passed.
+Android12 redroid 127.0.0.1:15555: 17 OTA validation cases passed using app_process.
+Cases: valid manifest; wrong channel/package/certificate/hash/size/version; HTTP, foreign host, wrong channel path, explicit port, userinfo and unrelated path rejected; SHA256 known vector.
+Both APKs installed (incremental unsupported; normal streamed fallback succeeded).
+Both explicit Activities cold started Status ok.
+No device proxy settings changed.
+Not yet tested: physical ARM playback, remote control, actual version-to-version system installer upgrade.
+Additional app_process network/archive integration attempt exited137 (Killed), no result obtained; not counted as passed. Public HTTPS full download was verified separately on macOS.

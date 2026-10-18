@@ -1,0 +1,5 @@
+2026-10-18: Personal phone adaptation based on HongguoTV 0.5.8.
+Original author: 渠道有数. Original notices preserved.
+Added portrait layout, bottom navigation, two-column cards and scrolling controls.
+Package: cn.yue.hongguo.mobile; independently signed. Not an upstream or official release.
+Original automatic update channel disabled; adapted builds require manual installation.

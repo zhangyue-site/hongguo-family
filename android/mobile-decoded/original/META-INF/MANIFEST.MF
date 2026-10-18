@@ -1,0 +1,38 @@
+Manifest-Version: 1.0
+
+Name: AndroidManifest.xml
+SHA-256-Digest: sGyNZgJYCaj57RZP0LpWUNygMmI2FFy/FqJtJwHWg3I=
+
+Name: assets/APACHE-2.0.txt
+SHA-256-Digest: z8d0m5b2O9McPEK1xHG/dWgUBT6EfBDz6wA0F7xSPTA=
+
+Name: assets/JNA-LICENSE.txt
+SHA-256-Digest: UhuycaxW4OKaGxtoi5SvF9ANN4/I5jR42Miyp8SiKdA=
+
+Name: assets/ORIGIN-NOTICE.txt
+SHA-256-Digest: zwohiggqv9gs/G/n8oXJb3WTp+YzB8nvlM0eEYMiyRQ=
+
+Name: assets/signer-cert.bin
+SHA-256-Digest: xEtPHiE0kONRj4X6jazh59Urd9PTYO8GzCe2Virftiw=
+
+Name: classes.dex
+SHA-256-Digest: VQOCnDjCb83dGAhEyMfsbtUnaxU+zS7HDCDZOEUJseA=
+
+Name: lib/arm64-v8a/libhongguo_jnidispatch.so
+SHA-256-Digest: lupBBwK1L7N/8hnnpfq6QZRbF+laoRGT3uDJUAOqSZY=
+
+Name: lib/arm64-v8a/libhongguo_signer.so
+SHA-256-Digest: INP43Y0NR+TjwNoPN36vaecqcsjSFMpW5udJPGWo/C0=
+
+Name: res/drawable-anydpi-v21/icon.xml
+SHA-256-Digest: W9PdnYsw82TPGHiIIeuf55GKOWoh0LMdnYOWeYHdR0s=
+
+Name: res/drawable/banner.xml
+SHA-256-Digest: 2TOFfmTusZRepP48K/RUfKlVm43uKgqrLjmGX68LFS8=
+
+Name: res/drawable/icon.png
+SHA-256-Digest: qEv3E6DkuTTl1sfelM49qXRtzLr/+aO2mwzcjQ5rxpQ=
+
+Name: resources.arsc
+SHA-256-Digest: v94dVvH+93U+sXbpaLGUZtbBaCfi2+NvY1IhctyqclE=
+

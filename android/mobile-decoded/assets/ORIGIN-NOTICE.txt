@@ -1,0 +1,14 @@
+红果电视端 / Hongguo TV
+Copyright © 2026 渠道有数及贡献者
+
+由渠道有数独立维护的第三方客户端，与红果官方无隶属关系。
+原发行入口：https://github.com/waligoraamodio288-rgb/hongguo-desktop-releases
+统一下载页：https://channel-ai-practice-wj.waligoraamodio288.chatgpt.site/
+问题反馈：https://github.com/waligoraamodio288-rgb/hongguo-desktop-releases/issues
+
+欢迎转载介绍，请保留渠道有数署名及原版链接；第三方镜像请标明身份，避免冒充原维护者。
+请在原发行页核对同版本 APK 的 SHA-256 摘要和安装签名证书摘要。
+签名用于识别发行来源，客户端核验不是不可绕过的防复制保护。
+
+相关品牌、剧集、海报及第三方组件归各自权利方所有，本声明不改变第三方组件许可。
+JNA 5.10.0 选择 Apache License 2.0，完整文本见包内 APACHE-2.0.txt，原双许可说明见 JNA-LICENSE.txt。

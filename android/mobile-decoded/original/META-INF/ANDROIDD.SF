@@ -1,0 +1,41 @@
+Signature-Version: 1.0
+Created-By: 1.0 (Android)
+SHA-256-Digest-Manifest: 9u9fbQ012HxL1rsd8L5zKFeZjOf9dIYILm429mcMFrY=
+X-Android-APK-Signed: 2, 3
+
+Name: AndroidManifest.xml
+SHA-256-Digest: oZvKjwY8h9HE92PFUdqPVpB/xfXxxQv2ryr+I/H5mAc=
+
+Name: assets/APACHE-2.0.txt
+SHA-256-Digest: V4YSzuGZ3ZKaPlSfWjeBbvLnMW9YPLs/ht+ZEyKcB4Q=
+
+Name: assets/JNA-LICENSE.txt
+SHA-256-Digest: jh60jjQ3jVW2ktNjWA579uwTgWRTDpWmOuRyrY4if9c=
+
+Name: assets/ORIGIN-NOTICE.txt
+SHA-256-Digest: iSeOAF0UJKPKELXXA5zEvQlztH5G5vB0/E3WF7Caokw=
+
+Name: assets/signer-cert.bin
+SHA-256-Digest: YdlFgFnv/k7bXclhhpoB+okg1AUelzl+j4SocriHUWE=
+
+Name: classes.dex
+SHA-256-Digest: u9D8Z+eRaqJBtpPlqFPod99OgdhJra/3l5/8pYLXFQs=
+
+Name: lib/arm64-v8a/libhongguo_jnidispatch.so
+SHA-256-Digest: 0Q2FhREAl0Ech6C4CRAbcmgZdfSwOkCSjppSlOtf5VU=
+
+Name: lib/arm64-v8a/libhongguo_signer.so
+SHA-256-Digest: DGuif2cS7o8w/wOP8Jmixm+CA2+Vev0hjV9jsQLpRls=
+
+Name: res/drawable-anydpi-v21/icon.xml
+SHA-256-Digest: vERnz/5HvaKtTH0mTzNny7PUypL9qFNVt8tKiIwjKwY=
+
+Name: res/drawable/banner.xml
+SHA-256-Digest: PmYBkkneGEfzG5tWijBBKsh+DrhoYgIDFe6TPp2OYok=
+
+Name: res/drawable/icon.png
+SHA-256-Digest: tApuYXmWAaIWvhAh6zci8xdwAfIVhIc9RMkA8AMnJnY=
+
+Name: resources.arsc
+SHA-256-Digest: +95SzFhE94lbIafJ5mektr6jsoBmACN10q4NXnFhxSk=
+

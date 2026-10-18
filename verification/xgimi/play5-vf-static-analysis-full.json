@@ -1,0 +1,65 @@
+{
+  "model": "Play5",
+  "serialPrefix": "VF",
+  "displayedVersionUserSupplied": "6.17.100.03",
+  "officialFirmwareLabel": "V1.3.19 (VF)",
+  "matchedToDisplayedVersion": false,
+  "sampleBytes": 4194304,
+  "sampleSha256": "a412c2cf05a3430e9ca9149046ba0376a7a9fb3939a851832a28e9f7ff62f4d2",
+  "reeOffset": 4096,
+  "reeLength": 1855324160,
+  "payloadEntropy": 7.999953312035544,
+  "extractedSettingsApk": false,
+  "adbEntryVerified": false,
+  "deviceWrites": false,
+  "finding": "Full official VF historical container read-only scanned. REE/MTK wrapper not decoded. No settings APK extracted; no proven mapping to displayed 6.17.100.03; no verified hidden ADB entry. Signature hits require structural validation and cannot alone identify a filesystem.",
+  "firmwareBytes": 1855328832,
+  "firmwareSha256": "7c3e1e1c9e5cab4323df36bb12435fb4c1c38d297490b60201970c80a1ad55fb",
+  "entropySamples": [
+    {
+      "offset": 4096,
+      "entropy": 7.996914046605541
+    },
+    {
+      "offset": 1048576,
+      "entropy": 7.9971321486992855
+    },
+    {
+      "offset": 927664416,
+      "entropy": 7.9970304124304805
+    },
+    {
+      "offset": 1854280256,
+      "entropy": 7.997129695344092
+    }
+  ],
+  "signatureOffsets": {
+    "androidBoot": [],
+    "zipLocal": [
+      96975764,
+      1161053398
+    ],
+    "zipEnd": [],
+    "squashfs": [],
+    "cpioNewc": [],
+    "erofs": [],
+    "androidSparse": []
+  },
+  "signatureWarning": "Unvalidated magic hits may be random; no APK or filesystem declared extracted.",
+  "displayedVersionLiteralFound": false,
+  "zipCandidateValidation": [
+    {
+      "offset": 96975764,
+      "versionNeeded": 28665,
+      "method": 34277,
+      "plausibleHeader": false
+    },
+    {
+      "offset": 1161053398,
+      "versionNeeded": 9374,
+      "method": 24692,
+      "plausibleHeader": false
+    }
+  ],
+  "plainZipCandidateValidated": false
+}
