@@ -1,6 +1,9 @@
 # Curated source repository; unrelated binaries and credentials stay local.
 *
 !/.gitignore
+!/.github/
+!/.github/workflows/
+!/.github/workflows/*.yml
 !/README.md
 !/build-family.py
 !/release-config.json

@@ -105,3 +105,13 @@ Play5 VF官方历史包下载到106分析中；前4MiB带REE偏移标记、MTK�
 新增跨机器tools/sign-family.py，SDK路径支持ANDROID_SDK_ROOT/ANDROID_HOME；在106用实际密钥对手机/盒子两份既有unsigned包签名，证书B5、包名和versionCode均验证通过，测试输出随临时目录删除，既有发行包与OTA未变。
 原计划自动Actions工作流被GitHub拒绝推送，明确原因当前OAuth缺少workflow scope；拒绝的本地提交已撤回，仅保留文档模板docs/workflows/build-signed.yml。模板YAML解析通过；云端工作流未启用、未运行。合作者接受邀请后可按README在GitHub网页添加.github/workflows/build-signed.yml，利用已存的密码Secret手动生成签名包；当前OAuth不能完成该步。模板只手动构建候选包，不自动部署。
 代码/模板/协作说明将推送私人仓库main；整体实机播放、遥控与覆盖升级验收仍未完成。
+
+## 启用GitHub手动云打包接手 2026-10-18T13:39:59.961168+08:00
+用户明确授权补充workflow权限并启用云端打包，要求YangLuSE后续直接在GitHub构建。本机工作区干净；准备刷新既有GitHub CLI OAuth的workflow scope，启用已有模板并触发实际云端构建，验证同B5签名两包。私人keystore附件与Actions Secret已就绪。现有公开OTA不在本轮部署范围。
+
+## 等待GitHub设备授权 2026-10-18T13:41:38.860835+08:00
+已启动 gh auth refresh --hostname github.com --scopes workflow，等待用户在GitHub设备授权页登录并确认；不保存设备码到仓库。仓库Actions enabled=true、allowed_actions=all已读回。现有模板已复制到本机.github/workflows/build-signed.yml，并更新.gitignore允许该目录，YAML解析通过；这两项尚未提交或推送，远端仍无启用的工作流。CLI授权进程仍在等待，未声称权限已增加。
+恢复：先核对 gh api user 及当前token scopes，若workflow已授权则提交并推送本地工作流；随后 gh workflow run build-signed.yml --repo xiaoletian64/hongguo-family --ref main，实际验证云构建两包及B5证书。若设备码已过期则重新启动授权，不复用旧码。云端构建未执行；现有OTA/APK不改动。
+
+## workflow授权已核验 2026-10-18T13:45:38.855381+08:00
+用户确认增加权限后，检查发现原CLI缓存账号zy15801543188而API返回xiaoletian64，导致refresh拒绝账号不匹配；已通过同一已登录GitHub会话重新绑定xiaoletian64。API响应头现明确含repo、workflow，未暴露token。准备提交.github/workflows/build-signed.yml并实际触发打包。授权进程均已结束；云构建尚未验收。
