@@ -90,3 +90,9 @@ Play5 VF官方历史包下载到106分析中；前4MiB带REE偏移标记、MTK�
 
 ## 私有Git与合作者分享接手 2026-10-18T13:21:21.984573+08:00
 用户授权将本项目上传本人私人Git仓库并分享给既有其他项目合作者，且授权自行查找该合作者。正在核对实际GitHub身份与已有仓库直接合作者。当前目录尚无Git仓库；准备仅纳入Android适配源码、解包工程/来源许可、构建及OTA脚本、验证说明与两份测试APK，排除签名私钥、凭据、Windows运行时和固件。实机验收仍未通过；不会因上传而更改此状态。确认唯一合作者后以最小只读权限邀请（未授权写入权限）。
+
+## 私人仓库上传与分享完成 2026-10-18T13:25:05.340488+08:00
+本轮由Codex执行。用户指定YangLuSE后，已创建并读回确认私人仓库 https://github.com/xiaoletian64/hongguo-family ，main初始提交cb011ebf03bbad4b8c4c25b40aa8289d45221694。423个文件保存Java新增源码、smali/资源工程、来源许可、构建/OTA脚本、验证结果与交接；未纳入私钥、密码、Windows运行时或固件。Python脚本语法检查通过，git暂存路径与私钥标记检查通过。
+已创建私人预发布 https://github.com/xiaoletian64/hongguo-family/releases/tag/v0.2.0-family-beta ，两包、两个清单和SHA256SUMS共5附件，远端大小及SHA256 digest全部匹配。未改变现有OTA发布、APK或NAS。
+已向YangLuSE发出协作者邀请，GitHub读回pending，邀请ID338306361，权限write；尚未接受。先尝试pull只读被GitHub以个人私人仓库不支持拒绝，随后按用户指定合作者及既有pm-handoff同等write权限发送。仓库保持private，无其他人被邀请。用户可转发仓库链接让其接受邀请。
+本轮上传分享交付完成；整体开发任务仍未完成，Play5本地首次安装、实体播放/遥控、覆盖升级和当前固件ADB入口均维持未验收。后续从此私人仓库main恢复；本机root已初始化Git，原Windows分析资料等仍在本机和106独立目录，不入Git。
