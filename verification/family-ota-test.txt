@@ -9,3 +9,4 @@ Both explicit Activities cold started Status ok.
 No device proxy settings changed.
 Not yet tested: physical ARM playback, remote control, actual version-to-version system installer upgrade.
 Additional app_process network/archive integration attempt exited137 (Killed), no result obtained; not counted as passed. Public HTTPS full download was verified separately on macOS.
+2026-10-18: Portable collaborator signer tested on106 against both unsigned APKs using existing B5 key: certificate/package/version verified. Published APKs and OTA unchanged. Workflow template YAML parsed; cloud workflow activation rejected for missing OAuth workflow scope, no cloud build claimed.

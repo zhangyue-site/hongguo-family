@@ -1,0 +1,39 @@
+name: Build signed Android APKs
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Select Java 17
+        run: |
+          echo "JAVA_HOME=$JAVA_HOME_17_X64" >> "$GITHUB_ENV"
+          echo "$JAVA_HOME_17_X64/bin" >> "$GITHUB_PATH"
+      - name: Install Android SDK components
+        run: '"$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" "platforms;android-35" "build-tools;35.0.0"'
+      - name: Build unsigned candidates
+        run: python3 build-family.py
+      - name: Download private encrypted keystore
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          umask 077
+          gh release download v0.2.0-family-beta --repo "$GITHUB_REPOSITORY" --pattern hongguo-family.keystore --dir "$RUNNER_TEMP/hongguo-signing"
+      - name: Sign and verify both APKs
+        env:
+          HONGGUO_STORE_PASSWORD: ${{ secrets.HONGGUO_STORE_PASSWORD }}
+        run: python3 tools/sign-family.py --keystore "$RUNNER_TEMP/hongguo-signing/hongguo-family.keystore"
+      - name: Remove runner keystore
+        if: always()
+        run: rm -f "$RUNNER_TEMP/hongguo-signing/hongguo-family.keystore"
+      - name: Upload signed candidates
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: hongguo-signed-${{ github.run_number }}
+          path: signed-build/
+          if-no-files-found: error
+          retention-days: 14

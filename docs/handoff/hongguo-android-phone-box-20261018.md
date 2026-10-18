@@ -96,3 +96,12 @@ Play5 VF官方历史包下载到106分析中；前4MiB带REE偏移标记、MTK�
 已创建私人预发布 https://github.com/xiaoletian64/hongguo-family/releases/tag/v0.2.0-family-beta ，两包、两个清单和SHA256SUMS共5附件，远端大小及SHA256 digest全部匹配。未改变现有OTA发布、APK或NAS。
 已向YangLuSE发出协作者邀请，GitHub读回pending，邀请ID338306361，权限write；尚未接受。先尝试pull只读被GitHub以个人私人仓库不支持拒绝，随后按用户指定合作者及既有pm-handoff同等write权限发送。仓库保持private，无其他人被邀请。用户可转发仓库链接让其接受邀请。
 本轮上传分享交付完成；整体开发任务仍未完成，Play5本地首次安装、实体播放/遥控、覆盖升级和当前固件ADB入口均维持未验收。后续从此私人仓库main恢复；本机root已初始化Git，原Windows分析资料等仍在本机和106独立目录，不入Git。
+
+## 协作签名接手 2026-10-18T13:35:17.089875+08:00
+用户明确授权上传既有签名密钥，让YangLuSE后续同签名打包。本轮计划将现有加密keystore作为私人仓库Release附件，密码写仓库Actions Secret，不写Git正文/日志；补充只手动触发的构建签名工作流与协作脚本。仓库private已再次读回。原106vault保留，现有APK和OTA不替换。
+
+## 协作签名交付 2026-10-18T13:38:11.248152+08:00
+用户明确要求上传既有签名密钥，以便YangLuSE同签名打包，取代此前不共享密钥的安排。已将106现有加密keystore副本作为私人Release v0.2.0-family-beta附件hongguo-family.keystore上传，附件大小和SHA256读回匹配；密码成功写入仓库Actions Secret HONGGUO_STORE_PASSWORD，仅核对名称，未记录值。本机上传临时密钥副本已清理；106原件保留，未上传NAS/公开OTA或Git历史。
+新增跨机器tools/sign-family.py，SDK路径支持ANDROID_SDK_ROOT/ANDROID_HOME；在106用实际密钥对手机/盒子两份既有unsigned包签名，证书B5、包名和versionCode均验证通过，测试输出随临时目录删除，既有发行包与OTA未变。
+原计划自动Actions工作流被GitHub拒绝推送，明确原因当前OAuth缺少workflow scope；拒绝的本地提交已撤回，仅保留文档模板docs/workflows/build-signed.yml。模板YAML解析通过；云端工作流未启用、未运行。合作者接受邀请后可按README在GitHub网页添加.github/workflows/build-signed.yml，利用已存的密码Secret手动生成签名包；当前OAuth不能完成该步。模板只手动构建候选包，不自动部署。
+代码/模板/协作说明将推送私人仓库main；整体实机播放、遥控与覆盖升级验收仍未完成。

@@ -6,7 +6,7 @@
 - HTTPS入口：`https://nas.zhangyue.site/hongguo-ota/`；清单在各渠道 `latest.json`。
 - 106发行缓存：`/opt/hongguo-analysis/family-ota/public/`；只放公开发行物，不公开固件、私钥或私人文件。
 - 包名：`site.zhangyue.hongguo.mobile`、`site.zhangyue.hongguo.tv`。两者都是ARM32/ARM64通用测试包。
-- 签名：既有乐天B5家族；私钥只在106的现有vault。原包和旧个人版可共存，不自动迁移数据。
+- 签名：既有乐天B5家族；私钥原件保留在106的现有vault；用户授权的加密副本在私人仓库Release附件，密码存Actions Secret。原包和旧个人版可共存，不自动迁移数据。
 
 首次安装后，应用启动会检查更新，有新版才提示；原应用更新页的检查按钮也转入新渠道。客户端只接受指定HTTPS来源，拒绝重定向，限制清单/包体大小；下载后校验SHA256、实际包名、递增版本及APK证书。清单没有独立数字签名；信任边界为HTTPS与固定APK证书。系统安装仍需用户确认和未知来源授权。
 
@@ -24,3 +24,7 @@
 0.2.0-family-beta已完成构建和B5证书验证。个人云文件逐个读回哈希通过；外网HTTPS清单和两包下载哈希通过。具体模拟安装及OTA输入验证结果见verification/family-ota-test.txt。实体播放、遥控、真正旧版本覆盖升级尚待验证。不能将发布测试包等同于播放功能验收。
 
 Nginx仅新增nas.zhangyue.site的/hongguo-ota/静态路径；修改前备份在106 `/opt/hongguo-analysis/family-ota/nginx-before.conf`（受控权限）。没有开放整个NAS公共空间。
+
+## 私人合作者构建
+
+2026-10-18 用户明确授权共享现有签名密钥，供YangLuSE同签名打包。私人Release附件为hongguo-family.keystore，别名notesvault；Actions Secret为HONGGUO_STORE_PASSWORD。仓库Actions Secret已创建；OAuth缺少workflow权限，自动流程尚未启用。合作者可在GitHub网页将docs/workflows/build-signed.yml模板保存到.github/workflows/build-signed.yml，提交后手动运行Build signed Android APKs生成签名候选包，使用tools/sign-family.py，不触发106/NAS部署。具体说明见根README。密码不写源码、交接或日志。

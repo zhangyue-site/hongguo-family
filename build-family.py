@@ -1,6 +1,6 @@
 from pathlib import Path
-import subprocess, shutil, re, zipfile, json
-R=Path(__file__).resolve().parent; S=Path.home()/'Library/Android/sdk';T=S/'build-tools/35.0.0';B=R/'family-build'; B.mkdir(exist_ok=True)
+import subprocess, shutil, re, zipfile, json, os
+R=Path(__file__).resolve().parent; S=Path(os.environ.get('ANDROID_SDK_ROOT') or os.environ.get('ANDROID_HOME') or str(Path.home()/'Library/Android/sdk'));T=S/'build-tools/35.0.0';B=R/'family-build'; B.mkdir(exist_ok=True)
 C=json.loads((R/'release-config.json').read_text());VC=C['versionCode'];VN=C['versionName']
 assert isinstance(VC,int) and VC>0 and re.fullmatch(r'[a-zA-Z0-9._-]+',VN)
 def run(*a):subprocess.run([str(x) for x in a],check=True)

@@ -23,7 +23,7 @@
 
 ## 构建
 
-需要 JDK 17、Android SDK platform 35、build-tools 35.0.0，以及 Python 3。当前脚本使用 macOS SDK 默认位置 `$HOME/Library/Android/sdk`，其他机器需调整脚本中的 `S`。
+需要 JDK 17、Android SDK platform 35、build-tools 35.0.0，以及 Python 3。脚本优先使用 `ANDROID_SDK_ROOT` 或 `ANDROID_HOME`；macOS 默认使用 `$HOME/Library/Android/sdk`。
 
 ```sh
 python3 build-family.py
@@ -31,7 +31,7 @@ python3 build-family.py
 
 输出位于忽略的 `family-build/`，为未签名安装包。`mobile-stubs` 仅供编译，构建不会把 MainActivity stub 放入 APK。`android/mobile-decoded` 保存修改后的基础工程；构建时分别生成手机、盒子 Manifest，并合入独立新增 dex 与 ARM32 库。
 
-发版前修改 `release-config.json`，严格增加 `versionCode` 并使用新文件名。签名由 106 现有受控环境执行，私钥与签名密码不在 Git 中；请参阅 [OTA 运维说明](docs/OTA.md)。脚本不会自动把新构建升级为已验收版本。
+发版前修改 `release-config.json`，严格增加 `versionCode` 并使用新文件名。签名可由 106 现有环境执行，也可按下方协作流程打包；签名私钥与密码不写入 Git 历史。请参阅 [OTA 运维说明](docs/OTA.md)。脚本不会自动把新构建升级为已验收版本。
 
 ## 目录
 
@@ -48,4 +48,14 @@ python3 build-family.py
 
 保留 `android/mobile-decoded/assets/ORIGIN-NOTICE.txt`、`APACHE-2.0.txt`、`JNA-LICENSE.txt` 和个人修改说明。Apache-2.0 文本对应第三方组件 JNA，不据此宣称整个原应用由 Apache-2.0 授权。品牌、剧集和海报等权利归各自权利方所有。
 
-附带构建工具 apktool 3.0.3 来自 <https://github.com/iBotPeaches/Apktool>。Windows 原安装包、完整运行时、投影固件、私钥和密码均不纳入仓库。
+附带构建工具 apktool 3.0.3 来自 <https://github.com/iBotPeaches/Apktool>。Windows 原安装包、完整运行时、投影固件、私钥和密码均不纳入 Git 源码历史。按仓库所有者明确授权，加密 keystore 作为私人 Release 附件共享，密码存仓库 Actions Secret。
+
+## 合作者同签名打包
+
+仓库所有者已授权共享现有乐天B5签名。加密签名文件和Actions Secret已上传。当前OAuth授权缺少workflow权限，**工作流尚未启用**。接受邀请后，在GitHub网页 **Actions → New workflow → set up a workflow yourself**，将 [流程模板](docs/workflows/build-signed.yml) 保存为 `.github/workflows/build-signed.yml` 并提交。随后打开 **Actions → Build signed Android APKs → Run workflow**；成功后下载该次运行的 `hongguo-signed-*` Artifact，包含手机/投影 APK、两个渠道清单和校验值。该云端流程尚未实跑验收。
+
+- 加密密钥：[私人 Release 附件 hongguo-family.keystore](https://github.com/xiaoletian64/hongguo-family/releases/tag/v0.2.0-family-beta)，别名 `notesvault`。
+- 密码：仓库 Actions Secret `HONGGUO_STORE_PASSWORD`，自动注入签名步骤，不显示在日志。
+- 构建脚本：`build-family.py`；独立跨机器签名脚本：`tools/sign-family.py`，密码从同名环境变量读取。
+- 证书 SHA256：`b5aaac0eb0369165d34ee3bae1cddd637eaa2bc3566adf9e3f2dc2f5a1a473e4`；签名后会检查证书、包名、版本。
+- 模板启用后只手动触发并生成候选包，不会自动发布到个人云或106，不会替换现有版本。正式发新版本前必须增加 release-config.json 中的 versionCode/versionName 并验收。
