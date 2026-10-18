@@ -52,10 +52,12 @@ python3 build-family.py
 
 ## 合作者同签名打包
 
-仓库所有者已授权共享现有乐天B5签名。加密签名文件和Actions Secret已上传。当前OAuth授权缺少workflow权限，**工作流尚未启用**。接受邀请后，在GitHub网页 **Actions → New workflow → set up a workflow yourself**，将 [流程模板](docs/workflows/build-signed.yml) 保存为 `.github/workflows/build-signed.yml` 并提交。随后打开 **Actions → Build signed Android APKs → Run workflow**；成功后下载该次运行的 `hongguo-signed-*` Artifact，包含手机/投影 APK、两个渠道清单和校验值。该云端流程尚未实跑验收。
+仓库所有者已授权共享现有乐天B5签名。**工作流已启用并通过首次云端构建。** 接受邀请后，打开 **Actions → Build signed Android APKs → Run workflow**，选择main并运行。成功后下载该次运行的 `hongguo-signed-*` Artifact，包含手机/投影 APK、两个渠道清单和校验值，保留14天。无需再手动添加工作流。
+
+[首次成功运行与产物](https://github.com/xiaoletian64/hongguo-family/actions/runs/39101666240)：已下载两份云端APK，复核SHA256、B5签名、包名、版本及ARM32/ARM64库均通过。当前流程定义位于 [.github/workflows/build-signed.yml](.github/workflows/build-signed.yml)，文档目录保留同版参考模板。
 
 - 加密密钥：[私人 Release 附件 hongguo-family.keystore](https://github.com/xiaoletian64/hongguo-family/releases/tag/v0.2.0-family-beta)，别名 `notesvault`。
 - 密码：仓库 Actions Secret `HONGGUO_STORE_PASSWORD`，自动注入签名步骤，不显示在日志。
 - 构建脚本：`build-family.py`；独立跨机器签名脚本：`tools/sign-family.py`，密码从同名环境变量读取。
 - 证书 SHA256：`b5aaac0eb0369165d34ee3bae1cddd637eaa2bc3566adf9e3f2dc2f5a1a473e4`；签名后会检查证书、包名、版本。
-- 模板启用后只手动触发并生成候选包，不会自动发布到个人云或106，不会替换现有版本。正式发新版本前必须增加 release-config.json 中的 versionCode/versionName 并验收。
+- 此流程只手动触发并生成候选包，不会自动发布到个人云或106，不会替换现有版本。正式发新版本前必须增加 release-config.json 中的 versionCode/versionName 并验收。

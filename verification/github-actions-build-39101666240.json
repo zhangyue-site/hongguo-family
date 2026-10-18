@@ -1,0 +1,23 @@
+{
+  "runUrl": "https://github.com/xiaoletian64/hongguo-family/actions/runs/39101666240",
+  "result": "success",
+  "artifacts": [
+    {
+      "channel": "mobile",
+      "size": 4916631,
+      "sha256": "9510fb1573b595b942babc93681c3286c14bca6ae3331b2040e1300b413d5c1b",
+      "certificateSha256": "b5aaac0eb0369165d34ee3bae1cddd637eaa2bc3566adf9e3f2dc2f5a1a473e4",
+      "packageName": "site.zhangyue.hongguo.mobile",
+      "versionCode": 2
+    },
+    {
+      "channel": "tv",
+      "size": 4916631,
+      "sha256": "431b706581699a719bffa64734819143edfa1c9f88626b696fe938a37fccc28d",
+      "certificateSha256": "b5aaac0eb0369165d34ee3bae1cddd637eaa2bc3566adf9e3f2dc2f5a1a473e4",
+      "packageName": "site.zhangyue.hongguo.tv",
+      "versionCode": 2
+    }
+  ],
+  "deployedToOTA": false
+}

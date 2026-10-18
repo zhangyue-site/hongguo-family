@@ -27,4 +27,6 @@ Nginx仅新增nas.zhangyue.site的/hongguo-ota/静态路径；修改前备份在
 
 ## 私人合作者构建
 
-2026-10-18 用户明确授权共享现有签名密钥，供YangLuSE同签名打包。私人Release附件为hongguo-family.keystore，别名notesvault；Actions Secret为HONGGUO_STORE_PASSWORD。仓库Actions Secret已创建；OAuth缺少workflow权限，自动流程尚未启用。合作者可在GitHub网页将docs/workflows/build-signed.yml模板保存到.github/workflows/build-signed.yml，提交后手动运行Build signed Android APKs生成签名候选包，使用tools/sign-family.py，不触发106/NAS部署。具体说明见根README。密码不写源码、交接或日志。
+2026-10-18 用户明确授权共享现有签名密钥，供YangLuSE同签名打包。私人Release附件为hongguo-family.keystore，别名notesvault；Actions Secret为HONGGUO_STORE_PASSWORD。仓库Actions Secret和workflow权限已配置，.github/workflows/build-signed.yml已启用。合作者直接从Actions手动运行Build signed Android APKs生成签名候选包，使用tools/sign-family.py，不触发106/NAS部署。具体说明见根README。密码不写源码、交接或日志。
+
+2026-10-18 首次GitHub云端运行39101666240成功；本地下载产物后手机、盒子两包的SHA256、B5证书、包名、versionCode与双ARM库均通过。验证报告verification/github-actions-build-39101666240.json。此结果只证明云构建签名流程可用，不代替实体播放或覆盖升级验收。

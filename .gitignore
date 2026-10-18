@@ -21,6 +21,7 @@
 !/verification/OtaSelfTest.java
 !/verification/OtaNetworkTest.java
 !/verification/family-ota-test.txt
+!/verification/github-actions-build-*.json
 !/verification/xgimi/
 !/verification/xgimi/play5-vf-static-analysis-full.json
 !/android/

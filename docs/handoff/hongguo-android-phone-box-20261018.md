@@ -115,3 +115,9 @@ Play5 VF官方历史包下载到106分析中；前4MiB带REE偏移标记、MTK�
 
 ## workflow授权已核验 2026-10-18T13:45:38.855381+08:00
 用户确认增加权限后，检查发现原CLI缓存账号zy15801543188而API返回xiaoletian64，导致refresh拒绝账号不匹配；已通过同一已登录GitHub会话重新绑定xiaoletian64。API响应头现明确含repo、workflow，未暴露token。准备提交.github/workflows/build-signed.yml并实际触发打包。授权进程均已结束；云构建尚未验收。
+
+## GitHub云端打包已验收 2026-10-18T13:48:25.436314+08:00
+本轮Codex在用户确认授权后完成OAuth账号重绑定，实际API scopes包含workflow；既有repo/private与Actions Secret保持。已提交启用.github/workflows/build-signed.yml（e6fb04bd22f097c70c155d50d31877fc2286f95b），手动触发运行 https://github.com/xiaoletian64/hongguo-family/actions/runs/39101666240 ，结论success，build作业28秒，已生成hongguo-signed-1 artifact。
+下载云端产物后，两份APK的SHA256、大小、B5证书、对应包名、versionCode2、classes2.dex、ARM32/ARM64 signer库均通过。验证报告verification/github-actions-build-39101666240.json；成功截图verification/github-actions-build-success.png（本机保留）。临时runner密钥删除步骤成功，签名密钥不进入构建产物。
+协作者后续直接Actions→Build signed Android APKs→Run workflow（main），下载该运行Artifacts，保留14天；README与docs/OTA.md已更新为启用和实测状态。本次未触发NAS/106发布，也未替换旧版本APK。
+workflow权限、启用与实际打包的本轮交付已完成；整体任务仍待Play5首次本地安装、实体播放/遥控及覆盖升级验收。
