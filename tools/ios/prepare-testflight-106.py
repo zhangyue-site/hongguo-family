@@ -14,23 +14,6 @@ import urllib.request
 
 APP = '6824873494'
 ROOT = Path('/opt/hongguo-analysis/ios-release')
-DESCRIPTION = (
-    '红果家庭版测试版本：浏览真人短剧、漫剧与 AI 剧目录，搜索剧名，'
-    '播放来源已公开开放的剧集。收藏与观看历史保存在设备本地。'
-    '采用适配手机的深色界面和底部选集面板，当前播放集明显标记。'
-    '部分剧集因来源未开放而锁定。无需账号登录。'
-)
-NOTES = (
-    'No account or sign-in is required. Browse the live-action, animation or AI '
-    'catalogs, or search by title. Open a title and play an unlocked episode. '
-    'Only episodes publicly available from the source are playable; unavailable '
-    'episodes are marked locked. While playing, open the dark episode sheet to '
-    'see the highlighted current episode and switch to another unlocked episode. '
-    'Favorites and viewing history are stored locally on the device; there is no '
-    'cloud account or cloud sync. Test playback, seeking, pause/resume, episode '
-    'selection, rotation, and returning to the catalog. Playback requires network '
-    'access and availability of the public source.'
-)
 
 
 def main():
@@ -40,6 +23,7 @@ def main():
     parser.add_argument('--version', required=True)
     parser.add_argument('--state', required=True, type=Path,
                         help='Separate restricted prepared-state file for this build')
+    parser.add_argument('--metadata', type=Path, default=ROOT / 'metadata-zh-Hans.json')
     args = parser.parse_args()
     previous = {}
     expected = {'appId': APP, 'buildId': args.build_id,
@@ -48,6 +32,9 @@ def main():
         previous = json.loads(args.state.read_text())
         if any(previous.get(k) != v for k, v in expected.items()):
             raise ValueError('Prepared-state identity differs; use a new per-build state file')
+    metadata = json.loads(args.metadata.read_text())
+    if metadata['appId'] != APP or metadata['bundleId'] != 'site.zhangyue.hongguo.ios':
+        raise ValueError('Unexpected metadata identity')
     os.umask(0o077)
     sys.path.insert(0, '/opt/mathduel-deploy')
     import asc
@@ -89,10 +76,11 @@ def main():
     detail = api('GET', '/v1/apps/' + APP + '/betaAppReviewDetail')['data']
     api('PATCH', '/v1/betaAppReviewDetails/' + detail['id'], {'data': {
         'type': 'betaAppReviewDetails', 'id': detail['id'], 'attributes': {
-            **contact, 'demoAccountRequired': False, 'notes': NOTES}}})
+            **contact, 'demoAccountRequired': False, 'notes': metadata['reviewNotes']}}})
     locales = api('GET', '/v1/apps/' + APP + '/betaAppLocalizations')['data']
     locale = next((x for x in locales if x['attributes']['locale'] == 'zh-Hans'), None)
-    attrs = {'description': DESCRIPTION, 'feedbackEmail': contact['contactEmail']}
+    attrs = {'description': metadata['betaDescription'], 'feedbackEmail': contact['contactEmail'],
+             'marketingUrl': metadata['supportUrl']}
     if locale:
         api('PATCH', '/v1/betaAppLocalizations/' + locale['id'], {'data': {
             'type': 'betaAppLocalizations', 'id': locale['id'], 'attributes': attrs}})
@@ -102,7 +90,7 @@ def main():
             'relationships': {'app': {'data': {'type': 'apps', 'id': APP}}}}})
     locales = api('GET', '/v1/builds/' + args.build_id + '/betaBuildLocalizations')['data']
     locale = next((x for x in locales if x['attributes']['locale'] == 'zh-Hans'), None)
-    attrs = {'whatsNew': '请测试目录和搜索、公开剧集播放、暂停与进度拖动、深色选集与当前集标记、横竖屏适配、返回目录，以及本地收藏和观看历史。'}
+    attrs = {'whatsNew': metadata['whatsNew']}
     if locale:
         api('PATCH', '/v1/betaBuildLocalizations/' + locale['id'], {'data': {
             'type': 'betaBuildLocalizations', 'id': locale['id'], 'attributes': attrs}})

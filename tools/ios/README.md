@@ -44,6 +44,16 @@ an external tester invitation or public link.
 Once the intended build is `VALID`, prepare metadata with an explicit Apple
 build ID, build number, marketing version and a separate state filename:
 
+All Apple API requests and release commands run on 106, not on the local Mac.
+Copy `docs/ios/metadata-zh-Hans.json` to 106's restricted release directory, then
+run `python3 tools/ios/update-metadata-106.py` there to update the complete
+description, beta review notes, feedback address, subtitle and existing
+unsubmitted App Store draft text. It does not associate an App Store build or
+submit an App Store review. The support page is
+`https://nas.zhangyue.site/hongguo-ota/ios/`; it must remain publicly accessible
+to testers. The helper reads review contacts from the restricted server
+snapshot and emits only boolean contact-completeness evidence.
+
 ```sh
 python3 tools/ios/prepare-testflight-106.py \
   --build-id APPLE_BUILD_ID --build-number 2 --version 0.9.0 \

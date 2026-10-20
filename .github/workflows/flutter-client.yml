@@ -10,13 +10,21 @@ on:
       build_number:
         description: Unique ascending Apple build number
         required: true
-        default: '1'
+        default: '2'
+
+      platform:
+        description: Platform to build
+        required: true
+        type: choice
+        default: both
+        options: [both, ios, android]
 
 permissions:
   contents: read
 
 jobs:
   ios:
+    if: inputs.platform != 'android'
     runs-on: macos-15
     env:
       DEVELOPER_DIR: /Applications/Xcode_26.3.app/Contents/Developer
@@ -67,6 +75,7 @@ jobs:
           path: client/build/hongguo-ios-simulator.zip
           retention-days: 7
   android-preview:
+    if: inputs.platform != 'ios'
     runs-on: ubuntu-latest
     defaults:
       run:
