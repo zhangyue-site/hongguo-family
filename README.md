@@ -13,7 +13,7 @@
 - [应用商店](https://d.zhangyue.site/) / [OTA 下载页](https://nas.zhangyue.site/hongguo-ota/)
 - 旧版可从“我的 → 检查更新”升级，保留同包名数据；不要先卸载。
 - 具体包哈希、测试与限制见 [发布记录](release/VERIFICATION.md)。模拟器验收不代表用户实体手机/投影验收。
-- 新增 `client/` Flutter 跨平台客户端，共享 iOS/Android 手机界面；云端编译、106签名与 TestFlight 发布脚本在 `tools/ios/`。当前0.9.0测试构建正在验证及外部审核准备，正式安卓OTA仍为0.8.2。
+- 新增 `client/` Flutter 跨平台客户端，共享 iOS/Android 手机界面；云端编译、106签名与 TestFlight 发布脚本在 `tools/ios/`。当前iOS 0.9.1(4)已在TestFlight内部组开放，按公开来源自动选择清晰度；部分作品仍只有360p预览，正式安卓OTA仍为0.8.2。
 
 ## 构建
 

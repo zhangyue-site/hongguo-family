@@ -9,3 +9,13 @@
 106的REA 6.4.0已读取原安卓APK的MediaTrackPolicy类及choose重载，保存私有Evidence。它是分析工具，未发现可直接用于iOS的官方播放SDK或未加密高清接口。
 
 发布方式：GitHub云端macOS编译，106签名并通过Apple API上传，仅内部测试；名单来自账号私有配置，测试者身份和邀请状态不进入此文件。
+
+## 发布结果
+
+106已完成0.9.1(4)签名和Apple REST API上传。Apple处理VALID，最低iOS15.0，内部状态IN_BETA_TESTING，内部组已关联，中文测试说明已读回匹配。未提交外部测试或App Store审核。
+
+源代码构建提交：7cd1701ac8582787d92409cb380be0e53aecbd68。
+云端构建：https://github.com/xiaoletian64/hongguo-family/actions/runs/39412645845 。
+签名IPA SHA-256：442902142318af5b95c77cd990ed76c72086fdc69c13514ab42e414fb32330ab。
+
+“已发布”指自动画质选择优化，并不表示已找到/接入该剧真正可直接播放的高清源。真实高清播放未验证，本项仍受来源限制。账号私有固定名单已自动核对；尚未接受团队邀请的人需先接受，不能视为已加入测试组。
