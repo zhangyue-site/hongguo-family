@@ -108,10 +108,9 @@ def main():
                 'publicLinkLimitEnabled': True, 'publicLinkLimit': 100,
                 'feedbackEnabled': True, 'hasAccessToAllBuilds': False},
             'relationships': {'app': {'data': {'type': 'apps', 'id': APP}}}}})['data']
-    if group['attributes'].get('publicLinkEnabled'):
-        raise RuntimeError('Existing group already has an enabled public link; inspect before continuing')
     result = {**previous, **expected, 'externalGroupId': group['id'],
-              'publicLinkEnabled': False, 'publicLinkLimit': 100,
+              'publicLinkEnabled': bool(group['attributes'].get('publicLinkEnabled')),
+              'publicLink': group['attributes'].get('publicLink'), 'publicLinkLimit': 100,
               'contactComplete': True, 'reviewSubmitted': previous.get('reviewSubmitted', False)}
     args.state.write_text(json.dumps(result, indent=2))
     print(json.dumps(result, indent=2))

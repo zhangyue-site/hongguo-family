@@ -1,8 +1,13 @@
 name: Flutter client preview
+run-name: ${{ inputs.release_id || format('Manual {0} ({1}) · {2}', inputs.build_name, inputs.build_number, inputs.platform) }}
 
 on:
   workflow_dispatch:
     inputs:
+      release_id:
+        description: Optional server release correlation ID
+        required: false
+        type: string
       build_name:
         description: Version shown to testers
         required: true

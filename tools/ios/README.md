@@ -88,3 +88,22 @@ Signing preparation completed on 106: team `MWFPLU44U9`, distribution certificat
 Certificate and profile expire on 2027-10-19. No other app's profile or
 certificate was changed. This is preparation evidence; a real signed-build
 upload and Apple processing must still be verified for each release.
+
+## Server-only coordinator
+
+The installed coordinator is `/opt/hongguo-analysis/ios-release/release.py` on 106. Its
+private configuration and credentials stay on that server. The generic coordinator
+and installable skill are maintained separately as `server-testflight-skill`.
+
+```sh
+python3 /opt/hongguo-analysis/ios-release/release.py \
+  --config /opt/hongguo-analysis/ios-release/server-config.json \
+  --version 0.9.1 --build-number 4 --submit-review
+```
+
+Choose an unused build number and intended version. Add `--check` for a read-only
+preflight. It dispatches GitHub's cloud macOS runner through API, matches the
+release correlation ID and source SHA, downloads and validates the IPA, signs and
+uploads on 106, waits for Apple processing, and optionally submits beta review.
+Repeating the same version/number resumes persisted state. It never submits an
+App Store release. macOS is still required in the cloud, not on your own computer.
