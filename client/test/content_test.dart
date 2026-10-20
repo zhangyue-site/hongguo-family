@@ -172,6 +172,73 @@ void main() {
     );
     service.close();
   });
+  test('prefers the highest advertised playable public quality', () async {
+    const sid = '7694653385668037657';
+    const vid = '7694655440692448281';
+    final html =
+        '${fixture('player')}<video src="/video/public/$vid/720p.mp4"></video>'
+        '<video src="/video/public/$vid/1080p.mp4"></video>';
+    final service = ContentService(
+      client: MockClient((request) async {
+        if (request.url.path.startsWith('/player/')) {
+          return http.Response(html, 200);
+        }
+        expect(request.url.path, '/video/public/$vid/1080p.mp4');
+        expect(request.headers['Range'], 'bytes=0-1023');
+        return http.Response.bytes(
+          [0, 0, 0, 24, 102, 116, 121, 112, 105, 115, 111, 109],
+          206,
+          headers: {'content-type': 'video/mp4'},
+        );
+      }),
+    );
+    try {
+      final url = await service.mediaURL(
+        sid,
+        const Episode(number: 1, id: vid, available: true),
+      );
+      expect(url.path, '/video/public/$vid/1080p.mp4');
+    } finally {
+      service.close();
+    }
+  });
+  test(
+    'unavailable advertised HD falls back to next advertised quality',
+    () async {
+      const sid = '7694653385668037657';
+      const vid = '7694655440692448281';
+      final html =
+          '${fixture('player')}<video src="/video/public/$vid/720p.mp4"></video>'
+          '<video src="/video/public/$vid/1080p.mp4"></video>';
+      final attempted = <String>[];
+      final service = ContentService(
+        client: MockClient((request) async {
+          if (request.url.path.startsWith('/player/')) {
+            return http.Response(html, 200);
+          }
+          attempted.add(request.url.path);
+          if (request.url.path.endsWith('/1080p.mp4')) {
+            return http.Response('not found', 404);
+          }
+          return http.Response.bytes(
+            [0, 0, 0, 24, 102, 116, 121, 112, 105, 115, 111, 109],
+            206,
+            headers: {'content-type': 'video/mp4'},
+          );
+        }),
+      );
+      try {
+        final url = await service.mediaURL(
+          sid,
+          const Episode(number: 1, id: vid, available: true),
+        );
+        expect(url.path, '/video/public/$vid/720p.mp4');
+        expect(attempted, contains('/video/public/$vid/1080p.mp4'));
+      } finally {
+        service.close();
+      }
+    },
+  );
   test('metadata denying public access is respected', () async {
     final service = ContentService(
       client: MockClient(

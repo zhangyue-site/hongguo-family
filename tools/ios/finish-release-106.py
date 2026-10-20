@@ -30,6 +30,19 @@ if policy.get('mode')=='internal':
  s,b=asc.api('GET','/v1/builds/'+bid+'/buildBetaDetail',token=asc.make_token(),retries=1)
  if isinstance(b,str):b=json.loads(b)
  if s!=200:raise RuntimeError('Cannot verify internal build status')
+ metadata=json.loads((root/'metadata-zh-Hans.json').read_text())
+ status,locales=asc.api('GET','/v1/builds/'+bid+'/betaBuildLocalizations',token=asc.make_token(),retries=1)
+ if isinstance(locales,str):locales=json.loads(locales)
+ if status!=200:raise RuntimeError('Cannot read internal build test notes')
+ locale=next((x for x in locales['data'] if x['attributes']['locale']=='zh-Hans'),None)
+ if locale:
+  method='PATCH';path='/v1/betaBuildLocalizations/'+locale['id']
+  body={'data':{'type':'betaBuildLocalizations','id':locale['id'],'attributes':{'whatsNew':metadata['whatsNew']}}}
+ else:
+  method='POST';path='/v1/betaBuildLocalizations'
+  body={'data':{'type':'betaBuildLocalizations','attributes':{'locale':'zh-Hans','whatsNew':metadata['whatsNew']},'relationships':{'build':{'data':{'type':'builds','id':bid}}}}}
+ status,_=asc.api(method,path,body,token=asc.make_token(),retries=1)
+ if status not in (200,201,204):raise RuntimeError('Cannot save internal test notes')
  print(json.dumps({'buildId':bid,'distribution':'internal','internalBuildState':b['data']['attributes']['internalBuildState'],'externalInvitationsEnabled':False}))
  raise SystemExit(0)
 base=['--build-id',bid,'--build-number',a.build_number,'--version',a.version,'--state',str(a.work/'prepared.json')]

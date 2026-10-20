@@ -207,14 +207,10 @@ class ContentService {
     _validateId(seriesId);
     _validateId(episode.id);
     if (!episode.available) throw const ContentException('本集未开放公开播放，请前往官方平台观看');
-    final page = _page(
-      routerData(
-        await _get(
-          Uri.https('hongguoduanju.com', '/player/$seriesId/${episode.id}'),
-        ),
-      ),
-      'publicVideoSeo',
+    final html = await _get(
+      Uri.https('hongguoduanju.com', '/player/$seriesId/${episode.id}'),
     );
+    final page = _page(routerData(html), 'publicVideoSeo');
     final seo = page['publicVideoSeo'];
     if (seo is! Map ||
         seo['available'] != true ||
@@ -222,10 +218,54 @@ class ContentService {
         seo['itemId']?.toString() != episode.id) {
       throw const ContentException('本集未开放公开播放，请前往官方平台观看');
     }
-    return Uri.https(
-      'hongguoduanju.com',
-      '/video/public/${episode.id}/360p.mp4',
+    final advertised = <int, Uri>{};
+    // Use only source-advertised public URLs, never invent an HD path or
+    // treat native encrypted tracks as clear MP4s.
+    final pattern = RegExp(
+      r'''["'\s](?:https://hongguoduanju\.com)?(/video/public/(\d{8,24})/(\d{3,4})p\.mp4)(?=["'\s<>\\]|$)''',
     );
+    for (final match in pattern.allMatches(html.replaceAll(r'\/', '/'))) {
+      if (match.group(2) != episode.id) continue;
+      final quality = int.parse(match.group(3)!);
+      if (quality < 144 || quality > 4320) continue;
+      advertised[quality] = Uri.https('hongguoduanju.com', match.group(1)!);
+    }
+    if (advertised.isEmpty) {
+      throw const ContentException('来源未提供可直接播放的视频地址');
+    }
+    final qualities = advertised.keys.toList()..sort((a, b) => b.compareTo(a));
+    for (final quality in qualities.take(qualities.length - 1)) {
+      final candidate = advertised[quality]!;
+      if (await _publicVideoResponds(candidate)) return candidate;
+    }
+    return advertised[qualities.last]!;
+  }
+
+  Future<bool> _publicVideoResponds(Uri uri) async {
+    try {
+      return await (() async {
+        final request = http.Request('GET', uri)..followRedirects = false;
+        request.headers['Range'] = 'bytes=0-1023';
+        request.headers['User-Agent'] = 'HongguoFamily/0.9.0';
+        final response = await _client.send(request);
+        final valid =
+            (response.statusCode == 200 || response.statusCode == 206) &&
+            (response.headers['content-type'] ?? '').split(';').first.trim() ==
+                'video/mp4';
+        if (!valid) {
+          await response.stream.listen((_) {}).cancel();
+          return false;
+        }
+        final bytes = <int>[];
+        await for (final chunk in response.stream) {
+          bytes.addAll(chunk.take(1024 - bytes.length));
+          if (bytes.length >= 32) break;
+        }
+        return String.fromCharCodes(bytes).contains('ftyp');
+      })().timeout(const Duration(seconds: 6));
+    } catch (_) {
+      return false;
+    }
   }
 
   static void _validateId(String id) {
