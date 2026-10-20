@@ -161,10 +161,15 @@ class DirectMediaService {
     Future<SharedPreferencesLike> Function()? store,
     Directory? cacheDir,
     int qualityCeiling = 1080,
+    this.keepIntermediates = false,
   }) : _client = client ?? http.Client(),
        _store = store,
        _cacheDir = cacheDir,
        _ceiling = qualityCeiling;
+
+  /// Keeps the downloaded encrypted file when decryption fails, so real
+  /// content can be pulled from the device and analysed offline.
+  final bool keepIntermediates;
 
   final http.Client _client;
   final Future<SharedPreferencesLike> Function()? _store;
@@ -217,8 +222,12 @@ class DirectMediaService {
       }
       try {
         await transform(enc, plain, key);
-      } finally {
+      } on DirectMediaException {
+        if (!keepIntermediates) await _remove([enc]);
+        rethrow;
+      } catch (_) {
         await _remove([enc]);
+        rethrow;
       }
       working = plain;
     } else if (!await renameFile(enc, plain)) {
@@ -362,8 +371,7 @@ class DirectMediaService {
     final sink = partial.openWrite();
     var received = 0;
     try {
-      final request = http.Request('GET', Uri.parse(track.url))
-        ..followRedirects = false;
+      final request = http.Request('GET', Uri.parse(track.url));
       request.headers['User-Agent'] = 'HongguoTV/0.1';
       final response = await _client.send(request).timeout(
             const Duration(seconds: 30),
