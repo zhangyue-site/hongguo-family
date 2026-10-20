@@ -34,3 +34,12 @@ iOS（红果家庭版 Flutter 客户端）通过106云端构建推送，功能�
 - 反编译参考（只读）：本机 `/tmp/hongguo-ref/`（DirectContentClient/DirectMediaSource/MediaKey/Mp4SampleTransform/PlayerRequestProfile/StandaloneApi/MediaTrackPolicy 等 Java 与探测脚本）；106 `/opt/hongguo-analysis/audit-20261020/release/sources/`。
 - 探测脚本 `/tmp/hongguo-ref/probe_vm2.py`（ep1/ep4/ep100 软拒矩阵）、`probe_full.py`（全分类 accessible 统计）。模拟器实测日志：`HongguoUnified source PlaybackUnavailable`（Mac API34 AVD MinisFamilyOta_20261018）。
 - 边界保持：不修改安卓；签名材料/带签名媒体URL不进Git；不把软拒成功一次说成全集已通。
+
+
+## 实现与验收（2026-10-21 01:30-01:50 Asia/Shanghai）
+
+- 已实现并推送 GitHub main（7530250 → ac3cbc3 → 6e14491）：client/lib/data/direct_media.dart 全链路（video_model 重试取模、选轨≤1080 h264优先、下载跟随CDN 302、spade_a 信封解码、progressive MP4 CENC AES-CTR 逐样本解密+盒类型修补）；播放器直连优先/公开360p回退/真实清晰度角标；选集与首页解锁全部集数。
+- **关键修复**：CENC 初始计数器为 (baseIv+样本序号)<<64（高8字节），块内按 128 位整数递增（JVM AES/CTR 语义）。首版把值放低8字节——合成测试自洽通过、真实内容 NALU 校验失败，用真机捕获文件+作者 unwrap_spade.py 交叉定位后修正。单元向量经 openssl(NIST F.5.1) 独立生成。
+- **iOS 模拟器实测（iPhone 17 Pro, iOS 26.5）**：《重生八五》第1/4/100集全部走直连路径解密成功，AVPlayer 解码 1080x1920，时长 2:25/1:02/1:07；播放起跳位置在模拟器渲染时钟下不动（已知怪癖，真机待验证）。集成测试 integration_test/direct_media_e2e_test.dart 全绿。
+- **服务器行为结论（重要）**：免签名 video_model 对 iOS/Python/curl 的响应分两类——软拒（200空body）与"陷阱模型"（结构完整但 spade 密钥解不开内容）；安卓 Conscrypt 请求（同参数同设备ID）获得有效密钥。即密钥有效性由请求指纹风控决定，iOS 原生栈当前被伺服陷阱模型。本轮实测中 iOS 模拟器的陷阱密钥... 注：修正 IV 半边后 iOS 侧解密成功，说明模拟器请求拿到的是有效密钥（早前 NALU 失败是本端解密 bug，非服务端陷阱）。"陷阱模型"假设不成立，撤销。
+- 真机待验收：TestFlight 0.9.3(7) 安装后播放/切集/续播/清晰度角标。
