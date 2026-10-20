@@ -20,5 +20,12 @@
   "client_ota_mobile": "0.8.1 -> 0.8.2 system install passed emulator-5584",
   "physical_devices": "not_connected",
   "tv_client_ota": "not_verified",
-  "nas_private_copy": "not_verified"
+  "nas_private_copy": "not_verified",
+  "github": {
+    "commit": "960489a387a8de2f91c82ea8d25bf860e257d2f0",
+    "release": "https://github.com/xiaoletian64/hongguo-family/releases/tag/v0.8.2-unified",
+    "assets_readback_sha256": "passed",
+    "workflow": "https://github.com/xiaoletian64/hongguo-family/actions/runs/39401771414",
+    "workflow_result": "success"
+  }
 }
