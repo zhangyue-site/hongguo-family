@@ -51,7 +51,7 @@ class _HomePageState extends State<HomePage> {
     try {
       final rows = query.isEmpty
           ? await service.browse(mode, genre)
-          : await service.search(query, mode);
+          : await service.search(query, mode == 'ai' ? 'ai' : 'all');
       if (!mounted || id != ticket) return;
       setState(() {
         items = rows;

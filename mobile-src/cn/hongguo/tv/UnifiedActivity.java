@@ -185,8 +185,10 @@ public class UnifiedActivity extends MainActivity {
   catalogJob=io.submit(()->{
    try {
     Catalog.Result result=null;JSONArray found;boolean fallback=false;
-    try{result=q.isEmpty()?catalog.browsePage(g,m,refresh):catalog.searchPage(q,m,refresh);found=result.items;}
-    catch(Exception unavailable){if(q.isEmpty()||"ai".equals(m)||Thread.currentThread().isInterrupted())throw unavailable;found=PublicSearch.search(q,m);fallback=true;}
+    try{
+     if(!q.isEmpty()&&!"ai".equals(m)){found=PublicSearch.search(q,"all");fallback=true;}
+     else{result=q.isEmpty()?catalog.browsePage(g,m,refresh):catalog.searchPage(q,m,refresh);found=result.items;}
+    }catch(Exception unavailable){if(q.isEmpty()||"ai".equals(m)||Thread.currentThread().isInterrupted())throw unavailable;result=catalog.searchPage(q,m,refresh);found=result.items;}
     final boolean stale=result!=null&&result.stale;final boolean alternate=fallback;
     ArrayList<JSONObject> rows=new ArrayList<>();for(int i=0;i<found.length();i++){JSONObject entry=found.getJSONObject(i);rows.add(entry);if(!entry.optString("cover").isEmpty())coverAddresses.put(entry.optString("id"),entry.optString("cover"));}
     ui.post(()->{if(dead||id!=ticket||player!=null)return;items.clear();items.addAll(rows);

@@ -181,16 +181,26 @@ class ContentService {
           )
           .toList();
     }
-    return parseSearch(
+    Future<List<Series>> fetch(String term) async => parseSearch(
       await _get(
         Uri(
           scheme: 'https',
           host: 'hongguoduanju.com',
-          pathSegments: ['search', q],
+          pathSegments: ['search', term],
         ),
       ),
       mode,
     );
+    final rows = await fetch(q);
+    if (rows.isNotEmpty) return rows;
+    // The public index can omit Arabic year shorthand. Retry its Chinese
+    // spelling only when the original query has no supported video results.
+    const digits = '零一二三四五六七八九';
+    final alternate = q.replaceAllMapped(
+      RegExp(r'[0-9]'),
+      (match) => digits[int.parse(match[0]!)],
+    );
+    return alternate == q ? rows : fetch(alternate);
   }
 
   Future<Detail> detail(Series series) async {
@@ -356,7 +366,13 @@ class ContentService {
     return _unique(
       rows.map((r) {
         final v = r is Map ? r['video_data'] : null;
-        if (v is! Map || '${v['genre']}' != expected) return null;
+        if (v is! Map) return null;
+        final genre = '${v['genre']}';
+        if (mode == 'all') {
+          if (genre != '203' && genre != '205') return null;
+          return _series(v, genre == '205' ? 'manju' : 'short', search: true);
+        }
+        if (genre != expected) return null;
         return _series(v, mode, search: true);
       }),
     );

@@ -10,6 +10,12 @@ import org.json.JSONTokener;
 /** Public SSR search fallback when the older app search API returns an empty body. */
 final class PublicSearch {
  static JSONArray search(String query,String mode)throws Exception {
+  JSONArray rows=fetch(query,mode);if(rows.length()>0)return rows;
+  StringBuilder alternate=new StringBuilder();String digits="零一二三四五六七八九";
+  for(int i=0;i<query.length();i++){char c=query.charAt(i);alternate.append(c>='0'&&c<='9'?digits.charAt(c-'0'):c);}
+  return query.equals(alternate.toString())?rows:fetch(alternate.toString(),mode);
+ }
+ private static JSONArray fetch(String query,String mode)throws Exception {
   HttpURLConnection h=(HttpURLConnection)new URL("https://hongguoduanju.com/search/"+URLEncoder.encode(query,"UTF-8").replace("+","%20")).openConnection();
   h.setConnectTimeout(10000);h.setReadTimeout(20000);h.setInstanceFollowRedirects(false);h.setRequestProperty("User-Agent","HongguoTV/0.8.0");
   try{if(h.getResponseCode()!=200)throw new Exception("公开搜索暂不可用");ByteArrayOutputStream bytes=new ByteArrayOutputStream();
@@ -27,11 +33,12 @@ final class PublicSearch {
   for(int i=0;i<rows.length();i++){
    JSONObject v=rows.getJSONObject(i).optJSONObject("video_data");if(v==null)continue;
    String id=v.optString("series_id"),type=v.optString("genre");if(!id.matches("[0-9]{8,24}"))continue;
+   if(!"203".equals(type)&&!"205".equals(type))continue;
    if("short".equals(mode)&&!"203".equals(type))continue;if("manju".equals(mode)&&!"205".equals(type))continue;
    if("ai".equals(mode))continue; // AI uses its category provider rather than guessing a genre code.
    String cover=v.optString("series_cover");
    if(!cover.matches("https://[a-zA-Z0-9.-]+\\.(byteimg\\.com|fqnovelpic\\.com|novelfmpic\\.com)/.*"))cover="";
-   result.put(new JSONObject().put("id",id).put("title",v.optString("series_title")).put("intro",v.optString("series_intro")).put("count",v.optInt("episode_cnt")).put("cover",cover).put("catalog_mode",mode));
+   result.put(new JSONObject().put("id",id).put("title",v.optString("series_title")).put("intro",v.optString("series_intro")).put("count",v.optInt("episode_cnt")).put("cover",cover).put("catalog_mode","205".equals(type)?"manju":"short"));
   }return result;
  }
 }

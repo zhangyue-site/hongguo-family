@@ -18,6 +18,55 @@ void main() {
     expect(rows.every((s) => RegExp(r'^\d{8,24}$').hasMatch(s.id)), isTrue);
   });
 
+  test(
+    'global search finds comic titles using numeric year shorthand',
+    () async {
+      final requested = <String>[];
+      final service = ContentService(
+        client: MockClient((request) async {
+          requested.add(request.url.pathSegments.last);
+          return http.Response(
+            page({
+              'searchList': [
+                {
+                  'video_data': {
+                    'series_id': '7694648775943392280',
+                    'series_title': '重生八五，靠购物返现系统赢麻了',
+                    'genre': 205,
+                  },
+                },
+              ],
+            }),
+            200,
+            headers: {'content-type': 'text/html; charset=utf-8'},
+          );
+        }),
+      );
+      final rows = await service.search('重生85', 'all');
+      expect(requested, ['重生85']);
+      expect(rows.single.id, '7694648775943392280');
+      expect(rows.single.mode, 'manju');
+      service.close();
+    },
+  );
+
+  test('empty numeric search retries Chinese year spelling once', () async {
+    final requested = <String>[];
+    final service = ContentService(
+      client: MockClient((request) async {
+        requested.add(request.url.pathSegments.last);
+        return http.Response(
+          requested.length == 1 ? page({'searchList': []}) : fixture('search'),
+          200,
+          headers: {'content-type': 'text/html; charset=utf-8'},
+        );
+      }),
+    );
+    expect(await service.search('重生85', 'all'), isNotEmpty);
+    expect(requested, ['重生85', '重生八五']);
+    service.close();
+  });
+
   test('genre uses server category paths and Series survives persistence', () {
     expect(
       ContentService.categoryPath('short', '喜剧'),
