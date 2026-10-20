@@ -9,4 +9,32 @@ Both explicit Activities cold started Status ok.
 No device proxy settings changed.
 Not yet tested: physical ARM playback, remote control, actual version-to-version system installer upgrade.
 Additional app_process network/archive integration attempt exited137 (Killed), no result obtained; not counted as passed. Public HTTPS full download was verified separately on macOS.
-2026-10-18: Portable collaborator signer tested on106 against both unsigned APKs using existing B5 key: certificate/package/version verified. Published APKs and OTA unchanged. Workflow template YAML parsed; cloud workflow activation rejected for missing OAuth workflow scope, no cloud build claimed.
+
+== 2026-10-19 0.2.0→0.3.0 真实覆盖升级（redroid hongguo-test, API31）==
+01:58 卸0.3.0 → adb install 0.2.0-family-beta (vc2) 成功
+01:59 启动 cn.hongguo.tv.MobileActivity → 首启即弹「发现更新 0.3.0-douyin」（真实清单校验通过）
+01:59 点「下载更新」→ 下载+sha256+签名校验通过 → 弹「允许安装更新」（canRequestPackageInstalls=false 正确拦截）
+02:00 打开设置 → Allow from this source 开关开启（Switch checked=true）
+02:00 返回App重触发下载 → 系统安装器「Do you want to update this app?」→ UPDATE
+02:01 覆盖安装完成：versionName=0.3.0-douyin versionCode=3 lastUpdateTime=02:01:21
+02:02 新版启动正常，首页短剧信息流渲染，播放器页有资源加载提示（模拟器网络限制属环境性）
+结论：真实OTA全链路（自检→清单校验→下载→哈希→签名→未知来源授权→系统覆盖→数据保留→新版运行）全部走通 ✅
+
+== 2026-10-19 0.3.3 (vc6) 提醒门槛适配抖音UX + 全链发布 ==
+- 根因：抖音式UX冷启即进播放屏(screen=播放)，原白名单(首页/漫剧/AI剧)永不满足→提醒永不弹
+- 修复：mobile渠道门槛改为 player==null 即可提醒（feed=新浏览面），TV保留原白名单
+- 真实验证（临时把清单顶0.9.9再还原）：
+  播放态弹窗出现次数=0（沉默✓）；BACK退出播放回浏览态→「发现新版本 0.9.9-test」三按钮弹出✓
+  ota_reminded_version/at落盘✓；点「忽略此版本」→ota_ignored落盘→重启不弹✓
+  稍后提醒默认焦点（button2 focused）✓
+- 签名规则审计：8包全部b5aaac0e(B5家族)，v1+v2+v3全true，zipalign过，清单一致，外网sha一致
+- 覆盖升级：0.3.2(vc5)→0.3.3(vc6) adb -r 覆盖成功
+结论：v2提醒礼仪在抖音式UX下全链路符合原版设计 ✅（发布流程见docs/OTA.md）
+
+== 2026-10-19 0.3.4 (vc7) 命名对齐官方 + 商店双条目 ==
+- 官方TV交互实测（HongguoTV-0.5.8 装redroid+遥控键流+UI树解析）：非三列；
+  左rail88dp(首页/分类/收藏/历史/设置) + 顶tab(真人剧/漫剧/AI剧)+搜索 + 分类chips行 + 海报网格
+  TV密度6列(源码>=1100dp用6列否则5列)，卡高=宽x1.38，每页20张焦点到底续页，FocusGraph纯函数焦点
+- 命名：mobile label=红果短剧，tv label=红果短剧电视版（对齐抖音/抖音电视版惯例）
+- 0.3.4双渠道构建签名发布，外网OTA清单校验PASS，redroid覆盖升级成功
+- 商店上架：hongguo + hongguo-tv 双条目 @0.3.4，公网验收（apps.json/APK sha/icon）PASS

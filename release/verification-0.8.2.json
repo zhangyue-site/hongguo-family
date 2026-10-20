@@ -1,0 +1,24 @@
+{
+  "verified_at": "2026-10-20T17:32:53.587527+08:00",
+  "mobile": {
+    "sha256": "031383860c2ce2ecbe77f37f92c9aef0314c3985084336348dcf972154eda391",
+    "bytes": 4982167,
+    "versionCode": 21,
+    "store_and_ota": "passed",
+    "certificateSha256": "b5aaac0eb0369165d34ee3bae1cddd637eaa2bc3566adf9e3f2dc2f5a1a473e4",
+    "package": "site.zhangyue.hongguo.mobile"
+  },
+  "tv": {
+    "sha256": "7a25d96ed7ecf9c96dbd8436525d51adcb7916a9efa93252426cb37a5c8efe89",
+    "bytes": 4982167,
+    "versionCode": 21,
+    "store_and_ota": "passed",
+    "certificateSha256": "b5aaac0eb0369165d34ee3bae1cddd637eaa2bc3566adf9e3f2dc2f5a1a473e4",
+    "package": "site.zhangyue.hongguo.tv"
+  },
+  "cover_install": "passed emulator-5580",
+  "client_ota_mobile": "0.8.1 -> 0.8.2 system install passed emulator-5584",
+  "physical_devices": "not_connected",
+  "tv_client_ota": "not_verified",
+  "nas_private_copy": "not_verified"
+}

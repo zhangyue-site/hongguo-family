@@ -1,1 +1,5 @@
-{"versionCode":2,"versionName":"0.2.0-family-beta","notes":"首个乐天家族测试版；手机竖屏、盒子横屏，接入独立OTA。实体播放和遥控仍待验证。"}
+{
+  "versionCode": 21,
+  "versionName": "0.8.2-unified",
+  "notes": "选集升级为深色圆角底部面板；当前播放集高亮并显示播放中，自动定位；保留手机触控与投影遥控支持。优化窄屏历史集标记，避免换行拥挤。"
+}

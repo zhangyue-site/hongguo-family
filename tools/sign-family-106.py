@@ -2,7 +2,7 @@
 from pathlib import Path
 import subprocess,os,re,hashlib,json
 root=Path('/opt/hongguo-analysis/family-ota')
-C=json.loads((root/'release-config.json').read_text());VC=C['versionCode'];VN=C['versionName']
+C=json.loads((root/'src-work/release-config.json').read_text());VC=C['versionCode'];VN=C['versionName']
 assert isinstance(VC,int) and VC>0 and re.fullmatch(r'[a-zA-Z0-9._-]+',VN)
 row=next(line for line in Path('/opt/keystore-vault/README.md').read_text().splitlines() if line.lstrip().startswith('|') and 'notesvault.keystore' in line)
 cells=[c.strip().strip('`') for c in row.strip().strip('|').split('|')]

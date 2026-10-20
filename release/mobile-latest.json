@@ -1,0 +1,11 @@
+{
+  "channel": "mobile",
+  "packageName": "site.zhangyue.hongguo.mobile",
+  "versionCode": 21,
+  "versionName": "0.8.2-unified",
+  "size": 4982167,
+  "sha256": "031383860c2ce2ecbe77f37f92c9aef0314c3985084336348dcf972154eda391",
+  "certificateSha256": "b5aaac0eb0369165d34ee3bae1cddd637eaa2bc3566adf9e3f2dc2f5a1a473e4",
+  "url": "https://nas.zhangyue.site/hongguo-ota/mobile/Hongguo-Mobile-0.8.2-unified-arm-universal.apk",
+  "notes": "选集升级为深色圆角底部面板；当前播放集高亮并显示播放中，自动定位；保留手机触控与投影遥控支持。优化窄屏历史集标记，避免换行拥挤。"
+}

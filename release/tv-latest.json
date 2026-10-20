@@ -1,0 +1,11 @@
+{
+  "channel": "tv",
+  "packageName": "site.zhangyue.hongguo.tv",
+  "versionCode": 21,
+  "versionName": "0.8.2-unified",
+  "size": 4982167,
+  "sha256": "7a25d96ed7ecf9c96dbd8436525d51adcb7916a9efa93252426cb37a5c8efe89",
+  "certificateSha256": "b5aaac0eb0369165d34ee3bae1cddd637eaa2bc3566adf9e3f2dc2f5a1a473e4",
+  "url": "https://nas.zhangyue.site/hongguo-ota/tv/Hongguo-Tv-0.8.2-unified-arm-universal.apk",
+  "notes": "选集升级为深色圆角底部面板；当前播放集高亮并显示播放中，自动定位；保留手机触控与投影遥控支持。优化窄屏历史集标记，避免换行拥挤。"
+}
