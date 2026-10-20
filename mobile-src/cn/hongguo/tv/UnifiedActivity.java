@@ -67,7 +67,32 @@ public class UnifiedActivity extends MainActivity {
  void applyWindow() {
   setRequestedOrientation(tv?ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE:ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
   getWindow().setStatusBarColor(BG); getWindow().setNavigationBarColor(BG);
-  getWindow().getDecorView().setSystemUiVisibility(tv || playback!=null ? 4102 : 0);
+  // Target 35 windows draw behind system bars on Android 15+. Handle the
+  // same layout explicitly on older phones so this path is testable there.
+  if(android.os.Build.VERSION.SDK_INT>=30)getWindow().setDecorFitsSystemWindows(false);
+  getWindow().getDecorView().setSystemUiVisibility(1792 | (tv || playback!=null ? 4102 : 0));
+  if(host!=null){
+   host.setBackgroundColor(BG);
+   host.setOnApplyWindowInsetsListener((view,insets)->{
+    int left=0,top=0,right=0,bottom=0;
+    if(!tv){
+     if(android.os.Build.VERSION.SDK_INT>=30){
+      android.graphics.Insets bars=insets.getInsets(android.view.WindowInsets.Type.systemBars()|android.view.WindowInsets.Type.displayCutout());
+      left=bars.left;top=bars.top;right=bars.right;bottom=bars.bottom;
+     }else{
+      left=insets.getSystemWindowInsetLeft();top=insets.getSystemWindowInsetTop();right=insets.getSystemWindowInsetRight();bottom=insets.getSystemWindowInsetBottom();
+      if(android.os.Build.VERSION.SDK_INT>=28&&insets.getDisplayCutout()!=null){
+       android.view.DisplayCutout cutout=insets.getDisplayCutout();
+       left=Math.max(left,cutout.getSafeInsetLeft());top=Math.max(top,cutout.getSafeInsetTop());right=Math.max(right,cutout.getSafeInsetRight());bottom=Math.max(bottom,cutout.getSafeInsetBottom());
+      }
+     }
+    }
+    // Assign absolute padding each time: rotation and returning from video
+    // must not accumulate the previous status/navigation bar heights.
+    view.setPadding(left,top,right,bottom);return insets;
+   });
+   host.requestApplyInsets();
+  }
  }
  @Override void home(String a,String b) { if(browser==null) openSection("推荐"); else attachBrowser(); }
  @Override void home(String a,String b,boolean c) { home(a,b); }
