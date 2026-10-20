@@ -98,7 +98,7 @@ and installable skill are maintained separately as `server-testflight-skill`.
 ```sh
 python3 /opt/hongguo-analysis/ios-release/release.py \
   --config /opt/hongguo-analysis/ios-release/server-config.json \
-  --version 0.9.1 --build-number 4 --submit-review
+  --version 0.9.1 --build-number 4
 ```
 
 Choose an unused build number and intended version. Add `--check` for a read-only
@@ -107,3 +107,9 @@ release correlation ID and source SHA, downloads and validates the IPA, signs an
 uploads on 106, waits for Apple processing, and optionally submits beta review.
 Repeating the same version/number resumes persisted state. It never submits an
 App Store release. macOS is still required in the cloud, not on your own computer.
+
+Current project policy: **internal testing only** (`distribution-policy.json`).
+The server launcher rejects external-review and public-link flags before building.
+An internal user's invite must be accepted on their device; group membership alone
+is not proof of installation. The public Apple API cannot delete an existing beta
+review submission; external invitations remain disabled.

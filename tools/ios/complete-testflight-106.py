@@ -15,6 +15,9 @@ def main():
     parser.add_argument('--submit-review', action='store_true')
     parser.add_argument('--enable-public-link', action='store_true')
     args = parser.parse_args()
+    policy_path = Path('/opt/hongguo-analysis/ios-release/distribution-policy.json')
+    if policy_path.exists() and json.loads(policy_path.read_text()).get('mode') == 'internal' and (args.submit_review or args.enable_public_link):
+        raise ValueError('Project distribution is internal testing only')
     state = json.loads(args.state.read_text())
     expected = {'appId': '6824873494', 'buildId': args.build_id,
                 'buildNumber': args.build_number, 'version': args.version}
