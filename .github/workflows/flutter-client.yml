@@ -1,0 +1,96 @@
+name: Flutter client preview
+
+on:
+  workflow_dispatch:
+    inputs:
+      build_name:
+        description: Version shown to testers
+        required: true
+        default: '0.9.0'
+      build_number:
+        description: Unique ascending Apple build number
+        required: true
+        default: '1'
+
+permissions:
+  contents: read
+
+jobs:
+  ios:
+    runs-on: macos-15
+    env:
+      DEVELOPER_DIR: /Applications/Xcode_26.3.app/Contents/Developer
+    defaults:
+      run:
+        working-directory: client
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify Apple upload SDK requirement
+        run: |
+          xcodebuild -version
+          xcrun --sdk iphoneos --show-sdk-version
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.44.0'
+          channel: stable
+          cache: true
+      - run: flutter pub get
+      - run: flutter analyze
+      - run: flutter test
+      - name: Build unsigned device app
+        env:
+          BUILD_NAME: ${{ inputs.build_name }}
+          BUILD_NUMBER: ${{ inputs.build_number }}
+        run: flutter build ios --release --no-codesign --build-name "$BUILD_NAME" --build-number "$BUILD_NUMBER"
+      - name: Package unsigned IPA for signing on 106
+        run: |
+          mkdir -p build/unsigned/Payload
+          cp -R build/ios/iphoneos/Runner.app build/unsigned/Payload/
+          cd build/unsigned
+          zip -qry ../hongguo-ios-unsigned.ipa Payload
+      - uses: actions/upload-artifact@v4
+        with:
+          name: hongguo-ios-unsigned-${{ inputs.build_name }}-${{ inputs.build_number }}
+          path: client/build/hongguo-ios-unsigned.ipa
+          retention-days: 7
+      - name: Build simulator app
+        env:
+          BUILD_NAME: ${{ inputs.build_name }}
+          BUILD_NUMBER: ${{ inputs.build_number }}
+        run: |
+          flutter build ios --simulator --debug --build-name "$BUILD_NAME" --build-number "$BUILD_NUMBER"
+          cd build/ios/iphonesimulator
+          zip -qry ../../hongguo-ios-simulator.zip Runner.app
+      - uses: actions/upload-artifact@v4
+        with:
+          name: hongguo-ios-simulator-${{ inputs.build_name }}-${{ inputs.build_number }}
+          path: client/build/hongguo-ios-simulator.zip
+          retention-days: 7
+  android-preview:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: client
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.44.0'
+          channel: stable
+          cache: true
+      - run: flutter pub get
+      - run: flutter analyze
+      - run: flutter test
+      - env:
+          BUILD_NAME: ${{ inputs.build_name }}
+          BUILD_NUMBER: ${{ inputs.build_number }}
+        run: flutter build apk --release --build-name "$BUILD_NAME" --build-number "$BUILD_NUMBER"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: hongguo-android-flutter-preview-${{ inputs.build_name }}-${{ inputs.build_number }}
+          path: client/build/app/outputs/flutter-apk/app-release.apk
+          retention-days: 7
