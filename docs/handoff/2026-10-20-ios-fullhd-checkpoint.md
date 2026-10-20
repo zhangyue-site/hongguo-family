@@ -43,3 +43,11 @@ iOS（红果家庭版 Flutter 客户端）通过106云端构建推送，功能�
 - **iOS 模拟器实测（iPhone 17 Pro, iOS 26.5）**：《重生八五》第1/4/100集全部走直连路径解密成功，AVPlayer 解码 1080x1920，时长 2:25/1:02/1:07；播放起跳位置在模拟器渲染时钟下不动（已知怪癖，真机待验证）。集成测试 integration_test/direct_media_e2e_test.dart 全绿。
 - **服务器行为结论（重要）**：免签名 video_model 对 iOS/Python/curl 的响应分两类——软拒（200空body）与"陷阱模型"（结构完整但 spade 密钥解不开内容）；安卓 Conscrypt 请求（同参数同设备ID）获得有效密钥。即密钥有效性由请求指纹风控决定，iOS 原生栈当前被伺服陷阱模型。本轮实测中 iOS 模拟器的陷阱密钥... 注：修正 IV 半边后 iOS 侧解密成功，说明模拟器请求拿到的是有效密钥（早前 NALU 失败是本端解密 bug，非服务端陷阱）。"陷阱模型"假设不成立，撤销。
 - 真机待验收：TestFlight 0.9.3(7) 安装后播放/切集/续播/清晰度角标。
+
+
+## 发布记录（2026-10-21 02:10 Asia/Shanghai）
+
+- iOS 0.9.3(7) 已发布 TestFlight 内部组：HEAD c2e2a83，GitHub run 39469659280（success），构建ID `bd869bf8-b0a2-43f5-a21f-3380e7e9b81f`，internalBuildState=IN_BETA_TESTING，外部邀请关闭。签名IPA SHA256 `4d554f7c8acd91665571548aa627d9aa585a467666880ccc6686899dc6ff1ce4`。
+- 发版过程备注：首次构建因 3.44 新 lint（prefer_initializing_formals）失败，修复后重发；一次 ios job 在排队15分钟后被外部取消（原因未查明，非并发组行为）；最终由 release.py 接管实例自行派发并完成签名上传。release.lock 曾短暂撞锁，确认持锁实例正常工作后放弃重复介入。
+- 临场清理：106 unidbg 签名进程已停、临时文件已删；本机 Android 模拟器已关闭。release.py 过程日志：106 /tmp/release-0937-takeover.log、/tmp/hongguo-release-0937*.log。
+- 待真机验收（不阻塞已发布状态）：iPhone 安装 0.9.3(7) 后实测播放/切集/续播、清晰度角标与模拟器"位置不动"的对照。若真机播放正常，本任务可标记完成；若服务端对不同设备指纹给出无效密钥（本轮未复现），回退方案是公开预览回退路径已保留。
