@@ -21,6 +21,28 @@ BASE = 'https://api.appstoreconnect.apple.com'
 EXPECTED_BUNDLE = 'site.zhangyue.hongguo.ios'
 
 
+def verify_checksums(path, checksums):
+    """Verify any checksums Apple returns without inventing an absent checksum."""
+    whole = checksums.get('file')
+    if whole:
+        algorithm = {'SHA_256': 'sha256', 'MD5': 'md5'}.get(whole['algorithm'])
+        if not algorithm:
+            raise ValueError('Unsupported Apple whole-file checksum algorithm')
+        if hashlib.new(algorithm, path.read_bytes()).hexdigest() != whole['hash']:
+            raise ValueError('Apple whole-file checksum differs from signed IPA')
+    composite = checksums.get('composite')
+    if composite:
+        if composite['algorithm'] != 'MD5':
+            raise ValueError('Unsupported Apple composite checksum algorithm')
+        expected, count, chunk_size = composite['hash'].split('-')
+        chunks = []
+        with path.open('rb') as source:
+            while chunk := source.read(int(chunk_size)):
+                chunks.append(hashlib.md5(chunk).digest())
+        if len(chunks) != int(count) or hashlib.md5(b''.join(chunks)).hexdigest() != expected:
+            raise ValueError('Apple composite checksum differs from signed IPA')
+
+
 def ipa_info(path):
     with zipfile.ZipFile(path) as archive:
         names = [n for n in archive.namelist()
@@ -96,7 +118,12 @@ def main():
         args.state.write_text(json.dumps(state, indent=2))
     else:
         uploaded_file = api('GET', '/v1/buildUploadFiles/' + state['fileId'])
-    if not state.get('committed'):
+    delivery = uploaded_file['data']['attributes']['assetDeliveryState']['state']
+    if delivery == 'COMPLETE':
+        state['transferred'] = True
+        state['committed'] = True
+        args.state.write_text(json.dumps(state, indent=2))
+    if not state.get('transferred'):
         operations = uploaded_file['data']['attributes'].get('uploadOperations', [])
         if not operations:
             raise RuntimeError('No upload operations returned; inspect Apple upload state')
@@ -121,12 +148,20 @@ def main():
                 except urllib.error.URLError:
                     raise RuntimeError('Chunk upload failed; rerun with same state file') from None
                 print(f'Uploaded part {number}/{len(operations)}', flush=True)
+        state['transferred'] = True
+        args.state.write_text(json.dumps(state, indent=2))
+    if not state.get('committed'):
+        # The generic schema lists optional sourceFileChecksums, but Apple's IPA
+        # endpoint rejects SHA_256 here. Follow the official WWDC25 walkthrough:
+        # commit with uploaded:true, then verify Apple's returned checksum.
         api('PATCH', '/v1/buildUploadFiles/' + state['fileId'], {'data': {
             'type': 'buildUploadFiles', 'id': state['fileId'], 'attributes': {
-                'uploaded': True, 'sourceFileChecksums': {
-                    'file': {'algorithm': 'SHA_256', 'hash': digest}}}}})
+                'uploaded': True}}})
         state['committed'] = True
         args.state.write_text(json.dumps(state, indent=2))
+    uploaded_file = api('GET', '/v1/buildUploadFiles/' + state['fileId'])
+    verify_checksums(args.ipa,
+                     uploaded_file['data']['attributes'].get('sourceFileChecksums') or {})
     result = api('GET', '/v1/buildUploads/' + state['uploadId'])
     print(json.dumps({'uploadId': state['uploadId'],
                       'attributes': result['data']['attributes']}, indent=2))

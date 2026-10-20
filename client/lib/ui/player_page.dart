@@ -95,7 +95,9 @@ class _PlayerPageState extends State<PlayerPage> with WidgetsBindingObserver {
           record.positionMs < candidate.value.duration.inMilliseconds - 2000) {
         await candidate.seekTo(Duration(milliseconds: record.positionMs));
       }
+      if (!mounted || ticket != _ticket) return;
       await candidate.setPlaybackSpeed(_speed);
+      if (!mounted || ticket != _ticket) return;
       candidate.addListener(_changed);
       if (WidgetsBinding.instance.lifecycleState == AppLifecycleState.resumed ||
           WidgetsBinding.instance.lifecycleState == null) {
@@ -198,12 +200,14 @@ class _PlayerPageState extends State<PlayerPage> with WidgetsBindingObserver {
 
   Future<void> _leave() async {
     if (_closing) return;
+    final route = ModalRoute.of(context);
+    _ticket++;
     setState(() => _closing = true);
     await _video?.pause();
     await _save();
     if (mounted) {
       await WidgetsBinding.instance.endOfFrame;
-      if (mounted) Navigator.pop(context);
+      if (mounted && route?.isCurrent == true) Navigator.pop(context);
     }
   }
 
@@ -223,7 +227,14 @@ class _PlayerPageState extends State<PlayerPage> with WidgetsBindingObserver {
     _ticket++;
     _hide?.cancel();
     _checkpoint?.cancel();
-    _save();
+    final video = _video;
+    if (video != null && video.value.isInitialized) {
+      final library = widget.library;
+      final series = widget.detail.series;
+      final episode = _episode;
+      final position = video.value.position.inMilliseconds;
+      scheduleMicrotask(() => library.save(series, episode, position));
+    }
     _video?.removeListener(_changed);
     _video?.dispose();
     super.dispose();

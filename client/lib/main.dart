@@ -29,6 +29,13 @@ class HongguoApp extends StatelessWidget {
         surface: hgPanel,
         primary: hgRed,
       ),
+      chipTheme: ChipThemeData(
+        selectedColor: const Color(0xff34202a),
+        backgroundColor: hgPanel,
+        side: BorderSide.none,
+        showCheckmark: false,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      ),
       appBarTheme: const AppBarTheme(
         backgroundColor: hgBackground,
         surfaceTintColor: Colors.transparent,

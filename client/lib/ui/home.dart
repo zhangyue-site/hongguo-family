@@ -6,13 +6,14 @@ import 'player_page.dart';
 
 class HomePage extends StatefulWidget {
   final Library library;
-  const HomePage({super.key, required this.library});
+  final ContentService? service;
+  const HomePage({super.key, required this.library, this.service});
   @override
   State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-  final service = ContentService();
+  late final service = widget.service ?? ContentService();
   final search = TextEditingController();
   int tab = 0, ticket = 0;
   String mode = 'short', genre = '全部', query = '';
@@ -150,7 +151,10 @@ class _HomePageState extends State<HomePage> {
                     OutlinedButton.icon(
                       onPressed: () async {
                         await library.toggle(series);
-                        if (sheetContext.mounted) Navigator.pop(sheetContext);
+                        if (sheetContext.mounted &&
+                            ModalRoute.of(sheetContext)?.isCurrent == true) {
+                          Navigator.pop(sheetContext);
+                        }
                       },
                       icon: Icon(
                         library.contains(series.id)
@@ -194,29 +198,38 @@ class _HomePageState extends State<HomePage> {
 
   Future<void> prepare(Series s, bool choose) async {
     BuildContext? loadingContext;
-    showDialog(
+    bool cancelled = false;
+    showDialog<void>(
       context: context,
       barrierDismissible: false,
       builder: (c) {
         loadingContext = c;
-        return AlertDialog(
-          content: const Row(
-            children: [
-              SizedBox(
-                width: 22,
-                height: 22,
-                child: CircularProgressIndicator(strokeWidth: 2),
+        return PopScope(
+          onPopInvokedWithResult: (popped, result) {
+            if (popped) cancelled = true;
+          },
+          child: AlertDialog(
+            content: const Row(
+              children: [
+                SizedBox(
+                  width: 22,
+                  height: 22,
+                  child: CircularProgressIndicator(strokeWidth: 2),
+                ),
+                SizedBox(width: 16),
+                Text('正在加载剧集…'),
+              ],
+            ),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  cancelled = true;
+                  Navigator.pop(c);
+                },
+                child: const Text('取消'),
               ),
-              SizedBox(width: 16),
-              Text('正在加载剧集…'),
             ],
           ),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.pop(c),
-              child: const Text('取消'),
-            ),
-          ],
         );
       },
     );
@@ -227,7 +240,12 @@ class _HomePageState extends State<HomePage> {
     } catch (e) {
       failure = e.toString();
     }
-    if (!mounted || loadingContext?.mounted != true) return;
+    if (!mounted ||
+        cancelled ||
+        loadingContext?.mounted != true ||
+        ModalRoute.of(loadingContext!)?.isCurrent != true) {
+      return;
+    }
     Navigator.of(loadingContext!).pop();
     if (detail == null) {
       message(failure ?? '剧集暂不可用，请稍后重试');

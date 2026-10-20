@@ -9,6 +9,7 @@ Future<int?> showEpisodeSheet(
 }) => showModalBottomSheet<int>(
   context: context,
   isScrollControlled: true,
+  showDragHandle: false,
   backgroundColor: const Color(0xff1b1c21),
   shape: const RoundedRectangleBorder(
     borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
