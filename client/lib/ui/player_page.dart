@@ -1,7 +1,9 @@
 import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 import '../data/content.dart';
+import '../data/direct_media.dart';
 import '../data/library.dart';
 import 'episode_sheet.dart';
 
@@ -12,11 +14,13 @@ class PlayerPage extends StatefulWidget {
     required this.initialEpisode,
     required this.library,
     required this.service,
+    this.direct,
   });
   final Detail detail;
   final int initialEpisode;
   final Library library;
   final ContentService service;
+  final DirectMediaService? direct;
   @override
   State<PlayerPage> createState() => _PlayerPageState();
 }
@@ -26,7 +30,7 @@ class _PlayerPageState extends State<PlayerPage> with WidgetsBindingObserver {
   late int _episode;
   int _ticket = 0;
   bool _controls = true, _loading = true, _closing = false;
-  String? _error;
+  String? _error, _quality;
   double _speed = 1;
   Timer? _hide, _checkpoint;
   @override
@@ -51,10 +55,10 @@ class _PlayerPageState extends State<PlayerPage> with WidgetsBindingObserver {
 
   Future<void> _load(int number, {bool restore = false}) async {
     final rows = widget.detail.episodes.where((e) => e.number == number);
-    if (rows.isEmpty || !rows.first.available) {
+    if (rows.isEmpty) {
       setState(() {
         _loading = false;
-        _error = '本集未开放公开播放，请前往官方平台观看';
+        _error = '本集不存在';
       });
       return;
     }
@@ -70,16 +74,51 @@ class _PlayerPageState extends State<PlayerPage> with WidgetsBindingObserver {
       _episode = number;
       _loading = true;
       _error = null;
+      _quality = null;
       _controls = true;
     });
     VideoPlayerController? candidate;
     try {
-      final url = await widget.service.mediaURL(
-        widget.detail.series.id,
-        rows.first,
-      );
-      if (!mounted || ticket != _ticket) return;
-      candidate = VideoPlayerController.networkUrl(url);
+      final episode = rows.first;
+      // Try the full/HD direct source first; the public 360p preview stays
+      // as the fallback for whatever the direct source cannot serve.
+      DirectMedia? direct;
+      String? directError;
+      final service = widget.direct;
+      if (service != null) {
+        try {
+          direct = await service.prepare(episode.id);
+          if (!mounted || ticket != _ticket) return;
+        } on DirectMediaException catch (e) {
+          directError = e.message;
+        }
+      }
+      if (direct != null) {
+        final lo = direct.width < direct.height
+            ? direct.width
+            : direct.height;
+        candidate = VideoPlayerController.file(direct.file);
+        _quality = '${lo.clamp(1, 4320)}p';
+      } else if (episode.available) {
+        final url = await widget.service.mediaURL(
+          widget.detail.series.id,
+          episode,
+        );
+        if (!mounted || ticket != _ticket) return;
+        candidate = VideoPlayerController.networkUrl(url);
+        _quality = '预览';
+      } else {
+        setState(() {
+          _loading = false;
+          _error = directError ?? '本集暂时无法获取片源，请稍后重试';
+          _controls = true;
+        });
+        return;
+      }
+      if (!mounted || ticket != _ticket) {
+        await candidate.dispose();
+        return;
+      }
       await candidate.initialize().timeout(const Duration(seconds: 35));
       if (!mounted || ticket != _ticket) {
         await candidate.dispose();
@@ -172,14 +211,7 @@ class _PlayerPageState extends State<PlayerPage> with WidgetsBindingObserver {
     final next =
         widget.detail.episodes.indexWhere((e) => e.number == _episode) + delta;
     if (next < 0 || next >= widget.detail.episodes.length) return;
-    final e = widget.detail.episodes[next];
-    if (e.available) {
-      _load(e.number);
-    } else {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(const SnackBar(content: Text('本集暂未开放公开播放')));
-    }
+    _load(widget.detail.episodes[next].number);
   }
 
   Future<void> _episodes() async {
@@ -351,12 +383,39 @@ class _PlayerPageState extends State<PlayerPage> with WidgetsBindingObserver {
                                     fontWeight: FontWeight.w600,
                                   ),
                                 ),
-                                Text(
-                                  '第 $_episode 集',
-                                  style: const TextStyle(
-                                    color: Colors.white60,
-                                    fontSize: 12,
-                                  ),
+                                Row(
+                                  children: [
+                                    Text(
+                                      '第 $_episode 集',
+                                      style: const TextStyle(
+                                        color: Colors.white60,
+                                        fontSize: 12,
+                                      ),
+                                    ),
+                                    if (_quality != null) ...[
+                                      const SizedBox(width: 8),
+                                      DecoratedBox(
+                                        decoration: BoxDecoration(
+                                          color: const Color(0xffff526e),
+                                          borderRadius:
+                                              BorderRadius.circular(6),
+                                        ),
+                                        child: Padding(
+                                          padding: const EdgeInsets
+                                              .symmetric(
+                                              horizontal: 6, vertical: 1),
+                                          child: Text(
+                                            _quality!,
+                                            style: const TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 10,
+                                              fontWeight: FontWeight.w700,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ],
                                 ),
                               ],
                             ),

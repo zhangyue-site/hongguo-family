@@ -51,13 +51,14 @@ void main() {
       expect(find.text('播放中'), findsNothing);
     },
   );
-  testWidgets('locked episode cannot dismiss selector or play', (t) async {
+  testWidgets('every episode is selectable, including beyond the preview', (
+    t,
+  ) async {
     int? selected;
     await open(t, (n) => selected = n);
     await t.tap(find.text('3'));
-    await t.pump();
-    expect(selected, isNull);
-    expect(find.text('播放中'), findsOneWidget);
-    expect(find.text('本集未开放公开播放，请前往官方平台观看'), findsOneWidget);
+    await t.pumpAndSettle();
+    expect(selected, 3);
+    expect(find.text('播放中'), findsNothing);
   });
 }

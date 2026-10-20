@@ -1,13 +1,20 @@
 import 'package:flutter/material.dart';
 import '../data/content.dart';
+import '../data/direct_media.dart';
 import '../data/library.dart';
 import 'episode_sheet.dart';
 import 'player_page.dart';
 
 class HomePage extends StatefulWidget {
   final Library library;
+  final DirectMediaService? direct;
   final ContentService? service;
-  const HomePage({super.key, required this.library, this.service});
+  const HomePage({
+    super.key,
+    required this.library,
+    this.direct,
+    this.service,
+  });
   @override
   State<HomePage> createState() => _HomePageState();
 }
@@ -264,10 +271,6 @@ class _HomePageState extends State<HomePage> {
       ep = selected;
     }
     if (ep < 1 || ep > d.episodes.length) ep = 1;
-    if (!d.episodes[ep - 1].available) {
-      message('上次观看的剧集暂无公开片源，请从选集选择可播放集数');
-      return;
-    }
     if (mounted) {
       await Navigator.of(context).push(
         MaterialPageRoute(
@@ -276,6 +279,7 @@ class _HomePageState extends State<HomePage> {
             initialEpisode: ep,
             library: library,
             service: service,
+            direct: widget.direct,
           ),
         ),
       );

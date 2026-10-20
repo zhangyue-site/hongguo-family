@@ -1,20 +1,46 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'data/direct_media.dart';
 import 'data/library.dart';
 import 'ui/home.dart';
 
 const hgRed = Color(0xffff526e),
     hgBackground = Color(0xff121316),
     hgPanel = Color(0xff202126);
+
+class _PrefsStore implements SharedPreferencesLike {
+  _PrefsStore(this.prefs);
+  final SharedPreferences prefs;
+  @override
+  Future<String?> read(String key) async => prefs.getString(key);
+  @override
+  Future<void> write(String key, String value) =>
+      prefs.setString(key, value);
+}
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final prefs = await SharedPreferences.getInstance();
-  runApp(HongguoApp(library: Library(prefs)));
+  final tmp = await getTemporaryDirectory();
+  final direct = DirectMediaService(
+    store: () async => _PrefsStore(prefs),
+    cacheDir: Directory('${tmp.path}/hongguo-media'),
+  );
+  runApp(HongguoApp(library: Library(prefs), direct: direct));
 }
 
 class HongguoApp extends StatelessWidget {
   final Library library;
-  const HongguoApp({super.key, required this.library});
+  final DirectMediaService direct;
+  const HongguoApp({
+    super.key,
+    required this.library,
+    required this.direct,
+  });
   @override
   Widget build(BuildContext context) => MaterialApp(
     title: '红果家庭版',
@@ -57,6 +83,6 @@ class HongguoApp extends StatelessWidget {
         ),
       ),
     ),
-    home: HomePage(library: library),
+    home: HomePage(library: library, direct: direct),
   );
 }

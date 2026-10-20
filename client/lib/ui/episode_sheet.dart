@@ -136,7 +136,7 @@ class _EpisodeSheetState extends State<EpisodeSheet> {
                         final active = episode.number == widget.selected;
                         final label = active
                             ? (widget.playing ? '播放中' : '当前集')
-                            : (episode.available ? '' : '未开放');
+                            : '';
                         return Semantics(
                           selected: active,
                           button: true,
@@ -149,37 +149,18 @@ class _EpisodeSheetState extends State<EpisodeSheet> {
                             borderRadius: BorderRadius.circular(12),
                             child: InkWell(
                               borderRadius: BorderRadius.circular(12),
-                              onTap: () {
-                                if (!episode.available) {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(
-                                      content: Text('本集未开放公开播放，请前往官方平台观看'),
-                                    ),
-                                  );
-                                  return;
-                                }
-                                Navigator.pop(context, episode.number);
-                              },
+                              onTap: () =>
+                                  Navigator.pop(context, episode.number),
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      if (!episode.available) ...[
-                                        const Icon(
-                                          Icons.lock_outline_rounded,
-                                          size: 12,
-                                          color: Colors.white38,
-                                        ),
-                                        const SizedBox(width: 2),
-                                      ],
                                       Text(
                                         '${episode.number}',
-                                        style: TextStyle(
-                                          color: episode.available
-                                              ? Colors.white
-                                              : Colors.white38,
+                                        style: const TextStyle(
+                                          color: Colors.white,
                                           fontSize: 18,
                                           fontWeight: FontWeight.w600,
                                         ),
