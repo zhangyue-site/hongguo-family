@@ -163,7 +163,9 @@ class DirectMediaService {
     int qualityCeiling = 1080,
     this.keepIntermediates = false,
   }) : _client = client ?? http.Client(),
+       // ignore: prefer_initializing_formals
        _store = store,
+       // ignore: prefer_initializing_formals
        _cacheDir = cacheDir,
        _ceiling = qualityCeiling;
 
