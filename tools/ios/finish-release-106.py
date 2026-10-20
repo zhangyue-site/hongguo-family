@@ -21,6 +21,7 @@ while True:
  time.sleep(30)
 bid=build['id'];root=Path('/opt/hongguo-analysis/ios-release')
 if policy.get('mode')=='internal':
+ subprocess.run(['python3',str(root/'sync-internal-testers.py'),'--config',str(root/'internal-roster-config.json')],check=True)
  s,b=asc.api('GET','/v1/apps/6824873494/betaGroups',token=asc.make_token(),retries=1)
  if isinstance(b,str):b=json.loads(b)
  if s!=200:raise RuntimeError('Cannot verify internal group')
