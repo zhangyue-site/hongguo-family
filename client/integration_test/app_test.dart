@@ -1,4 +1,7 @@
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter/material.dart';
+import 'dart:io';
+import 'package:hongguo_client/data/library.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:video_player/video_player.dart';
@@ -23,6 +26,10 @@ void main() {
     await tester.pump();
     const title = '王妈在顾家当保姆后全家只会搞笑了';
     await until(() => find.text(title).evaluate().isNotEmpty);
+    if (Platform.isAndroid) {
+      await binding.convertFlutterSurfaceToImage();
+      await tester.pump();
+    }
     await binding.takeScreenshot('ios-home');
     await tester.tap(find.text(title).first);
     await tester.pump(const Duration(milliseconds: 500));
@@ -76,6 +83,8 @@ void main() {
         .widget<VideoPlayer>(find.byType(VideoPlayer))
         .controller;
     await until(() => second.value.position.inMilliseconds > 500);
+    await second.seekTo(const Duration(seconds: 8));
+    await until(() => second.value.position.inMilliseconds >= 8000);
     if (find.byTooltip('返回').evaluate().isEmpty) {
       await tester.tap(find.byType(VideoPlayer));
       await tester.pump();
@@ -84,5 +93,24 @@ void main() {
     await tester.pump(const Duration(milliseconds: 800));
     await until(() => find.text('继续观看').evaluate().isNotEmpty);
     expect(find.text('第 2 集 · 接着上次的故事'), findsOneWidget);
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.reload();
+    final restored = Library(prefs);
+    expect(restored.history.first.episode, 2);
+    expect(restored.history.first.positionMs, greaterThanOrEqualTo(8000));
+    // Dispose the entire app, then create it from persisted preferences.
+    await tester.pumpWidget(const SizedBox.shrink());
+    await tester.pump();
+    await app.main();
+    await tester.pump();
+    await until(() => find.text('继续观看').evaluate().isNotEmpty);
+    await tester.tap(find.text('继续观看').first);
+    await tester.pump();
+    await until(() => find.byType(VideoPlayer).evaluate().isNotEmpty);
+    final resumed = tester.widget<VideoPlayer>(find.byType(VideoPlayer)).controller;
+    await until(() => resumed.value.position.inMilliseconds >= 8000);
+    expect(resumed.value.isPlaying, isTrue);
+    expect(resumed.value.size.width, greaterThan(0));
+    expect(resumed.value.size.height, greaterThan(0));
   });
 }

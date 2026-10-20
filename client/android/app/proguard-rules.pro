@@ -30,3 +30,22 @@
     public java.lang.String getMessage();
     public java.lang.Object getDetails();
 }
+
+# jni 1.1.0/lib/src/kotlin.dart resolves these coroutine/result symbols by
+# literal JVM names. Its consumer rules retain com.github.dart_lang.jni only;
+# R8 otherwise removes CoroutineSingletons and renames Result's fields.
+-keep class kotlin.coroutines.intrinsics.CoroutineSingletons
+-keep class kotlin.coroutines.intrinsics.IntrinsicsKt
+-keepclassmembers class kotlin.coroutines.intrinsics.IntrinsicsKt__IntrinsicsKt {
+    public static java.lang.Object getCOROUTINE_SUSPENDED();
+}
+-keep class kotlin.Result {
+    private final java.lang.Object value;
+}
+-keep class kotlin.Result$Failure {
+    public <init>(java.lang.Throwable);
+    public final java.lang.Throwable exception;
+}
+-keep interface kotlin.coroutines.Continuation {
+    public void resumeWith(java.lang.Object);
+}
