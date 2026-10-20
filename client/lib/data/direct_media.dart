@@ -833,9 +833,11 @@ Future<void> _processTrack(
           }
         }
         if (!inside) throw const DirectMediaException('样本超出媒体数据范围');
+        // The native player places baseIv + sampleIndex in the counter's
+        // high eight bytes (iv = value << 64) with the low half zeroed.
         final counter = Uint8List(16);
         var v = baseIv + sample;
-        for (var p = 15; p >= 8; p--) {
+        for (var p = 7; p >= 0; p--) {
           counter[p] = v & 0xff;
           v >>= 8;
         }

@@ -95,16 +95,19 @@ void main() {
   });
 
   group('mp4 CENC transform', () {
-    // Independent AES-128-CTR keystream (48 bytes) for key
-    // 2b7e151628aed2a6abf7158809cf4f3c, counter blocks 00..00||0/1/2
-    // (generated with openssl against the NIST SP 800-38A F.5.1 vector).
-    final keystream = _hexBytes(
+    // Independent AES-128-CTR keystreams for key
+    // 2b7e151628aed2a6abf7158809cf4f3c (openssl, NIST SP 800-38A F.5.1 key
+    // vector). The initial counter block places baseIv<<64 in the high half;
+    // following blocks increment the full 128-bit integer (JVM AES/CTR).
+    final keystreamSample0 = _hexBytes(
       '7df76b0c1ab899b33e42f047b91b546f'
       '57127d4034b1bebfaef466b9c7726fc6'
-      '973f2ef34879e2027f1734303ff21f89'
-      '469c7fcb75d5d9a1b418cb997b09a185'
-      '8a7c37ad7c3edf32495ececadec2311c'
-      'ef28d82739fd8c7147323f7e91c0cbfa',
+      '973f2ef34879e2027f1734303ff21f89',
+    );
+    final keystreamSample1 = _hexBytes(
+      'dc0a3bc38609c26f6f2a63a39cf7ee93'
+      'c5eb9614bd235873ff3771254315047c'
+      'a419361ef995e1af798b107a35090358',
     );
     final key = _hexBytes('2b7e151628aed2a6abf7158809cf4f3c');
     // Two NALU-framed units per sample: [len=16][payload], twice = 40 bytes.
@@ -114,18 +117,16 @@ void main() {
     plainSample[23] = 16;
     plainSample[24] = 0x68;
 
-    // The counter starts at baseIv + sampleIndex and increments per 16-byte
-    // block within the sample, so sample 2 consumes keystream blocks 1-3.
-    Uint8List encrypt(Uint8List plain, int blockOffset) {
+    Uint8List encrypt(Uint8List plain, Uint8List keystream) {
       final out = Uint8List(plain.length);
       for (var i = 0; i < plain.length; i++) {
-        out[i] = plain[i] ^ keystream[blockOffset * 16 + i];
+        out[i] = plain[i] ^ keystream[i];
       }
       return out;
     }
 
     test('decrypts a synthetic encrypted track into plain samples', () async {
-      final cipher = <int>[...encrypt(plainSample, 0), ...encrypt(plainSample, 1)];
+      final cipher = <int>[...encrypt(plainSample, keystreamSample0), ...encrypt(plainSample, keystreamSample1)];
       final mp4 = _EncryptedMp4Builder(cipher: Uint8List.fromList(cipher)).build();
       final dir = await Directory.systemTemp.createTemp('hgtransform');
       final enc = File('${dir.path}/a.enc')..writeAsBytesSync(mp4);
@@ -153,7 +154,7 @@ void main() {
     });
 
     test('rejects wrong keys and leaves no output behind', () async {
-      final mp4 = _EncryptedMp4Builder(cipher: encrypt(plainSample, 0)).build();
+      final mp4 = _EncryptedMp4Builder(cipher: encrypt(plainSample, keystreamSample0)).build();
       final dir = await Directory.systemTemp.createTemp('hgtransform');
       final enc = File('${dir.path}/b.enc')..writeAsBytesSync(mp4);
       final out = File('${dir.path}/b.mp4');
