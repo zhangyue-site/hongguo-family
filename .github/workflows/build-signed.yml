@@ -17,12 +17,13 @@ jobs:
         run: '"$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" "platforms;android-35" "build-tools;35.0.0"'
       - name: Build unsigned candidates
         run: python3 build-family.py
-      - name: Download private encrypted keystore
+      - name: Restore keystore from secret
         env:
-          GH_TOKEN: ${{ github.token }}
+          KEYSTORE_B64: ${{ secrets.HONGGUO_KEYSTORE_B64 }}
         run: |
           umask 077
-          gh release download v0.2.0-family-beta --repo "$GITHUB_REPOSITORY" --pattern hongguo-family.keystore --dir "$RUNNER_TEMP/hongguo-signing"
+          mkdir -p "$RUNNER_TEMP/hongguo-signing"
+          echo "$KEYSTORE_B64" | base64 -d > "$RUNNER_TEMP/hongguo-signing/hongguo-family.keystore"
       - name: Sign and verify both APKs
         env:
           HONGGUO_STORE_PASSWORD: ${{ secrets.HONGGUO_STORE_PASSWORD }}
