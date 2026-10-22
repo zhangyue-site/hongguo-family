@@ -316,7 +316,7 @@ class DirectMediaService {
       'iid': _iid ?? '',
       '_rticket': '${DateTime.now().millisecondsSinceEpoch}',
     };
-    final uri = Uri.https(_apiHost, '/novel/player/video_model/v1/', query);
+    final uri = Uri.https(_apiHost, '/novel/player/multi_video_model/v1/', query);
     try {
       final response = await _client
           .post(
@@ -351,7 +351,27 @@ class DirectMediaService {
         throw const DirectMediaException('媒体服务返回异常');
       }
       final data = obj['data'];
-      if (data is! Map || data['video_model'] == null) {
+      if (data is Map && data['multi_video_model'] != null) {
+      final batch = data['multi_video_model'];
+      if (batch is List && batch.isNotEmpty) {
+        final first = batch.first;
+        if (first is Map && first['video_model'] != null) {
+          return first['video_model'];
+        }
+        if (first is Map) return first;
+      }
+      if (batch is Map) {
+        final list = batch['video_model_list'] ?? batch['list'];
+        if (list is List && list.isNotEmpty) {
+          final first = list.first;
+          if (first is Map && first['video_model'] != null) {
+            return first['video_model'];
+          }
+          if (first is Map) return first;
+        }
+      }
+    }
+    if (data is! Map || data['video_model'] == null) {
         throw const DirectMediaException('媒体服务缺少数据');
       }
       return data['video_model'];
