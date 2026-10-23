@@ -7,6 +7,39 @@ import '../data/direct_media.dart';
 import '../data/library.dart';
 import 'episode_sheet.dart';
 
+/// 轻量通知封装：有平台通知能力时弹系统通知，否则静默降级为日志。
+/// 任何异常都不能影响播放，调用点已 try/catch 包裹。
+class LocalNotifications {
+  LocalNotifications._();
+  static final LocalNotifications instance = LocalNotifications._();
+  bool _ready = false;
+
+  Future<void> ensure() async {
+    if (_ready) return;
+    _ready = true;
+    try {
+      await notifyInit();
+    } catch (e) {
+      debugPrint('notification init skipped: $e');
+    }
+  }
+
+  Future<void> show(String title, String body) async {
+    try {
+      await notifyShow(title, body);
+    } catch (e) {
+      debugPrint('notification skipped: $e');
+    }
+  }
+}
+
+/// 平台实现占位：未接入通知插件时静默跳过。
+Future<void> notifyInit() async {}
+
+Future<void> notifyShow(String title, String body) async {
+  debugPrint('NOTIFY $title: $body');
+}
+
 class PlayerPage extends StatefulWidget {
   const PlayerPage({
     super.key,
@@ -100,9 +133,7 @@ class _PlayerPageState extends State<PlayerPage> with WidgetsBindingObserver {
         }
       }
       if (direct != null) {
-        final lo = direct.width < direct.height
-            ? direct.width
-            : direct.height;
+        final lo = direct.width < direct.height ? direct.width : direct.height;
         candidate = VideoPlayerController.file(direct.file);
         _quality = '${lo.clamp(1, 4320)}p';
       } else if (episode.available) {
@@ -119,6 +150,7 @@ class _PlayerPageState extends State<PlayerPage> with WidgetsBindingObserver {
           _error = directError ?? '本集暂时无法获取片源，请稍后重试';
           _controls = true;
         });
+        unawaited(LocalNotifications.instance.show('播放失败', _error!));
         return;
       }
       if (!mounted || ticket != _ticket) {
@@ -159,6 +191,7 @@ class _PlayerPageState extends State<PlayerPage> with WidgetsBindingObserver {
         _error = '播放暂时不可用，请检查网络后重试';
         _controls = true;
       });
+      unawaited(LocalNotifications.instance.show('播放失败', '播放暂时不可用，请检查网络后重试'));
     }
   }
 
@@ -409,13 +442,15 @@ class _PlayerPageState extends State<PlayerPage> with WidgetsBindingObserver {
                                       DecoratedBox(
                                         decoration: BoxDecoration(
                                           color: const Color(0xffff526e),
-                                          borderRadius:
-                                              BorderRadius.circular(6),
+                                          borderRadius: BorderRadius.circular(
+                                            6,
+                                          ),
                                         ),
                                         child: Padding(
-                                          padding: const EdgeInsets
-                                              .symmetric(
-                                              horizontal: 6, vertical: 1),
+                                          padding: const EdgeInsets.symmetric(
+                                            horizontal: 6,
+                                            vertical: 1,
+                                          ),
                                           child: Text(
                                             _quality!,
                                             style: const TextStyle(

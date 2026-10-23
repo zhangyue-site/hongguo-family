@@ -287,14 +287,15 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget poster(Series s) => Image.network(
-    s.cover,
-    fit: BoxFit.cover,
-    errorBuilder: (_, e, st) => Container(
-      color: const Color(0xff30232c),
-      alignment: Alignment.center,
-      child: const Icon(Icons.movie_outlined, color: Colors.white38, size: 38),
-    ),
-  );
+        s.cover,
+        fit: BoxFit.cover,
+        errorBuilder: (_, e, st) => Container(
+          color: const Color(0xff30232c),
+          alignment: Alignment.center,
+          child:
+              const Icon(Icons.movie_outlined, color: Colors.white38, size: 38),
+        ),
+      );
   @override
   Widget build(BuildContext context) {
     final saved = historyOnly
@@ -398,10 +399,10 @@ class _HomePageState extends State<HomePage> {
                         child: Text(
                           rows.isEmpty
                               ? historyOnly
-                                    ? '看过的短剧会保存在这里'
-                                    : tab == 2
-                                    ? '把喜欢的故事加入追剧'
-                                    : '暂无结果，请换个分类或关键词'
+                                  ? '看过的短剧会保存在这里'
+                                  : tab == 2
+                                      ? '把喜欢的故事加入追剧'
+                                      : '暂无结果，请换个分类或关键词'
                               : '${tab == 2 || historyOnly ? '已保存' : '找到'} ${rows.length} 部',
                           style: const TextStyle(
                             color: Colors.white54,
@@ -461,11 +462,11 @@ class _HomePageState extends State<HomePage> {
                           }, childCount: rows.length),
                           gridDelegate:
                               SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: columns,
-                                mainAxisSpacing: 22,
-                                crossAxisSpacing: 12,
-                                childAspectRatio: .55,
-                              ),
+                            crossAxisCount: columns,
+                            mainAxisSpacing: 22,
+                            crossAxisSpacing: 12,
+                            childAspectRatio: .55,
+                          ),
                         );
                       },
                     ),
@@ -506,92 +507,92 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget filters() => Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        padding: const EdgeInsets.fromLTRB(20, 10, 20, 8),
-        child: Row(
-          children: [
-            for (final item in [
-              ('short', '真人短剧'),
-              ('manju', '漫剧'),
-              ('ai', 'AI 剧'),
-            ])
-              Padding(
-                padding: const EdgeInsets.only(right: 10),
-                child: ChoiceChip(
-                  label: Text(item.$2),
-                  selected: mode == item.$1,
-                  onSelected: (_) {
-                    setState(() {
-                      mode = item.$1;
-                      genre = '全部';
-                      query = '';
-                      search.clear();
-                    });
-                    load();
-                  },
-                ),
-              ),
-          ],
-        ),
-      ),
-      SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        padding: const EdgeInsets.fromLTRB(20, 0, 20, 8),
-        child: Row(
-          children: [
-            for (final g in [
-              '全部',
-              ...(mode == 'short'
-                  ? ContentService.realGenres.keys
-                  : ContentService.animationGenres.keys),
-            ])
-              Padding(
-                padding: const EdgeInsets.only(right: 8),
-                child: ChoiceChip(
-                  label: Text(g),
-                  selected: genre == g,
-                  onSelected: (_) {
-                    setState(() {
-                      genre = g;
-                      query = '';
-                      search.clear();
-                    });
-                    load();
-                  },
-                ),
-              ),
-          ],
-        ),
-      ),
-      if (query.isNotEmpty)
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-          child: Row(
-            children: [
-              Expanded(
-                child: Text(
-                  '“$query”的搜索结果',
-                  style: const TextStyle(color: Colors.white60),
-                ),
-              ),
-              TextButton(
-                onPressed: () {
-                  setState(() {
-                    query = '';
-                    search.clear();
-                  });
-                  load();
-                },
-                child: const Text('清除'),
-              ),
-            ],
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            padding: const EdgeInsets.fromLTRB(20, 10, 20, 8),
+            child: Row(
+              children: [
+                for (final item in [
+                  ('short', '真人短剧'),
+                  ('manju', '漫剧'),
+                  ('ai', 'AI 剧'),
+                ])
+                  Padding(
+                    padding: const EdgeInsets.only(right: 10),
+                    child: ChoiceChip(
+                      label: Text(item.$2),
+                      selected: mode == item.$1,
+                      onSelected: (_) {
+                        setState(() {
+                          mode = item.$1;
+                          genre = '全部';
+                          query = '';
+                          search.clear();
+                        });
+                        load();
+                      },
+                    ),
+                  ),
+              ],
+            ),
           ),
-        ),
-    ],
-  );
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            padding: const EdgeInsets.fromLTRB(20, 0, 20, 8),
+            child: Row(
+              children: [
+                for (final g in [
+                  '全部',
+                  ...(mode == 'short'
+                      ? ContentService.realGenres.keys
+                      : ContentService.animationGenres.keys),
+                ])
+                  Padding(
+                    padding: const EdgeInsets.only(right: 8),
+                    child: ChoiceChip(
+                      label: Text(g),
+                      selected: genre == g,
+                      onSelected: (_) {
+                        setState(() {
+                          genre = g;
+                          query = '';
+                          search.clear();
+                        });
+                        load();
+                      },
+                    ),
+                  ),
+              ],
+            ),
+          ),
+          if (query.isNotEmpty)
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      '“$query”的搜索结果',
+                      style: const TextStyle(color: Colors.white60),
+                    ),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      setState(() {
+                        query = '';
+                        search.clear();
+                      });
+                      load();
+                    },
+                    child: const Text('清除'),
+                  ),
+                ],
+              ),
+            ),
+        ],
+      );
   Widget continueCard() {
     final r = library.history.first;
     return Padding(
@@ -635,41 +636,101 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget mine() => ListView(
-    padding: const EdgeInsets.all(20),
-    children: [
-      const Text(
-        '我的',
-        style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+        padding: const EdgeInsets.all(20),
+        children: [
+          const Text(
+            '我的',
+            style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(height: 24),
+          ListTile(
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+            tileColor: const Color(0xff202126),
+            leading: const Icon(Icons.history),
+            title: const Text('观看历史'),
+            subtitle: Text('${library.history.length} 部'),
+            trailing: const Icon(Icons.chevron_right),
+            onTap: () {
+              setState(() {
+                historyOnly = true;
+              });
+            },
+          ),
+          const SizedBox(height: 12),
+          ListTile(
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+            tileColor: const Color(0xff202126),
+            leading: const Icon(Icons.favorite_border),
+            title: const Text('我的追剧'),
+            subtitle: Text('${library.favorites.length} 部'),
+            trailing: const Icon(Icons.chevron_right),
+            onTap: () => selectTab(2),
+          ),
+          const SizedBox(height: 12),
+          ListTile(
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+            tileColor: const Color(0xff202126),
+            leading: const Icon(Icons.sd_storage_outlined),
+            title: const Text('缓存管理'),
+            subtitle: Text(_cacheSummary),
+            trailing: const Icon(Icons.chevron_right),
+            onTap: _openCacheManager,
+          ),
+          const SizedBox(height: 28),
+          const Text(
+            '红果家庭版 · 0.9.0\n收藏与观看进度保存在本机。\n个人适配测试版，非红果官方发行。',
+            style: TextStyle(color: Colors.white38, height: 1.8, fontSize: 12),
+          ),
+        ],
+      );
+
+  String _cacheSummary = '正在统计…';
+
+  Future<void> _openCacheManager() async {
+    final service = widget.direct;
+    if (service == null) return;
+    DirectMediaStats stats;
+    try {
+      stats = await service.stats();
+    } catch (_) {
+      stats = const DirectMediaStats(0, 0);
+    }
+    if (!mounted) return;
+    setState(
+        () => _cacheSummary = '已缓存 ${stats.episodes} 集 · ${stats.readable}');
+    if (!mounted) return;
+    final cleared = await showDialog<bool>(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: const Text('缓存管理'),
+        content: Text(
+          '已缓存 ${stats.episodes} 集 · 占用 ${stats.readable}\n\n'
+          '缓存用于秒开和切集加速，自动保留最近看的几集；清空不影响观看记录和收藏。',
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(ctx).pop(false),
+            child: const Text('关闭'),
+          ),
+          TextButton(
+            onPressed: () => Navigator.of(ctx).pop(true),
+            child: const Text('清空缓存'),
+          ),
+        ],
       ),
-      const SizedBox(height: 24),
-      ListTile(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        tileColor: const Color(0xff202126),
-        leading: const Icon(Icons.history),
-        title: const Text('观看历史'),
-        subtitle: Text('${library.history.length} 部'),
-        trailing: const Icon(Icons.chevron_right),
-        onTap: () {
-          setState(() {
-            historyOnly = true;
-          });
-        },
-      ),
-      const SizedBox(height: 12),
-      ListTile(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        tileColor: const Color(0xff202126),
-        leading: const Icon(Icons.favorite_border),
-        title: const Text('我的追剧'),
-        subtitle: Text('${library.favorites.length} 部'),
-        trailing: const Icon(Icons.chevron_right),
-        onTap: () => selectTab(2),
-      ),
-      const SizedBox(height: 28),
-      const Text(
-        '红果家庭版 · 0.9.0\n收藏与观看进度保存在本机。\n个人适配测试版，非红果官方发行。',
-        style: TextStyle(color: Colors.white38, height: 1.8, fontSize: 12),
-      ),
-    ],
-  );
+    );
+    if (cleared == true) {
+      try {
+        await service.clearAll();
+      } catch (_) {}
+      if (!mounted) return;
+      setState(() => _cacheSummary = '已缓存 0 集 · 0 KB');
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('缓存已清空')),
+      );
+    }
+  }
 }

@@ -93,8 +93,8 @@ class MediaModel {
       final size = _int(m['size']);
       if (url.isEmpty || width <= 0 || height <= 0 || size <= 0) continue;
       if (!url.startsWith('https://')) continue;
-      final quality = RegExp(r'4:(\d{3,4})p').firstMatch('${m['gear_des_key']}')
-          ?.group(1);
+      final quality =
+          RegExp(r'4:(\d{3,4})p').firstMatch('${m['gear_des_key']}')?.group(1);
       final codec = '${m['codec_type'] ?? ''}'.toLowerCase();
       String? spade;
       final encrypt = row['encrypt_info'];
@@ -120,8 +120,8 @@ class MediaModel {
 
   /// Mirrors the Android MediaTrackPolicy: prefer AVC, then the smallest
   /// scored track at or below the ceiling.
-  MediaTrack? choose({int ceiling = 1080,
-      int budget = DirectMediaService.maxFileBytes}) {
+  MediaTrack? choose(
+      {int ceiling = 1080, int budget = DirectMediaService.maxFileBytes}) {
     const maxSpan = {480: 854, 720: 1280, 1080: 1920};
     if (!maxSpan.containsKey(ceiling)) {
       throw ArgumentError.value(ceiling, 'ceiling');
@@ -134,7 +134,13 @@ class MediaModel {
       if (mime == null) continue;
       final lo = min(t.width, t.height), hi = max(t.width, t.height);
       if (lo <= 0 || lo > ceiling || hi > maxSpan[ceiling]!) continue;
-      final rank = lo >= 1080 ? 0 : lo >= 720 ? 1 : lo >= 480 ? 2 : 3;
+      final rank = lo >= 1080
+          ? 0
+          : lo >= 720
+              ? 1
+              : lo >= 480
+                  ? 2
+                  : 3;
       final score = rank * budget * 2.0 + t.size + (mime == 'avc' ? 0 : budget);
       if (score < bestScore) {
         bestScore = score;
@@ -162,12 +168,12 @@ class DirectMediaService {
     Directory? cacheDir,
     int qualityCeiling = 1080,
     this.keepIntermediates = false,
-  }) : _client = client ?? http.Client(),
-       // ignore: prefer_initializing_formals
-       _store = store,
-       // ignore: prefer_initializing_formals
-       _cacheDir = cacheDir,
-       _ceiling = qualityCeiling;
+  })  : _client = client ?? http.Client(),
+        // ignore: prefer_initializing_formals
+        _store = store,
+        // ignore: prefer_initializing_formals
+        _cacheDir = cacheDir,
+        _ceiling = qualityCeiling;
 
   /// Keeps the downloaded encrypted file when decryption fails, so real
   /// content can be pulled from the device and analysed offline.
@@ -191,6 +197,56 @@ class DirectMediaService {
 
   Directory _slotDir(String dir, String videoId) =>
       Directory('${Directory(dir).path}/slots/$videoId');
+
+  /// 当前缓存占用概览（集数 + 字节数）。
+  Future<DirectMediaStats> stats() async {
+    final dir = (await _cacheDirPath());
+    if (dir == null) return const DirectMediaStats(0, 0);
+    final slots = Directory('${Directory(dir).path}/slots');
+    if (!await slots.exists()) return const DirectMediaStats(0, 0);
+    var bytes = 0;
+    var count = 0;
+    await for (final e in slots.list(recursive: true)) {
+      if (e is! File) continue;
+      try {
+        bytes += await e.length();
+        if (e.path.endsWith('.mp4') && await e.length() > 0) count += 1;
+      } catch (_) {}
+    }
+    return DirectMediaStats(count, bytes);
+  }
+
+  /// 清空所有已缓存剧集，返回删掉的集数。与播放共用串行队列，不会打架。
+  Future<int> clearAll() {
+    return _locked(() async {
+      final dir = await _cacheDirPath();
+      if (dir == null) return 0;
+      final slots = Directory('${Directory(dir).path}/slots');
+      if (!await slots.exists()) return 0;
+      var removed = 0;
+      await for (final e in slots.list()) {
+        try {
+          if (e is Directory) {
+            await for (final f in e.list(recursive: true)) {
+              if (f is File &&
+                  f.path.endsWith('.mp4') &&
+                  await f.length() > 0) {
+                removed += 1;
+              }
+            }
+            await e.delete(recursive: true);
+          }
+        } catch (_) {}
+      }
+      return removed;
+    });
+  }
+
+  Future<String?> _cacheDirPath() async {
+    final dir = _cacheDir;
+    if (dir == null) return null;
+    return dir.path;
+  }
 
   Future<DirectMedia?> _fromCache(String dir, String videoId) async {
     final slot = _slotDir(dir, videoId);
@@ -216,7 +272,8 @@ class DirectMediaService {
     }
   }
 
-  Future<void> _writeMeta(Directory slot, int width, int height, int quality, bool decrypted) async {
+  Future<void> _writeMeta(Directory slot, int width, int height, int quality,
+      bool decrypted) async {
     try {
       await File('${slot.path}/meta.json').writeAsString(jsonEncode({
         'width': width,
@@ -289,7 +346,8 @@ class DirectMediaService {
     Directory? cacheDir,
     void Function(int received, int total)? progress,
   }) {
-    return _locked(() => _prepareLocked(videoId, cacheDir: cacheDir, progress: progress));
+    return _locked(
+        () => _prepareLocked(videoId, cacheDir: cacheDir, progress: progress));
   }
 
   Future<DirectMedia> _prepareLocked(
@@ -390,7 +448,8 @@ class DirectMediaService {
     for (var attempt = 0; attempt < _attempts; attempt++) {
       if (attempt > 0) {
         await Future<void>.delayed(
-          Duration(milliseconds: _backoffs[min(attempt - 1, _backoffs.length - 1)]),
+          Duration(
+              milliseconds: _backoffs[min(attempt - 1, _backoffs.length - 1)]),
         );
       }
       try {
@@ -430,7 +489,8 @@ class DirectMediaService {
       'iid': _iid ?? '',
       '_rticket': '${DateTime.now().millisecondsSinceEpoch}',
     };
-    final uri = Uri.https(_apiHost, '/novel/player/multi_video_model/v1/', query);
+    final uri =
+        Uri.https(_apiHost, '/novel/player/multi_video_model/v1/', query);
     try {
       final response = await _client
           .post(
@@ -466,26 +526,26 @@ class DirectMediaService {
       }
       final data = obj['data'];
       if (data is Map && data['multi_video_model'] != null) {
-      final batch = data['multi_video_model'];
-      if (batch is List && batch.isNotEmpty) {
-        final first = batch.first;
-        if (first is Map && first['video_model'] != null) {
-          return first['video_model'];
-        }
-        if (first is Map) return first;
-      }
-      if (batch is Map) {
-        final list = batch['video_model_list'] ?? batch['list'];
-        if (list is List && list.isNotEmpty) {
-          final first = list.first;
+        final batch = data['multi_video_model'];
+        if (batch is List && batch.isNotEmpty) {
+          final first = batch.first;
           if (first is Map && first['video_model'] != null) {
             return first['video_model'];
           }
           if (first is Map) return first;
         }
+        if (batch is Map) {
+          final list = batch['video_model_list'] ?? batch['list'];
+          if (list is List && list.isNotEmpty) {
+            final first = list.first;
+            if (first is Map && first['video_model'] != null) {
+              return first['video_model'];
+            }
+            if (first is Map) return first;
+          }
+        }
       }
-    }
-    if (data is! Map || data['video_model'] == null) {
+      if (data is! Map || data['video_model'] == null) {
         throw const DirectMediaException('媒体服务缺少数据');
       }
       return data['video_model'];
@@ -783,7 +843,8 @@ Future<void> transform(File source, File target, Uint8List key) async {
       var copied = 0;
       final buffer = Uint8List(64 * 1024);
       while (copied < length) {
-        final n = await src.readInto(buffer, 0, min(buffer.length, length - copied));
+        final n =
+            await src.readInto(buffer, 0, min(buffer.length, length - copied));
         if (n <= 0) throw const DirectMediaException('媒体文件被截断');
         await dst.writeFrom(buffer, 0, n);
         copied += n;
@@ -918,7 +979,9 @@ Future<void> _processTrack(
   await r.seek(stsz.data + 4);
   final fixed = await r.u32();
   final sampleCount = await r.u32();
-  if (sampleCount < 1 || sampleCount > 100000 || sampleCount != count ||
+  if (sampleCount < 1 ||
+      sampleCount > 100000 ||
+      sampleCount != count ||
       fixed > (1 << 24)) {
     throw const DirectMediaException('样本数量或大小异常');
   }
@@ -931,7 +994,8 @@ Future<void> _processTrack(
   final co64 = _optional(boxes, 'co64');
   final stco = co64 ?? await _one(boxes, 'stco');
   await r.seek(stco.data + 4);
-  final chunkCount = await _tableCount(r, stco, 4, 100000, co64 != null ? 8 : 4);
+  final chunkCount =
+      await _tableCount(r, stco, 4, 100000, co64 != null ? 8 : 4);
   final chunks = List<int>.filled(chunkCount, 0);
   for (var i = 0; i < chunkCount; i++) {
     chunks[i] = co64 != null ? await r.u64() : await r.u32();
@@ -945,7 +1009,10 @@ Future<void> _processTrack(
     final first = await r.u32();
     final per = await r.u32();
     final desc = await r.u32();
-    if (first < 1 || first > chunkCount || per < 1 || per > sampleCount ||
+    if (first < 1 ||
+        first > chunkCount ||
+        per < 1 ||
+        per > sampleCount ||
         desc != 1 ||
         (i == 0 ? first != 1 : first <= mapFirst[i - 1])) {
       throw const DirectMediaException('块映射异常');
@@ -1009,7 +1076,9 @@ Future<int> _tableCount(
   int width,
 ) async {
   final count = await r.u32();
-  if (count < 1 || count > max || box.data + skip + 4 + width * count > box.end) {
+  if (count < 1 ||
+      count > max ||
+      box.data + skip + 4 + width * count > box.end) {
     throw const DirectMediaException('媒体表越界');
   }
   return count;
@@ -1094,5 +1163,17 @@ class _CtrBlock {
       if (_used == 16) _nextKeystream();
       data[i] ^= _keystream[_used++];
     }
+  }
+}
+
+/// 本地缓存占用概览。
+class DirectMediaStats {
+  const DirectMediaStats(this.episodes, this.bytes);
+  final int episodes;
+  final int bytes;
+
+  String get readable {
+    if (bytes < 1024 * 1024) return '${(bytes / 1024).toStringAsFixed(0)} KB';
+    return '${(bytes / (1024 * 1024)).toStringAsFixed(1)} MB';
   }
 }
