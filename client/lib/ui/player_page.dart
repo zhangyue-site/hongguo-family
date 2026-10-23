@@ -92,6 +92,12 @@ class _PlayerPageState extends State<PlayerPage> with WidgetsBindingObserver {
         } on DirectMediaException catch (e) {
           directError = e.message;
         }
+        // HG-IOS-CACHE: 播放起来就顺手把下一集缓好，切集不用等
+        final nextIndex =
+            widget.detail.episodes.indexWhere((e) => e.number == number) + 1;
+        if (nextIndex > 0 && nextIndex < widget.detail.episodes.length) {
+          unawaited(service.prefetch(widget.detail.episodes[nextIndex].id));
+        }
       }
       if (direct != null) {
         final lo = direct.width < direct.height
@@ -224,6 +230,12 @@ class _PlayerPageState extends State<PlayerPage> with WidgetsBindingObserver {
     );
     if (!mounted) return;
     if (n != null && n != _episode) {
+      // HG-IOS-CACHE: 点选集就立刻开始缓存这一集
+      final picked = widget.detail.episodes.where((e) => e.number == n);
+      final service = widget.direct;
+      if (service != null && picked.isNotEmpty) {
+        unawaited(service.prefetch(picked.first.id));
+      }
       await _load(n);
     } else {
       _scheduleHide();

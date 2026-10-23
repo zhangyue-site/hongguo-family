@@ -173,6 +173,106 @@ class DirectMediaService {
   /// content can be pulled from the device and analysed offline.
   final bool keepIntermediates;
 
+  // HG-IOS-CACHE: 按集分目录的双槽 LRU 缓存 + 串行队列
+  static const _maxSlots = 2;
+  Future<void> _chain = Future.value();
+
+  Future<T> _locked<T>(Future<T> Function() body) {
+    final completer = Completer<T>();
+    _chain = _chain.then((_) async {
+      try {
+        completer.complete(await body());
+      } catch (e, st) {
+        completer.completeError(e, st);
+      }
+    });
+    return completer.future;
+  }
+
+  Directory _slotDir(String dir, String videoId) =>
+      Directory('${Directory(dir).path}/slots/$videoId');
+
+  Future<DirectMedia?> _fromCache(String dir, String videoId) async {
+    final slot = _slotDir(dir, videoId);
+    final media = File('${slot.path}/current.mp4');
+    final meta = File('${slot.path}/meta.json');
+    if (!await media.exists() || await media.length() == 0) return null;
+    if (!await meta.exists()) return null;
+    try {
+      final m = jsonDecode(await meta.readAsString()) as Map;
+      // 触碰时间戳：LRU 靠 mtime 判定
+      try {
+        await media.setLastModified(DateTime.now());
+      } catch (_) {}
+      return DirectMedia(
+        file: media,
+        width: (m['width'] as num?)?.toInt() ?? 0,
+        height: (m['height'] as num?)?.toInt() ?? 0,
+        quality: (m['quality'] as num?)?.toInt() ?? 0,
+        decrypted: m['decrypted'] == true,
+      );
+    } catch (_) {
+      return null;
+    }
+  }
+
+  Future<void> _writeMeta(Directory slot, int width, int height, int quality, bool decrypted) async {
+    try {
+      await File('${slot.path}/meta.json').writeAsString(jsonEncode({
+        'width': width,
+        'height': height,
+        'quality': quality,
+        'decrypted': decrypted,
+        'savedAt': DateTime.now().millisecondsSinceEpoch,
+      }));
+    } catch (_) {}
+  }
+
+  Future<void> _trimSlots(String dir, String keepId) async {
+    final slots = Directory('${Directory(dir).path}/slots');
+    if (!await slots.exists()) return;
+    final dirs = <Directory>[];
+    await for (final e in slots.list()) {
+      if (e is Directory) dirs.add(e);
+    }
+    if (dirs.length < _maxSlots) return;
+    dirs.sort((a, b) {
+      DateTime ta, tb;
+      try {
+        ta = a.statSync().modified;
+      } catch (_) {
+        ta = DateTime.fromMillisecondsSinceEpoch(0);
+      }
+      try {
+        tb = b.statSync().modified;
+      } catch (_) {
+        tb = DateTime.fromMillisecondsSinceEpoch(0);
+      }
+      return ta.compareTo(tb);
+    });
+    var count = dirs.length;
+    for (final d in dirs) {
+      if (count < _maxSlots) break;
+      if (d.path.endsWith('/$keepId')) continue;
+      try {
+        await d.delete(recursive: true);
+        count--;
+      } catch (_) {}
+    }
+  }
+
+  /// HG-IOS-CACHE: 后台预取某一集（已缓存则直接返回）。
+  Future<void> prefetch(String videoId, {Directory? cacheDir}) async {
+    final dir = (cacheDir ?? _cacheDir)?.path;
+    if (dir == null) return;
+    if (await _fromCache(dir, videoId) != null) return;
+    try {
+      await prepare(videoId, cacheDir: cacheDir);
+    } catch (_) {
+      // 预取失败不影响正在播放的内容
+    }
+  }
+
   final http.Client _client;
   final Future<SharedPreferencesLike> Function()? _store;
   final Directory? _cacheDir;
@@ -188,8 +288,21 @@ class DirectMediaService {
     String videoId, {
     Directory? cacheDir,
     void Function(int received, int total)? progress,
+  }) {
+    return _locked(() => _prepareLocked(videoId, cacheDir: cacheDir, progress: progress));
+  }
+
+  Future<DirectMedia> _prepareLocked(
+    String videoId, {
+    Directory? cacheDir,
+    void Function(int received, int total)? progress,
   }) async {
     await _loadIdentity();
+    final cacheRoot = (cacheDir ?? _cacheDir)?.path;
+    if (cacheRoot != null) {
+      final hit = await _fromCache(cacheRoot, videoId);
+      if (hit != null) return hit;
+    }
     final model = await _fetchModel(videoId);
     final track = model.choose(ceiling: _ceiling);
     if (track == null) {
@@ -197,8 +310,8 @@ class DirectMediaService {
     }
     final dir = (cacheDir ?? _cacheDir)?.path;
     if (dir == null) throw const DirectMediaException('缺少媒体缓存目录');
-    final slot = Directory('${Directory(dir).path}/slot');
-    // Single-slot cache: the previous episode's files are no longer needed.
+    await _trimSlots(dir, videoId);
+    final slot = _slotDir(dir, videoId);
     if (await slot.exists()) {
       try {
         await slot.delete(recursive: true);
@@ -235,6 +348,7 @@ class DirectMediaService {
     } else if (!await renameFile(enc, plain)) {
       throw const DirectMediaException('片源落盘失败', retryable: true);
     }
+    await _writeMeta(slot, track.width, track.height, track.quality, encrypted);
     return DirectMedia(
       file: working,
       width: track.width,
