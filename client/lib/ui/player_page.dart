@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 import '../data/content.dart';
@@ -33,11 +34,55 @@ class LocalNotifications {
   }
 }
 
-/// 平台实现占位：未接入通知插件时静默跳过。
-Future<void> notifyInit() async {}
+/// 平台实现：flutter_local_notifications 真通知。
+/// iOS 首次调用请求通知权限；Android 建 HongguoCache 通道。失败静默，绝不影响播放。
+Future<void> notifyInit() async {
+  final plugin = FlutterLocalNotificationsPlugin();
+  const android = AndroidInitializationSettings('@mipmap/ic_launcher');
+  const darwin = DarwinInitializationSettings(
+    requestAlertPermission: true,
+    requestBadgePermission: true,
+    requestSoundPermission: true,
+  );
+  await plugin.initialize(
+    settings: const InitializationSettings(android: android, iOS: darwin),
+  );
+  // Android 13+ 运行时权限：初始化后请求一次。
+  await plugin
+      .resolvePlatformSpecificImplementation<
+        AndroidFlutterLocalNotificationsPlugin
+      >()
+      ?.requestNotificationsPermission();
+}
+
+int _notifyId = 100;
 
 Future<void> notifyShow(String title, String body) async {
-  debugPrint('NOTIFY $title: $body');
+  final plugin = FlutterLocalNotificationsPlugin();
+  const android = AndroidNotificationDetails(
+    'HongguoCache',
+    '缓存提醒',
+    channelDescription: '缓存完成与播放状态提醒',
+    importance: Importance.low,
+    priority: Priority.low,
+    onlyAlertOnce: true,
+  );
+  const darwin = DarwinNotificationDetails(
+    presentAlert: true,
+    presentBanner: true,
+    presentList: true,
+    presentSound: false,
+    interruptionLevel: InterruptionLevel.active,
+  );
+  await plugin.show(
+    id: _notifyId++,
+    title: title,
+    body: body,
+    notificationDetails: const NotificationDetails(
+      android: android,
+      iOS: darwin,
+    ),
+  );
 }
 
 class PlayerPage extends StatefulWidget {
