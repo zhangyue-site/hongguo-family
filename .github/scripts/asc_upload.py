@@ -9,15 +9,17 @@ BASE = 'https://api.appstoreconnect.apple.com'
 from pathlib import Path
 ipa = Path('build/ship/hongguo-ios-signed.ipa')
 _p8_raw = os.environ['ASC_P8'].strip()
-if _p8_raw.startswith('-----'):
-    p8 = _p8_raw.encode()          # secret 直接是 PEM
-else:
-    try:
-        p8 = base64.b64decode(_p8_raw)
-        if not p8.startswith(b'-----'):
-            p8 = _p8_raw.encode()  # 不是 PEM(可能是二进制误传)，回退原样
-    except Exception:
-        p8 = _p8_raw.encode()
+def _to_pem(x):
+    if isinstance(x, bytes) and x.startswith(b'-----'):
+        return x
+    for guess in (x, base64.b64decode(x + '=' * (-len(x) % 4))):
+        try:
+            if guess.startswith(b'-----'):
+                return guess
+        except Exception:
+            pass
+    return x
+p8 = _to_pem(_p8_raw.encode() if not _p8_raw.startswith('-----') else _p8_raw.encode())
 key_id = os.environ['ASC_KEY_ID']
 issuer = os.environ['ASC_ISSUER_ID']
 app_id = os.environ['ASC_APP_ID']
@@ -55,10 +57,22 @@ def der_rs(r, s):
 def load_scalar(p8):
     # Apple .p8 = PKCS#8 PEM wrapping SEC1 EC key; scalar lives after 02 01 01 04 20
     body = b''.join(l for l in p8.splitlines() if b'-----' not in l)
-    der = base64.b64decode(body)
+    candidates = [body.strip(), body]
+    der = None
+    for c in candidates:
+        try:
+            d = base64.b64decode(c, validate=False)
+            if b'\x02\x01\x01\x04\x20' in d:
+                der = d
+                break
+        except Exception:
+            continue
+    if der is None:
+        # last resort: treat raw env as b64 of DER directly
+        der = base64.b64decode(_p8_raw + '=' * (-len(_p8_raw) % 4))
     marker = bytes([0x02, 0x01, 0x01, 0x04, 0x20])
     i = der.find(marker)
-    assert i >= 0, 'unexpected p8 structure'
+    assert i >= 0, 'unexpected p8 structure (len=%d head=%s)' % (len(der), der[:16].hex())
     return int.from_bytes(der[i+5:i+37], 'big')
 
 d = load_scalar(p8) % N
