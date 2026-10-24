@@ -116,7 +116,7 @@ jobs:
           rm -f hongguo-ios-signed.ipa
           zip -qry hongguo-ios-signed.ipa Payload
           ls -la hongguo-ios-signed.ipa
-          /usr/bin/codesign -v "$APP_PATH" --keychain "$SIGN_KEYCHAIN"
+          /usr/bin/codesign -v "$GITHUB_WORKSPACE/$APP_PATH" --keychain "$SIGN_KEYCHAIN"
           echo "signature verify ok"
 
       - name: Upload to App Store Connect
