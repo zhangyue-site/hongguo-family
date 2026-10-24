@@ -4,6 +4,10 @@ Pure stdlib. Secrets from env: ASC_P8, ASC_KEY_ID, ASC_ISSUER_ID, ASC_APP_ID.
 L2 port of 106:/opt/hongguo-analysis/ios-release/upload-asc-106.py'''
 import base64, hashlib, json, os, time, urllib.error, urllib.parse, urllib.request
 import zipfile, plistlib
+from cryptography.hazmat.primitives.serialization import load_pem_private_key
+from cryptography.hazmat.primitives.asymmetric import ec
+from cryptography.hazmat.primitives import hashes
+from cryptography.hazmat.primitives.asymmetric.utils import decode_dss_signature
 
 BASE = 'https://api.appstoreconnect.apple.com'
 from pathlib import Path
@@ -75,25 +79,19 @@ def load_scalar(p8):
     assert i >= 0, 'unexpected p8 structure (len=%d head=%s)' % (len(der), der[:16].hex())
     return int.from_bytes(der[i+5:i+37], 'big')
 
-d = load_scalar(p8) % N
-now = int(time.time())
-header = {"alg": "ES256", "kid": key_id, "typ": "JWT"}
-payload = {"iss": issuer, "iat": now, "exp": now + 900, "aud": "appstoreconnect-v1"}
-si = (b64u(json.dumps(header, separators=(',', ':')).encode()) + '.' +
-      b64u(json.dumps(payload, separators=(',', ':')).encode())).encode()
-z = int.from_bytes(hashlib.sha256(si).digest(), 'big') % N
-import random
-k = random.randrange(1, N)
-R = pmul(k, (Gx, Gy))[0] % N
-S = (inv(k, N) * (z + R * d)) % N
-if S > N // 2: S = N - S          # low-S, matches Apple/openssl convention
-token = si.decode() + '.' + b64u(der_rs(R, S))
-# self-verify: u1*G + u2*Q must recover x == R
-w = inv(S, N)
-u1, u2 = (z * w) % N, (R * w) % N
-pt = padd(pmul(u1, (Gx, Gy)), pmul(u2, pmul(d, (Gx, Gy))))
-assert pt is not None and pt[0] % N == R, 'JWT self-verify failed'
-print('ES256 JWT signed + self-verified (mod-N math)')
+def make_token():
+    key = load_pem_private_key(p8, password=None)
+    now = int(time.time())
+    header = {"alg": "ES256", "kid": key_id, "typ": "JWT"}
+    payload = {"iss": issuer, "iat": now, "exp": now + 900, "aud": "appstoreconnect-v1"}
+    si = (b64u(json.dumps(header, separators=(',', ':')).encode()) + '.' +
+          b64u(json.dumps(payload, separators=(',', ':')).encode())).encode()
+    der = key.sign(si, ec.ECDSA(hashes.SHA256()))
+    r, s_ = decode_dss_signature(der)
+    return si.decode() + '.' + b64u(r.to_bytes(32, 'big') + s_.to_bytes(32, 'big'))
+
+token = make_token()
+print('ES256 JWT signed via cryptography (matches verified asc.py)')
 
 def api(method, path, body=None):
     req = urllib.request.Request(BASE + path,
