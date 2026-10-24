@@ -77,7 +77,7 @@ jobs:
             -inkey "$WORK/dist.key.pem" -in "$WORK/dist.cer" \
             -certfile "$WORK/wwdr.cer" -passout "pass:$KEYCHAIN_PASS"
           security import "$WORK/dist.p12" -k "$KEYCHAIN" -P "$KEYCHAIN_PASS" -T /usr/bin/codesign
-          security import "$WORK/wwdr.cer" -k "$KEYCHAIN" -P "$KEYCHAIN_PASS"
+          security import "$WORK/wwdr.cer" -k "$KEYCHAIN" -P "$KEYCHAIN_PASS" 2>/dev/null || true  # p12 已含 WWDR，重复导入会 already-exists 致命
           security set-key-partition-list -S apple-tool:,apple-codesign: -k "$KEYCHAIN_PASS" "$KEYCHAIN" >/dev/null
           security list-keychain -d user -s "$KEYCHAIN" login-keychain
           echo "SIGN_KEYCHAIN=$KEYCHAIN" >> "$GITHUB_ENV"
