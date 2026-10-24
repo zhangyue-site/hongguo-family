@@ -91,8 +91,13 @@ jobs:
           echo "$IOS_PROFILE_HONGGUO" | base64 --decode > "$WORK/appstore.mobileprovision"
           APP=$(find build/ship/Payload -maxdepth 1 -name '*.app')
           security cms -D -i "$WORK/appstore.mobileprovision" > "$WORK/profile.plist"
-                    /usr/libexec/PlistBuddy -c 'Print :Entitlements' "$WORK/profile.plist" > "$WORK/entitlements.os"
-          plutil -convert xml1 "$WORK/entitlements.os" -o "$WORK/entitlements.plist"
+                    python3 - "$WORK/profile.plist" > "$WORK/entitlements.plist" <<'PYEOF'
+import plistlib, sys
+with open(sys.argv[1], "rb") as f:
+    pl = plistlib.load(f)
+ent = pl.get("Entitlements") or {}
+print(plistlib.dumps(ent).decode())
+PYEOF
           xmllint --noout "$WORK/entitlements.plist"
           cp "$WORK/appstore.mobileprovision" "$APP/embedded.mobileprovision"
           echo "APP_PATH=$APP" >> "$GITHUB_ENV"
