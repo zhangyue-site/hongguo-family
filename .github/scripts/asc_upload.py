@@ -10,9 +10,9 @@ from pathlib import Path
 ipa = Path('build/ship/hongguo-ios-signed.ipa')
 _p8_raw = os.environ['ASC_P8'].strip()
 def _to_pem(x):
-    if isinstance(x, bytes) and x.startswith(b'-----'):
+    if x.startswith(b'-----'):
         return x
-    for guess in (x, base64.b64decode(x + '=' * (-len(x) % 4))):
+    for guess in (x, base64.b64decode(x + b'=' * (-len(x) % 4))):
         try:
             if guess.startswith(b'-----'):
                 return guess
