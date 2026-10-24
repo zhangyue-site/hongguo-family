@@ -8,7 +8,16 @@ import zipfile, plistlib
 BASE = 'https://api.appstoreconnect.apple.com'
 from pathlib import Path
 ipa = Path('build/ship/hongguo-ios-signed.ipa')
-p8 = base64.b64decode(os.environ['ASC_P8'])
+_p8_raw = os.environ['ASC_P8'].strip()
+if _p8_raw.startswith('-----'):
+    p8 = _p8_raw.encode()          # secret 直接是 PEM
+else:
+    try:
+        p8 = base64.b64decode(_p8_raw)
+        if not p8.startswith(b'-----'):
+            p8 = _p8_raw.encode()  # 不是 PEM(可能是二进制误传)，回退原样
+    except Exception:
+        p8 = _p8_raw.encode()
 key_id = os.environ['ASC_KEY_ID']
 issuer = os.environ['ASC_ISSUER_ID']
 app_id = os.environ['ASC_APP_ID']
