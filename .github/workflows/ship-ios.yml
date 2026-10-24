@@ -91,9 +91,8 @@ jobs:
           echo "$IOS_PROFILE_HONGGUO" | base64 --decode > "$WORK/appstore.mobileprovision"
           APP=$(find build/ship/Payload -maxdepth 1 -name '*.app')
           security cms -D -i "$WORK/appstore.mobileprovision" > "$WORK/profile.plist"
-          /usr/libexec/PlistBuddy -c 'Print :Entitlements' "$WORK/profile.plist" \
-            | sed -E 's/^<dict>/<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE plist PUBLIC "-\/\/Apple\/\/DTD PLIST 1.0\/\/EN" "http:\/\/www.apple.com\/DTDs\/PropertyList-1.0.dtd"><plist version="1.0"><dict>/; s/<\/dict>$/<\/dict><\/plist>/' \
-            > "$WORK/entitlements.plist"
+                    /usr/libexec/PlistBuddy -c 'Print :Entitlements' "$WORK/profile.plist" > "$WORK/entitlements.os"
+          plutil -convert xml1 "$WORK/entitlements.os" -o "$WORK/entitlements.plist"
           xmllint --noout "$WORK/entitlements.plist"
           cp "$WORK/appstore.mobileprovision" "$APP/embedded.mobileprovision"
           echo "APP_PATH=$APP" >> "$GITHUB_ENV"
