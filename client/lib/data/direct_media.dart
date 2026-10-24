@@ -439,10 +439,21 @@ class DirectMediaService {
     if (!RegExp(r'^\d{8,24}$').hasMatch(videoId)) {
       throw const DirectMediaException('剧集编号无效');
     }
+    // Single-video legacy route now rejects with code 100001; wrap the id in
+    // the live batch contract instead (matches desktop_public_player 1.0.19).
     final body = jsonEncode({
-      'video_id': videoId,
-      'content_type': 1,
-      'biz_param': {'need_all_video_definition': true, 'video_platform': 3},
+      'mixed_video_id_map': {'1': [videoId]},
+      'biz_param': {
+        'detail_page_version': 0,
+        'device_level': 3,
+        'disable_digg_stat': false,
+        'disable_video_relate_book': false,
+        'need_all_video_definition': true,
+        'need_mp4_align': false,
+        'use_os_player': false,
+        'use_server_dns': false,
+        'video_platform': 1024,
+      },
     });
     Object? last;
     for (var attempt = 0; attempt < _attempts; attempt++) {
@@ -525,6 +536,11 @@ class DirectMediaService {
         throw const DirectMediaException('媒体服务返回异常');
       }
       final data = obj['data'];
+      // Batch envelope: data = {<videoId>: {video_model: ...}}.
+      if (data is Map && data[videoId] is Map) {
+        final slot = data[videoId] as Map;
+        if (slot['video_model'] != null) return slot['video_model'];
+      }
       if (data is Map && data['multi_video_model'] != null) {
         final batch = data['multi_video_model'];
         if (batch is List && batch.isNotEmpty) {
