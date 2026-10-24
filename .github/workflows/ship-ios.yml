@@ -94,7 +94,7 @@ jobs:
           python3 -c "import plistlib,sys; pl=plistlib.load(open(sys.argv[1],'rb')); sys.stdout.write(plistlib.dumps(pl.get('Entitlements') or {}).decode())" "$WORK/profile.plist" > "$WORK/entitlements.plist"
           xmllint --noout "$WORK/entitlements.plist"
           cp "$WORK/appstore.mobileprovision" "$APP/embedded.mobileprovision"
-          echo "APP_PATH=$APP" >> "$GITHUB_ENV"
+          echo "APP_PATH=$(cd "$APP" && pwd)" >> "$GITHUB_ENV"
 
       - name: Codesign (replace signature)
         run: |
