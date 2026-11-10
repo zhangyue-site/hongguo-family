@@ -227,8 +227,11 @@
 
 .method static architecture(Landroid/content/Context;)Ljava/lang/String;
     .locals 0
+
     invoke-static {p0}, Lcn/hongguo/tv/MobileArchitecture;->installed(Landroid/content/Context;)Ljava/lang/String;
+
     move-result-object p0
+
     return-object p0
 .end method
 

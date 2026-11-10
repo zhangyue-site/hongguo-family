@@ -31,7 +31,7 @@
 .method constructor <init>(Lcn/hongguo/tv/MainActivity;I)V
     .locals 0
 
-    .line 55
+    .line 56
     iput-object p1, p0, Lcn/hongguo/tv/MainActivity$2;->this$0:Lcn/hongguo/tv/MainActivity;
 
     invoke-direct {p0, p2}, Landroid/util/LruCache;-><init>(I)V
@@ -44,7 +44,7 @@
 .method protected bridge synthetic sizeOf(Ljava/lang/Object;Ljava/lang/Object;)I
     .locals 0
 
-    .line 55
+    .line 56
     check-cast p1, Ljava/lang/String;
 
     check-cast p2, Landroid/graphics/Bitmap;
@@ -59,7 +59,7 @@
 .method protected sizeOf(Ljava/lang/String;Landroid/graphics/Bitmap;)I
     .locals 0
 
-    .line 55
+    .line 56
     invoke-virtual {p2}, Landroid/graphics/Bitmap;->getAllocationByteCount()I
 
     move-result p1

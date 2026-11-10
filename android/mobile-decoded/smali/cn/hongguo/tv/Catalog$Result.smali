@@ -26,7 +26,7 @@
 .method constructor <init>(Lorg/json/JSONArray;ZZ)V
     .locals 0
 
-    .line 29
+    .line 36
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
     iput-object p1, p0, Lcn/hongguo/tv/Catalog$Result;->items:Lorg/json/JSONArray;
@@ -43,7 +43,7 @@
 .method note(Ljava/lang/String;)Ljava/lang/String;
     .locals 0
 
-    .line 30
+    .line 37
     iget-boolean p1, p0, Lcn/hongguo/tv/Catalog$Result;->stale:Z
 
     if-eqz p1, :cond_0

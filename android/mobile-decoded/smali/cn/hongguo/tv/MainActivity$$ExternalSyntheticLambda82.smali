@@ -9,15 +9,13 @@
 # instance fields
 .field public final synthetic f$0:Lcn/hongguo/tv/MainActivity;
 
-.field public final synthetic f$1:Landroid/widget/EditText;
+.field public final synthetic f$1:Lorg/json/JSONObject;
 
-.field public final synthetic f$2:Landroid/widget/EditText;
-
-.field public final synthetic f$3:Landroid/widget/TextView;
+.field public final synthetic f$2:Landroid/widget/Button;
 
 
 # direct methods
-.method public synthetic constructor <init>(Lcn/hongguo/tv/MainActivity;Landroid/widget/EditText;Landroid/widget/EditText;Landroid/widget/TextView;)V
+.method public synthetic constructor <init>(Lcn/hongguo/tv/MainActivity;Lorg/json/JSONObject;Landroid/widget/Button;)V
     .locals 0
 
     .line 0
@@ -25,11 +23,9 @@
 
     iput-object p1, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda82;->f$0:Lcn/hongguo/tv/MainActivity;
 
-    iput-object p2, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda82;->f$1:Landroid/widget/EditText;
+    iput-object p2, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda82;->f$1:Lorg/json/JSONObject;
 
-    iput-object p3, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda82;->f$2:Landroid/widget/EditText;
-
-    iput-object p4, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda82;->f$3:Landroid/widget/TextView;
+    iput-object p3, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda82;->f$2:Landroid/widget/Button;
 
     return-void
 .end method
@@ -37,18 +33,16 @@
 
 # virtual methods
 .method public final run()V
-    .locals 4
+    .locals 3
 
     .line 0
     iget-object v0, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda82;->f$0:Lcn/hongguo/tv/MainActivity;
 
-    iget-object v1, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda82;->f$1:Landroid/widget/EditText;
+    iget-object v1, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda82;->f$1:Lorg/json/JSONObject;
 
-    iget-object v2, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda82;->f$2:Landroid/widget/EditText;
+    iget-object v2, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda82;->f$2:Landroid/widget/Button;
 
-    iget-object v3, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda82;->f$3:Landroid/widget/TextView;
-
-    invoke-virtual {v0, v1, v2, v3}, Lcn/hongguo/tv/MainActivity;->lambda$settings$58$cn-hongguo-tv-MainActivity(Landroid/widget/EditText;Landroid/widget/EditText;Landroid/widget/TextView;)V
+    invoke-virtual {v0, v1, v2}, Lcn/hongguo/tv/MainActivity;->lambda$detail$53$cn-hongguo-tv-MainActivity(Lorg/json/JSONObject;Landroid/widget/Button;)V
 
     return-void
 .end method

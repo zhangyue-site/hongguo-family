@@ -177,10 +177,22 @@ def wire_ota_v2(project):
     :family_origin_check
 """,1)
     # Remove the loading cover only when MediaPlayer reports the first rendered frame.
-    video_info='.method synthetic lambda$playEpisode$90$cn-hongguo-tv-MainActivity(Landroid/media/MediaPlayer;II)Z\n    .locals 5'
     if 'UnifiedActivity;->onVideoInfo' not in s:
-        assert video_info in s
-        s=s.replace(video_info,video_info+'\n    invoke-static {p0, p1, p2}, Lcn/hongguo/tv/UnifiedActivity;->onVideoInfo(Lcn/hongguo/tv/MainActivity;Landroid/media/MediaPlayer;I)V\n',1)
+        # 上游 0.5.9 起同签名 lambda 有两个，按首帧信息刷新体(含 elapsedRealtime)动态定位
+        lines=s.split('\n'); hit=None; local=None
+        for i,l in enumerate(lines):
+            if l.startswith('.method synthetic lambda$playEpisode$') and l.endswith('(Landroid/media/MediaPlayer;II)Z'):
+                body='\n'.join(lines[i:i+160]).split('.end method')[0]
+                if 'Landroid/os/SystemClock;->elapsedRealtime()J' in body:
+                    hit=i
+                    for j in range(i+1,min(i+6,len(lines))):
+                        if lines[j].strip().startswith('.locals'):
+                            local=j; break
+                    break
+        assert hit is not None and local is not None, 'first-frame playEpisode lambda not found'
+        hook='    invoke-static {p0, p1, p2}, Lcn/hongguo/tv/UnifiedActivity;->onVideoInfo(Lcn/hongguo/tv/MainActivity;Landroid/media/MediaPlayer;I)V'
+        lines.insert(local+1, hook)
+        s='\n'.join(lines)
     f.write_text(s)
     print('[wire] OTA v2 lifecycle hooks installed')
 
@@ -250,7 +262,10 @@ for channel in ('mobile', 'tv'):
         names = z.namelist()
     with zipfile.ZipFile(built, 'a') as z:
         z.write(B / 'dex' / 'classes.dex', 'classes2.dex')
-        with zipfile.ZipFile(R / 'android/HongguoTV-0.5.8-arm32.apk') as a:
+        arm32_apk = R/'android/HongguoTV-0.5.9-arm32.apk'
+        if not arm32_apk.exists():
+            arm32_apk = R/'android/HongguoTV-0.5.8-arm32.apk'
+        with zipfile.ZipFile(arm32_apk) as a:
             for name in a.namelist():
                 if name.startswith('lib/'):
                     z.writestr(name, a.read(name))

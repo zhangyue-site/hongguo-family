@@ -278,6 +278,21 @@ public class UnifiedActivity extends MainActivity {
   input.setOnEditorActionListener((v,a,e)->{runSearch(input.getText().toString());dialog.dismiss();return true;});dialog.show();
  }
  void runSearch(String value){query=value.trim();section="剧场";if(query.isEmpty())return;rebuild();loadCatalog(false);}
+ void maybeSearchSetup(){
+  if(prefs.getBoolean("search_setup_asked",false))return;
+  boolean need;try{need=catalog.requiresSearchSetup();}catch(Throwable t){need=false;}
+  if(!need){prefs.edit().putBoolean("search_setup_asked",true).apply();return;}
+  prefs.edit().putBoolean("search_setup_asked",true).apply();
+  ui.post(()->{new AlertDialog.Builder(this).setTitle("启用应用内搜索")
+   .setMessage("首次使用完整搜索需要匿名设备登记：仅在本机保存一个随机编号，不读取账号、手机号或设备标识。是否启用？（暂不启用仍可使用公开网页搜索）")
+   .setPositiveButton("启用",(d,w)->io.submit(this::activateSearchNow))
+   .setNegativeButton("暂不",(d,w)->prefs.edit().putBoolean("search_native_declined",true).apply())
+   .show();});
+ }
+ void activateSearchNow(){
+  try{catalog.activateSearch();}catch(Exception e){ui.post(()->Toast.makeText(this,"登记未成功，继续使用公开搜索",Toast.LENGTH_SHORT).show());return;}
+  ui.post(()->{if(!dead){Toast.makeText(this,"应用内搜索已启用",Toast.LENGTH_SHORT).show();if(!query.isEmpty())loadCatalog(false);}});
+ }
  void openDrama(JSONObject item) {
   if(player!=null)return;
   new AlertDialog.Builder(this).setTitle(item.optString("title","短剧"))
@@ -364,7 +379,8 @@ public class UnifiedActivity extends MainActivity {
   });
  }
  void nextDrama(){if(current==null)return;for(int i=0;i<items.size()-1;i++)if(items.get(i).optString("id").equals(current.optString("id"))){JSONObject next=items.get(i+1);stopPlayer();attachBrowser();fetchEpisodes(next,false);return;}Toast.makeText(this,"已看完，返回剧场发现更多",Toast.LENGTH_SHORT).show();}
- @Override public void playEpisode(int ep,long pos) {android.util.Log.i("HongguoUnified","episode="+ep);prepareCover(ep);super.playEpisode(ep,pos);if(episodeSheetAdapter!=null&&current!=null&&current.optString("id").equals(episodeSheetSeries))episodeSheetAdapter.notifyDataSetChanged();if(episodeLabel!=null)episodeLabel.setText("第 "+ep+" 集 / 全 "+episodes.length()+" 集  ›");}
+ @Override public void playEpisode(int ep,long pos){playEpisode(ep,pos,false);}
+@Override public void playEpisode(int ep,long pos,boolean quiet){android.util.Log.i("HongguoUnified","episode="+ep+(quiet?" quiet":""));prepareCover(ep);super.playEpisode(ep,pos,quiet);if(episodeSheetAdapter!=null&&current!=null&&current.optString("id").equals(episodeSheetSeries))episodeSheetAdapter.notifyDataSetChanged();if(episodeLabel!=null)episodeLabel.setText("第 "+ep+" 集 / 全 "+episodes.length()+" 集  ›");}
  @Override public void fitVideo(int w,int h) {
   if(w<=0||h<=0)return;videoW=w;videoH=h;videoWidth=w;videoHeight=h;
   if(playback!=null)playback.post(()->{if(surface==null||playback==null||playback.getWidth()<=0||playback.getHeight()<=0)return;int[] size=PresentationPolicy.fit(playback.getWidth(),playback.getHeight(),videoW,videoH);surface.setLayoutParams(new android.widget.FrameLayout.LayoutParams(size[0],size[1],Gravity.CENTER));});

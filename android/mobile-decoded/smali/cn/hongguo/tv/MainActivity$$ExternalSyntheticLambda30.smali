@@ -3,17 +3,15 @@
 .source "D8$$SyntheticClass"
 
 # interfaces
-.implements Landroid/view/View$OnClickListener;
+.implements Ljava/lang/Runnable;
 
 
 # instance fields
 .field public final synthetic f$0:Lcn/hongguo/tv/MainActivity;
 
-.field public final synthetic f$1:Lorg/json/JSONObject;
-
 
 # direct methods
-.method public synthetic constructor <init>(Lcn/hongguo/tv/MainActivity;Lorg/json/JSONObject;)V
+.method public synthetic constructor <init>(Lcn/hongguo/tv/MainActivity;)V
     .locals 0
 
     .line 0
@@ -21,22 +19,18 @@
 
     iput-object p1, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda30;->f$0:Lcn/hongguo/tv/MainActivity;
 
-    iput-object p2, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda30;->f$1:Lorg/json/JSONObject;
-
     return-void
 .end method
 
 
 # virtual methods
-.method public final onClick(Landroid/view/View;)V
-    .locals 2
+.method public final run()V
+    .locals 1
 
     .line 0
     iget-object v0, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda30;->f$0:Lcn/hongguo/tv/MainActivity;
 
-    iget-object v1, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda30;->f$1:Lorg/json/JSONObject;
-
-    invoke-virtual {v0, v1, p1}, Lcn/hongguo/tv/MainActivity;->lambda$renderCards$31$cn-hongguo-tv-MainActivity(Lorg/json/JSONObject;Landroid/view/View;)V
+    invoke-virtual {v0}, Lcn/hongguo/tv/MainActivity;->lambda$new$2$cn-hongguo-tv-MainActivity()V
 
     return-void
 .end method

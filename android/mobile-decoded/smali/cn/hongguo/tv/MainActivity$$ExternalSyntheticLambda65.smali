@@ -3,7 +3,7 @@
 .source "D8$$SyntheticClass"
 
 # interfaces
-.implements Landroid/media/MediaPlayer$OnInfoListener;
+.implements Landroid/media/MediaPlayer$OnPreparedListener;
 
 
 # instance fields
@@ -24,15 +24,13 @@
 
 
 # virtual methods
-.method public final onInfo(Landroid/media/MediaPlayer;II)Z
+.method public final onPrepared(Landroid/media/MediaPlayer;)V
     .locals 1
 
     .line 0
     iget-object v0, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda65;->f$0:Lcn/hongguo/tv/MainActivity;
 
-    invoke-virtual {v0, p1, p2, p3}, Lcn/hongguo/tv/MainActivity;->lambda$playEpisode$90$cn-hongguo-tv-MainActivity(Landroid/media/MediaPlayer;II)Z
+    invoke-virtual {v0, p1}, Lcn/hongguo/tv/MainActivity;->lambda$playEpisode$92$cn-hongguo-tv-MainActivity(Landroid/media/MediaPlayer;)V
 
-    move-result p1
-
-    return p1
+    return-void
 .end method

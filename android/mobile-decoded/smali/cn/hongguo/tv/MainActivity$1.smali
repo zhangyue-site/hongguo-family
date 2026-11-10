@@ -25,7 +25,7 @@
 .method constructor <init>(Lcn/hongguo/tv/MainActivity;)V
     .locals 0
 
-    .line 49
+    .line 50
     iput-object p1, p0, Lcn/hongguo/tv/MainActivity$1;->this$0:Lcn/hongguo/tv/MainActivity;
 
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
@@ -38,7 +38,7 @@
 .method public run()V
     .locals 6
 
-    .line 49
+    .line 50
     iget-object v0, p0, Lcn/hongguo/tv/MainActivity$1;->this$0:Lcn/hongguo/tv/MainActivity;
 
     iget-object v0, v0, Lcn/hongguo/tv/MainActivity;->player:Landroid/media/MediaPlayer;

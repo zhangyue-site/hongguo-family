@@ -28,7 +28,7 @@
 .method constructor <init>(Landroid/view/View;Ljava/lang/String;)V
     .locals 0
 
-    .line 50
+    .line 51
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
     iput-object p1, p0, Lcn/hongguo/tv/MainActivity$Screen;->view:Landroid/view/View;

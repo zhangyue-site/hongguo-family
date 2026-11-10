@@ -3,32 +3,40 @@
 .source "D8$$SyntheticClass"
 
 # interfaces
-.implements Ljava/util/Comparator;
+.implements Ljava/lang/Runnable;
+
+
+# instance fields
+.field public final synthetic f$0:Lcn/hongguo/tv/MainActivity;
+
+.field public final synthetic f$1:Ljava/lang/String;
 
 
 # direct methods
-.method public synthetic constructor <init>()V
+.method public synthetic constructor <init>(Lcn/hongguo/tv/MainActivity;Ljava/lang/String;)V
     .locals 0
 
     .line 0
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
+
+    iput-object p1, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda13;->f$0:Lcn/hongguo/tv/MainActivity;
+
+    iput-object p2, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda13;->f$1:Ljava/lang/String;
 
     return-void
 .end method
 
 
 # virtual methods
-.method public final compare(Ljava/lang/Object;Ljava/lang/Object;)I
-    .locals 0
+.method public final run()V
+    .locals 2
 
     .line 0
-    check-cast p1, Lorg/json/JSONObject;
+    iget-object v0, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda13;->f$0:Lcn/hongguo/tv/MainActivity;
 
-    check-cast p2, Lorg/json/JSONObject;
+    iget-object v1, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda13;->f$1:Ljava/lang/String;
 
-    invoke-static {p1, p2}, Lcn/hongguo/tv/MainActivity;->lambda$home$27(Lorg/json/JSONObject;Lorg/json/JSONObject;)I
+    invoke-virtual {v0, v1}, Lcn/hongguo/tv/MainActivity;->lambda$home$26$cn-hongguo-tv-MainActivity(Ljava/lang/String;)V
 
-    move-result p1
-
-    return p1
+    return-void
 .end method

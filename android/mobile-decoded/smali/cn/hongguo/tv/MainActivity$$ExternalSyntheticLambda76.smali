@@ -9,13 +9,29 @@
 # instance fields
 .field public final synthetic f$0:Lcn/hongguo/tv/MainActivity;
 
-.field public final synthetic f$1:I
+.field public final synthetic f$1:Ljava/lang/String;
 
-.field public final synthetic f$2:Landroid/widget/TextView;
+.field public final synthetic f$10:Lorg/json/JSONObject;
+
+.field public final synthetic f$2:I
+
+.field public final synthetic f$3:Ljava/lang/String;
+
+.field public final synthetic f$4:Lcn/hongguo/tv/Recommendations;
+
+.field public final synthetic f$5:Ljava/lang/String;
+
+.field public final synthetic f$6:J
+
+.field public final synthetic f$7:Ljava/lang/String;
+
+.field public final synthetic f$8:Lcn/hongguo/tv/Api;
+
+.field public final synthetic f$9:Z
 
 
 # direct methods
-.method public synthetic constructor <init>(Lcn/hongguo/tv/MainActivity;ILandroid/widget/TextView;)V
+.method public synthetic constructor <init>(Lcn/hongguo/tv/MainActivity;Ljava/lang/String;ILjava/lang/String;Lcn/hongguo/tv/Recommendations;Ljava/lang/String;JLjava/lang/String;Lcn/hongguo/tv/Api;ZLorg/json/JSONObject;)V
     .locals 0
 
     .line 0
@@ -23,9 +39,25 @@
 
     iput-object p1, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda76;->f$0:Lcn/hongguo/tv/MainActivity;
 
-    iput p2, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda76;->f$1:I
+    iput-object p2, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda76;->f$1:Ljava/lang/String;
 
-    iput-object p3, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda76;->f$2:Landroid/widget/TextView;
+    iput p3, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda76;->f$2:I
+
+    iput-object p4, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda76;->f$3:Ljava/lang/String;
+
+    iput-object p5, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda76;->f$4:Lcn/hongguo/tv/Recommendations;
+
+    iput-object p6, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda76;->f$5:Ljava/lang/String;
+
+    iput-wide p7, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda76;->f$6:J
+
+    iput-object p9, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda76;->f$7:Ljava/lang/String;
+
+    iput-object p10, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda76;->f$8:Lcn/hongguo/tv/Api;
+
+    iput-boolean p11, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda76;->f$9:Z
+
+    iput-object p12, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda76;->f$10:Lorg/json/JSONObject;
 
     return-void
 .end method
@@ -33,16 +65,32 @@
 
 # virtual methods
 .method public final run()V
-    .locals 3
+    .locals 12
 
     .line 0
     iget-object v0, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda76;->f$0:Lcn/hongguo/tv/MainActivity;
 
-    iget v1, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda76;->f$1:I
+    iget-object v1, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda76;->f$1:Ljava/lang/String;
 
-    iget-object v2, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda76;->f$2:Landroid/widget/TextView;
+    iget v2, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda76;->f$2:I
 
-    invoke-virtual {v0, v1, v2}, Lcn/hongguo/tv/MainActivity;->lambda$home$29$cn-hongguo-tv-MainActivity(ILandroid/widget/TextView;)V
+    iget-object v3, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda76;->f$3:Ljava/lang/String;
+
+    iget-object v4, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda76;->f$4:Lcn/hongguo/tv/Recommendations;
+
+    iget-object v5, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda76;->f$5:Ljava/lang/String;
+
+    iget-wide v6, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda76;->f$6:J
+
+    iget-object v8, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda76;->f$7:Ljava/lang/String;
+
+    iget-object v9, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda76;->f$8:Lcn/hongguo/tv/Api;
+
+    iget-boolean v10, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda76;->f$9:Z
+
+    iget-object v11, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda76;->f$10:Lorg/json/JSONObject;
+
+    invoke-virtual/range {v0 .. v11}, Lcn/hongguo/tv/MainActivity;->lambda$recommendNext$76$cn-hongguo-tv-MainActivity(Ljava/lang/String;ILjava/lang/String;Lcn/hongguo/tv/Recommendations;Ljava/lang/String;JLjava/lang/String;Lcn/hongguo/tv/Api;ZLorg/json/JSONObject;)V
 
     return-void
 .end method

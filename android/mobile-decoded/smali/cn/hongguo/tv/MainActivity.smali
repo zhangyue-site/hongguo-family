@@ -146,6 +146,8 @@
 
 .field qualityNote:Ljava/lang/String;
 
+.field quietTransition:Z
+
 .field rateButton:Landroid/widget/Button;
 
 .field recommendationSaveAt:J
@@ -161,6 +163,10 @@
 .field rewindButton:Landroid/widget/Button;
 
 .field screen:Lcn/hongguo/tv/MainActivity$Screen;
+
+.field searchSetupBusy:Z
+
+.field searchSetupVisible:Z
 
 .field seek:Landroid/widget/SeekBar;
 
@@ -299,9 +305,9 @@
     iput v0, p0, Lcn/hongguo/tv/MainActivity;->seekPreview:I
 
     .line 24
-    new-instance v0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda26;
+    new-instance v0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda28;
 
-    invoke-direct {v0, p0}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda26;-><init>(Lcn/hongguo/tv/MainActivity;)V
+    invoke-direct {v0, p0}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda28;-><init>(Lcn/hongguo/tv/MainActivity;)V
 
     iput-object v0, p0, Lcn/hongguo/tv/MainActivity;->sleepStop:Ljava/lang/Runnable;
 
@@ -322,7 +328,7 @@
 
     iput-boolean v2, p0, Lcn/hongguo/tv/MainActivity;->wantPlaying:Z
 
-    .line 26
+    .line 27
     iput v1, p0, Lcn/hongguo/tv/MainActivity;->episode:I
 
     const/high16 v0, 0x3f800000    # 1.0f
@@ -337,35 +343,40 @@
 
     iput-wide v0, p0, Lcn/hongguo/tv/MainActivity;->lastProgressWrite:J
 
-    .line 28
-    new-instance v0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda27;
-
-    invoke-direct {v0, p0}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda27;-><init>(Lcn/hongguo/tv/MainActivity;)V
-
-    iput-object v0, p0, Lcn/hongguo/tv/MainActivity;->beginHold:Ljava/lang/Runnable;
-
-    .line 47
-    new-instance v0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda28;
-
-    invoke-direct {v0, p0}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda28;-><init>(Lcn/hongguo/tv/MainActivity;)V
-
-    iput-object v0, p0, Lcn/hongguo/tv/MainActivity;->hideChrome:Ljava/lang/Runnable;
-
-    .line 48
+    .line 29
     new-instance v0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda29;
 
     invoke-direct {v0, p0}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda29;-><init>(Lcn/hongguo/tv/MainActivity;)V
 
-    iput-object v0, p0, Lcn/hongguo/tv/MainActivity;->stallTimeout:Ljava/lang/Runnable;
+    iput-object v0, p0, Lcn/hongguo/tv/MainActivity;->beginHold:Ljava/lang/Runnable;
+
+    .line 48
+    new-instance v0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda30;
+
+    invoke-direct {v0, p0}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda30;-><init>(Lcn/hongguo/tv/MainActivity;)V
+
+    iput-object v0, p0, Lcn/hongguo/tv/MainActivity;->hideChrome:Ljava/lang/Runnable;
 
     .line 49
+    new-instance v0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda31;
+
+    invoke-direct {v0, p0}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda31;-><init>(Lcn/hongguo/tv/MainActivity;)V
+
+    iput-object v0, p0, Lcn/hongguo/tv/MainActivity;->stallTimeout:Ljava/lang/Runnable;
+
+    .line 50
     new-instance v0, Lcn/hongguo/tv/MainActivity$1;
 
     invoke-direct {v0, p0}, Lcn/hongguo/tv/MainActivity$1;-><init>(Lcn/hongguo/tv/MainActivity;)V
 
     iput-object v0, p0, Lcn/hongguo/tv/MainActivity;->ticker:Ljava/lang/Runnable;
 
-    .line 233
+    .line 106
+    iput-boolean v2, p0, Lcn/hongguo/tv/MainActivity;->searchSetupVisible:Z
+
+    iput-boolean v2, p0, Lcn/hongguo/tv/MainActivity;->searchSetupBusy:Z
+
+    .line 247
     iput-object v3, p0, Lcn/hongguo/tv/MainActivity;->qualityNote:Ljava/lang/String;
 
     return-void
@@ -374,23 +385,38 @@
 .method static synthetic lambda$button$7(Ljava/lang/Runnable;Landroid/view/View;)V
     .locals 0
 
-    .line 67
+    .line 68
     invoke-interface {p0}, Ljava/lang/Runnable;->run()V
 
     return-void
 .end method
 
-.method static synthetic lambda$detail$50()V
+.method static synthetic lambda$detail$55()V
     .locals 0
 
-    .line 146
+    .line 160
     return-void
 .end method
 
-.method static synthetic lambda$home$23(ILcn/hongguo/tv/MainActivity$PageUi;Landroid/view/View;ILandroid/view/KeyEvent;)Z
+.method static synthetic lambda$home$25(Landroid/app/AlertDialog;Landroid/content/DialogInterface;)V
+    .locals 0
+
+    .line 118
+    const/4 p1, -0x2
+
+    invoke-virtual {p0, p1}, Landroid/app/AlertDialog;->getButton(I)Landroid/widget/Button;
+
+    move-result-object p0
+
+    invoke-virtual {p0}, Landroid/widget/Button;->requestFocusFromTouch()Z
+
+    return-void
+.end method
+
+.method static synthetic lambda$home$28(ILcn/hongguo/tv/MainActivity$PageUi;Landroid/view/View;ILandroid/view/KeyEvent;)Z
     .locals 1
 
-    .line 113
+    .line 127
     invoke-virtual {p4}, Landroid/view/KeyEvent;->getAction()I
 
     move-result p2
@@ -434,10 +460,10 @@
     return p4
 .end method
 
-.method static synthetic lambda$home$27(Lorg/json/JSONObject;Lorg/json/JSONObject;)I
+.method static synthetic lambda$home$32(Lorg/json/JSONObject;Lorg/json/JSONObject;)I
     .locals 3
 
-    .line 117
+    .line 131
     const-string v0, "updated"
 
     invoke-virtual {p1, v0}, Lorg/json/JSONObject;->optLong(Ljava/lang/String;)J
@@ -455,10 +481,10 @@
     return p0
 .end method
 
-.method static synthetic lambda$manageSaved$61(Lorg/json/JSONObject;Lorg/json/JSONObject;)I
+.method static synthetic lambda$manageSaved$66(Lorg/json/JSONObject;Lorg/json/JSONObject;)I
     .locals 3
 
-    .line 188
+    .line 202
     const-string v0, "updated"
 
     invoke-virtual {p1, v0}, Lorg/json/JSONObject;->optLong(Ljava/lang/String;)J
@@ -476,17 +502,17 @@
     return p0
 .end method
 
-.method static synthetic lambda$manageSaved$62()V
+.method static synthetic lambda$manageSaved$67()V
     .locals 0
 
-    .line 188
+    .line 202
     return-void
 .end method
 
-.method static synthetic lambda$manageSaved$64(Landroid/app/AlertDialog;Landroid/content/DialogInterface;)V
+.method static synthetic lambda$manageSaved$69(Landroid/app/AlertDialog;Landroid/content/DialogInterface;)V
     .locals 0
 
-    .line 188
+    .line 202
     const/4 p1, -0x2
 
     invoke-virtual {p0, p1}, Landroid/app/AlertDialog;->getButton(I)Landroid/widget/Button;
@@ -498,10 +524,10 @@
     return-void
 .end method
 
-.method static synthetic lambda$maybePrefetch$72(Lcn/hongguo/tv/Api;Ljava/lang/String;II)V
+.method static synthetic lambda$maybePrefetch$77(Lcn/hongguo/tv/Api;Ljava/lang/String;II)V
     .locals 0
 
-    .line 221
+    .line 235
     :try_start_0
     invoke-virtual {p0, p1, p2, p3}, Lcn/hongguo/tv/Api;->prefetch(Ljava/lang/String;II)V
     :try_end_0
@@ -516,10 +542,10 @@
     return-void
 .end method
 
-.method static synthetic lambda$renderCards$35(Landroid/view/View;Landroid/view/View;ILandroid/view/KeyEvent;)Z
+.method static synthetic lambda$renderCards$40(Landroid/view/View;Landroid/view/View;ILandroid/view/KeyEvent;)Z
     .locals 0
 
-    .line 134
+    .line 148
     invoke-virtual {p3}, Landroid/view/KeyEvent;->getAction()I
 
     move-result p1
@@ -542,10 +568,10 @@
     return p0
 .end method
 
-.method static synthetic lambda$renderEpisodePage$56(Landroid/view/View;Landroid/view/View;ILandroid/view/KeyEvent;)Z
+.method static synthetic lambda$renderEpisodePage$61(Landroid/view/View;Landroid/view/View;ILandroid/view/KeyEvent;)Z
     .locals 0
 
-    .line 171
+    .line 185
     invoke-virtual {p3}, Landroid/view/KeyEvent;->getAction()I
 
     move-result p1
@@ -571,10 +597,10 @@
     return p3
 .end method
 
-.method static synthetic lambda$search$43(Landroid/widget/Button;Landroid/widget/TextView;ILandroid/view/KeyEvent;)Z
+.method static synthetic lambda$search$48(Landroid/widget/Button;Landroid/widget/TextView;ILandroid/view/KeyEvent;)Z
     .locals 0
 
-    .line 142
+    .line 156
     invoke-virtual {p0}, Landroid/widget/Button;->performClick()Z
 
     const/4 p0, 0x1
@@ -582,17 +608,17 @@
     return p0
 .end method
 
-.method static synthetic lambda$settings$59()V
+.method static synthetic lambda$settings$64()V
     .locals 0
 
-    .line 175
+    .line 189
     return-void
 .end method
 
 .method static synthetic lambda$shell$19(Ljava/util/ArrayList;ILcn/hongguo/tv/MainActivity$PageUi;Landroid/view/View;ILandroid/view/KeyEvent;)Z
     .locals 2
 
-    .line 99
+    .line 100
     invoke-virtual {p5}, Landroid/view/KeyEvent;->getAction()I
 
     move-result p3
@@ -695,7 +721,7 @@
 .method static synthetic lambda$shell$20(Lcn/hongguo/tv/MainActivity$PageUi;Landroid/view/View;ILandroid/view/KeyEvent;)Z
     .locals 0
 
-    .line 100
+    .line 101
     invoke-virtual {p3}, Landroid/view/KeyEvent;->getAction()I
 
     move-result p1
@@ -720,10 +746,10 @@
     return p0
 .end method
 
-.method static synthetic lambda$wireGrid$37(ILjava/util/ArrayList;ILcn/hongguo/tv/MainActivity$PageUi;Landroid/view/View;Landroid/view/View;Landroid/view/View;ILandroid/view/KeyEvent;)Z
+.method static synthetic lambda$wireGrid$42(ILjava/util/ArrayList;ILcn/hongguo/tv/MainActivity$PageUi;Landroid/view/View;Landroid/view/View;Landroid/view/View;ILandroid/view/KeyEvent;)Z
     .locals 4
 
-    .line 138
+    .line 152
     invoke-virtual {p8}, Landroid/view/KeyEvent;->getAction()I
 
     move-result p8
@@ -856,7 +882,7 @@
 .method static time(J)Ljava/lang/String;
     .locals 5
 
-    .line 235
+    .line 249
     const-wide/16 v0, 0x3e8
 
     div-long/2addr p0, v0
@@ -909,7 +935,7 @@
 .method addButton(Landroid/widget/LinearLayout;Landroid/widget/Button;)V
     .locals 5
 
-    .line 68
+    .line 69
     new-instance v0, Landroid/widget/LinearLayout$LayoutParams;
 
     const/high16 v1, 0x42500000    # 52.0f
@@ -952,7 +978,7 @@
 .method applySpeed()V
     .locals 3
 
-    .line 261
+    .line 276
     sget v0, Landroid/os/Build$VERSION;->SDK_INT:I
 
     const/16 v1, 0x17
@@ -964,11 +990,11 @@
     :cond_0
     iget-object v0, p0, Lcn/hongguo/tv/MainActivity;->player:Landroid/media/MediaPlayer;
 
-    if-eqz v0, :cond_2
+    if-eqz v0, :cond_3
 
     iget-boolean v0, p0, Lcn/hongguo/tv/MainActivity;->prepared:Z
 
-    if-eqz v0, :cond_2
+    if-eqz v0, :cond_3
 
     :try_start_0
     iget-object v0, p0, Lcn/hongguo/tv/MainActivity;->player:Landroid/media/MediaPlayer;
@@ -993,7 +1019,7 @@
     :goto_0
     invoke-static {v1, v2}, Lcn/hongguo/tv/MainActivity$Modern23;->speed(Landroid/media/MediaPlayer;F)V
 
-    if-nez v0, :cond_2
+    if-nez v0, :cond_3
 
     iget-object v0, p0, Lcn/hongguo/tv/MainActivity;->player:Landroid/media/MediaPlayer;
 
@@ -1001,26 +1027,92 @@
     :try_end_0
     .catch Ljava/lang/Exception; {:try_start_0 .. :try_end_0} :catch_0
 
-    goto :goto_1
+    goto :goto_2
 
     :catch_0
     move-exception v0
 
+    :try_start_1
+    iget-object v0, p0, Lcn/hongguo/tv/MainActivity;->player:Landroid/media/MediaPlayer;
+
+    invoke-static {v0}, Lcn/hongguo/tv/MainActivity$Modern23;->currentSpeed(Landroid/media/MediaPlayer;)F
+
+    move-result v0
+
+    iput v0, p0, Lcn/hongguo/tv/MainActivity;->speed:F
+    :try_end_1
+    .catch Ljava/lang/Exception; {:try_start_1 .. :try_end_1} :catch_1
+
+    goto :goto_1
+
+    :catch_1
+    move-exception v0
+
+    const/high16 v0, 0x3f800000    # 1.0f
+
+    iput v0, p0, Lcn/hongguo/tv/MainActivity;->speed:F
+
+    :goto_1
+    iget-object v0, p0, Lcn/hongguo/tv/MainActivity;->prefs:Landroid/content/SharedPreferences;
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
+
+    move-result-object v0
+
+    const-string v1, "speed"
+
+    iget v2, p0, Lcn/hongguo/tv/MainActivity;->speed:F
+
+    invoke-interface {v0, v1, v2}, Landroid/content/SharedPreferences$Editor;->putFloat(Ljava/lang/String;F)Landroid/content/SharedPreferences$Editor;
+
+    move-result-object v0
+
+    invoke-interface {v0}, Landroid/content/SharedPreferences$Editor;->apply()V
+
+    iget-object v0, p0, Lcn/hongguo/tv/MainActivity;->rateButton:Landroid/widget/Button;
+
+    if-eqz v0, :cond_2
+
+    iget-object v0, p0, Lcn/hongguo/tv/MainActivity;->rateButton:Landroid/widget/Button;
+
+    new-instance v1, Ljava/lang/StringBuilder;
+
+    invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
+
+    iget v2, p0, Lcn/hongguo/tv/MainActivity;->speed:F
+
+    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(F)Ljava/lang/StringBuilder;
+
+    move-result-object v1
+
+    const-string v2, " \u500d"
+
+    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v1
+
+    invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v1
+
+    invoke-virtual {v0, v1}, Landroid/widget/Button;->setText(Ljava/lang/CharSequence;)V
+
+    :cond_2
     iget-object v0, p0, Lcn/hongguo/tv/MainActivity;->status:Landroid/widget/TextView;
 
-    const-string v1, "\u8be5\u8bbe\u5907\u6682\u4e0d\u652f\u6301\u6b64\u500d\u901f"
+    const-string v1, "\u8be5\u8bbe\u5907\u6682\u4e0d\u652f\u6301\u6b64\u500d\u901f\uff0c\u5df2\u4fdd\u7559\u53ef\u7528\u901f\u5ea6"
 
     invoke-virtual {v0, v1}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V
 
-    :cond_2
-    :goto_1
+    :cond_3
+    :goto_2
     return-void
 .end method
 
 .method bg(II)Landroid/graphics/drawable/GradientDrawable;
     .locals 1
 
-    .line 62
+    .line 63
     new-instance v0, Landroid/graphics/drawable/GradientDrawable;
 
     invoke-direct {v0}, Landroid/graphics/drawable/GradientDrawable;-><init>()V
@@ -1058,7 +1150,7 @@
 .method body(Landroid/widget/LinearLayout;)Landroid/widget/LinearLayout;
     .locals 1
 
-    .line 81
+    .line 82
     invoke-virtual {p0, p1}, Lcn/hongguo/tv/MainActivity;->pageUi(Landroid/view/View;)Lcn/hongguo/tv/MainActivity$PageUi;
 
     move-result-object v0
@@ -1077,7 +1169,7 @@
 .method bucket(Ljava/lang/String;)Lorg/json/JSONObject;
     .locals 3
 
-    .line 144
+    .line 158
     :try_start_0
     new-instance v0, Lorg/json/JSONObject;
 
@@ -1108,7 +1200,7 @@
 .method button(Ljava/lang/String;Ljava/lang/Runnable;Z)Landroid/widget/Button;
     .locals 4
 
-    .line 67
+    .line 68
     new-instance v0, Landroid/widget/Button;
 
     invoke-direct {v0, p0}, Landroid/widget/Button;-><init>(Landroid/content/Context;)V
@@ -1171,9 +1263,9 @@
 
     invoke-static {v0}, Lcn/hongguo/tv/MainActivity$Modern21;->buttonStyle(Landroid/view/View;)V
 
-    new-instance p1, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda2;
+    new-instance p1, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda4;
 
-    invoke-direct {p1, p2}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda2;-><init>(Ljava/lang/Runnable;)V
+    invoke-direct {p1, p2}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda4;-><init>(Ljava/lang/Runnable;)V
 
     invoke-virtual {v0, p1}, Landroid/widget/Button;->setOnClickListener(Landroid/view/View$OnClickListener;)V
 
@@ -1183,7 +1275,7 @@
 .method cancelConfirmHold()V
     .locals 2
 
-    .line 35
+    .line 36
     iget-object v0, p0, Lcn/hongguo/tv/MainActivity;->ui:Landroid/os/Handler;
 
     iget-object v1, p0, Lcn/hongguo/tv/MainActivity;->beginHold:Ljava/lang/Runnable;
@@ -1238,7 +1330,7 @@
 .method cancelMedia()V
     .locals 2
 
-    .line 230
+    .line 244
     invoke-virtual {p0}, Lcn/hongguo/tv/MainActivity;->cancelPrefetch()V
 
     iget v0, p0, Lcn/hongguo/tv/MainActivity;->mediaGeneration:I
@@ -1276,7 +1368,7 @@
 .method cancelMediaForEpisode(I)V
     .locals 3
 
-    .line 223
+    .line 237
     new-instance v0, Ljava/lang/StringBuilder;
 
     invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
@@ -1319,7 +1411,7 @@
 
     move-result-object p1
 
-    .line 224
+    .line 238
     iget-object v0, p0, Lcn/hongguo/tv/MainActivity;->prefetchJob:Ljava/util/concurrent/Future;
 
     if-eqz v0, :cond_0
@@ -1340,7 +1432,7 @@
 
     if-eqz p1, :cond_0
 
-    .line 226
+    .line 240
     iget p1, p0, Lcn/hongguo/tv/MainActivity;->mediaGeneration:I
 
     const/4 v0, 0x1
@@ -1363,11 +1455,11 @@
 
     goto :goto_0
 
-    .line 227
+    .line 241
     :cond_0
     invoke-virtual {p0}, Lcn/hongguo/tv/MainActivity;->cancelMedia()V
 
-    .line 228
+    .line 242
     :cond_1
     :goto_0
     return-void
@@ -1376,7 +1468,7 @@
 .method cancelPrefetch()V
     .locals 2
 
-    .line 219
+    .line 233
     iget-object v0, p0, Lcn/hongguo/tv/MainActivity;->prefetchJob:Ljava/util/concurrent/Future;
 
     if-eqz v0, :cond_0
@@ -1411,7 +1503,7 @@
         }
     .end annotation
 
-    .line 121
+    .line 135
     :try_start_0
     iget-object v0, p0, Lcn/hongguo/tv/MainActivity;->catalog:Lcn/hongguo/tv/Catalog;
 
@@ -1537,7 +1629,7 @@
         }
     .end annotation
 
-    .line 120
+    .line 134
     const/4 v0, 0x0
 
     invoke-virtual {p0, p1, p2, p3, v0}, Lcn/hongguo/tv/MainActivity;->catalogItems(Ljava/lang/String;Ljava/lang/String;Lcn/hongguo/tv/Api;Z)Lcn/hongguo/tv/Catalog$Result;
@@ -1552,7 +1644,7 @@
 .method categories()V
     .locals 14
 
-    .line 143
+    .line 157
     const-string v0, "\u6309\u9898\u6750\u627e\u5267"
 
     invoke-virtual {p0, v0}, Lcn/hongguo/tv/MainActivity;->shell(Ljava/lang/String;)Landroid/widget/LinearLayout;
@@ -1613,9 +1705,9 @@
     :cond_1
     aget-object v8, v4, v7
 
-    new-instance v9, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda89;
+    new-instance v9, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda95;
 
-    invoke-direct {v9, p0, v8}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda89;-><init>(Lcn/hongguo/tv/MainActivity;Ljava/lang/String;)V
+    invoke-direct {v9, p0, v8}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda95;-><init>(Lcn/hongguo/tv/MainActivity;Ljava/lang/String;)V
 
     invoke-virtual {p0, v8, v9, v5}, Lcn/hongguo/tv/MainActivity;->button(Ljava/lang/String;Ljava/lang/Runnable;Z)Landroid/widget/Button;
 
@@ -1710,7 +1802,7 @@
 .method changeQuality(I)V
     .locals 3
 
-    .line 229
+    .line 243
     iget-object v0, p0, Lcn/hongguo/tv/MainActivity;->prefs:Landroid/content/SharedPreferences;
 
     invoke-interface {v0}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
@@ -1784,7 +1876,7 @@
 .method chooseSection(Ljava/lang/String;)V
     .locals 2
 
-    .line 83
+    .line 84
     iget-object v0, p0, Lcn/hongguo/tv/MainActivity;->back:Ljava/util/ArrayDeque;
 
     invoke-virtual {v0}, Ljava/util/ArrayDeque;->clear()V
@@ -1881,7 +1973,7 @@
 .method closeEpisodeOverlay()V
     .locals 2
 
-    .line 291
+    .line 306
     iget-object v0, p0, Lcn/hongguo/tv/MainActivity;->playback:Landroid/widget/FrameLayout;
 
     const-string v1, "episode-overlay"
@@ -1934,7 +2026,7 @@
 .method closeSettingsOverlay()V
     .locals 2
 
-    .line 183
+    .line 197
     iget-object v0, p0, Lcn/hongguo/tv/MainActivity;->playback:Landroid/widget/FrameLayout;
 
     if-nez v0, :cond_0
@@ -1988,7 +2080,7 @@
 .method column()Landroid/widget/LinearLayout;
     .locals 2
 
-    .line 64
+    .line 65
     new-instance v0, Landroid/widget/LinearLayout;
 
     invoke-direct {v0, p0}, Landroid/widget/LinearLayout;-><init>(Landroid/content/Context;)V
@@ -2003,7 +2095,7 @@
 .method commitSeekPreview()V
     .locals 5
 
-    .line 287
+    .line 302
     iget v0, p0, Lcn/hongguo/tv/MainActivity;->seekPreview:I
 
     if-gez v0, :cond_0
@@ -2080,7 +2172,7 @@
 .method confirmGesture(Landroid/view/KeyEvent;)Z
     .locals 4
 
-    .line 37
+    .line 38
     invoke-virtual {p1}, Landroid/view/KeyEvent;->getKeyCode()I
 
     move-result v0
@@ -2112,13 +2204,13 @@
     :goto_0
     const/4 v1, 0x1
 
-    .line 38
+    .line 39
     :goto_1
     if-nez v1, :cond_2
 
     return v2
 
-    .line 39
+    .line 40
     :cond_2
     invoke-virtual {p1}, Landroid/view/KeyEvent;->getAction()I
 
@@ -2179,7 +2271,7 @@
 
     return v3
 
-    .line 40
+    .line 41
     :cond_6
     invoke-virtual {p1}, Landroid/view/KeyEvent;->getAction()I
 
@@ -2187,7 +2279,7 @@
 
     if-nez v1, :cond_a
 
-    .line 41
+    .line 42
     invoke-virtual {p1}, Landroid/view/KeyEvent;->getRepeatCount()I
 
     move-result v1
@@ -2200,7 +2292,7 @@
 
     return v3
 
-    .line 42
+    .line 43
     :cond_7
     invoke-virtual {p1}, Landroid/view/KeyEvent;->getRepeatCount()I
 
@@ -2216,7 +2308,7 @@
 
     iput v2, p0, Lcn/hongguo/tv/MainActivity;->heldConfirmKey:I
 
-    .line 43
+    .line 44
     :cond_8
     iget-object p1, p0, Lcn/hongguo/tv/MainActivity;->player:Landroid/media/MediaPlayer;
 
@@ -2271,7 +2363,7 @@
 
     return v3
 
-    .line 45
+    .line 46
     :cond_a
     return v2
 .end method
@@ -2279,7 +2371,7 @@
 .method currentUi()Lcn/hongguo/tv/MainActivity$PageUi;
     .locals 1
 
-    .line 80
+    .line 81
     iget-object v0, p0, Lcn/hongguo/tv/MainActivity;->screen:Lcn/hongguo/tv/MainActivity$Screen;
 
     if-nez v0, :cond_0
@@ -2334,7 +2426,7 @@
 .method detail(Lorg/json/JSONObject;)V
     .locals 10
 
-    .line 145
+    .line 159
     const-string v0, "title"
 
     invoke-virtual {p1, v0}, Lorg/json/JSONObject;->optString(Ljava/lang/String;)Ljava/lang/String;
@@ -2469,9 +2561,9 @@
 
     invoke-virtual {v2, v0}, Landroid/widget/LinearLayout;->addView(Landroid/view/View;)V
 
-    new-instance v0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda22;
+    new-instance v0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda24;
 
-    invoke-direct {v0, p0, p1}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda22;-><init>(Lcn/hongguo/tv/MainActivity;Lorg/json/JSONObject;)V
+    invoke-direct {v0, p0, p1}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda24;-><init>(Lcn/hongguo/tv/MainActivity;Lorg/json/JSONObject;)V
 
     const-string v2, "\u91cd\u65b0\u8bfb\u53d6"
 
@@ -2483,9 +2575,9 @@
 
     move-result-object v2
 
-    new-instance v3, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda23;
+    new-instance v3, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda25;
 
-    invoke-direct {v3, p0, p1}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda23;-><init>(Lcn/hongguo/tv/MainActivity;Lorg/json/JSONObject;)V
+    invoke-direct {v3, p0, p1}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda25;-><init>(Lcn/hongguo/tv/MainActivity;Lorg/json/JSONObject;)V
 
     const-string v4, "\u6362\u4e00\u90e8"
 
@@ -2523,7 +2615,7 @@
 
     invoke-virtual {p0, v2, v1}, Lcn/hongguo/tv/MainActivity;->loadCover(Ljava/lang/String;Landroid/widget/ImageView;)V
 
-    .line 146
+    .line 160
     :try_start_0
     new-instance v1, Ljava/lang/StringBuilder;
 
@@ -2551,7 +2643,7 @@
 
     move-result-object v0
 
-    new-instance v9, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda24;
+    new-instance v9, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda26;
 
     move-object v1, v9
 
@@ -2563,7 +2655,7 @@
 
     move-object v5, v8
 
-    invoke-direct/range {v1 .. v6}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda24;-><init>(Lcn/hongguo/tv/MainActivity;Lorg/json/JSONObject;Landroid/widget/TextView;Landroid/widget/LinearLayout;Landroid/widget/LinearLayout;)V
+    invoke-direct/range {v1 .. v6}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda26;-><init>(Lcn/hongguo/tv/MainActivity;Lorg/json/JSONObject;Landroid/widget/TextView;Landroid/widget/LinearLayout;Landroid/widget/LinearLayout;)V
 
     invoke-virtual {p0, v0, v7, v9}, Lcn/hongguo/tv/MainActivity;->request(Ljava/lang/String;Landroid/widget/TextView;Lcn/hongguo/tv/MainActivity$Done;)V
     :try_end_0
@@ -2578,7 +2670,7 @@
 
     invoke-virtual {v7, p1}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V
 
-    .line 147
+    .line 161
     :goto_0
     return-void
 .end method
@@ -2617,7 +2709,7 @@
 .method public dispatchKeyEvent(Landroid/view/KeyEvent;)Z
     .locals 14
 
-    .line 293
+    .line 308
     invoke-virtual {p1}, Landroid/view/KeyEvent;->getKeyCode()I
 
     move-result v0
@@ -2639,7 +2731,7 @@
     :cond_0
     const/4 v1, 0x0
 
-    .line 294
+    .line 309
     :goto_0
     invoke-virtual {p0, p1}, Lcn/hongguo/tv/MainActivity;->confirmGesture(Landroid/view/KeyEvent;)Z
 
@@ -2649,7 +2741,7 @@
 
     return v3
 
-    .line 295
+    .line 310
     :cond_1
     if-eqz v1, :cond_2
 
@@ -2663,7 +2755,7 @@
 
     invoke-virtual {p0}, Lcn/hongguo/tv/MainActivity;->cancelConfirmHold()V
 
-    .line 296
+    .line 311
     :cond_2
     const/16 v4, 0x52
 
@@ -2696,18 +2788,18 @@
     :cond_3
     return v3
 
-    .line 297
+    .line 312
     :cond_4
     iget-object v9, p0, Lcn/hongguo/tv/MainActivity;->player:Landroid/media/MediaPlayer;
 
     if-eqz v9, :cond_1b
 
-    .line 298
+    .line 313
     invoke-virtual {p0}, Lcn/hongguo/tv/MainActivity;->playerOverlay()Landroid/view/View;
 
     move-result-object v9
 
-    .line 299
+    .line 314
     const/16 v10, 0x14
 
     const/16 v11, 0x16
@@ -2724,7 +2816,7 @@
 
     if-gt v0, v11, :cond_c
 
-    .line 300
+    .line 315
     invoke-virtual {p0}, Lcn/hongguo/tv/MainActivity;->getCurrentFocus()Landroid/view/View;
 
     move-result-object v1
@@ -2747,7 +2839,7 @@
 
     const/16 v8, 0x11
 
-    .line 301
+    .line 316
     :cond_7
     :goto_1
     invoke-virtual {p0, v1, v9}, Lcn/hongguo/tv/MainActivity;->inside(Landroid/view/View;Landroid/view/View;)Z
@@ -2781,7 +2873,7 @@
     :cond_8
     return v3
 
-    .line 302
+    .line 317
     :cond_9
     invoke-virtual {v1, p1}, Landroid/view/View;->dispatchKeyEvent(Landroid/view/KeyEvent;)Z
 
@@ -2791,7 +2883,7 @@
 
     return v3
 
-    .line 303
+    .line 318
     :cond_a
     invoke-virtual {v1, v8}, Landroid/view/View;->focusSearch(I)Landroid/view/View;
 
@@ -2810,7 +2902,7 @@
     :cond_b
     return v3
 
-    .line 305
+    .line 320
     :cond_c
     if-eqz v9, :cond_d
 
@@ -2820,7 +2912,7 @@
 
     return p1
 
-    .line 306
+    .line 321
     :cond_d
     if-eq v0, v13, :cond_e
 
@@ -2845,11 +2937,11 @@
 
     goto :goto_2
 
-    .line 307
+    .line 322
     :cond_f
     if-eqz v1, :cond_1b
 
-    .line 308
+    .line 323
     if-ne v0, v5, :cond_10
 
     iget-object p1, p0, Lcn/hongguo/tv/MainActivity;->current:Lorg/json/JSONObject;
@@ -2865,7 +2957,7 @@
 
     return v3
 
-    .line 309
+    .line 324
     :cond_11
     const/16 v1, 0x5a
 
@@ -2905,7 +2997,7 @@
 
     return v3
 
-    .line 310
+    .line 325
     :cond_14
     iget-boolean v1, p0, Lcn/hongguo/tv/MainActivity;->controlsVisible:Z
 
@@ -2929,7 +3021,7 @@
 
     goto :goto_5
 
-    .line 306
+    .line 321
     :cond_17
     :goto_2
     if-eqz v1, :cond_19
@@ -2969,7 +3061,7 @@
     :goto_4
     return v3
 
-    .line 313
+    .line 328
     :cond_1b
     :goto_5
     invoke-super {p0, p1}, Landroid/app/Activity;->dispatchKeyEvent(Landroid/view/KeyEvent;)Z
@@ -2982,7 +3074,7 @@
 .method dp(F)I
     .locals 1
 
-    .line 51
+    .line 52
     invoke-virtual {p0}, Lcn/hongguo/tv/MainActivity;->getResources()Landroid/content/res/Resources;
 
     move-result-object v0
@@ -3005,7 +3097,7 @@
 .method episodePage(Lorg/json/JSONObject;Lorg/json/JSONArray;I)V
     .locals 8
 
-    .line 151
+    .line 165
     new-instance v0, Ljava/lang/StringBuilder;
 
     invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
@@ -3084,7 +3176,7 @@
 .method fitVideo(II)V
     .locals 0
 
-    .line 260
+    .line 275
     if-lez p1, :cond_2
 
     if-gtz p2, :cond_0
@@ -3105,9 +3197,9 @@
     :cond_1
     iget-object p1, p0, Lcn/hongguo/tv/MainActivity;->playback:Landroid/widget/FrameLayout;
 
-    new-instance p2, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda80;
+    new-instance p2, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda86;
 
-    invoke-direct {p2, p0}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda80;-><init>(Lcn/hongguo/tv/MainActivity;)V
+    invoke-direct {p2, p0}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda86;-><init>(Lcn/hongguo/tv/MainActivity;)V
 
     invoke-virtual {p1, p2}, Landroid/widget/FrameLayout;->post(Ljava/lang/Runnable;)Z
 
@@ -3119,7 +3211,7 @@
 .method focusStyle(Landroid/view/View;Z)V
     .locals 2
 
-    .line 66
+    .line 67
     const/4 v0, 0x1
 
     invoke-virtual {p1, v0}, Landroid/view/View;->setFocusable(Z)V
@@ -3144,9 +3236,9 @@
 
     invoke-virtual {p1, v0}, Landroid/view/View;->setBackground(Landroid/graphics/drawable/Drawable;)V
 
-    new-instance v0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda86;
+    new-instance v0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda94;
 
-    invoke-direct {v0, p0, p2}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda86;-><init>(Lcn/hongguo/tv/MainActivity;Z)V
+    invoke-direct {v0, p0, p2}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda94;-><init>(Lcn/hongguo/tv/MainActivity;Z)V
 
     invoke-virtual {p1, v0}, Landroid/view/View;->setOnFocusChangeListener(Landroid/view/View$OnFocusChangeListener;)V
 
@@ -3156,7 +3248,7 @@
 .method hideKeyboard()V
     .locals 3
 
-    .line 70
+    .line 71
     const-string v0, "input_method"
 
     invoke-virtual {p0, v0}, Lcn/hongguo/tv/MainActivity;->getSystemService(Ljava/lang/String;)Ljava/lang/Object;
@@ -3181,7 +3273,7 @@
 .method home(Ljava/lang/String;Ljava/lang/String;)V
     .locals 1
 
-    .line 103
+    .line 104
     if-eqz p2, :cond_0
 
     const/4 v0, 0x1
@@ -3200,7 +3292,7 @@
 .method home(Ljava/lang/String;Ljava/lang/String;Z)V
     .locals 1
 
-    .line 104
+    .line 105
     const/4 v0, 0x0
 
     invoke-virtual {p0, p1, p2, p3, v0}, Lcn/hongguo/tv/MainActivity;->home(Ljava/lang/String;Ljava/lang/String;ZZ)V
@@ -3211,48 +3303,180 @@
 .method home(Ljava/lang/String;Ljava/lang/String;ZZ)V
     .locals 23
 
-    .line 106
+    .line 108
     move-object/from16 v12, p0
 
-    move-object/from16 v1, p1
+    move-object/from16 v3, p1
 
     move-object/from16 v0, p2
 
-    const-string v2, "AI\u5267"
+    const/4 v1, 0x1
 
-    const-string v3, "\u6f2b\u5267"
+    const-string v2, "\u5386\u53f2"
 
-    const-string v4, "\u9996\u9875"
+    const-string v4, "\u6536\u85cf"
 
-    if-nez v0, :cond_2
+    const/4 v5, 0x0
 
-    invoke-virtual {v1, v4}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    if-eqz v0, :cond_2
 
-    move-result v5
+    invoke-virtual {v3, v4}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
-    if-nez v5, :cond_1
+    move-result v6
 
-    invoke-virtual {v1, v3}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    if-nez v6, :cond_2
 
-    move-result v5
+    invoke-virtual {v3, v2}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
-    if-nez v5, :cond_1
+    move-result v6
 
-    invoke-virtual {v1, v2}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    if-nez v6, :cond_2
 
-    move-result v5
+    iget-object v6, v12, Lcn/hongguo/tv/MainActivity;->catalogMode:Ljava/lang/String;
 
-    if-eqz v5, :cond_0
+    const-string v7, "ai"
+
+    invoke-virtual {v6, v7}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+
+    move-result v6
+
+    if-nez v6, :cond_2
+
+    iget-object v6, v12, Lcn/hongguo/tv/MainActivity;->catalog:Lcn/hongguo/tv/Catalog;
+
+    invoke-virtual {v6}, Lcn/hongguo/tv/Catalog;->requiresSearchSetup()Z
+
+    move-result v6
+
+    if-eqz v6, :cond_2
+
+    .line 109
+    iget-boolean v2, v12, Lcn/hongguo/tv/MainActivity;->searchSetupVisible:Z
+
+    if-nez v2, :cond_1
+
+    iget-boolean v2, v12, Lcn/hongguo/tv/MainActivity;->searchSetupBusy:Z
+
+    if-eqz v2, :cond_0
 
     goto :goto_0
 
     :cond_0
-    move/from16 v7, p4
+    iput-boolean v1, v12, Lcn/hongguo/tv/MainActivity;->searchSetupVisible:Z
+
+    .line 110
+    invoke-virtual {v12, v5}, Lcn/hongguo/tv/MainActivity;->dialog(Z)Landroid/app/AlertDialog$Builder;
+
+    move-result-object v1
+
+    const-string v2, "\u542f\u7528\u641c\u7d22"
+
+    invoke-virtual {v1, v2}, Landroid/app/AlertDialog$Builder;->setTitle(Ljava/lang/CharSequence;)Landroid/app/AlertDialog$Builder;
+
+    move-result-object v1
+
+    .line 111
+    const-string v2, "\u641c\u7d22\u670d\u52a1\u9700\u8981\u767b\u8bb0\u672c\u8bbe\u5907\u3002\u786e\u8ba4\u540e\u5c06\u5411\u7ea2\u679c\u670d\u52a1\u53d1\u9001\u8bbe\u5907\u578b\u53f7\u3001Android\u7248\u672c\u3001CPU\u67b6\u6784\u3001\u5c4f\u5e55\u53ca\u7cfb\u7edf\u53c2\u6570\u548c\u968f\u673a\u5b89\u88c5\u6807\u8bc6\u3002\u4ec5\u4fdd\u5b58\u8fd4\u56de\u7684\u8bbe\u5907\u7f16\u53f7\uff0c\u4e0d\u8bfb\u53d6\u8d26\u53f7\u3001\u624b\u673a\u53f7\u6216IMEI\u3002\u53d6\u6d88\u4ecd\u53ef\u6d4f\u89c8\u9996\u9875\u3002"
+
+    invoke-virtual {v1, v2}, Landroid/app/AlertDialog$Builder;->setMessage(Ljava/lang/CharSequence;)Landroid/app/AlertDialog$Builder;
+
+    move-result-object v1
+
+    .line 112
+    const-string v2, "\u53d6\u6d88"
+
+    const/4 v4, 0x0
+
+    invoke-virtual {v1, v2, v4}, Landroid/app/AlertDialog$Builder;->setNegativeButton(Ljava/lang/CharSequence;Landroid/content/DialogInterface$OnClickListener;)Landroid/app/AlertDialog$Builder;
+
+    move-result-object v7
+
+    new-instance v8, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda9;
+
+    move-object v1, v8
+
+    move-object/from16 v2, p0
+
+    move-object/from16 v3, p1
+
+    move-object/from16 v4, p2
+
+    move/from16 v5, p3
+
+    move/from16 v6, p4
+
+    invoke-direct/range {v1 .. v6}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda9;-><init>(Lcn/hongguo/tv/MainActivity;Ljava/lang/String;Ljava/lang/String;ZZ)V
+
+    const-string v0, "\u540c\u610f\u5e76\u641c\u7d22"
+
+    invoke-virtual {v7, v0, v8}, Landroid/app/AlertDialog$Builder;->setPositiveButton(Ljava/lang/CharSequence;Landroid/content/DialogInterface$OnClickListener;)Landroid/app/AlertDialog$Builder;
+
+    move-result-object v0
+
+    .line 117
+    invoke-virtual {v0}, Landroid/app/AlertDialog$Builder;->create()Landroid/app/AlertDialog;
+
+    move-result-object v0
+
+    .line 118
+    new-instance v1, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda11;
+
+    invoke-direct {v1, v12}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda11;-><init>(Lcn/hongguo/tv/MainActivity;)V
+
+    invoke-virtual {v0, v1}, Landroid/app/AlertDialog;->setOnDismissListener(Landroid/content/DialogInterface$OnDismissListener;)V
+
+    new-instance v1, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda12;
+
+    invoke-direct {v1, v0}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda12;-><init>(Landroid/app/AlertDialog;)V
+
+    invoke-virtual {v0, v1}, Landroid/app/AlertDialog;->setOnShowListener(Landroid/content/DialogInterface$OnShowListener;)V
+
+    invoke-virtual {v0}, Landroid/app/AlertDialog;->show()V
+
+    return-void
+
+    .line 109
+    :cond_1
+    :goto_0
+    return-void
+
+    .line 120
+    :cond_2
+    const-string v6, "AI\u5267"
+
+    const-string v7, "\u6f2b\u5267"
+
+    const-string v8, "\u9996\u9875"
+
+    if-nez v0, :cond_5
+
+    invoke-virtual {v3, v8}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+
+    move-result v9
+
+    if-nez v9, :cond_4
+
+    invoke-virtual {v3, v7}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+
+    move-result v9
+
+    if-nez v9, :cond_4
+
+    invoke-virtual {v3, v6}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+
+    move-result v9
+
+    if-eqz v9, :cond_3
 
     goto :goto_1
 
-    :cond_1
-    :goto_0
+    :cond_3
+    move/from16 v9, p4
+
+    goto :goto_2
+
+    :cond_4
+    :goto_1
     iget-object v0, v12, Lcn/hongguo/tv/MainActivity;->back:Ljava/util/ArrayDeque;
 
     invoke-virtual {v0}, Ljava/util/ArrayDeque;->clear()V
@@ -3261,158 +3485,154 @@
 
     invoke-direct {v0, v12}, Lcn/hongguo/tv/HomeFeed;-><init>(Lcn/hongguo/tv/MainActivity;)V
 
-    move/from16 v7, p4
+    move/from16 v9, p4
 
-    invoke-virtual {v0, v7}, Lcn/hongguo/tv/HomeFeed;->show(Z)V
+    invoke-virtual {v0, v9}, Lcn/hongguo/tv/HomeFeed;->show(Z)V
 
     return-void
 
-    :cond_2
-    move/from16 v7, p4
-
-    .line 107
-    :goto_1
-    if-nez v0, :cond_3
-
-    iget-object v5, v12, Lcn/hongguo/tv/MainActivity;->back:Ljava/util/ArrayDeque;
-
-    invoke-virtual {v5}, Ljava/util/ArrayDeque;->clear()V
-
-    :cond_3
-    if-eqz v0, :cond_4
-
-    move-object v5, v0
-
-    goto :goto_2
-
-    :cond_4
-    iget-object v5, v12, Lcn/hongguo/tv/MainActivity;->catalogMode:Ljava/lang/String;
-
-    const-string v6, "manju"
-
-    invoke-virtual {v5, v6}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
-
-    move-result v5
-
-    if-eqz v5, :cond_5
-
-    const-string v5, "\u4e07\u5996"
-
-    goto :goto_2
-
     :cond_5
-    const-string v5, "\u91cd\u751f"
+    move/from16 v9, p4
 
-    .line 108
+    .line 121
     :goto_2
-    invoke-virtual {v1, v4}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    if-nez v0, :cond_6
 
-    move-result v6
+    iget-object v10, v12, Lcn/hongguo/tv/MainActivity;->back:Ljava/util/ArrayDeque;
 
-    if-eqz v6, :cond_6
-
-    const-string v6, "\u53d1\u73b0\u597d\u5267"
-
-    goto :goto_3
+    invoke-virtual {v10}, Ljava/util/ArrayDeque;->clear()V
 
     :cond_6
-    invoke-virtual {v1, v3}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    if-eqz v0, :cond_7
 
-    move-result v6
-
-    if-eqz v6, :cond_7
-
-    const-string v6, "\u6f2b\u5267\u63a2\u7d22"
+    move-object v10, v0
 
     goto :goto_3
 
     :cond_7
-    const-string v6, "\u641c\u7d22\u7ed3\u679c"
+    iget-object v10, v12, Lcn/hongguo/tv/MainActivity;->catalogMode:Ljava/lang/String;
 
-    invoke-virtual {v1, v6}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    const-string v11, "manju"
 
-    move-result v6
+    invoke-virtual {v10, v11}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
-    if-eqz v6, :cond_8
+    move-result v10
 
-    new-instance v6, Ljava/lang/StringBuilder;
+    if-eqz v10, :cond_8
 
-    invoke-direct {v6}, Ljava/lang/StringBuilder;-><init>()V
-
-    const-string v8, "\u641c\u7d22 \u00b7 "
-
-    invoke-virtual {v6, v8}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v6
-
-    invoke-virtual {v6, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v6
-
-    invoke-virtual {v6}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v6
+    const-string v10, "\u4e07\u5996"
 
     goto :goto_3
 
     :cond_8
-    move-object v6, v1
+    const-string v10, "\u91cd\u751f"
 
-    .line 109
+    .line 122
     :goto_3
-    invoke-virtual {v12, v6}, Lcn/hongguo/tv/MainActivity;->shell(Ljava/lang/String;)Landroid/widget/LinearLayout;
-
-    move-result-object v6
-
-    invoke-virtual {v12, v6}, Lcn/hongguo/tv/MainActivity;->pageUi(Landroid/view/View;)Lcn/hongguo/tv/MainActivity$PageUi;
-
-    move-result-object v8
-
-    invoke-virtual {v12, v6}, Lcn/hongguo/tv/MainActivity;->body(Landroid/widget/LinearLayout;)Landroid/widget/LinearLayout;
-
-    move-result-object v9
-
-    .line 110
-    const-string v10, "\u6536\u85cf"
-
-    invoke-virtual {v1, v10}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    invoke-virtual {v3, v8}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
     move-result v11
 
-    const-string v15, "\u5386\u53f2"
+    if-eqz v11, :cond_9
 
-    if-nez v11, :cond_b
+    const-string v11, "\u53d1\u73b0\u597d\u5267"
 
-    invoke-virtual {v1, v15}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    goto :goto_4
+
+    :cond_9
+    invoke-virtual {v3, v7}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
     move-result v11
 
-    if-nez v11, :cond_b
+    if-eqz v11, :cond_a
 
-    .line 111
-    invoke-virtual/range {p0 .. p0}, Lcn/hongguo/tv/MainActivity;->row()Landroid/widget/LinearLayout;
+    const-string v11, "\u6f2b\u5267\u63a2\u7d22"
+
+    goto :goto_4
+
+    :cond_a
+    const-string v11, "\u641c\u7d22\u7ed3\u679c"
+
+    invoke-virtual {v3, v11}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+
+    move-result v11
+
+    if-eqz v11, :cond_b
+
+    new-instance v11, Ljava/lang/StringBuilder;
+
+    invoke-direct {v11}, Ljava/lang/StringBuilder;-><init>()V
+
+    const-string v13, "\u641c\u7d22 \u00b7 "
+
+    invoke-virtual {v11, v13}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
     move-result-object v11
 
-    const/16 v13, 0xe
+    invoke-virtual {v11, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v11
+
+    invoke-virtual {v11}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v11
+
+    goto :goto_4
+
+    :cond_b
+    move-object v11, v3
+
+    .line 123
+    :goto_4
+    invoke-virtual {v12, v11}, Lcn/hongguo/tv/MainActivity;->shell(Ljava/lang/String;)Landroid/widget/LinearLayout;
+
+    move-result-object v11
+
+    invoke-virtual {v12, v11}, Lcn/hongguo/tv/MainActivity;->pageUi(Landroid/view/View;)Lcn/hongguo/tv/MainActivity$PageUi;
+
+    move-result-object v13
+
+    invoke-virtual {v12, v11}, Lcn/hongguo/tv/MainActivity;->body(Landroid/widget/LinearLayout;)Landroid/widget/LinearLayout;
+
+    move-result-object v14
+
+    .line 124
+    invoke-virtual {v3, v4}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+
+    move-result v15
+
+    if-nez v15, :cond_e
+
+    invoke-virtual {v3, v2}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+
+    move-result v15
+
+    if-nez v15, :cond_e
+
+    .line 125
+    invoke-virtual/range {p0 .. p0}, Lcn/hongguo/tv/MainActivity;->row()Landroid/widget/LinearLayout;
+
+    move-result-object v15
+
+    const/16 v1, 0xe
 
     invoke-virtual/range {p0 .. p0}, Lcn/hongguo/tv/MainActivity;->muted()I
 
-    move-result v14
+    move-result v5
 
-    const-string v7, "\u9898\u6750"
+    const-string v9, "\u9898\u6750"
 
-    invoke-virtual {v12, v7, v13, v14}, Lcn/hongguo/tv/MainActivity;->text(Ljava/lang/String;II)Landroid/widget/TextView;
+    invoke-virtual {v12, v9, v1, v5}, Lcn/hongguo/tv/MainActivity;->text(Ljava/lang/String;II)Landroid/widget/TextView;
 
-    move-result-object v7
+    move-result-object v1
 
-    invoke-virtual {v11, v7}, Landroid/widget/LinearLayout;->addView(Landroid/view/View;)V
+    invoke-virtual {v15, v1}, Landroid/widget/LinearLayout;->addView(Landroid/view/View;)V
 
-    new-instance v7, Ljava/util/ArrayList;
+    new-instance v1, Ljava/util/ArrayList;
 
-    invoke-direct {v7}, Ljava/util/ArrayList;-><init>()V
+    invoke-direct {v1}, Ljava/util/ArrayList;-><init>()V
 
-    .line 112
+    .line 126
     const-string v20, "\u53e4\u88c5"
 
     const-string v21, "\u60ac\u7591"
@@ -3427,86 +3647,42 @@
 
     filled-new-array/range {v16 .. v21}, [Ljava/lang/String;
 
-    move-result-object v13
+    move-result-object v5
 
-    const/4 v14, 0x0
+    const/4 v9, 0x0
 
-    :goto_4
-    move-object/from16 v16, v6
+    :goto_5
+    move-object/from16 v16, v11
 
-    const/4 v6, 0x6
+    const/4 v11, 0x6
 
-    if-ge v14, v6, :cond_a
+    if-ge v9, v11, :cond_d
 
-    aget-object v6, v13, v14
+    aget-object v11, v5, v9
 
-    move-object/from16 v17, v13
+    move-object/from16 v17, v5
 
-    new-instance v13, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda7;
+    new-instance v5, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda13;
 
-    invoke-direct {v13, v12, v6}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda7;-><init>(Lcn/hongguo/tv/MainActivity;Ljava/lang/String;)V
+    invoke-direct {v5, v12, v11}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda13;-><init>(Lcn/hongguo/tv/MainActivity;Ljava/lang/String;)V
 
-    move-object/from16 v18, v15
-
-    const/4 v15, 0x0
-
-    invoke-virtual {v12, v6, v13, v15}, Lcn/hongguo/tv/MainActivity;->button(Ljava/lang/String;Ljava/lang/Runnable;Z)Landroid/widget/Button;
-
-    move-result-object v13
-
-    const/high16 v15, 0x41700000    # 15.0f
-
-    invoke-virtual {v13, v15}, Landroid/widget/Button;->setTextSize(F)V
-
-    const/high16 v15, 0x41200000    # 10.0f
-
-    move-object/from16 v19, v10
-
-    invoke-virtual {v12, v15}, Lcn/hongguo/tv/MainActivity;->dp(F)I
-
-    move-result v10
-
-    invoke-virtual {v12, v15}, Lcn/hongguo/tv/MainActivity;->dp(F)I
-
-    move-result v15
-
-    move-object/from16 v20, v2
+    move-object/from16 v18, v2
 
     const/4 v2, 0x0
 
-    invoke-virtual {v13, v10, v2, v15, v2}, Landroid/widget/Button;->setPadding(IIII)V
+    invoke-virtual {v12, v11, v5, v2}, Lcn/hongguo/tv/MainActivity;->button(Ljava/lang/String;Ljava/lang/Runnable;Z)Landroid/widget/Button;
 
-    invoke-virtual {v6, v5}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    move-result-object v5
 
-    move-result v10
+    const/high16 v2, 0x41700000    # 15.0f
 
-    invoke-virtual {v12, v13, v10}, Lcn/hongguo/tv/MainActivity;->selectedStyle(Landroid/widget/Button;Z)V
+    invoke-virtual {v5, v2}, Landroid/widget/Button;->setTextSize(F)V
 
-    new-instance v10, Landroid/widget/LinearLayout$LayoutParams;
+    const/high16 v2, 0x41200000    # 10.0f
 
-    move-object/from16 v21, v3
-
-    const/high16 v15, 0x42200000    # 40.0f
-
-    invoke-virtual {v12, v15}, Lcn/hongguo/tv/MainActivity;->dp(F)I
-
-    move-result v3
-
-    const/high16 v15, 0x3f800000    # 1.0f
-
-    invoke-direct {v10, v2, v3, v15}, Landroid/widget/LinearLayout$LayoutParams;-><init>(IIF)V
-
-    const/high16 v2, 0x40400000    # 3.0f
+    move-object/from16 v19, v4
 
     invoke-virtual {v12, v2}, Lcn/hongguo/tv/MainActivity;->dp(F)I
-
-    move-result v3
-
-    const/high16 v15, 0x40800000    # 4.0f
-
-    move-object/from16 v22, v4
-
-    invoke-virtual {v12, v15}, Lcn/hongguo/tv/MainActivity;->dp(F)I
 
     move-result v4
 
@@ -3514,259 +3690,108 @@
 
     move-result v2
 
-    invoke-virtual {v12, v15}, Lcn/hongguo/tv/MainActivity;->dp(F)I
-
-    move-result v15
-
-    invoke-virtual {v10, v3, v4, v2, v15}, Landroid/widget/LinearLayout$LayoutParams;->setMargins(IIII)V
-
-    invoke-virtual {v11, v13, v10}, Landroid/widget/LinearLayout;->addView(Landroid/view/View;Landroid/view/ViewGroup$LayoutParams;)V
-
-    invoke-virtual {v7, v13}, Ljava/util/ArrayList;->add(Ljava/lang/Object;)Z
-
-    invoke-virtual {v6, v5}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
-
-    move-result v2
-
-    if-eqz v2, :cond_9
-
-    iput-object v13, v8, Lcn/hongguo/tv/MainActivity$PageUi;->top:Landroid/view/View;
-
-    :cond_9
-    add-int/lit8 v14, v14, 0x1
-
-    move-object/from16 v6, v16
-
-    move-object/from16 v13, v17
-
-    move-object/from16 v15, v18
-
-    move-object/from16 v10, v19
-
-    move-object/from16 v2, v20
-
-    move-object/from16 v3, v21
-
-    move-object/from16 v4, v22
-
-    goto :goto_4
-
-    .line 113
-    :cond_a
-    move-object/from16 v20, v2
-
-    move-object/from16 v21, v3
-
-    move-object/from16 v22, v4
-
-    move-object/from16 v19, v10
-
-    move-object/from16 v18, v15
-
-    new-instance v2, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda8;
-
-    invoke-direct {v2, v12}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda8;-><init>(Lcn/hongguo/tv/MainActivity;)V
-
-    const-string v3, "\u5168\u90e8\u5206\u7c7b"
-
-    const/4 v4, 0x0
-
-    invoke-virtual {v12, v3, v2, v4}, Lcn/hongguo/tv/MainActivity;->button(Ljava/lang/String;Ljava/lang/Runnable;Z)Landroid/widget/Button;
-
-    move-result-object v2
-
-    const/high16 v3, 0x41600000    # 14.0f
-
-    invoke-virtual {v2, v3}, Landroid/widget/Button;->setTextSize(F)V
-
-    invoke-virtual {v12, v11, v2}, Lcn/hongguo/tv/MainActivity;->addButton(Landroid/widget/LinearLayout;Landroid/widget/Button;)V
-
-    invoke-virtual {v9, v11}, Landroid/widget/LinearLayout;->addView(Landroid/view/View;)V
-
-    const/4 v2, 0x0
-
-    :goto_5
-    invoke-virtual {v7}, Ljava/util/ArrayList;->size()I
-
-    move-result v3
-
-    if-ge v2, v3, :cond_c
-
-    invoke-virtual {v7, v2}, Ljava/util/ArrayList;->get(I)Ljava/lang/Object;
-
-    move-result-object v3
-
-    check-cast v3, Landroid/view/View;
-
-    new-instance v4, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda9;
-
-    invoke-direct {v4, v2, v8}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda9;-><init>(ILcn/hongguo/tv/MainActivity$PageUi;)V
-
-    invoke-virtual {v3, v4}, Landroid/view/View;->setOnKeyListener(Landroid/view/View$OnKeyListener;)V
-
-    add-int/lit8 v2, v2, 0x1
-
-    goto :goto_5
-
-    .line 110
-    :cond_b
-    move-object/from16 v20, v2
-
-    move-object/from16 v21, v3
-
-    move-object/from16 v22, v4
-
-    move-object/from16 v16, v6
-
-    move-object/from16 v19, v10
-
-    move-object/from16 v18, v15
-
-    .line 115
-    :cond_c
-    invoke-virtual/range {p0 .. p0}, Lcn/hongguo/tv/MainActivity;->row()Landroid/widget/LinearLayout;
-
-    move-result-object v11
-
-    const/16 v2, 0xd
-
-    invoke-virtual/range {p0 .. p0}, Lcn/hongguo/tv/MainActivity;->muted()I
-
-    move-result v3
-
-    const-string v4, "\u6b63\u5728\u52a0\u8f7d\u2026"
-
-    invoke-virtual {v12, v4, v2, v3}, Lcn/hongguo/tv/MainActivity;->text(Ljava/lang/String;II)Landroid/widget/TextView;
-
-    move-result-object v10
-
-    new-instance v2, Landroid/widget/LinearLayout$LayoutParams;
-
-    const/4 v3, -0x2
-
-    const/high16 v4, 0x3f800000    # 1.0f
+    move-object/from16 v20, v6
 
     const/4 v6, 0x0
 
-    invoke-direct {v2, v6, v3, v4}, Landroid/widget/LinearLayout$LayoutParams;-><init>(IIF)V
+    invoke-virtual {v5, v4, v6, v2, v6}, Landroid/widget/Button;->setPadding(IIII)V
 
-    invoke-virtual {v11, v10, v2}, Landroid/widget/LinearLayout;->addView(Landroid/view/View;Landroid/view/ViewGroup$LayoutParams;)V
+    invoke-virtual {v11, v10}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
-    new-instance v2, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda10;
+    move-result v2
 
-    invoke-direct {v2, v12, v1, v0}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda10;-><init>(Lcn/hongguo/tv/MainActivity;Ljava/lang/String;Ljava/lang/String;)V
+    invoke-virtual {v12, v5, v2}, Lcn/hongguo/tv/MainActivity;->selectedStyle(Landroid/widget/Button;Z)V
 
-    const-string v0, "\u91cd\u65b0\u52a0\u8f7d"
+    new-instance v2, Landroid/widget/LinearLayout$LayoutParams;
 
-    invoke-virtual {v12, v0, v2, v6}, Lcn/hongguo/tv/MainActivity;->button(Ljava/lang/String;Ljava/lang/Runnable;Z)Landroid/widget/Button;
+    move-object/from16 v21, v7
 
-    move-result-object v13
-
-    const/high16 v0, 0x41500000    # 13.0f
-
-    invoke-virtual {v13, v0}, Landroid/widget/Button;->setTextSize(F)V
-
-    const/high16 v2, 0x42000000    # 32.0f
-
-    invoke-virtual {v12, v2}, Lcn/hongguo/tv/MainActivity;->dp(F)I
-
-    move-result v4
-
-    invoke-virtual {v13, v4}, Landroid/widget/Button;->setMinHeight(I)V
-
-    const/high16 v4, 0x41400000    # 12.0f
+    const/high16 v4, 0x42200000    # 40.0f
 
     invoke-virtual {v12, v4}, Lcn/hongguo/tv/MainActivity;->dp(F)I
 
     move-result v7
 
+    const/high16 v4, 0x3f800000    # 1.0f
+
+    invoke-direct {v2, v6, v7, v4}, Landroid/widget/LinearLayout$LayoutParams;-><init>(IIF)V
+
+    const/high16 v4, 0x40400000    # 3.0f
+
     invoke-virtual {v12, v4}, Lcn/hongguo/tv/MainActivity;->dp(F)I
+
+    move-result v6
+
+    const/high16 v7, 0x40800000    # 4.0f
+
+    move-object/from16 v22, v8
+
+    invoke-virtual {v12, v7}, Lcn/hongguo/tv/MainActivity;->dp(F)I
 
     move-result v8
 
-    invoke-virtual {v13, v7, v6, v8, v6}, Landroid/widget/Button;->setPadding(IIII)V
+    invoke-virtual {v12, v4}, Lcn/hongguo/tv/MainActivity;->dp(F)I
 
-    invoke-virtual {v9, v11}, Landroid/widget/LinearLayout;->addView(Landroid/view/View;)V
+    move-result v4
 
-    .line 116
-    new-instance v7, Landroid/widget/ScrollView;
+    invoke-virtual {v12, v7}, Lcn/hongguo/tv/MainActivity;->dp(F)I
 
-    invoke-direct {v7, v12}, Landroid/widget/ScrollView;-><init>(Landroid/content/Context;)V
+    move-result v7
 
-    invoke-virtual {v7, v6}, Landroid/widget/ScrollView;->setClipToPadding(Z)V
+    invoke-virtual {v2, v6, v8, v4, v7}, Landroid/widget/LinearLayout$LayoutParams;->setMargins(IIII)V
 
-    invoke-virtual {v7, v6}, Landroid/widget/ScrollView;->setFocusable(Z)V
+    invoke-virtual {v15, v5, v2}, Landroid/widget/LinearLayout;->addView(Landroid/view/View;Landroid/view/ViewGroup$LayoutParams;)V
 
-    const/high16 v8, 0x40000
+    invoke-virtual {v1, v5}, Ljava/util/ArrayList;->add(Ljava/lang/Object;)Z
 
-    invoke-virtual {v7, v8}, Landroid/widget/ScrollView;->setDescendantFocusability(I)V
-
-    invoke-virtual/range {p0 .. p0}, Lcn/hongguo/tv/MainActivity;->column()Landroid/widget/LinearLayout;
-
-    move-result-object v8
-
-    invoke-virtual {v7, v8}, Landroid/widget/ScrollView;->addView(Landroid/view/View;)V
-
-    new-instance v14, Landroid/widget/LinearLayout$LayoutParams;
-
-    const/4 v15, -0x1
-
-    const/high16 v4, 0x3f800000    # 1.0f
-
-    invoke-direct {v14, v15, v6, v4}, Landroid/widget/LinearLayout$LayoutParams;-><init>(IIF)V
-
-    invoke-virtual {v9, v7, v14}, Landroid/widget/LinearLayout;->addView(Landroid/view/View;Landroid/view/ViewGroup$LayoutParams;)V
-
-    invoke-virtual/range {p0 .. p0}, Lcn/hongguo/tv/MainActivity;->row()Landroid/widget/LinearLayout;
-
-    move-result-object v7
-
-    new-instance v14, Landroid/view/View;
-
-    invoke-direct {v14, v12}, Landroid/view/View;-><init>(Landroid/content/Context;)V
-
-    new-instance v15, Landroid/widget/LinearLayout$LayoutParams;
-
-    const/4 v2, 0x1
-
-    invoke-direct {v15, v6, v2, v4}, Landroid/widget/LinearLayout$LayoutParams;-><init>(IIF)V
-
-    invoke-virtual {v7, v14, v15}, Landroid/widget/LinearLayout;->addView(Landroid/view/View;Landroid/view/ViewGroup$LayoutParams;)V
-
-    move-object/from16 v2, v22
-
-    invoke-virtual {v1, v2}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    invoke-virtual {v11, v10}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
     move-result v2
 
-    if-nez v2, :cond_d
+    if-eqz v2, :cond_c
 
-    move-object/from16 v2, v21
+    iput-object v5, v13, Lcn/hongguo/tv/MainActivity$PageUi;->top:Landroid/view/View;
 
-    invoke-virtual {v1, v2}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    :cond_c
+    add-int/lit8 v9, v9, 0x1
 
-    move-result v2
+    move-object/from16 v11, v16
 
-    if-nez v2, :cond_d
+    move-object/from16 v5, v17
 
-    move-object/from16 v2, v20
+    move-object/from16 v2, v18
 
-    invoke-virtual {v1, v2}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    move-object/from16 v4, v19
 
-    move-result v2
+    move-object/from16 v6, v20
 
-    if-eqz v2, :cond_e
+    move-object/from16 v7, v21
 
+    move-object/from16 v8, v22
+
+    goto :goto_5
+
+    .line 127
     :cond_d
-    new-instance v2, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda11;
+    move-object/from16 v18, v2
 
-    invoke-direct {v2, v12}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda11;-><init>(Lcn/hongguo/tv/MainActivity;)V
+    move-object/from16 v19, v4
 
-    const-string v4, "\u968f\u4fbf\u770b\u770b"
+    move-object/from16 v20, v6
 
-    const/4 v6, 0x0
+    move-object/from16 v21, v7
 
-    invoke-virtual {v12, v4, v2, v6}, Lcn/hongguo/tv/MainActivity;->button(Ljava/lang/String;Ljava/lang/Runnable;Z)Landroid/widget/Button;
+    move-object/from16 v22, v8
+
+    new-instance v2, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda14;
+
+    invoke-direct {v2, v12}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda14;-><init>(Lcn/hongguo/tv/MainActivity;)V
+
+    const-string v4, "\u5168\u90e8\u5206\u7c7b"
+
+    const/4 v5, 0x0
+
+    invoke-virtual {v12, v4, v2, v5}, Lcn/hongguo/tv/MainActivity;->button(Ljava/lang/String;Ljava/lang/Runnable;Z)Landroid/widget/Button;
 
     move-result-object v2
 
@@ -3774,71 +3799,266 @@
 
     invoke-virtual {v2, v4}, Landroid/widget/Button;->setTextSize(F)V
 
-    new-instance v4, Landroid/widget/LinearLayout$LayoutParams;
+    invoke-virtual {v12, v15, v2}, Lcn/hongguo/tv/MainActivity;->addButton(Landroid/widget/LinearLayout;Landroid/widget/Button;)V
 
-    const/high16 v6, 0x42200000    # 40.0f
+    invoke-virtual {v14, v15}, Landroid/widget/LinearLayout;->addView(Landroid/view/View;)V
 
-    invoke-virtual {v12, v6}, Lcn/hongguo/tv/MainActivity;->dp(F)I
+    const/4 v2, 0x0
 
-    move-result v6
+    :goto_6
+    invoke-virtual {v1}, Ljava/util/ArrayList;->size()I
 
-    invoke-direct {v4, v3, v6}, Landroid/widget/LinearLayout$LayoutParams;-><init>(II)V
+    move-result v4
 
-    invoke-virtual {v7, v2, v4}, Landroid/widget/LinearLayout;->addView(Landroid/view/View;Landroid/view/ViewGroup$LayoutParams;)V
+    if-ge v2, v4, :cond_f
 
+    invoke-virtual {v1, v2}, Ljava/util/ArrayList;->get(I)Ljava/lang/Object;
+
+    move-result-object v4
+
+    check-cast v4, Landroid/view/View;
+
+    new-instance v5, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda15;
+
+    invoke-direct {v5, v2, v13}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda15;-><init>(ILcn/hongguo/tv/MainActivity$PageUi;)V
+
+    invoke-virtual {v4, v5}, Landroid/view/View;->setOnKeyListener(Landroid/view/View$OnKeyListener;)V
+
+    add-int/lit8 v2, v2, 0x1
+
+    goto :goto_6
+
+    .line 124
     :cond_e
-    new-instance v2, Landroid/widget/LinearLayout$LayoutParams;
+    move-object/from16 v18, v2
 
-    const/high16 v4, 0x42080000    # 34.0f
+    move-object/from16 v19, v4
+
+    move-object/from16 v20, v6
+
+    move-object/from16 v21, v7
+
+    move-object/from16 v22, v8
+
+    move-object/from16 v16, v11
+
+    .line 129
+    :cond_f
+    invoke-virtual/range {p0 .. p0}, Lcn/hongguo/tv/MainActivity;->row()Landroid/widget/LinearLayout;
+
+    move-result-object v11
+
+    const/16 v1, 0xd
+
+    invoke-virtual/range {p0 .. p0}, Lcn/hongguo/tv/MainActivity;->muted()I
+
+    move-result v2
+
+    const-string v4, "\u6b63\u5728\u52a0\u8f7d\u2026"
+
+    invoke-virtual {v12, v4, v1, v2}, Lcn/hongguo/tv/MainActivity;->text(Ljava/lang/String;II)Landroid/widget/TextView;
+
+    move-result-object v13
+
+    new-instance v1, Landroid/widget/LinearLayout$LayoutParams;
+
+    const/4 v2, -0x2
+
+    const/high16 v4, 0x3f800000    # 1.0f
+
+    const/4 v5, 0x0
+
+    invoke-direct {v1, v5, v2, v4}, Landroid/widget/LinearLayout$LayoutParams;-><init>(IIF)V
+
+    invoke-virtual {v11, v13, v1}, Landroid/widget/LinearLayout;->addView(Landroid/view/View;Landroid/view/ViewGroup$LayoutParams;)V
+
+    new-instance v1, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda16;
+
+    invoke-direct {v1, v12, v3, v0}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda16;-><init>(Lcn/hongguo/tv/MainActivity;Ljava/lang/String;Ljava/lang/String;)V
+
+    const-string v0, "\u91cd\u65b0\u52a0\u8f7d"
+
+    invoke-virtual {v12, v0, v1, v5}, Lcn/hongguo/tv/MainActivity;->button(Ljava/lang/String;Ljava/lang/Runnable;Z)Landroid/widget/Button;
+
+    move-result-object v9
+
+    const/high16 v0, 0x41500000    # 13.0f
+
+    invoke-virtual {v9, v0}, Landroid/widget/Button;->setTextSize(F)V
+
+    const/high16 v1, 0x42000000    # 32.0f
+
+    invoke-virtual {v12, v1}, Lcn/hongguo/tv/MainActivity;->dp(F)I
+
+    move-result v4
+
+    invoke-virtual {v9, v4}, Landroid/widget/Button;->setMinHeight(I)V
+
+    const/high16 v4, 0x41400000    # 12.0f
 
     invoke-virtual {v12, v4}, Lcn/hongguo/tv/MainActivity;->dp(F)I
 
     move-result v6
 
-    invoke-direct {v2, v3, v6}, Landroid/widget/LinearLayout$LayoutParams;-><init>(II)V
+    invoke-virtual {v12, v4}, Lcn/hongguo/tv/MainActivity;->dp(F)I
 
-    invoke-virtual {v7, v13, v2}, Landroid/widget/LinearLayout;->addView(Landroid/view/View;Landroid/view/ViewGroup$LayoutParams;)V
+    move-result v7
 
-    move-object/from16 v2, v19
+    invoke-virtual {v9, v6, v5, v7, v5}, Landroid/widget/Button;->setPadding(IIII)V
 
-    invoke-virtual {v1, v2}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    invoke-virtual {v14, v11}, Landroid/widget/LinearLayout;->addView(Landroid/view/View;)V
 
-    move-result v6
+    .line 130
+    new-instance v6, Landroid/widget/ScrollView;
 
-    if-nez v6, :cond_10
+    invoke-direct {v6, v12}, Landroid/widget/ScrollView;-><init>(Landroid/content/Context;)V
 
-    move-object/from16 v6, v18
+    invoke-virtual {v6, v5}, Landroid/widget/ScrollView;->setClipToPadding(Z)V
 
-    invoke-virtual {v1, v6}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    invoke-virtual {v6, v5}, Landroid/widget/ScrollView;->setFocusable(Z)V
 
-    move-result v14
+    const/high16 v7, 0x40000
 
-    if-eqz v14, :cond_f
+    invoke-virtual {v6, v7}, Landroid/widget/ScrollView;->setDescendantFocusability(I)V
 
-    goto :goto_6
+    invoke-virtual/range {p0 .. p0}, Lcn/hongguo/tv/MainActivity;->column()Landroid/widget/LinearLayout;
 
-    :cond_f
-    const/4 v3, 0x0
+    move-result-object v8
+
+    invoke-virtual {v6, v8}, Landroid/widget/ScrollView;->addView(Landroid/view/View;)V
+
+    new-instance v7, Landroid/widget/LinearLayout$LayoutParams;
+
+    const/4 v15, -0x1
+
+    const/high16 v4, 0x3f800000    # 1.0f
+
+    invoke-direct {v7, v15, v5, v4}, Landroid/widget/LinearLayout$LayoutParams;-><init>(IIF)V
+
+    invoke-virtual {v14, v6, v7}, Landroid/widget/LinearLayout;->addView(Landroid/view/View;Landroid/view/ViewGroup$LayoutParams;)V
+
+    invoke-virtual/range {p0 .. p0}, Lcn/hongguo/tv/MainActivity;->row()Landroid/widget/LinearLayout;
+
+    move-result-object v6
+
+    new-instance v7, Landroid/view/View;
+
+    invoke-direct {v7, v12}, Landroid/view/View;-><init>(Landroid/content/Context;)V
+
+    new-instance v15, Landroid/widget/LinearLayout$LayoutParams;
+
+    const/4 v1, 0x1
+
+    invoke-direct {v15, v5, v1, v4}, Landroid/widget/LinearLayout$LayoutParams;-><init>(IIF)V
+
+    invoke-virtual {v6, v7, v15}, Landroid/widget/LinearLayout;->addView(Landroid/view/View;Landroid/view/ViewGroup$LayoutParams;)V
+
+    move-object/from16 v1, v22
+
+    invoke-virtual {v3, v1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+
+    move-result v1
+
+    if-nez v1, :cond_10
+
+    move-object/from16 v1, v21
+
+    invoke-virtual {v3, v1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+
+    move-result v1
+
+    if-nez v1, :cond_10
+
+    move-object/from16 v1, v20
+
+    invoke-virtual {v3, v1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+
+    move-result v1
+
+    if-eqz v1, :cond_11
+
+    :cond_10
+    new-instance v1, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda17;
+
+    invoke-direct {v1, v12}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda17;-><init>(Lcn/hongguo/tv/MainActivity;)V
+
+    const-string v4, "\u968f\u4fbf\u770b\u770b"
+
+    const/4 v5, 0x0
+
+    invoke-virtual {v12, v4, v1, v5}, Lcn/hongguo/tv/MainActivity;->button(Ljava/lang/String;Ljava/lang/Runnable;Z)Landroid/widget/Button;
+
+    move-result-object v1
+
+    const/high16 v4, 0x41600000    # 14.0f
+
+    invoke-virtual {v1, v4}, Landroid/widget/Button;->setTextSize(F)V
+
+    new-instance v4, Landroid/widget/LinearLayout$LayoutParams;
+
+    const/high16 v5, 0x42200000    # 40.0f
+
+    invoke-virtual {v12, v5}, Lcn/hongguo/tv/MainActivity;->dp(F)I
+
+    move-result v5
+
+    invoke-direct {v4, v2, v5}, Landroid/widget/LinearLayout$LayoutParams;-><init>(II)V
+
+    invoke-virtual {v6, v1, v4}, Landroid/widget/LinearLayout;->addView(Landroid/view/View;Landroid/view/ViewGroup$LayoutParams;)V
+
+    :cond_11
+    new-instance v1, Landroid/widget/LinearLayout$LayoutParams;
+
+    const/high16 v4, 0x42080000    # 34.0f
+
+    invoke-virtual {v12, v4}, Lcn/hongguo/tv/MainActivity;->dp(F)I
+
+    move-result v5
+
+    invoke-direct {v1, v2, v5}, Landroid/widget/LinearLayout$LayoutParams;-><init>(II)V
+
+    invoke-virtual {v6, v9, v1}, Landroid/widget/LinearLayout;->addView(Landroid/view/View;Landroid/view/ViewGroup$LayoutParams;)V
+
+    move-object/from16 v1, v19
+
+    invoke-virtual {v3, v1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+
+    move-result v5
+
+    if-nez v5, :cond_13
+
+    move-object/from16 v5, v18
+
+    invoke-virtual {v3, v5}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+
+    move-result v7
+
+    if-eqz v7, :cond_12
 
     goto :goto_7
 
-    :cond_10
-    move-object/from16 v6, v18
+    :cond_12
+    const/4 v2, 0x0
 
-    :goto_6
-    new-instance v14, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda12;
+    goto :goto_8
 
-    invoke-direct {v14, v12, v1}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda12;-><init>(Lcn/hongguo/tv/MainActivity;Ljava/lang/String;)V
+    :cond_13
+    move-object/from16 v5, v18
+
+    :goto_7
+    new-instance v7, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda18;
+
+    invoke-direct {v7, v12, v3}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda18;-><init>(Lcn/hongguo/tv/MainActivity;Ljava/lang/String;)V
 
     const-string v15, "\u7ba1\u7406"
 
-    const/4 v3, 0x0
+    const/4 v2, 0x0
 
-    invoke-virtual {v12, v15, v14, v3}, Lcn/hongguo/tv/MainActivity;->button(Ljava/lang/String;Ljava/lang/Runnable;Z)Landroid/widget/Button;
+    invoke-virtual {v12, v15, v7, v2}, Lcn/hongguo/tv/MainActivity;->button(Ljava/lang/String;Ljava/lang/Runnable;Z)Landroid/widget/Button;
 
-    move-result-object v14
+    move-result-object v7
 
-    invoke-virtual {v14, v0}, Landroid/widget/Button;->setTextSize(F)V
+    invoke-virtual {v7, v0}, Landroid/widget/Button;->setTextSize(F)V
 
     const/high16 v0, 0x42000000    # 32.0f
 
@@ -3846,7 +4066,7 @@
 
     move-result v0
 
-    invoke-virtual {v14, v0}, Landroid/widget/Button;->setMinHeight(I)V
+    invoke-virtual {v7, v0}, Landroid/widget/Button;->setMinHeight(I)V
 
     const/high16 v0, 0x41400000    # 12.0f
 
@@ -3858,7 +4078,7 @@
 
     move-result v0
 
-    invoke-virtual {v14, v15, v3, v0, v3}, Landroid/widget/Button;->setPadding(IIII)V
+    invoke-virtual {v7, v15, v2, v0, v2}, Landroid/widget/Button;->setPadding(IIII)V
 
     new-instance v0, Landroid/widget/LinearLayout$LayoutParams;
 
@@ -3870,66 +4090,64 @@
 
     invoke-direct {v0, v15, v4}, Landroid/widget/LinearLayout$LayoutParams;-><init>(II)V
 
-    invoke-virtual {v7, v14, v0}, Landroid/widget/LinearLayout;->addView(Landroid/view/View;Landroid/view/ViewGroup$LayoutParams;)V
+    invoke-virtual {v6, v7, v0}, Landroid/widget/LinearLayout;->addView(Landroid/view/View;Landroid/view/ViewGroup$LayoutParams;)V
 
-    :goto_7
-    invoke-virtual {v9, v7}, Landroid/widget/LinearLayout;->addView(Landroid/view/View;)V
+    :goto_8
+    invoke-virtual {v14, v6}, Landroid/widget/LinearLayout;->addView(Landroid/view/View;)V
 
     move/from16 v0, p3
 
     move-object/from16 v4, v16
 
-    invoke-virtual {v12, v4, v1, v13, v0}, Lcn/hongguo/tv/MainActivity;->show(Landroid/view/View;Ljava/lang/String;Landroid/view/View;Z)V
+    invoke-virtual {v12, v4, v3, v9, v0}, Lcn/hongguo/tv/MainActivity;->show(Landroid/view/View;Ljava/lang/String;Landroid/view/View;Z)V
 
-    .line 117
-    invoke-virtual {v1, v2}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
-
-    move-result v0
-
-    if-nez v0, :cond_12
-
-    invoke-virtual {v1, v6}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    .line 131
+    invoke-virtual {v3, v1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
     move-result v0
 
-    if-eqz v0, :cond_11
+    if-nez v0, :cond_15
 
-    goto :goto_8
+    invoke-virtual {v3, v5}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
-    .line 118
-    :cond_11
+    move-result v0
+
+    if-eqz v0, :cond_14
+
+    goto :goto_9
+
+    .line 132
+    :cond_14
     iget v3, v12, Lcn/hongguo/tv/MainActivity;->generation:I
 
-    iget-object v0, v12, Lcn/hongguo/tv/MainActivity;->catalogMode:Ljava/lang/String;
+    iget-object v5, v12, Lcn/hongguo/tv/MainActivity;->catalogMode:Ljava/lang/String;
 
     iget-object v6, v12, Lcn/hongguo/tv/MainActivity;->api:Lcn/hongguo/tv/Api;
 
-    iget-object v14, v12, Lcn/hongguo/tv/MainActivity;->io:Ljava/util/concurrent/ThreadPoolExecutor;
+    iget-object v0, v12, Lcn/hongguo/tv/MainActivity;->io:Ljava/util/concurrent/ThreadPoolExecutor;
 
-    new-instance v15, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda14;
+    new-instance v14, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda10;
 
-    move-object v1, v15
+    move-object v1, v14
 
     move-object/from16 v2, p0
 
-    move-object v4, v5
-
-    move-object v5, v0
+    move-object v4, v10
 
     move/from16 v7, p4
 
-    move-object v9, v13
+    move-object v10, v13
 
-    invoke-direct/range {v1 .. v11}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda14;-><init>(Lcn/hongguo/tv/MainActivity;ILjava/lang/String;Ljava/lang/String;Lcn/hongguo/tv/Api;ZLandroid/widget/LinearLayout;Landroid/widget/Button;Landroid/widget/TextView;Landroid/widget/LinearLayout;)V
+    invoke-direct/range {v1 .. v11}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda10;-><init>(Lcn/hongguo/tv/MainActivity;ILjava/lang/String;Ljava/lang/String;Lcn/hongguo/tv/Api;ZLandroid/widget/LinearLayout;Landroid/widget/Button;Landroid/widget/TextView;Landroid/widget/LinearLayout;)V
 
-    invoke-virtual {v14, v15}, Ljava/util/concurrent/ThreadPoolExecutor;->execute(Ljava/lang/Runnable;)V
+    invoke-virtual {v0, v14}, Ljava/util/concurrent/ThreadPoolExecutor;->execute(Ljava/lang/Runnable;)V
 
-    .line 119
+    .line 133
     return-void
 
-    .line 117
-    :cond_12
-    :goto_8
+    .line 131
+    :cond_15
+    :goto_9
     new-instance v4, Lorg/json/JSONArray;
 
     invoke-direct {v4}, Lorg/json/JSONArray;-><init>()V
@@ -3939,42 +4157,42 @@
 
     iget-object v5, v12, Lcn/hongguo/tv/MainActivity;->prefs:Landroid/content/SharedPreferences;
 
-    invoke-virtual {v1, v2}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    invoke-virtual {v3, v1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
-    move-result v2
+    move-result v1
 
-    if-eqz v2, :cond_13
+    if-eqz v1, :cond_16
 
-    const-string v2, "favorites"
+    const-string v1, "favorites"
 
-    goto :goto_9
+    goto :goto_a
 
-    :cond_13
-    const-string v2, "history"
+    :cond_16
+    const-string v1, "history"
 
-    :goto_9
+    :goto_a
     const-string v6, "{}"
 
-    invoke-interface {v5, v2, v6}, Landroid/content/SharedPreferences;->getString(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+    invoke-interface {v5, v1, v6}, Landroid/content/SharedPreferences;->getString(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
 
-    move-result-object v2
+    move-result-object v1
 
-    invoke-direct {v0, v2}, Lorg/json/JSONObject;-><init>(Ljava/lang/String;)V
+    invoke-direct {v0, v1}, Lorg/json/JSONObject;-><init>(Ljava/lang/String;)V
 
-    new-instance v2, Ljava/util/ArrayList;
+    new-instance v1, Ljava/util/ArrayList;
 
-    invoke-direct {v2}, Ljava/util/ArrayList;-><init>()V
+    invoke-direct {v1}, Ljava/util/ArrayList;-><init>()V
 
     invoke-virtual {v0}, Lorg/json/JSONObject;->keys()Ljava/util/Iterator;
 
     move-result-object v5
 
-    :goto_a
+    :goto_b
     invoke-interface {v5}, Ljava/util/Iterator;->hasNext()Z
 
     move-result v6
 
-    if-eqz v6, :cond_14
+    if-eqz v6, :cond_17
 
     invoke-interface {v5}, Ljava/util/Iterator;->next()Ljava/lang/Object;
 
@@ -3986,63 +4204,63 @@
 
     move-result-object v6
 
-    invoke-virtual {v2, v6}, Ljava/util/ArrayList;->add(Ljava/lang/Object;)Z
+    invoke-virtual {v1, v6}, Ljava/util/ArrayList;->add(Ljava/lang/Object;)Z
 
-    goto :goto_a
+    goto :goto_b
 
-    :cond_14
-    new-instance v0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda13;
+    :cond_17
+    new-instance v0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda19;
 
-    invoke-direct {v0}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda13;-><init>()V
+    invoke-direct {v0}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda19;-><init>()V
 
-    invoke-static {v2, v0}, Ljava/util/Collections;->sort(Ljava/util/List;Ljava/util/Comparator;)V
+    invoke-static {v1, v0}, Ljava/util/Collections;->sort(Ljava/util/List;Ljava/util/Comparator;)V
 
-    invoke-virtual {v2}, Ljava/util/ArrayList;->iterator()Ljava/util/Iterator;
+    invoke-virtual {v1}, Ljava/util/ArrayList;->iterator()Ljava/util/Iterator;
 
     move-result-object v0
 
-    :goto_b
+    :goto_c
     invoke-interface {v0}, Ljava/util/Iterator;->hasNext()Z
 
-    move-result v2
+    move-result v1
 
-    if-eqz v2, :cond_15
+    if-eqz v1, :cond_18
 
     invoke-interface {v0}, Ljava/util/Iterator;->next()Ljava/lang/Object;
 
-    move-result-object v2
+    move-result-object v1
 
-    check-cast v2, Lorg/json/JSONObject;
+    check-cast v1, Lorg/json/JSONObject;
 
-    invoke-virtual {v4, v2}, Lorg/json/JSONArray;->put(Ljava/lang/Object;)Lorg/json/JSONArray;
+    invoke-virtual {v4, v1}, Lorg/json/JSONArray;->put(Ljava/lang/Object;)Lorg/json/JSONArray;
     :try_end_0
     .catch Ljava/lang/Exception; {:try_start_0 .. :try_end_0} :catch_0
 
-    goto :goto_b
+    goto :goto_c
 
     :catch_0
     move-exception v0
 
-    :cond_15
-    invoke-virtual {v12, v8, v4, v13}, Lcn/hongguo/tv/MainActivity;->renderCards(Landroid/widget/LinearLayout;Lorg/json/JSONArray;Landroid/view/View;)V
+    :cond_18
+    invoke-virtual {v12, v8, v4, v9}, Lcn/hongguo/tv/MainActivity;->renderCards(Landroid/widget/LinearLayout;Lorg/json/JSONArray;Landroid/view/View;)V
 
     invoke-virtual {v4}, Lorg/json/JSONArray;->length()I
 
     move-result v0
 
-    if-nez v0, :cond_16
+    if-nez v0, :cond_19
 
     new-instance v0, Ljava/lang/StringBuilder;
 
     invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
 
-    const-string v2, "\u6682\u65e0"
+    const-string v1, "\u6682\u65e0"
 
-    invoke-virtual {v0, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
     move-result-object v0
 
-    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    invoke-virtual {v0, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
     move-result-object v0
 
@@ -4050,29 +4268,29 @@
 
     move-result-object v0
 
-    goto :goto_c
+    goto :goto_d
 
-    :cond_16
+    :cond_19
     const-string v0, ""
 
-    :goto_c
-    invoke-virtual {v10, v0}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V
+    :goto_d
+    invoke-virtual {v13, v0}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V
 
     invoke-virtual {v4}, Lorg/json/JSONArray;->length()I
 
     move-result v0
 
-    if-nez v0, :cond_17
+    if-nez v0, :cond_1a
 
-    const/4 v14, 0x0
+    const/4 v5, 0x0
 
-    goto :goto_d
+    goto :goto_e
 
-    :cond_17
-    const/16 v14, 0x8
+    :cond_1a
+    const/16 v5, 0x8
 
-    :goto_d
-    invoke-virtual {v11, v14}, Landroid/widget/LinearLayout;->setVisibility(I)V
+    :goto_e
+    invoke-virtual {v11, v5}, Landroid/widget/LinearLayout;->setVisibility(I)V
 
     return-void
 .end method
@@ -4101,7 +4319,7 @@
 .method inside(Landroid/view/View;Landroid/view/View;)Z
     .locals 1
 
-    .line 284
+    .line 299
     :goto_0
     if-eqz p1, :cond_2
 
@@ -4135,10 +4353,10 @@
     return p1
 .end method
 
-.method synthetic lambda$categories$44$cn-hongguo-tv-MainActivity(Ljava/lang/String;)V
+.method synthetic lambda$categories$49$cn-hongguo-tv-MainActivity(Ljava/lang/String;)V
     .locals 2
 
-    .line 143
+    .line 157
     new-instance v0, Ljava/lang/StringBuilder;
 
     invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
@@ -4162,10 +4380,10 @@
     return-void
 .end method
 
-.method synthetic lambda$detail$45$cn-hongguo-tv-MainActivity(Lorg/json/JSONObject;)V
+.method synthetic lambda$detail$50$cn-hongguo-tv-MainActivity(Lorg/json/JSONObject;)V
     .locals 0
 
-    .line 145
+    .line 159
     invoke-virtual {p0}, Lcn/hongguo/tv/MainActivity;->restore()V
 
     invoke-virtual {p0, p1}, Lcn/hongguo/tv/MainActivity;->detail(Lorg/json/JSONObject;)V
@@ -4173,28 +4391,28 @@
     return-void
 .end method
 
-.method synthetic lambda$detail$46$cn-hongguo-tv-MainActivity(Lorg/json/JSONObject;)V
+.method synthetic lambda$detail$51$cn-hongguo-tv-MainActivity(Lorg/json/JSONObject;)V
     .locals 0
 
-    .line 145
+    .line 159
     invoke-virtual {p0, p1}, Lcn/hongguo/tv/MainActivity;->recommendNext(Lorg/json/JSONObject;)V
 
     return-void
 .end method
 
-.method synthetic lambda$detail$47$cn-hongguo-tv-MainActivity(Lorg/json/JSONObject;Lorg/json/JSONArray;)V
+.method synthetic lambda$detail$52$cn-hongguo-tv-MainActivity(Lorg/json/JSONObject;Lorg/json/JSONArray;)V
     .locals 0
 
-    .line 146
+    .line 160
     invoke-virtual {p0, p1, p2}, Lcn/hongguo/tv/MainActivity;->resumeSeries(Lorg/json/JSONObject;Lorg/json/JSONArray;)V
 
     return-void
 .end method
 
-.method synthetic lambda$detail$48$cn-hongguo-tv-MainActivity(Lorg/json/JSONObject;Landroid/widget/Button;)V
+.method synthetic lambda$detail$53$cn-hongguo-tv-MainActivity(Lorg/json/JSONObject;Landroid/widget/Button;)V
     .locals 3
 
-    .line 146
+    .line 160
     const-string v0, "history"
 
     invoke-virtual {p0, v0}, Lcn/hongguo/tv/MainActivity;->bucket(Ljava/lang/String;)Lorg/json/JSONObject;
@@ -4265,10 +4483,10 @@
     return-void
 .end method
 
-.method synthetic lambda$detail$49$cn-hongguo-tv-MainActivity(Lorg/json/JSONObject;Lorg/json/JSONArray;)V
+.method synthetic lambda$detail$54$cn-hongguo-tv-MainActivity(Lorg/json/JSONObject;Lorg/json/JSONArray;)V
     .locals 1
 
-    .line 146
+    .line 160
     invoke-virtual {p0, p1, p2}, Lcn/hongguo/tv/MainActivity;->latestEpisode(Lorg/json/JSONObject;Lorg/json/JSONArray;)I
 
     move-result v0
@@ -4278,10 +4496,10 @@
     return-void
 .end method
 
-.method synthetic lambda$detail$51$cn-hongguo-tv-MainActivity(Lorg/json/JSONObject;Landroid/widget/Button;Landroid/view/View;)V
+.method synthetic lambda$detail$56$cn-hongguo-tv-MainActivity(Lorg/json/JSONObject;Landroid/widget/Button;Landroid/view/View;)V
     .locals 5
 
-    .line 146
+    .line 160
     const-string p3, "favorites"
 
     :try_start_0
@@ -4353,7 +4571,7 @@
     return-void
 .end method
 
-.method synthetic lambda$detail$52$cn-hongguo-tv-MainActivity(Lorg/json/JSONObject;Landroid/widget/TextView;Landroid/widget/LinearLayout;Landroid/widget/LinearLayout;Lorg/json/JSONObject;)V
+.method synthetic lambda$detail$57$cn-hongguo-tv-MainActivity(Lorg/json/JSONObject;Landroid/widget/TextView;Landroid/widget/LinearLayout;Landroid/widget/LinearLayout;Lorg/json/JSONObject;)V
     .locals 7
     .annotation system Ldalvik/annotation/Throws;
         value = {
@@ -4361,7 +4579,7 @@
         }
     .end annotation
 
-    .line 146
+    .line 160
     const-string v0, "series"
 
     invoke-virtual {p5, v0}, Lorg/json/JSONObject;->getJSONObject(Ljava/lang/String;)Lorg/json/JSONObject;
@@ -4519,9 +4737,9 @@
     move-result-object p2
 
     :goto_3
-    new-instance p5, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda17;
+    new-instance p5, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda81;
 
-    invoke-direct {p5, p0, v0, p1}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda17;-><init>(Lcn/hongguo/tv/MainActivity;Lorg/json/JSONObject;Lorg/json/JSONArray;)V
+    invoke-direct {p5, p0, v0, p1}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda81;-><init>(Lcn/hongguo/tv/MainActivity;Lorg/json/JSONObject;Lorg/json/JSONArray;)V
 
     const/4 v2, 0x0
 
@@ -4531,9 +4749,9 @@
 
     iget-object p5, p0, Lcn/hongguo/tv/MainActivity;->screen:Lcn/hongguo/tv/MainActivity$Screen;
 
-    new-instance v3, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda18;
+    new-instance v3, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda82;
 
-    invoke-direct {v3, p0, v0, p2}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda18;-><init>(Lcn/hongguo/tv/MainActivity;Lorg/json/JSONObject;Landroid/widget/Button;)V
+    invoke-direct {v3, p0, v0, p2}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda82;-><init>(Lcn/hongguo/tv/MainActivity;Lorg/json/JSONObject;Landroid/widget/Button;)V
 
     iput-object v3, p5, Lcn/hongguo/tv/MainActivity$Screen;->onRestore:Ljava/lang/Runnable;
 
@@ -4545,9 +4763,9 @@
 
     invoke-virtual {p0, p3, p2}, Lcn/hongguo/tv/MainActivity;->addButton(Landroid/widget/LinearLayout;Landroid/widget/Button;)V
 
-    new-instance p4, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda19;
+    new-instance p4, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda83;
 
-    invoke-direct {p4, p0, v0, p1}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda19;-><init>(Lcn/hongguo/tv/MainActivity;Lorg/json/JSONObject;Lorg/json/JSONArray;)V
+    invoke-direct {p4, p0, v0, p1}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda83;-><init>(Lcn/hongguo/tv/MainActivity;Lorg/json/JSONObject;Lorg/json/JSONArray;)V
 
     const-string p1, "\u9009\u96c6"
 
@@ -4581,17 +4799,17 @@
     const-string p1, "\u6536\u85cf"
 
     :goto_4
-    new-instance p4, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda20;
+    new-instance p4, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda84;
 
-    invoke-direct {p4}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda20;-><init>()V
+    invoke-direct {p4}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda84;-><init>()V
 
     invoke-virtual {p0, p1, p4, v2}, Lcn/hongguo/tv/MainActivity;->button(Ljava/lang/String;Ljava/lang/Runnable;Z)Landroid/widget/Button;
 
     move-result-object p1
 
-    new-instance p4, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda21;
+    new-instance p4, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda85;
 
-    invoke-direct {p4, p0, v0, p1}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda21;-><init>(Lcn/hongguo/tv/MainActivity;Lorg/json/JSONObject;Landroid/widget/Button;)V
+    invoke-direct {p4, p0, v0, p1}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda85;-><init>(Lcn/hongguo/tv/MainActivity;Lorg/json/JSONObject;Landroid/widget/Button;)V
 
     invoke-virtual {p1, p4}, Landroid/widget/Button;->setOnClickListener(Landroid/view/View$OnClickListener;)V
 
@@ -4602,10 +4820,10 @@
     return-void
 .end method
 
-.method synthetic lambda$fitVideo$92$cn-hongguo-tv-MainActivity()V
+.method synthetic lambda$fitVideo$97$cn-hongguo-tv-MainActivity()V
     .locals 7
 
-    .line 260
+    .line 275
     iget-object v0, p0, Lcn/hongguo/tv/MainActivity;->surface:Landroid/view/SurfaceView;
 
     if-eqz v0, :cond_5
@@ -4740,7 +4958,7 @@
 .method synthetic lambda$focusStyle$6$cn-hongguo-tv-MainActivity(ZLandroid/view/View;Z)V
     .locals 1
 
-    .line 66
+    .line 67
     if-eqz p3, :cond_1
 
     if-eqz p1, :cond_0
@@ -4809,10 +5027,177 @@
     return-void
 .end method
 
-.method synthetic lambda$home$21$cn-hongguo-tv-MainActivity(Ljava/lang/String;)V
+.method synthetic lambda$home$21$cn-hongguo-tv-MainActivity(Ljava/lang/String;ILjava/lang/String;Ljava/lang/String;Ljava/lang/String;ZZ)V
     .locals 2
 
-    .line 112
+    .line 115
+    const/4 v0, 0x0
+
+    iput-boolean v0, p0, Lcn/hongguo/tv/MainActivity;->searchSetupBusy:Z
+
+    iget-boolean v1, p0, Lcn/hongguo/tv/MainActivity;->released:Z
+
+    if-eqz v1, :cond_0
+
+    return-void
+
+    :cond_0
+    if-eqz p1, :cond_1
+
+    invoke-virtual {p0, v0}, Lcn/hongguo/tv/MainActivity;->dialog(Z)Landroid/app/AlertDialog$Builder;
+
+    move-result-object p2
+
+    const-string p3, "\u641c\u7d22\u6682\u4e0d\u53ef\u7528"
+
+    invoke-virtual {p2, p3}, Landroid/app/AlertDialog$Builder;->setTitle(Ljava/lang/CharSequence;)Landroid/app/AlertDialog$Builder;
+
+    move-result-object p2
+
+    invoke-virtual {p2, p1}, Landroid/app/AlertDialog$Builder;->setMessage(Ljava/lang/CharSequence;)Landroid/app/AlertDialog$Builder;
+
+    move-result-object p1
+
+    const-string p2, "\u77e5\u9053\u4e86"
+
+    const/4 p3, 0x0
+
+    invoke-virtual {p1, p2, p3}, Landroid/app/AlertDialog$Builder;->setPositiveButton(Ljava/lang/CharSequence;Landroid/content/DialogInterface$OnClickListener;)Landroid/app/AlertDialog$Builder;
+
+    move-result-object p1
+
+    invoke-virtual {p1}, Landroid/app/AlertDialog$Builder;->show()Landroid/app/AlertDialog;
+
+    return-void
+
+    .line 116
+    :cond_1
+    iget p1, p0, Lcn/hongguo/tv/MainActivity;->generation:I
+
+    if-ne p2, p1, :cond_2
+
+    iget-object p1, p0, Lcn/hongguo/tv/MainActivity;->catalogMode:Ljava/lang/String;
+
+    invoke-virtual {p3, p1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+
+    move-result p1
+
+    if-eqz p1, :cond_2
+
+    invoke-virtual {p0, p4, p5, p6, p7}, Lcn/hongguo/tv/MainActivity;->home(Ljava/lang/String;Ljava/lang/String;ZZ)V
+
+    :cond_2
+    return-void
+.end method
+
+.method synthetic lambda$home$22$cn-hongguo-tv-MainActivity(ILjava/lang/String;Ljava/lang/String;Ljava/lang/String;ZZ)V
+    .locals 12
+
+    .line 114
+    move-object v10, p0
+
+    :try_start_0
+    iget-object v0, v10, Lcn/hongguo/tv/MainActivity;->catalog:Lcn/hongguo/tv/Catalog;
+
+    invoke-virtual {v0}, Lcn/hongguo/tv/Catalog;->activateSearch()V
+    :try_end_0
+    .catch Ljava/lang/Exception; {:try_start_0 .. :try_end_0} :catch_0
+
+    const/4 v0, 0x0
+
+    goto :goto_0
+
+    :catch_0
+    move-exception v0
+
+    invoke-virtual {v0}, Ljava/lang/Exception;->getMessage()Ljava/lang/String;
+
+    move-result-object v0
+
+    :goto_0
+    move-object v3, v0
+
+    .line 115
+    iget-object v0, v10, Lcn/hongguo/tv/MainActivity;->ui:Landroid/os/Handler;
+
+    new-instance v11, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda0;
+
+    move-object v1, v11
+
+    move-object v2, p0
+
+    move v4, p1
+
+    move-object v5, p2
+
+    move-object v6, p3
+
+    move-object/from16 v7, p4
+
+    move/from16 v8, p5
+
+    move/from16 v9, p6
+
+    invoke-direct/range {v1 .. v9}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda0;-><init>(Lcn/hongguo/tv/MainActivity;Ljava/lang/String;ILjava/lang/String;Ljava/lang/String;Ljava/lang/String;ZZ)V
+
+    invoke-virtual {v0, v11}, Landroid/os/Handler;->post(Ljava/lang/Runnable;)Z
+
+    .line 116
+    return-void
+.end method
+
+.method synthetic lambda$home$23$cn-hongguo-tv-MainActivity(Ljava/lang/String;Ljava/lang/String;ZZLandroid/content/DialogInterface;I)V
+    .locals 8
+
+    .line 113
+    const/4 p5, 0x1
+
+    iput-boolean p5, p0, Lcn/hongguo/tv/MainActivity;->searchSetupBusy:Z
+
+    iget v2, p0, Lcn/hongguo/tv/MainActivity;->generation:I
+
+    iget-object v3, p0, Lcn/hongguo/tv/MainActivity;->catalogMode:Ljava/lang/String;
+
+    .line 114
+    iget-object p5, p0, Lcn/hongguo/tv/MainActivity;->io:Ljava/util/concurrent/ThreadPoolExecutor;
+
+    new-instance p6, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda2;
+
+    move-object v0, p6
+
+    move-object v1, p0
+
+    move-object v4, p1
+
+    move-object v5, p2
+
+    move v6, p3
+
+    move v7, p4
+
+    invoke-direct/range {v0 .. v7}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda2;-><init>(Lcn/hongguo/tv/MainActivity;ILjava/lang/String;Ljava/lang/String;Ljava/lang/String;ZZ)V
+
+    invoke-virtual {p5, p6}, Ljava/util/concurrent/ThreadPoolExecutor;->execute(Ljava/lang/Runnable;)V
+
+    .line 117
+    return-void
+.end method
+
+.method synthetic lambda$home$24$cn-hongguo-tv-MainActivity(Landroid/content/DialogInterface;)V
+    .locals 0
+
+    .line 118
+    const/4 p1, 0x0
+
+    iput-boolean p1, p0, Lcn/hongguo/tv/MainActivity;->searchSetupVisible:Z
+
+    return-void
+.end method
+
+.method synthetic lambda$home$26$cn-hongguo-tv-MainActivity(Ljava/lang/String;)V
+    .locals 2
+
+    .line 126
     new-instance v0, Ljava/lang/StringBuilder;
 
     invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
@@ -4836,19 +5221,19 @@
     return-void
 .end method
 
-.method synthetic lambda$home$22$cn-hongguo-tv-MainActivity()V
+.method synthetic lambda$home$27$cn-hongguo-tv-MainActivity()V
     .locals 0
 
-    .line 113
+    .line 127
     invoke-virtual {p0}, Lcn/hongguo/tv/MainActivity;->categories()V
 
     return-void
 .end method
 
-.method synthetic lambda$home$24$cn-hongguo-tv-MainActivity(Ljava/lang/String;Ljava/lang/String;)V
+.method synthetic lambda$home$29$cn-hongguo-tv-MainActivity(Ljava/lang/String;Ljava/lang/String;)V
     .locals 2
 
-    .line 115
+    .line 129
     const/4 v0, 0x0
 
     const/4 v1, 0x1
@@ -4858,10 +5243,10 @@
     return-void
 .end method
 
-.method synthetic lambda$home$25$cn-hongguo-tv-MainActivity()V
+.method synthetic lambda$home$30$cn-hongguo-tv-MainActivity()V
     .locals 1
 
-    .line 116
+    .line 130
     const/4 v0, 0x0
 
     invoke-virtual {p0, v0}, Lcn/hongguo/tv/MainActivity;->recommendNext(Lorg/json/JSONObject;)V
@@ -4869,10 +5254,10 @@
     return-void
 .end method
 
-.method synthetic lambda$home$26$cn-hongguo-tv-MainActivity(Ljava/lang/String;)V
+.method synthetic lambda$home$31$cn-hongguo-tv-MainActivity(Ljava/lang/String;)V
     .locals 1
 
-    .line 116
+    .line 130
     const-string v0, "\u6536\u85cf"
 
     invoke-virtual {p1, v0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
@@ -4894,10 +5279,10 @@
     return-void
 .end method
 
-.method synthetic lambda$home$28$cn-hongguo-tv-MainActivity(ILandroid/widget/LinearLayout;Lcn/hongguo/tv/Catalog$Result;Landroid/widget/Button;Ljava/lang/String;Landroid/widget/TextView;Landroid/widget/LinearLayout;)V
+.method synthetic lambda$home$33$cn-hongguo-tv-MainActivity(ILandroid/widget/LinearLayout;Lcn/hongguo/tv/Catalog$Result;Landroid/widget/Button;Ljava/lang/String;Landroid/widget/TextView;Landroid/widget/LinearLayout;)V
     .locals 1
 
-    .line 118
+    .line 132
     iget v0, p0, Lcn/hongguo/tv/MainActivity;->generation:I
 
     if-ne p1, v0, :cond_2
@@ -4940,10 +5325,10 @@
     return-void
 .end method
 
-.method synthetic lambda$home$29$cn-hongguo-tv-MainActivity(ILandroid/widget/TextView;)V
+.method synthetic lambda$home$34$cn-hongguo-tv-MainActivity(ILandroid/widget/TextView;)V
     .locals 1
 
-    .line 118
+    .line 132
     iget v0, p0, Lcn/hongguo/tv/MainActivity;->generation:I
 
     if-ne p1, v0, :cond_0
@@ -4960,10 +5345,10 @@
     return-void
 .end method
 
-.method synthetic lambda$home$30$cn-hongguo-tv-MainActivity(ILjava/lang/String;Ljava/lang/String;Lcn/hongguo/tv/Api;ZLandroid/widget/LinearLayout;Landroid/widget/Button;Landroid/widget/TextView;Landroid/widget/LinearLayout;)V
+.method synthetic lambda$home$35$cn-hongguo-tv-MainActivity(ILjava/lang/String;Ljava/lang/String;Lcn/hongguo/tv/Api;ZLandroid/widget/LinearLayout;Landroid/widget/Button;Landroid/widget/TextView;Landroid/widget/LinearLayout;)V
     .locals 13
 
-    .line 118
+    .line 132
     move-object v10, p0
 
     move v11, p1
@@ -4994,7 +5379,7 @@
 
     iget-object v0, v10, Lcn/hongguo/tv/MainActivity;->ui:Landroid/os/Handler;
 
-    new-instance v12, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda75;
+    new-instance v12, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda45;
 
     move-object v1, v12
 
@@ -5012,7 +5397,7 @@
 
     move-object/from16 v9, p9
 
-    invoke-direct/range {v1 .. v9}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda75;-><init>(Lcn/hongguo/tv/MainActivity;ILandroid/widget/LinearLayout;Lcn/hongguo/tv/Catalog$Result;Landroid/widget/Button;Ljava/lang/String;Landroid/widget/TextView;Landroid/widget/LinearLayout;)V
+    invoke-direct/range {v1 .. v9}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda45;-><init>(Lcn/hongguo/tv/MainActivity;ILandroid/widget/LinearLayout;Lcn/hongguo/tv/Catalog$Result;Landroid/widget/Button;Ljava/lang/String;Landroid/widget/TextView;Landroid/widget/LinearLayout;)V
 
     invoke-virtual {v0, v12}, Landroid/os/Handler;->post(Ljava/lang/Runnable;)Z
     :try_end_0
@@ -5025,11 +5410,11 @@
 
     iget-object v0, v10, Lcn/hongguo/tv/MainActivity;->ui:Landroid/os/Handler;
 
-    new-instance v1, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda76;
+    new-instance v1, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda46;
 
     move-object/from16 v2, p8
 
-    invoke-direct {v1, p0, p1, v2}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda76;-><init>(Lcn/hongguo/tv/MainActivity;ILandroid/widget/TextView;)V
+    invoke-direct {v1, p0, p1, v2}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda46;-><init>(Lcn/hongguo/tv/MainActivity;ILandroid/widget/TextView;)V
 
     invoke-virtual {v0, v1}, Landroid/os/Handler;->post(Ljava/lang/Runnable;)Z
 
@@ -5038,10 +5423,10 @@
     return-void
 .end method
 
-.method synthetic lambda$loadCover$38$cn-hongguo-tv-MainActivity(Landroid/graphics/Bitmap;ILjava/lang/String;Landroid/widget/ImageView;)V
+.method synthetic lambda$loadCover$43$cn-hongguo-tv-MainActivity(Landroid/graphics/Bitmap;ILjava/lang/String;Landroid/widget/ImageView;)V
     .locals 1
 
-    .line 139
+    .line 153
     if-nez p1, :cond_0
 
     return-void
@@ -5089,10 +5474,10 @@
     return-void
 .end method
 
-.method synthetic lambda$loadCover$39$cn-hongguo-tv-MainActivity(ILjava/lang/String;Lcn/hongguo/tv/Api;Landroid/widget/ImageView;)V
+.method synthetic lambda$loadCover$44$cn-hongguo-tv-MainActivity(ILjava/lang/String;Lcn/hongguo/tv/Api;Landroid/widget/ImageView;)V
     .locals 7
 
-    .line 139
+    .line 153
     iget v0, p0, Lcn/hongguo/tv/MainActivity;->generation:I
 
     if-ne p1, v0, :cond_2
@@ -5145,7 +5530,7 @@
 
     iget-object p3, p0, Lcn/hongguo/tv/MainActivity;->ui:Landroid/os/Handler;
 
-    new-instance v6, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda90;
+    new-instance v6, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda88;
 
     move-object v0, v6
 
@@ -5157,7 +5542,7 @@
 
     move-object v5, p4
 
-    invoke-direct/range {v0 .. v5}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda90;-><init>(Lcn/hongguo/tv/MainActivity;Landroid/graphics/Bitmap;ILjava/lang/String;Landroid/widget/ImageView;)V
+    invoke-direct/range {v0 .. v5}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda88;-><init>(Lcn/hongguo/tv/MainActivity;Landroid/graphics/Bitmap;ILjava/lang/String;Landroid/widget/ImageView;)V
 
     invoke-virtual {p3, v6}, Landroid/os/Handler;->post(Ljava/lang/Runnable;)Z
     :try_end_1
@@ -5173,10 +5558,10 @@
     return-void
 .end method
 
-.method synthetic lambda$manageSaved$63$cn-hongguo-tv-MainActivity(Ljava/lang/String;Lorg/json/JSONObject;Landroid/content/DialogInterface;I)V
+.method synthetic lambda$manageSaved$68$cn-hongguo-tv-MainActivity(Ljava/lang/String;Lorg/json/JSONObject;Landroid/content/DialogInterface;I)V
     .locals 0
 
-    .line 188
+    .line 202
     invoke-virtual {p0, p1}, Lcn/hongguo/tv/MainActivity;->bucket(Ljava/lang/String;)Lorg/json/JSONObject;
 
     move-result-object p3
@@ -5214,10 +5599,10 @@
     return-void
 .end method
 
-.method synthetic lambda$manageSaved$65$cn-hongguo-tv-MainActivity(Lorg/json/JSONObject;Ljava/lang/String;Landroid/view/View;)V
+.method synthetic lambda$manageSaved$70$cn-hongguo-tv-MainActivity(Lorg/json/JSONObject;Ljava/lang/String;Landroid/view/View;)V
     .locals 2
 
-    .line 188
+    .line 202
     const/4 p3, 0x0
 
     invoke-virtual {p0, p3}, Lcn/hongguo/tv/MainActivity;->dialog(Z)Landroid/app/AlertDialog$Builder;
@@ -5248,9 +5633,9 @@
 
     move-result-object p3
 
-    new-instance v0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda87;
+    new-instance v0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda22;
 
-    invoke-direct {v0, p0, p2, p1}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda87;-><init>(Lcn/hongguo/tv/MainActivity;Ljava/lang/String;Lorg/json/JSONObject;)V
+    invoke-direct {v0, p0, p2, p1}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda22;-><init>(Lcn/hongguo/tv/MainActivity;Ljava/lang/String;Lorg/json/JSONObject;)V
 
     const-string p1, "\u79fb\u9664"
 
@@ -5262,9 +5647,9 @@
 
     move-result-object p1
 
-    new-instance p2, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda88;
+    new-instance p2, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda23;
 
-    invoke-direct {p2, p1}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda88;-><init>(Landroid/app/AlertDialog;)V
+    invoke-direct {p2, p1}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda23;-><init>(Landroid/app/AlertDialog;)V
 
     invoke-virtual {p1, p2}, Landroid/app/AlertDialog;->setOnShowListener(Landroid/content/DialogInterface$OnShowListener;)V
 
@@ -5273,10 +5658,10 @@
     return-void
 .end method
 
-.method synthetic lambda$manageSaved$66$cn-hongguo-tv-MainActivity(Ljava/lang/String;I)V
+.method synthetic lambda$manageSaved$71$cn-hongguo-tv-MainActivity(Ljava/lang/String;I)V
     .locals 1
 
-    .line 188
+    .line 202
     add-int/lit8 p2, p2, -0x14
 
     const/4 v0, 0x0
@@ -5290,10 +5675,10 @@
     return-void
 .end method
 
-.method synthetic lambda$manageSaved$67$cn-hongguo-tv-MainActivity(Ljava/lang/String;ILjava/util/ArrayList;)V
+.method synthetic lambda$manageSaved$72$cn-hongguo-tv-MainActivity(Ljava/lang/String;ILjava/util/ArrayList;)V
     .locals 1
 
-    .line 188
+    .line 202
     add-int/lit8 v0, p2, 0x14
 
     invoke-virtual {p3}, Ljava/util/ArrayList;->size()I
@@ -5310,10 +5695,10 @@
     return-void
 .end method
 
-.method synthetic lambda$manageSaved$68$cn-hongguo-tv-MainActivity(Ljava/lang/String;)V
+.method synthetic lambda$manageSaved$73$cn-hongguo-tv-MainActivity(Ljava/lang/String;)V
     .locals 1
 
-    .line 188
+    .line 202
     const-string v0, "favorites"
 
     invoke-virtual {p1, v0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
@@ -5368,7 +5753,7 @@
 .method synthetic lambda$new$1$cn-hongguo-tv-MainActivity()V
     .locals 4
 
-    .line 29
+    .line 30
     iget-boolean v0, p0, Lcn/hongguo/tv/MainActivity;->confirmEligible:Z
 
     if-eqz v0, :cond_6
@@ -5384,7 +5769,7 @@
 
     iput-boolean v0, p0, Lcn/hongguo/tv/MainActivity;->confirmConsumed:Z
 
-    .line 30
+    .line 31
     sget v1, Landroid/os/Build$VERSION;->SDK_INT:I
 
     const/16 v2, 0x17
@@ -5403,7 +5788,7 @@
 
     return-void
 
-    .line 31
+    .line 32
     :cond_1
     iget-object v1, p0, Lcn/hongguo/tv/MainActivity;->player:Landroid/media/MediaPlayer;
 
@@ -5443,7 +5828,7 @@
 
     goto :goto_1
 
-    .line 32
+    .line 33
     :cond_2
     :try_start_0
     iget-object v1, p0, Lcn/hongguo/tv/MainActivity;->player:Landroid/media/MediaPlayer;
@@ -5491,7 +5876,7 @@
     :try_end_0
     .catch Ljava/lang/Exception; {:try_start_0 .. :try_end_0} :catch_0
 
-    .line 33
+    .line 34
     :cond_4
     goto :goto_0
 
@@ -5508,16 +5893,16 @@
 
     invoke-virtual {v0}, Landroid/widget/Toast;->show()V
 
-    .line 34
+    .line 35
     :goto_0
     return-void
 
-    .line 31
+    .line 32
     :cond_5
     :goto_1
     return-void
 
-    .line 29
+    .line 30
     :cond_6
     :goto_2
     return-void
@@ -5526,7 +5911,7 @@
 .method synthetic lambda$new$2$cn-hongguo-tv-MainActivity()V
     .locals 2
 
-    .line 47
+    .line 48
     iget-boolean v0, p0, Lcn/hongguo/tv/MainActivity;->confirmEligible:Z
 
     if-nez v0, :cond_0
@@ -5596,7 +5981,7 @@
 .method synthetic lambda$new$3$cn-hongguo-tv-MainActivity()V
     .locals 2
 
-    .line 48
+    .line 49
     iget-object v0, p0, Lcn/hongguo/tv/MainActivity;->player:Landroid/media/MediaPlayer;
 
     if-eqz v0, :cond_2
@@ -5675,7 +6060,7 @@
 .method synthetic lambda$onCreate$4$cn-hongguo-tv-MainActivity(I)V
     .locals 2
 
-    .line 60
+    .line 61
     iget-boolean v0, p0, Lcn/hongguo/tv/MainActivity;->released:Z
 
     if-nez v0, :cond_0
@@ -5753,7 +6138,7 @@
 .method synthetic lambda$onCreate$5$cn-hongguo-tv-MainActivity()V
     .locals 3
 
-    .line 60
+    .line 61
     invoke-static {p0}, Lcn/hongguo/tv/AppOrigin;->verify(Landroid/content/Context;)I
 
     move-result v0
@@ -5764,9 +6149,9 @@
 
     iget-object v1, p0, Lcn/hongguo/tv/MainActivity;->ui:Landroid/os/Handler;
 
-    new-instance v2, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda1;
+    new-instance v2, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda3;
 
-    invoke-direct {v2, p0, v0}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda1;-><init>(Lcn/hongguo/tv/MainActivity;I)V
+    invoke-direct {v2, p0, v0}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda3;-><init>(Lcn/hongguo/tv/MainActivity;I)V
 
     invoke-virtual {v1, v2}, Landroid/os/Handler;->post(Ljava/lang/Runnable;)Z
 
@@ -5774,10 +6159,10 @@
     return-void
 .end method
 
-.method synthetic lambda$playEpisode$86$cn-hongguo-tv-MainActivity(Landroid/media/MediaPlayer;)V
+.method synthetic lambda$playEpisode$91$cn-hongguo-tv-MainActivity(Landroid/media/MediaPlayer;)V
     .locals 2
 
-    .line 258
+    .line 273
     iget-object v0, p0, Lcn/hongguo/tv/MainActivity;->player:Landroid/media/MediaPlayer;
 
     if-ne p1, v0, :cond_2
@@ -5831,10 +6216,10 @@
     return-void
 .end method
 
-.method synthetic lambda$playEpisode$87$cn-hongguo-tv-MainActivity(Landroid/media/MediaPlayer;)V
+.method synthetic lambda$playEpisode$92$cn-hongguo-tv-MainActivity(Landroid/media/MediaPlayer;)V
     .locals 9
 
-    .line 258
+    .line 273
     iget-object v0, p0, Lcn/hongguo/tv/MainActivity;->player:Landroid/media/MediaPlayer;
 
     if-eq p1, v0, :cond_0
@@ -5935,9 +6320,9 @@
     invoke-virtual {v0, v1, v2, v3}, Landroid/os/Handler;->postDelayed(Ljava/lang/Runnable;J)Z
 
     :cond_1
-    new-instance v0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda79;
+    new-instance v0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda64;
 
-    invoke-direct {v0, p0}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda79;-><init>(Lcn/hongguo/tv/MainActivity;)V
+    invoke-direct {v0, p0}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda64;-><init>(Lcn/hongguo/tv/MainActivity;)V
 
     invoke-virtual {p1, v0}, Landroid/media/MediaPlayer;->setOnSeekCompleteListener(Landroid/media/MediaPlayer$OnSeekCompleteListener;)V
 
@@ -6027,10 +6412,10 @@
     return-void
 .end method
 
-.method synthetic lambda$playEpisode$88$cn-hongguo-tv-MainActivity(Landroid/media/MediaPlayer;II)V
+.method synthetic lambda$playEpisode$93$cn-hongguo-tv-MainActivity(Landroid/media/MediaPlayer;II)V
     .locals 1
 
-    .line 258
+    .line 273
     iget-object v0, p0, Lcn/hongguo/tv/MainActivity;->player:Landroid/media/MediaPlayer;
 
     if-ne p1, v0, :cond_0
@@ -6041,10 +6426,10 @@
     return-void
 .end method
 
-.method synthetic lambda$playEpisode$89$cn-hongguo-tv-MainActivity(Landroid/media/MediaPlayer;II)Z
+.method synthetic lambda$playEpisode$94$cn-hongguo-tv-MainActivity(Landroid/media/MediaPlayer;II)Z
     .locals 2
 
-    .line 258
+    .line 273
     iget-object v0, p0, Lcn/hongguo/tv/MainActivity;->player:Landroid/media/MediaPlayer;
 
     const/4 v1, 0x1
@@ -6123,10 +6508,10 @@
     return v1
 .end method
 
-.method synthetic lambda$playEpisode$90$cn-hongguo-tv-MainActivity(Landroid/media/MediaPlayer;II)Z
+.method synthetic lambda$playEpisode$95$cn-hongguo-tv-MainActivity(Landroid/media/MediaPlayer;II)Z
     .locals 5
 
-    .line 258
+    .line 273
     iget-object p3, p0, Lcn/hongguo/tv/MainActivity;->player:Landroid/media/MediaPlayer;
 
     const/4 v0, 0x0
@@ -6146,6 +6531,8 @@
     sub-long/2addr v1, v3
 
     iput-wide v1, p0, Lcn/hongguo/tv/MainActivity;->lastTransitionMs:J
+
+    iput-boolean v0, p0, Lcn/hongguo/tv/MainActivity;->quietTransition:Z
 
     :cond_0
     const/16 p1, 0x2bd
@@ -6239,8 +6626,6 @@
 
     invoke-virtual {p1, p2}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V
 
-    invoke-virtual {p0}, Lcn/hongguo/tv/MainActivity;->showControls()V
-
     goto :goto_1
 
     :cond_3
@@ -6299,10 +6684,10 @@
     return v0
 .end method
 
-.method synthetic lambda$playEpisode$91$cn-hongguo-tv-MainActivity(Landroid/media/MediaPlayer;)V
+.method synthetic lambda$playEpisode$96$cn-hongguo-tv-MainActivity(Landroid/media/MediaPlayer;)V
     .locals 5
 
-    .line 258
+    .line 273
     iget-object v0, p0, Lcn/hongguo/tv/MainActivity;->player:Landroid/media/MediaPlayer;
 
     if-eq p1, v0, :cond_0
@@ -6322,8 +6707,6 @@
 
     invoke-virtual {p0}, Lcn/hongguo/tv/MainActivity;->saveProgress()V
 
-    invoke-virtual {p0}, Lcn/hongguo/tv/MainActivity;->showControls()V
-
     iget-boolean v1, p0, Lcn/hongguo/tv/MainActivity;->activityVisible:Z
 
     const-wide/16 v2, 0x0
@@ -6340,11 +6723,12 @@
 
     if-eqz v0, :cond_1
 
-    iget p1, p0, Lcn/hongguo/tv/MainActivity;->episode:I
+    iget v0, p0, Lcn/hongguo/tv/MainActivity;->episode:I
 
-    invoke-virtual {p0, p1, v2, v3}, Lcn/hongguo/tv/MainActivity;->playEpisode(IJ)V
+    :goto_0
+    invoke-virtual {p0, v0, v2, v3, p1}, Lcn/hongguo/tv/MainActivity;->playEpisode(IJZ)V
 
-    goto :goto_0
+    goto :goto_1
 
     :cond_1
     iget-boolean v0, p0, Lcn/hongguo/tv/MainActivity;->activityVisible:Z
@@ -6375,11 +6759,11 @@
 
     add-int/2addr v0, p1
 
-    invoke-virtual {p0, v0, v2, v3}, Lcn/hongguo/tv/MainActivity;->playEpisode(IJ)V
-
     goto :goto_0
 
     :cond_2
+    invoke-virtual {p0}, Lcn/hongguo/tv/MainActivity;->showControls()V
+
     iget-object p1, p0, Lcn/hongguo/tv/MainActivity;->status:Landroid/widget/TextView;
 
     const-string v0, "\u672c\u96c6\u64ad\u653e\u7ed3\u675f"
@@ -6392,14 +6776,14 @@
 
     invoke-virtual {p1, v0}, Landroid/widget/Button;->setText(Ljava/lang/CharSequence;)V
 
-    :goto_0
+    :goto_1
     return-void
 .end method
 
-.method synthetic lambda$prepareSource$73$cn-hongguo-tv-MainActivity(ILandroid/media/MediaPlayer;Lcn/hongguo/tv/Api$Source;)V
+.method synthetic lambda$prepareSource$78$cn-hongguo-tv-MainActivity(ILandroid/media/MediaPlayer;Lcn/hongguo/tv/Api$Source;)V
     .locals 1
 
-    .line 234
+    .line 248
     iget v0, p0, Lcn/hongguo/tv/MainActivity;->mediaGeneration:I
 
     if-ne p1, v0, :cond_2
@@ -6467,17 +6851,17 @@
     :catch_0
     move-exception p1
 
-    invoke-virtual {p0, p2, p1}, Lcn/hongguo/tv/MainActivity;->sourceFailure(Landroid/media/MediaPlayer;Ljava/lang/Exception;)V
+    invoke-virtual {p0, p2}, Lcn/hongguo/tv/MainActivity;->sourceFailure(Landroid/media/MediaPlayer;)V
 
     :cond_2
     :goto_1
     return-void
 .end method
 
-.method synthetic lambda$prepareSource$74$cn-hongguo-tv-MainActivity(ILandroid/media/MediaPlayer;Ljava/lang/Exception;)V
+.method synthetic lambda$prepareSource$79$cn-hongguo-tv-MainActivity(ILandroid/media/MediaPlayer;Ljava/lang/Exception;)V
     .locals 1
 
-    .line 234
+    .line 248
     iget v0, p0, Lcn/hongguo/tv/MainActivity;->mediaGeneration:I
 
     if-ne p1, v0, :cond_0
@@ -6488,10 +6872,10 @@
     return-void
 .end method
 
-.method synthetic lambda$prepareSource$75$cn-hongguo-tv-MainActivity(Lcn/hongguo/tv/Api;Ljava/lang/String;IIILandroid/media/MediaPlayer;)V
+.method synthetic lambda$prepareSource$80$cn-hongguo-tv-MainActivity(Lcn/hongguo/tv/Api;Ljava/lang/String;IIILandroid/media/MediaPlayer;)V
     .locals 0
 
-    .line 234
+    .line 248
     :try_start_0
     invoke-virtual {p1, p2, p3, p4}, Lcn/hongguo/tv/Api;->media(Ljava/lang/String;II)Lcn/hongguo/tv/Api$Source;
 
@@ -6512,9 +6896,9 @@
     :cond_0
     iget-object p2, p0, Lcn/hongguo/tv/MainActivity;->ui:Landroid/os/Handler;
 
-    new-instance p3, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda36;
+    new-instance p3, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda52;
 
-    invoke-direct {p3, p0, p5, p6, p1}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda36;-><init>(Lcn/hongguo/tv/MainActivity;ILandroid/media/MediaPlayer;Lcn/hongguo/tv/Api$Source;)V
+    invoke-direct {p3, p0, p5, p6, p1}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda52;-><init>(Lcn/hongguo/tv/MainActivity;ILandroid/media/MediaPlayer;Lcn/hongguo/tv/Api$Source;)V
 
     invoke-virtual {p2, p3}, Landroid/os/Handler;->post(Ljava/lang/Runnable;)Z
     :try_end_0
@@ -6557,9 +6941,9 @@
 
     iget-object p2, p0, Lcn/hongguo/tv/MainActivity;->ui:Landroid/os/Handler;
 
-    new-instance p3, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda37;
+    new-instance p3, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda53;
 
-    invoke-direct {p3, p0, p5, p6, p1}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda37;-><init>(Lcn/hongguo/tv/MainActivity;ILandroid/media/MediaPlayer;Ljava/lang/Exception;)V
+    invoke-direct {p3, p0, p5, p6, p1}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda53;-><init>(Lcn/hongguo/tv/MainActivity;ILandroid/media/MediaPlayer;Ljava/lang/Exception;)V
 
     invoke-virtual {p2, p3}, Landroid/os/Handler;->post(Ljava/lang/Runnable;)Z
 
@@ -6567,10 +6951,10 @@
     return-void
 .end method
 
-.method synthetic lambda$recommendNext$69$cn-hongguo-tv-MainActivity(IZLorg/json/JSONObject;ZLjava/lang/String;Lorg/json/JSONObject;Lorg/json/JSONArray;)V
+.method synthetic lambda$recommendNext$74$cn-hongguo-tv-MainActivity(IZLorg/json/JSONObject;ZLjava/lang/String;Lorg/json/JSONObject;Lorg/json/JSONArray;)V
     .locals 6
 
-    .line 211
+    .line 225
     iget v0, p0, Lcn/hongguo/tv/MainActivity;->generation:I
 
     if-ne p1, v0, :cond_8
@@ -6586,7 +6970,7 @@
 
     iput p1, p0, Lcn/hongguo/tv/MainActivity;->recommendationTicket:I
 
-    .line 212
+    .line 226
     if-eqz p2, :cond_1
 
     iget-object p1, p0, Lcn/hongguo/tv/MainActivity;->recommendations:Lcn/hongguo/tv/Recommendations;
@@ -6597,7 +6981,7 @@
 
     invoke-virtual {p1, p3, v0, v1}, Lcn/hongguo/tv/Recommendations;->skipped(Lorg/json/JSONObject;J)V
 
-    .line 213
+    .line 227
     :cond_1
     iget-object p1, p0, Lcn/hongguo/tv/MainActivity;->player:Landroid/media/MediaPlayer;
 
@@ -6639,7 +7023,7 @@
 
     invoke-virtual {p0}, Lcn/hongguo/tv/MainActivity;->stopPlayer()V
 
-    .line 214
+    .line 228
     :cond_4
     if-eqz p1, :cond_6
 
@@ -6715,7 +7099,7 @@
 
     goto :goto_2
 
-    .line 215
+    .line 229
     :cond_6
     if-eqz p4, :cond_7
 
@@ -6742,19 +7126,19 @@
 
     invoke-virtual/range {v0 .. v5}, Lcn/hongguo/tv/MainActivity;->startPlayer(Lorg/json/JSONObject;Lorg/json/JSONArray;IJ)V
 
-    .line 216
+    .line 230
     return-void
 
-    .line 211
+    .line 225
     :cond_8
     :goto_3
     return-void
 .end method
 
-.method synthetic lambda$recommendNext$70$cn-hongguo-tv-MainActivity(I)V
+.method synthetic lambda$recommendNext$75$cn-hongguo-tv-MainActivity(I)V
     .locals 1
 
-    .line 217
+    .line 231
     iget v0, p0, Lcn/hongguo/tv/MainActivity;->generation:I
 
     if-ne p1, v0, :cond_0
@@ -6781,10 +7165,10 @@
     return-void
 .end method
 
-.method synthetic lambda$recommendNext$71$cn-hongguo-tv-MainActivity(Ljava/lang/String;ILjava/lang/String;Lcn/hongguo/tv/Recommendations;Ljava/lang/String;JLjava/lang/String;Lcn/hongguo/tv/Api;ZLorg/json/JSONObject;)V
+.method synthetic lambda$recommendNext$76$cn-hongguo-tv-MainActivity(Ljava/lang/String;ILjava/lang/String;Lcn/hongguo/tv/Recommendations;Ljava/lang/String;JLjava/lang/String;Lcn/hongguo/tv/Api;ZLorg/json/JSONObject;)V
     .locals 17
 
-    .line 203
+    .line 217
     move-object/from16 v10, p0
 
     move-object/from16 v1, p1
@@ -6800,7 +7184,7 @@
 
     invoke-direct {v2}, Lorg/json/JSONArray;-><init>()V
 
-    .line 204
+    .line 218
     const/4 v3, 0x0
 
     move-object v0, v1
@@ -6814,7 +7198,7 @@
 
     if-ge v4, v6, :cond_7
 
-    .line 205
+    .line 219
     iget v6, v10, Lcn/hongguo/tv/MainActivity;->generation:I
 
     if-ne v11, v6, :cond_6
@@ -6827,7 +7211,7 @@
 
     goto/16 :goto_5
 
-    .line 206
+    .line 220
     :cond_0
     :try_start_1
     iget-object v6, v10, Lcn/hongguo/tv/MainActivity;->catalog:Lcn/hongguo/tv/Catalog;
@@ -6890,7 +7274,7 @@
 
     return-void
 
-    .line 207
+    .line 221
     :cond_2
     move-object/from16 v6, p4
 
@@ -6954,7 +7338,7 @@
 
     goto :goto_3
 
-    .line 204
+    .line 218
     :cond_5
     :goto_4
     add-int/lit8 v4, v4, 0x1
@@ -6963,12 +7347,12 @@
 
     goto :goto_0
 
-    .line 205
+    .line 219
     :cond_6
     :goto_5
     return-void
 
-    .line 209
+    .line 223
     :cond_7
     move-object/from16 v6, p4
 
@@ -6990,7 +7374,7 @@
 
     if-eqz v0, :cond_9
 
-    .line 210
+    .line 224
     new-instance v1, Ljava/lang/StringBuilder;
 
     invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
@@ -7049,10 +7433,10 @@
 
     if-eqz v1, :cond_8
 
-    .line 211
+    .line 225
     iget-object v13, v10, Lcn/hongguo/tv/MainActivity;->ui:Landroid/os/Handler;
 
-    new-instance v14, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda38;
+    new-instance v14, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda89;
 
     move-object v1, v14
 
@@ -7072,14 +7456,14 @@
 
     move-object v9, v0
 
-    invoke-direct/range {v1 .. v9}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda38;-><init>(Lcn/hongguo/tv/MainActivity;IZLorg/json/JSONObject;ZLjava/lang/String;Lorg/json/JSONObject;Lorg/json/JSONArray;)V
+    invoke-direct/range {v1 .. v9}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda89;-><init>(Lcn/hongguo/tv/MainActivity;IZLorg/json/JSONObject;ZLjava/lang/String;Lorg/json/JSONObject;Lorg/json/JSONArray;)V
 
     invoke-virtual {v13, v14}, Landroid/os/Handler;->post(Ljava/lang/Runnable;)Z
 
-    .line 217
+    .line 231
     goto :goto_6
 
-    .line 210
+    .line 224
     :cond_8
     new-instance v0, Ljava/lang/Exception;
 
@@ -7089,7 +7473,7 @@
 
     throw v0
 
-    .line 209
+    .line 223
     :cond_9
     new-instance v0, Ljava/lang/Exception;
 
@@ -7101,15 +7485,15 @@
     :try_end_2
     .catch Ljava/lang/Exception; {:try_start_2 .. :try_end_2} :catch_1
 
-    .line 217
+    .line 231
     :catch_1
     move-exception v0
 
     iget-object v0, v10, Lcn/hongguo/tv/MainActivity;->ui:Landroid/os/Handler;
 
-    new-instance v1, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda39;
+    new-instance v1, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda90;
 
-    invoke-direct {v1, v10, v11}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda39;-><init>(Lcn/hongguo/tv/MainActivity;I)V
+    invoke-direct {v1, v10, v11}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda90;-><init>(Lcn/hongguo/tv/MainActivity;I)V
 
     invoke-virtual {v0, v1}, Landroid/os/Handler;->post(Ljava/lang/Runnable;)Z
 
@@ -7117,19 +7501,19 @@
     return-void
 .end method
 
-.method synthetic lambda$renderCards$31$cn-hongguo-tv-MainActivity(Lorg/json/JSONObject;Landroid/view/View;)V
+.method synthetic lambda$renderCards$36$cn-hongguo-tv-MainActivity(Lorg/json/JSONObject;Landroid/view/View;)V
     .locals 0
 
-    .line 126
+    .line 140
     invoke-virtual {p0, p1}, Lcn/hongguo/tv/MainActivity;->detail(Lorg/json/JSONObject;)V
 
     return-void
 .end method
 
-.method synthetic lambda$renderCards$32$cn-hongguo-tv-MainActivity(Landroid/view/View$OnFocusChangeListener;Lcn/hongguo/tv/MainActivity$PageUi;Landroid/widget/TextView;Landroid/view/View;Z)V
+.method synthetic lambda$renderCards$37$cn-hongguo-tv-MainActivity(Landroid/view/View$OnFocusChangeListener;Lcn/hongguo/tv/MainActivity$PageUi;Landroid/widget/TextView;Landroid/view/View;Z)V
     .locals 0
 
-    .line 130
+    .line 144
     invoke-interface {p1, p4, p5}, Landroid/view/View$OnFocusChangeListener;->onFocusChange(Landroid/view/View;Z)V
 
     if-eqz p5, :cond_0
@@ -7156,10 +7540,10 @@
     return-void
 .end method
 
-.method synthetic lambda$renderCards$33$cn-hongguo-tv-MainActivity(Landroid/widget/LinearLayout;Lorg/json/JSONArray;Landroid/view/View;I)V
+.method synthetic lambda$renderCards$38$cn-hongguo-tv-MainActivity(Landroid/widget/LinearLayout;Lorg/json/JSONArray;Landroid/view/View;I)V
     .locals 1
 
-    .line 134
+    .line 148
     add-int/lit8 p4, p4, -0x14
 
     const/4 v0, 0x0
@@ -7173,10 +7557,10 @@
     return-void
 .end method
 
-.method synthetic lambda$renderCards$34$cn-hongguo-tv-MainActivity(Landroid/widget/LinearLayout;Lorg/json/JSONArray;Landroid/view/View;I)V
+.method synthetic lambda$renderCards$39$cn-hongguo-tv-MainActivity(Landroid/widget/LinearLayout;Lorg/json/JSONArray;Landroid/view/View;I)V
     .locals 2
 
-    .line 134
+    .line 148
     add-int/lit8 v0, p4, 0x14
 
     invoke-virtual {p2}, Lorg/json/JSONArray;->length()I
@@ -7193,10 +7577,10 @@
     return-void
 .end method
 
-.method synthetic lambda$renderCards$36$cn-hongguo-tv-MainActivity(Landroid/view/View;ZLandroid/view/View;Ljava/util/ArrayList;)V
+.method synthetic lambda$renderCards$41$cn-hongguo-tv-MainActivity(Landroid/view/View;ZLandroid/view/View;Ljava/util/ArrayList;)V
     .locals 1
 
-    .line 135
+    .line 149
     iget-object v0, p0, Lcn/hongguo/tv/MainActivity;->screen:Lcn/hongguo/tv/MainActivity$Screen;
 
     if-eqz v0, :cond_1
@@ -7236,10 +7620,10 @@
     return-void
 .end method
 
-.method synthetic lambda$renderEpisodePage$53$cn-hongguo-tv-MainActivity(Landroid/widget/LinearLayout;Lorg/json/JSONObject;Lorg/json/JSONArray;IIZ)V
+.method synthetic lambda$renderEpisodePage$58$cn-hongguo-tv-MainActivity(Landroid/widget/LinearLayout;Lorg/json/JSONObject;Lorg/json/JSONArray;IIZ)V
     .locals 7
 
-    .line 155
+    .line 169
     add-int/lit8 v4, p4, -0x1
 
     move-object v0, p0
@@ -7259,10 +7643,10 @@
     return-void
 .end method
 
-.method synthetic lambda$renderEpisodePage$54$cn-hongguo-tv-MainActivity(Landroid/widget/LinearLayout;Lorg/json/JSONObject;Lorg/json/JSONArray;IIZ)V
+.method synthetic lambda$renderEpisodePage$59$cn-hongguo-tv-MainActivity(Landroid/widget/LinearLayout;Lorg/json/JSONObject;Lorg/json/JSONArray;IIZ)V
     .locals 7
 
-    .line 156
+    .line 170
     add-int/lit8 v4, p4, 0x1
 
     move-object v0, p0
@@ -7282,10 +7666,10 @@
     return-void
 .end method
 
-.method synthetic lambda$renderEpisodePage$55$cn-hongguo-tv-MainActivity(ZILorg/json/JSONObject;Lorg/json/JSONArray;)V
+.method synthetic lambda$renderEpisodePage$60$cn-hongguo-tv-MainActivity(ZILorg/json/JSONObject;Lorg/json/JSONArray;)V
     .locals 6
 
-    .line 163
+    .line 177
     if-eqz p1, :cond_0
 
     invoke-virtual {p0}, Lcn/hongguo/tv/MainActivity;->closeEpisodeOverlay()V
@@ -7316,7 +7700,7 @@
 .method synthetic lambda$request$10$cn-hongguo-tv-MainActivity(ILcn/hongguo/tv/MainActivity$Done;Lorg/json/JSONObject;Landroid/widget/TextView;)V
     .locals 1
 
-    .line 74
+    .line 75
     iget v0, p0, Lcn/hongguo/tv/MainActivity;->generation:I
 
     if-ne p1, v0, :cond_0
@@ -7347,7 +7731,7 @@
 .method synthetic lambda$request$11$cn-hongguo-tv-MainActivity(ILandroid/widget/TextView;Ljava/lang/Exception;)V
     .locals 1
 
-    .line 74
+    .line 75
     iget v0, p0, Lcn/hongguo/tv/MainActivity;->generation:I
 
     if-ne p1, v0, :cond_1
@@ -7381,7 +7765,7 @@
 .method synthetic lambda$request$12$cn-hongguo-tv-MainActivity(ILcn/hongguo/tv/Api;Ljava/lang/String;Lcn/hongguo/tv/MainActivity$Done;Landroid/widget/TextView;)V
     .locals 7
 
-    .line 74
+    .line 75
     iget v0, p0, Lcn/hongguo/tv/MainActivity;->generation:I
 
     if-ne p1, v0, :cond_1
@@ -7400,7 +7784,7 @@
 
     iget-object p2, p0, Lcn/hongguo/tv/MainActivity;->ui:Landroid/os/Handler;
 
-    new-instance p3, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda15;
+    new-instance p3, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda20;
 
     move-object v1, p3
 
@@ -7412,7 +7796,7 @@
 
     move-object v6, p5
 
-    invoke-direct/range {v1 .. v6}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda15;-><init>(Lcn/hongguo/tv/MainActivity;ILcn/hongguo/tv/MainActivity$Done;Lorg/json/JSONObject;Landroid/widget/TextView;)V
+    invoke-direct/range {v1 .. v6}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda20;-><init>(Lcn/hongguo/tv/MainActivity;ILcn/hongguo/tv/MainActivity$Done;Lorg/json/JSONObject;Landroid/widget/TextView;)V
 
     invoke-virtual {p2, p3}, Landroid/os/Handler;->post(Ljava/lang/Runnable;)Z
     :try_end_0
@@ -7425,9 +7809,9 @@
 
     iget-object p3, p0, Lcn/hongguo/tv/MainActivity;->ui:Landroid/os/Handler;
 
-    new-instance p4, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda16;
+    new-instance p4, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda21;
 
-    invoke-direct {p4, p0, p1, p5, p2}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda16;-><init>(Lcn/hongguo/tv/MainActivity;ILandroid/widget/TextView;Ljava/lang/Exception;)V
+    invoke-direct {p4, p0, p1, p5, p2}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda21;-><init>(Lcn/hongguo/tv/MainActivity;ILandroid/widget/TextView;Ljava/lang/Exception;)V
 
     invoke-virtual {p3, p4}, Landroid/os/Handler;->post(Ljava/lang/Runnable;)Z
 
@@ -7439,7 +7823,7 @@
 .method synthetic lambda$restore$9$cn-hongguo-tv-MainActivity(Lcn/hongguo/tv/MainActivity$Screen;Landroid/view/View;)V
     .locals 1
 
-    .line 71
+    .line 72
     iget-object v0, p0, Lcn/hongguo/tv/MainActivity;->screen:Lcn/hongguo/tv/MainActivity$Screen;
 
     if-ne v0, p1, :cond_0
@@ -7456,10 +7840,10 @@
     return-void
 .end method
 
-.method synthetic lambda$resumePausedPlayer$93$cn-hongguo-tv-MainActivity(Landroid/media/MediaPlayer;)V
+.method synthetic lambda$resumePausedPlayer$98$cn-hongguo-tv-MainActivity(Landroid/media/MediaPlayer;)V
     .locals 4
 
-    .line 276
+    .line 291
     iget-object v0, p0, Lcn/hongguo/tv/MainActivity;->player:Landroid/media/MediaPlayer;
 
     if-ne p1, v0, :cond_3
@@ -7470,7 +7854,7 @@
 
     goto :goto_2
 
-    .line 277
+    .line 292
     :cond_0
     iget-object v0, p0, Lcn/hongguo/tv/MainActivity;->ui:Landroid/os/Handler;
 
@@ -7486,7 +7870,7 @@
 
     invoke-virtual {p1, v0}, Landroid/media/MediaPlayer;->setOnSeekCompleteListener(Landroid/media/MediaPlayer$OnSeekCompleteListener;)V
 
-    .line 278
+    .line 293
     iget-object v0, p0, Lcn/hongguo/tv/MainActivity;->status:Landroid/widget/TextView;
 
     new-instance v1, Ljava/lang/StringBuilder;
@@ -7549,7 +7933,7 @@
 
     invoke-virtual {v0, v1}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V
 
-    .line 279
+    .line 294
     iget-boolean v0, p0, Lcn/hongguo/tv/MainActivity;->activityVisible:Z
 
     if-eqz v0, :cond_2
@@ -7571,20 +7955,20 @@
 
     invoke-virtual {p1, v0}, Landroid/widget/Button;->setText(Ljava/lang/CharSequence;)V
 
-    .line 280
+    .line 295
     :goto_1
     return-void
 
-    .line 276
+    .line 291
     :cond_3
     :goto_2
     return-void
 .end method
 
-.method synthetic lambda$search$40$cn-hongguo-tv-MainActivity(Landroid/widget/EditText;)V
+.method synthetic lambda$search$45$cn-hongguo-tv-MainActivity(Landroid/widget/EditText;)V
     .locals 0
 
-    .line 142
+    .line 156
     invoke-virtual {p1}, Landroid/widget/EditText;->getText()Landroid/text/Editable;
 
     move-result-object p1
@@ -7602,19 +7986,19 @@
     return-void
 .end method
 
-.method synthetic lambda$search$41$cn-hongguo-tv-MainActivity(Ljava/lang/String;)V
+.method synthetic lambda$search$46$cn-hongguo-tv-MainActivity(Ljava/lang/String;)V
     .locals 0
 
-    .line 142
+    .line 156
     invoke-virtual {p0, p1}, Lcn/hongguo/tv/MainActivity;->searchFor(Ljava/lang/String;)V
 
     return-void
 .end method
 
-.method synthetic lambda$search$42$cn-hongguo-tv-MainActivity(Ljava/lang/String;)V
+.method synthetic lambda$search$47$cn-hongguo-tv-MainActivity(Ljava/lang/String;)V
     .locals 0
 
-    .line 142
+    .line 156
     invoke-virtual {p0, p1}, Lcn/hongguo/tv/MainActivity;->searchFor(Ljava/lang/String;)V
 
     return-void
@@ -7623,7 +8007,7 @@
 .method synthetic lambda$selectedStyle$13$cn-hongguo-tv-MainActivity(ZLandroid/view/View;Z)V
     .locals 1
 
-    .line 84
+    .line 85
     const/4 v0, 0x0
 
     if-eqz p3, :cond_0
@@ -7657,7 +8041,7 @@
     return-void
 .end method
 
-.method synthetic lambda$settings$57$cn-hongguo-tv-MainActivity(Lcn/hongguo/tv/Api;Landroid/widget/TextView;Lorg/json/JSONObject;)V
+.method synthetic lambda$settings$62$cn-hongguo-tv-MainActivity(Lcn/hongguo/tv/Api;Landroid/widget/TextView;Lorg/json/JSONObject;)V
     .locals 2
     .annotation system Ldalvik/annotation/Throws;
         value = {
@@ -7665,7 +8049,7 @@
         }
     .end annotation
 
-    .line 175
+    .line 189
     const-string v0, "service"
 
     invoke-virtual {p3, v0}, Lorg/json/JSONObject;->optString(Ljava/lang/String;)Ljava/lang/String;
@@ -7718,10 +8102,10 @@
     throw p1
 .end method
 
-.method synthetic lambda$settings$58$cn-hongguo-tv-MainActivity(Landroid/widget/EditText;Landroid/widget/EditText;Landroid/widget/TextView;)V
+.method synthetic lambda$settings$63$cn-hongguo-tv-MainActivity(Landroid/widget/EditText;Landroid/widget/EditText;Landroid/widget/TextView;)V
     .locals 1
 
-    .line 175
+    .line 189
     :try_start_0
     new-instance v0, Lcn/hongguo/tv/Api;
 
@@ -7747,9 +8131,9 @@
 
     const-string p1, "/health"
 
-    new-instance p2, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda85;
+    new-instance p2, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda80;
 
-    invoke-direct {p2, p0, v0, p3}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda85;-><init>(Lcn/hongguo/tv/MainActivity;Lcn/hongguo/tv/Api;Landroid/widget/TextView;)V
+    invoke-direct {p2, p0, v0, p3}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda80;-><init>(Lcn/hongguo/tv/MainActivity;Lcn/hongguo/tv/Api;Landroid/widget/TextView;)V
 
     invoke-virtual {p0, p1, p3, p2}, Lcn/hongguo/tv/MainActivity;->request(Ljava/lang/String;Landroid/widget/TextView;Lcn/hongguo/tv/MainActivity$Done;)V
     :try_end_0
@@ -7770,10 +8154,10 @@
     return-void
 .end method
 
-.method synthetic lambda$settings$60$cn-hongguo-tv-MainActivity(Landroid/widget/Button;Landroid/view/View;)V
+.method synthetic lambda$settings$65$cn-hongguo-tv-MainActivity(Landroid/widget/Button;Landroid/view/View;)V
     .locals 2
 
-    .line 175
+    .line 189
     iget-object p2, p0, Lcn/hongguo/tv/MainActivity;->prefs:Landroid/content/SharedPreferences;
 
     const-string v0, "autoplay"
@@ -7834,7 +8218,7 @@
 .method synthetic lambda$shell$14$cn-hongguo-tv-MainActivity(Ljava/lang/String;)V
     .locals 0
 
-    .line 91
+    .line 92
     invoke-virtual {p0, p1}, Lcn/hongguo/tv/MainActivity;->chooseSection(Ljava/lang/String;)V
 
     return-void
@@ -7843,7 +8227,7 @@
 .method synthetic lambda$shell$15$cn-hongguo-tv-MainActivity()V
     .locals 1
 
-    .line 95
+    .line 96
     const-string v0, "\u9996\u9875"
 
     invoke-virtual {p0, v0}, Lcn/hongguo/tv/MainActivity;->chooseSection(Ljava/lang/String;)V
@@ -7854,7 +8238,7 @@
 .method synthetic lambda$shell$16$cn-hongguo-tv-MainActivity()V
     .locals 1
 
-    .line 95
+    .line 96
     const-string v0, "\u6f2b\u5267"
 
     invoke-virtual {p0, v0}, Lcn/hongguo/tv/MainActivity;->chooseSection(Ljava/lang/String;)V
@@ -7865,7 +8249,7 @@
 .method synthetic lambda$shell$17$cn-hongguo-tv-MainActivity()V
     .locals 1
 
-    .line 95
+    .line 96
     const-string v0, "AI\u5267"
 
     invoke-virtual {p0, v0}, Lcn/hongguo/tv/MainActivity;->chooseSection(Ljava/lang/String;)V
@@ -7876,7 +8260,7 @@
 .method synthetic lambda$shell$18$cn-hongguo-tv-MainActivity()V
     .locals 0
 
-    .line 96
+    .line 97
     invoke-virtual {p0}, Lcn/hongguo/tv/MainActivity;->search()V
 
     return-void
@@ -7885,7 +8269,7 @@
 .method synthetic lambda$show$8$cn-hongguo-tv-MainActivity(Landroid/view/View;Landroid/view/View;)V
     .locals 1
 
-    .line 69
+    .line 70
     iget-object v0, p0, Lcn/hongguo/tv/MainActivity;->screen:Lcn/hongguo/tv/MainActivity$Screen;
 
     if-eqz v0, :cond_0
@@ -7908,10 +8292,10 @@
     return-void
 .end method
 
-.method synthetic lambda$startPlayer$76$cn-hongguo-tv-MainActivity(Landroid/view/View;IIIIIIII)V
+.method synthetic lambda$startPlayer$81$cn-hongguo-tv-MainActivity(Landroid/view/View;IIIIIIII)V
     .locals 0
 
-    .line 239
+    .line 253
     sub-int/2addr p4, p2
 
     sub-int/2addr p8, p6
@@ -7935,28 +8319,28 @@
     return-void
 .end method
 
-.method synthetic lambda$startPlayer$77$cn-hongguo-tv-MainActivity(Landroid/view/View;)V
+.method synthetic lambda$startPlayer$82$cn-hongguo-tv-MainActivity(Landroid/view/View;)V
     .locals 0
 
-    .line 240
+    .line 254
     invoke-virtual {p0}, Lcn/hongguo/tv/MainActivity;->openPlayerControls()V
 
     return-void
 .end method
 
-.method synthetic lambda$startPlayer$78$cn-hongguo-tv-MainActivity()V
+.method synthetic lambda$startPlayer$83$cn-hongguo-tv-MainActivity()V
     .locals 0
 
-    .line 245
+    .line 259
     invoke-virtual {p0}, Lcn/hongguo/tv/MainActivity;->togglePause()V
 
     return-void
 .end method
 
-.method synthetic lambda$startPlayer$79$cn-hongguo-tv-MainActivity()V
+.method synthetic lambda$startPlayer$84$cn-hongguo-tv-MainActivity()V
     .locals 3
 
-    .line 245
+    .line 259
     iget v0, p0, Lcn/hongguo/tv/MainActivity;->episode:I
 
     iget-object v1, p0, Lcn/hongguo/tv/MainActivity;->episodes:Lorg/json/JSONArray;
@@ -7979,10 +8363,10 @@
     return-void
 .end method
 
-.method synthetic lambda$startPlayer$80$cn-hongguo-tv-MainActivity()V
+.method synthetic lambda$startPlayer$85$cn-hongguo-tv-MainActivity()V
     .locals 3
 
-    .line 246
+    .line 260
     new-instance v0, Lcn/hongguo/tv/TvSettings;
 
     const/4 v1, 0x1
@@ -7996,10 +8380,10 @@
     return-void
 .end method
 
-.method synthetic lambda$startPlayer$81$cn-hongguo-tv-MainActivity()V
+.method synthetic lambda$startPlayer$86$cn-hongguo-tv-MainActivity()V
     .locals 1
 
-    .line 247
+    .line 261
     iget-object v0, p0, Lcn/hongguo/tv/MainActivity;->current:Lorg/json/JSONObject;
 
     invoke-virtual {p0, v0}, Lcn/hongguo/tv/MainActivity;->recommendNext(Lorg/json/JSONObject;)V
@@ -8007,28 +8391,28 @@
     return-void
 .end method
 
-.method synthetic lambda$startPlayer$82$cn-hongguo-tv-MainActivity()V
+.method synthetic lambda$startPlayer$87$cn-hongguo-tv-MainActivity()V
     .locals 0
 
-    .line 247
+    .line 261
     invoke-virtual {p0}, Lcn/hongguo/tv/MainActivity;->playerEpisodes()V
 
     return-void
 .end method
 
-.method synthetic lambda$startPlayer$83$cn-hongguo-tv-MainActivity()V
+.method synthetic lambda$startPlayer$88$cn-hongguo-tv-MainActivity()V
     .locals 0
 
-    .line 247
+    .line 261
     invoke-virtual {p0}, Lcn/hongguo/tv/MainActivity;->playerSettings()V
 
     return-void
 .end method
 
-.method synthetic lambda$startPlayer$84$cn-hongguo-tv-MainActivity(ILjava/util/ArrayList;Landroid/view/View;ILandroid/view/KeyEvent;)Z
+.method synthetic lambda$startPlayer$89$cn-hongguo-tv-MainActivity(ILjava/util/ArrayList;Landroid/view/View;ILandroid/view/KeyEvent;)Z
     .locals 2
 
-    .line 250
+    .line 264
     invoke-virtual {p5}, Landroid/view/KeyEvent;->getAction()I
 
     move-result p3
@@ -8137,10 +8521,10 @@
     return v0
 .end method
 
-.method synthetic lambda$startPlayer$85$cn-hongguo-tv-MainActivity(Landroid/view/View;ILandroid/view/KeyEvent;)Z
+.method synthetic lambda$startPlayer$90$cn-hongguo-tv-MainActivity(Landroid/view/View;ILandroid/view/KeyEvent;)Z
     .locals 1
 
-    .line 253
+    .line 267
     invoke-virtual {p3}, Landroid/view/KeyEvent;->getAction()I
 
     move-result p1
@@ -8197,7 +8581,7 @@
 .method latestEpisode(Lorg/json/JSONObject;Lorg/json/JSONArray;)I
     .locals 2
 
-    .line 149
+    .line 163
     const-string v0, "history"
 
     invoke-virtual {p0, v0}, Lcn/hongguo/tv/MainActivity;->bucket(Ljava/lang/String;)Lorg/json/JSONObject;
@@ -8248,7 +8632,7 @@
 .method learnRecommendations()Z
     .locals 3
 
-    .line 190
+    .line 204
     iget-object v0, p0, Lcn/hongguo/tv/MainActivity;->prefs:Landroid/content/SharedPreferences;
 
     const-string v1, "personal_recommendations"
@@ -8283,7 +8667,7 @@
 .method loadCover(Ljava/lang/String;Landroid/widget/ImageView;)V
     .locals 8
 
-    .line 139
+    .line 153
     invoke-virtual {p2, p1}, Landroid/widget/ImageView;->setTag(Ljava/lang/Object;)V
 
     iget-object v4, p0, Lcn/hongguo/tv/MainActivity;->api:Lcn/hongguo/tv/Api;
@@ -8307,7 +8691,7 @@
     :cond_0
     iget-object v6, p0, Lcn/hongguo/tv/MainActivity;->coverIo:Ljava/util/concurrent/ThreadPoolExecutor;
 
-    new-instance v7, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda93;
+    new-instance v7, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda98;
 
     move-object v0, v7
 
@@ -8317,7 +8701,7 @@
 
     move-object v5, p2
 
-    invoke-direct/range {v0 .. v5}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda93;-><init>(Lcn/hongguo/tv/MainActivity;ILjava/lang/String;Lcn/hongguo/tv/Api;Landroid/widget/ImageView;)V
+    invoke-direct/range {v0 .. v5}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda98;-><init>(Lcn/hongguo/tv/MainActivity;ILjava/lang/String;Lcn/hongguo/tv/Api;Landroid/widget/ImageView;)V
 
     invoke-virtual {v6, v7}, Ljava/util/concurrent/ThreadPoolExecutor;->execute(Ljava/lang/Runnable;)V
 
@@ -8327,7 +8711,7 @@
 .method manageSaved(Ljava/lang/String;)V
     .locals 1
 
-    .line 187
+    .line 201
     const/4 v0, 0x0
 
     invoke-virtual {p0, p1, v0}, Lcn/hongguo/tv/MainActivity;->manageSaved(Ljava/lang/String;I)V
@@ -8338,7 +8722,7 @@
 .method manageSaved(Ljava/lang/String;I)V
     .locals 13
 
-    .line 188
+    .line 202
     const-string v0, "favorites"
 
     invoke-virtual {p1, v0}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
@@ -8424,9 +8808,9 @@
     goto :goto_1
 
     :cond_2
-    new-instance v2, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda67;
+    new-instance v2, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda70;
 
-    invoke-direct {v2}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda67;-><init>()V
+    invoke-direct {v2}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda70;-><init>()V
 
     invoke-static {v5, v2}, Ljava/util/Collections;->sort(Ljava/util/List;Ljava/util/Comparator;)V
 
@@ -8497,9 +8881,9 @@
 
     move-result-object v9
 
-    new-instance v10, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda68;
+    new-instance v10, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda71;
 
-    invoke-direct {v10}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda68;-><init>()V
+    invoke-direct {v10}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda71;-><init>()V
 
     invoke-virtual {p0, v9, v10, v3}, Lcn/hongguo/tv/MainActivity;->button(Ljava/lang/String;Ljava/lang/Runnable;Z)Landroid/widget/Button;
 
@@ -8541,9 +8925,9 @@
 
     invoke-virtual {v2, v9}, Ljava/util/ArrayList;->add(Ljava/lang/Object;)Z
 
-    new-instance v10, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda69;
+    new-instance v10, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda72;
 
-    invoke-direct {v10, p0, v7, p1}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda69;-><init>(Lcn/hongguo/tv/MainActivity;Lorg/json/JSONObject;Ljava/lang/String;)V
+    invoke-direct {v10, p0, v7, p1}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda72;-><init>(Lcn/hongguo/tv/MainActivity;Lorg/json/JSONObject;Ljava/lang/String;)V
 
     invoke-virtual {v9, v10}, Landroid/widget/Button;->setOnClickListener(Landroid/view/View$OnClickListener;)V
 
@@ -8562,9 +8946,9 @@
 
     move-result-object v6
 
-    new-instance v7, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda70;
+    new-instance v7, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda73;
 
-    invoke-direct {v7, p0, p1, p2}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda70;-><init>(Lcn/hongguo/tv/MainActivity;Ljava/lang/String;I)V
+    invoke-direct {v7, p0, p1, p2}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda73;-><init>(Lcn/hongguo/tv/MainActivity;Ljava/lang/String;I)V
 
     const-string v8, "\u4e0a\u4e00\u9875"
 
@@ -8574,9 +8958,9 @@
 
     invoke-virtual {p0, v6, v7}, Lcn/hongguo/tv/MainActivity;->addButton(Landroid/widget/LinearLayout;Landroid/widget/Button;)V
 
-    new-instance v8, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda71;
+    new-instance v8, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda74;
 
-    invoke-direct {v8, p0, p1, p2, v5}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda71;-><init>(Lcn/hongguo/tv/MainActivity;Ljava/lang/String;ILjava/util/ArrayList;)V
+    invoke-direct {v8, p0, p1, p2, v5}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda74;-><init>(Lcn/hongguo/tv/MainActivity;Ljava/lang/String;ILjava/util/ArrayList;)V
 
     const-string p2, "\u4e0b\u4e00\u9875"
 
@@ -8641,9 +9025,9 @@
 
     move-result-object p2
 
-    new-instance v4, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda72;
+    new-instance v4, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda75;
 
-    invoke-direct {v4, p0, p1}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda72;-><init>(Lcn/hongguo/tv/MainActivity;Ljava/lang/String;)V
+    invoke-direct {v4, p0, p1}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda75;-><init>(Lcn/hongguo/tv/MainActivity;Ljava/lang/String;)V
 
     invoke-virtual {p0, p2, v4, v3}, Lcn/hongguo/tv/MainActivity;->button(Ljava/lang/String;Ljava/lang/Runnable;Z)Landroid/widget/Button;
 
@@ -8711,7 +9095,7 @@
 .method maybePrefetch(II)V
     .locals 5
 
-    .line 221
+    .line 235
     invoke-static {}, Landroid/os/SystemClock;->elapsedRealtime()J
 
     move-result-wide v0
@@ -8870,9 +9254,9 @@
 
     iget-object v2, p0, Lcn/hongguo/tv/MainActivity;->mediaIo:Ljava/util/concurrent/ThreadPoolExecutor;
 
-    new-instance v3, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda25;
+    new-instance v3, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda27;
 
-    invoke-direct {v3, p1, p2, v0, v1}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda25;-><init>(Lcn/hongguo/tv/Api;Ljava/lang/String;II)V
+    invoke-direct {v3, p1, p2, v0, v1}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda27;-><init>(Lcn/hongguo/tv/Api;Ljava/lang/String;II)V
 
     invoke-virtual {v2, v3}, Ljava/util/concurrent/ThreadPoolExecutor;->submit(Ljava/lang/Runnable;)Ljava/util/concurrent/Future;
 
@@ -8909,7 +9293,7 @@
 .method protected onActivityResult(IILandroid/content/Intent;)V
     .locals 0
 
-    .line 324
+    .line 339
     invoke-super {p0, p1, p2, p3}, Landroid/app/Activity;->onActivityResult(IILandroid/content/Intent;)V
 
     iget-object p3, p0, Lcn/hongguo/tv/MainActivity;->updates:Lcn/hongguo/tv/TvUpdater;
@@ -8927,7 +9311,7 @@
 .method public onBackPressed()V
     .locals 2
 
-    .line 72
+    .line 73
     invoke-virtual {p0}, Lcn/hongguo/tv/MainActivity;->cancelConfirmHold()V
 
     iget-object v0, p0, Lcn/hongguo/tv/MainActivity;->player:Landroid/media/MediaPlayer;
@@ -9020,22 +9404,22 @@
 .method public onCreate(Landroid/os/Bundle;)V
     .locals 5
 
-    .line 52
+    .line 53
     invoke-super {p0, p1}, Landroid/app/Activity;->onCreate(Landroid/os/Bundle;)V
 
-    new-instance p1, Lcn/hongguo/tv/Catalog;
-
-    new-instance v0, Ljava/io/File;
+    new-instance p1, Ljava/io/File;
 
     invoke-virtual {p0}, Lcn/hongguo/tv/MainActivity;->getCacheDir()Ljava/io/File;
 
-    move-result-object v1
+    move-result-object v0
 
-    const-string v2, "catalog-v1.json"
+    const-string v1, "catalog-v2.json"
 
-    invoke-direct {v0, v1, v2}, Ljava/io/File;-><init>(Ljava/io/File;Ljava/lang/String;)V
+    invoke-direct {p1, v0, v1}, Ljava/io/File;-><init>(Ljava/io/File;Ljava/lang/String;)V
 
-    invoke-direct {p1, v0}, Lcn/hongguo/tv/Catalog;-><init>(Ljava/io/File;)V
+    invoke-static {p0, p1}, Lcn/hongguo/tv/Catalog;->local(Landroid/content/Context;Ljava/io/File;)Lcn/hongguo/tv/Catalog;
+
+    move-result-object p1
 
     iput-object p1, p0, Lcn/hongguo/tv/MainActivity;->catalog:Lcn/hongguo/tv/Catalog;
 
@@ -9084,7 +9468,7 @@
     :cond_0
     iput v1, p0, Lcn/hongguo/tv/MainActivity;->speed:F
 
-    .line 53
+    .line 54
     const-string p1, "activity"
 
     invoke-virtual {p0, p1}, Lcn/hongguo/tv/MainActivity;->getSystemService(Ljava/lang/String;)Ljava/lang/Object;
@@ -9119,7 +9503,7 @@
 
     iput-object v1, p0, Lcn/hongguo/tv/MainActivity;->memory:Lcn/hongguo/tv/MemoryProfile;
 
-    .line 54
+    .line 55
     iget-object p1, p0, Lcn/hongguo/tv/MainActivity;->memory:Lcn/hongguo/tv/MemoryProfile;
 
     iget p1, p1, Lcn/hongguo/tv/MemoryProfile;->coverWorkers:I
@@ -9152,7 +9536,7 @@
 
     iput-object p1, p0, Lcn/hongguo/tv/MainActivity;->io:Ljava/util/concurrent/ThreadPoolExecutor;
 
-    .line 55
+    .line 56
     new-instance p1, Lcn/hongguo/tv/MainActivity$2;
 
     iget-object v0, p0, Lcn/hongguo/tv/MainActivity;->memory:Lcn/hongguo/tv/MemoryProfile;
@@ -9163,7 +9547,7 @@
 
     iput-object p1, p0, Lcn/hongguo/tv/MainActivity;->covers:Landroid/util/LruCache;
 
-    .line 56
+    .line 57
     invoke-virtual {p0}, Lcn/hongguo/tv/MainActivity;->getWindow()Landroid/view/Window;
 
     move-result-object p1
@@ -9176,7 +9560,7 @@
 
     invoke-virtual {p1, v0}, Landroid/view/View;->setSystemUiVisibility(I)V
 
-    .line 57
+    .line 58
     new-instance p1, Landroid/widget/FrameLayout;
 
     invoke-direct {p1, p0}, Landroid/widget/FrameLayout;-><init>(Landroid/content/Context;)V
@@ -9195,7 +9579,7 @@
 
     invoke-virtual {p0, p1}, Lcn/hongguo/tv/MainActivity;->setContentView(Landroid/view/View;)V
 
-    .line 58
+    .line 59
     :try_start_0
     invoke-static {p0}, Lcn/hongguo/tv/Api;->local(Landroid/content/Context;)Lcn/hongguo/tv/Api;
 
@@ -9240,7 +9624,7 @@
     :catch_0
     move-exception p1
 
-    .line 59
+    .line 60
     :cond_4
     :goto_1
     new-instance p1, Lcn/hongguo/tv/TvUpdater;
@@ -9261,23 +9645,23 @@
 
     invoke-virtual {p1, v0}, Landroid/os/Handler;->post(Ljava/lang/Runnable;)Z
 
-    .line 60
+    .line 61
     iget-object p1, p0, Lcn/hongguo/tv/MainActivity;->io:Ljava/util/concurrent/ThreadPoolExecutor;
 
-    new-instance v0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda91;
+    new-instance v0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda96;
 
-    invoke-direct {v0, p0}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda91;-><init>(Lcn/hongguo/tv/MainActivity;)V
+    invoke-direct {v0, p0}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda96;-><init>(Lcn/hongguo/tv/MainActivity;)V
 
     invoke-virtual {p1, v0}, Ljava/util/concurrent/ThreadPoolExecutor;->execute(Ljava/lang/Runnable;)V
 
-    .line 61
+    .line 62
     return-void
 .end method
 
 .method protected onDestroy()V
     .locals 2
 
-    .line 325
+    .line 340
     const/4 v0, 0x1
 
     iput-boolean v0, p0, Lcn/hongguo/tv/MainActivity;->released:Z
@@ -9327,7 +9711,7 @@
 .method public onLowMemory()V
     .locals 4
 
-    .line 323
+    .line 338
     invoke-super {p0}, Landroid/app/Activity;->onLowMemory()V
 
     invoke-virtual {p0}, Lcn/hongguo/tv/MainActivity;->cancelPrefetch()V
@@ -9357,7 +9741,7 @@
 .method protected onPause()V
     .locals 4
 
-    .line 321
+    .line 336
     iget-object v0, p0, Lcn/hongguo/tv/MainActivity;->updates:Lcn/hongguo/tv/TvUpdater;
 
     if-eqz v0, :cond_0
@@ -9496,7 +9880,7 @@
 .method protected onResume()V
     .locals 1
 
-    .line 320
+    .line 335
     invoke-super {p0}, Landroid/app/Activity;->onResume()V
 
     const/4 v0, 0x1
@@ -9518,7 +9902,7 @@
 .method public onTrimMemory(I)V
     .locals 7
 
-    .line 322
+    .line 337
     invoke-super {p0, p1}, Landroid/app/Activity;->onTrimMemory(I)V
 
     const/16 v0, 0xf
@@ -9569,7 +9953,7 @@
 .method public onWindowFocusChanged(Z)V
     .locals 0
 
-    .line 319
+    .line 334
     invoke-super {p0, p1}, Landroid/app/Activity;->onWindowFocusChanged(Z)V
 
     if-nez p1, :cond_0
@@ -9595,7 +9979,7 @@
 .method openPlayerControls()V
     .locals 1
 
-    .line 288
+    .line 303
     invoke-virtual {p0}, Lcn/hongguo/tv/MainActivity;->showControls()V
 
     iget-boolean v0, p0, Lcn/hongguo/tv/MainActivity;->prepared:Z
@@ -9636,7 +10020,7 @@
 .method pageUi(Landroid/view/View;)Lcn/hongguo/tv/MainActivity$PageUi;
     .locals 1
 
-    .line 79
+    .line 80
     if-eqz p1, :cond_0
 
     invoke-virtual {p1}, Landroid/view/View;->getTag()Ljava/lang/Object;
@@ -9665,7 +10049,7 @@
 .method persistRecommendations()V
     .locals 3
 
-    .line 191
+    .line 205
     iget-object v0, p0, Lcn/hongguo/tv/MainActivity;->recommendations:Lcn/hongguo/tv/Recommendations;
 
     if-eqz v0, :cond_0
@@ -9699,10 +10083,23 @@
 .end method
 
 .method playEpisode(IJ)V
+    .locals 1
+
+    .line 271
+    const/4 v0, 0x0
+
+    invoke-virtual {p0, p1, p2, p3, v0}, Lcn/hongguo/tv/MainActivity;->playEpisode(IJZ)V
+
+    return-void
+.end method
+
+.method playEpisode(IJZ)V
     .locals 4
 
-    .line 257
+    .line 272
     invoke-virtual {p0}, Lcn/hongguo/tv/MainActivity;->cancelConfirmHold()V
+
+    iput-boolean p4, p0, Lcn/hongguo/tv/MainActivity;->quietTransition:Z
 
     const/4 v0, -0x1
 
@@ -9832,12 +10229,31 @@
 
     invoke-virtual {p2, v2}, Landroid/widget/SeekBar;->setMax(I)V
 
-    iput-boolean v2, p0, Lcn/hongguo/tv/MainActivity;->controlsVisible:Z
+    xor-int/lit8 p2, p4, 0x1
+
+    iput-boolean p2, p0, Lcn/hongguo/tv/MainActivity;->controlsVisible:Z
 
     iget-object p2, p0, Lcn/hongguo/tv/MainActivity;->chrome:Landroid/widget/LinearLayout;
 
-    invoke-virtual {p2, v3}, Landroid/widget/LinearLayout;->setVisibility(I)V
+    if-eqz p4, :cond_3
 
+    const/16 p3, 0x8
+
+    goto :goto_3
+
+    :cond_3
+    const/4 p3, 0x0
+
+    :goto_3
+    invoke-virtual {p2, p3}, Landroid/widget/LinearLayout;->setVisibility(I)V
+
+    if-eqz p4, :cond_4
+
+    iget-object p2, p0, Lcn/hongguo/tv/MainActivity;->surface:Landroid/view/SurfaceView;
+
+    invoke-virtual {p2}, Landroid/view/SurfaceView;->requestFocusFromTouch()Z
+
+    :cond_4
     iget-object p2, p0, Lcn/hongguo/tv/MainActivity;->pauseButton:Landroid/widget/Button;
 
     const-string p3, "\u6682\u505c"
@@ -9850,33 +10266,33 @@
 
     invoke-direct {p3}, Ljava/lang/StringBuilder;-><init>()V
 
-    iget-object v0, p0, Lcn/hongguo/tv/MainActivity;->current:Lorg/json/JSONObject;
+    iget-object p4, p0, Lcn/hongguo/tv/MainActivity;->current:Lorg/json/JSONObject;
 
-    const-string v1, "title"
+    const-string v0, "title"
 
-    invoke-virtual {v0, v1}, Lorg/json/JSONObject;->optString(Ljava/lang/String;)Ljava/lang/String;
+    invoke-virtual {p4, v0}, Lorg/json/JSONObject;->optString(Ljava/lang/String;)Ljava/lang/String;
 
-    move-result-object v0
+    move-result-object p4
 
-    invoke-virtual {p3, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object p3
-
-    const-string v0, " \u00b7 \u7b2c "
-
-    invoke-virtual {p3, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    invoke-virtual {p3, p4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
     move-result-object p3
 
-    iget v0, p0, Lcn/hongguo/tv/MainActivity;->episode:I
+    const-string p4, " \u00b7 \u7b2c "
 
-    invoke-virtual {p3, v0}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+    invoke-virtual {p3, p4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
     move-result-object p3
 
-    const-string v0, " \u96c6 \u00b7 \u6b63\u5728\u51c6\u5907\u2026"
+    iget p4, p0, Lcn/hongguo/tv/MainActivity;->episode:I
 
-    invoke-virtual {p3, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    invoke-virtual {p3, p4}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+
+    move-result-object p3
+
+    const-string p4, " \u96c6 \u00b7 \u6b63\u5728\u51c6\u5907\u2026"
+
+    invoke-virtual {p3, p4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
     move-result-object p3
 
@@ -9888,7 +10304,7 @@
 
     iget-object p2, p0, Lcn/hongguo/tv/MainActivity;->player:Landroid/media/MediaPlayer;
 
-    if-nez p2, :cond_3
+    if-nez p2, :cond_5
 
     new-instance p2, Landroid/media/MediaPlayer;
 
@@ -9896,10 +10312,10 @@
 
     iput-object p2, p0, Lcn/hongguo/tv/MainActivity;->player:Landroid/media/MediaPlayer;
 
-    :cond_3
+    :cond_5
     iget-object p2, p0, Lcn/hongguo/tv/MainActivity;->player:Landroid/media/MediaPlayer;
 
-    .line 258
+    .line 273
     :try_start_1
     invoke-static {p2}, Lcn/hongguo/tv/MainActivity$Modern21;->audio(Landroid/media/MediaPlayer;)V
 
@@ -9913,33 +10329,33 @@
 
     invoke-virtual {p2, v2}, Landroid/media/MediaPlayer;->setScreenOnWhilePlaying(Z)V
 
-    new-instance p3, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda62;
-
-    invoke-direct {p3, p0}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda62;-><init>(Lcn/hongguo/tv/MainActivity;)V
-
-    invoke-virtual {p2, p3}, Landroid/media/MediaPlayer;->setOnPreparedListener(Landroid/media/MediaPlayer$OnPreparedListener;)V
-
-    new-instance p3, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda63;
-
-    invoke-direct {p3, p0}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda63;-><init>(Lcn/hongguo/tv/MainActivity;)V
-
-    invoke-virtual {p2, p3}, Landroid/media/MediaPlayer;->setOnVideoSizeChangedListener(Landroid/media/MediaPlayer$OnVideoSizeChangedListener;)V
-
-    new-instance p3, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda64;
-
-    invoke-direct {p3, p0}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda64;-><init>(Lcn/hongguo/tv/MainActivity;)V
-
-    invoke-virtual {p2, p3}, Landroid/media/MediaPlayer;->setOnErrorListener(Landroid/media/MediaPlayer$OnErrorListener;)V
-
     new-instance p3, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda65;
 
     invoke-direct {p3, p0}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda65;-><init>(Lcn/hongguo/tv/MainActivity;)V
 
-    invoke-virtual {p2, p3}, Landroid/media/MediaPlayer;->setOnInfoListener(Landroid/media/MediaPlayer$OnInfoListener;)V
+    invoke-virtual {p2, p3}, Landroid/media/MediaPlayer;->setOnPreparedListener(Landroid/media/MediaPlayer$OnPreparedListener;)V
 
     new-instance p3, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda66;
 
     invoke-direct {p3, p0}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda66;-><init>(Lcn/hongguo/tv/MainActivity;)V
+
+    invoke-virtual {p2, p3}, Landroid/media/MediaPlayer;->setOnVideoSizeChangedListener(Landroid/media/MediaPlayer$OnVideoSizeChangedListener;)V
+
+    new-instance p3, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda67;
+
+    invoke-direct {p3, p0}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda67;-><init>(Lcn/hongguo/tv/MainActivity;)V
+
+    invoke-virtual {p2, p3}, Landroid/media/MediaPlayer;->setOnErrorListener(Landroid/media/MediaPlayer$OnErrorListener;)V
+
+    new-instance p3, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda68;
+
+    invoke-direct {p3, p0}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda68;-><init>(Lcn/hongguo/tv/MainActivity;)V
+
+    invoke-virtual {p2, p3}, Landroid/media/MediaPlayer;->setOnInfoListener(Landroid/media/MediaPlayer$OnInfoListener;)V
+
+    new-instance p3, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda69;
+
+    invoke-direct {p3, p0}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda69;-><init>(Lcn/hongguo/tv/MainActivity;)V
 
     invoke-virtual {p2, p3}, Landroid/media/MediaPlayer;->setOnCompletionListener(Landroid/media/MediaPlayer$OnCompletionListener;)V
 
@@ -9949,13 +10365,13 @@
 
     iget-object p2, p0, Lcn/hongguo/tv/MainActivity;->stallTimeout:Ljava/lang/Runnable;
 
-    const-wide/32 v0, 0x15f90
+    const-wide/32 p3, 0x15f90
 
-    invoke-virtual {p1, p2, v0, v1}, Landroid/os/Handler;->postDelayed(Ljava/lang/Runnable;J)Z
+    invoke-virtual {p1, p2, p3, p4}, Landroid/os/Handler;->postDelayed(Ljava/lang/Runnable;J)Z
     :try_end_1
     .catch Ljava/lang/Exception; {:try_start_1 .. :try_end_1} :catch_1
 
-    goto :goto_3
+    goto :goto_4
 
     :catch_1
     move-exception p1
@@ -9980,15 +10396,15 @@
 
     invoke-virtual {p0}, Lcn/hongguo/tv/MainActivity;->showControls()V
 
-    .line 259
-    :goto_3
+    .line 274
+    :goto_4
     return-void
 .end method
 
 .method playerEpisodes()V
     .locals 11
 
-    .line 290
+    .line 305
     invoke-virtual {p0}, Lcn/hongguo/tv/MainActivity;->cancelConfirmHold()V
 
     invoke-virtual {p0}, Lcn/hongguo/tv/MainActivity;->playerOverlay()Landroid/view/View;
@@ -10176,7 +10592,7 @@
 .method playerOverlay()Landroid/view/View;
     .locals 2
 
-    .line 283
+    .line 298
     iget-object v0, p0, Lcn/hongguo/tv/MainActivity;->playback:Landroid/widget/FrameLayout;
 
     if-nez v0, :cond_0
@@ -10214,7 +10630,7 @@
 .method playerSettings()V
     .locals 2
 
-    .line 182
+    .line 196
     invoke-virtual {p0}, Lcn/hongguo/tv/MainActivity;->cancelConfirmHold()V
 
     iget-object v0, p0, Lcn/hongguo/tv/MainActivity;->playback:Landroid/widget/FrameLayout;
@@ -10263,7 +10679,7 @@
 .method prepareSource(Landroid/media/MediaPlayer;I)V
     .locals 10
 
-    .line 234
+    .line 248
     iget v6, p0, Lcn/hongguo/tv/MainActivity;->mediaGeneration:I
 
     iget-object v2, p0, Lcn/hongguo/tv/MainActivity;->api:Lcn/hongguo/tv/Api;
@@ -10282,7 +10698,7 @@
 
     iget-object v8, p0, Lcn/hongguo/tv/MainActivity;->mediaIo:Ljava/util/concurrent/ThreadPoolExecutor;
 
-    new-instance v9, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda77;
+    new-instance v9, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda78;
 
     move-object v0, v9
 
@@ -10292,7 +10708,7 @@
 
     move-object v7, p1
 
-    invoke-direct/range {v0 .. v7}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda77;-><init>(Lcn/hongguo/tv/MainActivity;Lcn/hongguo/tv/Api;Ljava/lang/String;IIILandroid/media/MediaPlayer;)V
+    invoke-direct/range {v0 .. v7}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda78;-><init>(Lcn/hongguo/tv/MainActivity;Lcn/hongguo/tv/Api;Ljava/lang/String;IIILandroid/media/MediaPlayer;)V
 
     invoke-virtual {v8, v9}, Ljava/util/concurrent/ThreadPoolExecutor;->submit(Ljava/lang/Runnable;)Ljava/util/concurrent/Future;
 
@@ -10306,7 +10722,7 @@
 .method previewSeek(I)V
     .locals 3
 
-    .line 286
+    .line 301
     iget-boolean v0, p0, Lcn/hongguo/tv/MainActivity;->prepared:Z
 
     if-eqz v0, :cond_2
@@ -10442,7 +10858,7 @@
 .method qualityCeiling()I
     .locals 3
 
-    .line 220
+    .line 234
     iget-object v0, p0, Lcn/hongguo/tv/MainActivity;->prefs:Landroid/content/SharedPreferences;
 
     const-string v1, "quality"
@@ -10467,7 +10883,7 @@
 .method recommendNext(Lorg/json/JSONObject;)V
     .locals 16
 
-    .line 194
+    .line 208
     move-object/from16 v13, p0
 
     move-object/from16 v12, p1
@@ -10480,7 +10896,7 @@
 
     return-void
 
-    .line 195
+    .line 209
     :cond_0
     iget v3, v13, Lcn/hongguo/tv/MainActivity;->generation:I
 
@@ -10488,7 +10904,7 @@
 
     iget-object v10, v13, Lcn/hongguo/tv/MainActivity;->api:Lcn/hongguo/tv/Api;
 
-    .line 196
+    .line 210
     if-nez v12, :cond_1
 
     iget-object v0, v13, Lcn/hongguo/tv/MainActivity;->catalogMode:Ljava/lang/String;
@@ -10524,7 +10940,7 @@
 
     move-object v9, v1
 
-    .line 197
+    .line 211
     :goto_1
     const/4 v1, 0x0
 
@@ -10573,7 +10989,7 @@
     :cond_3
     const/4 v11, 0x0
 
-    .line 198
+    .line 212
     :goto_2
     if-eqz v11, :cond_4
 
@@ -10588,7 +11004,7 @@
 
     move-result v0
 
-    .line 199
+    .line 213
     if-eqz v0, :cond_5
 
     iget-object v0, v13, Lcn/hongguo/tv/MainActivity;->recommendations:Lcn/hongguo/tv/Recommendations;
@@ -10605,7 +11021,7 @@
     :goto_3
     move-object v5, v0
 
-    .line 200
+    .line 214
     invoke-static {}, Ljava/lang/System;->currentTimeMillis()J
 
     move-result-wide v7
@@ -10614,7 +11030,7 @@
 
     move-result-object v2
 
-    .line 201
+    .line 215
     const-string v0, "\u6b63\u5728\u627e\u4e0b\u4e00\u90e8\u2026"
 
     invoke-static {v13, v0, v1}, Landroid/widget/Toast;->makeText(Landroid/content/Context;Ljava/lang/CharSequence;I)Landroid/widget/Toast;
@@ -10623,10 +11039,10 @@
 
     invoke-virtual {v0}, Landroid/widget/Toast;->show()V
 
-    .line 202
+    .line 216
     iget-object v14, v13, Lcn/hongguo/tv/MainActivity;->io:Ljava/util/concurrent/ThreadPoolExecutor;
 
-    new-instance v15, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda73;
+    new-instance v15, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda76;
 
     move-object v0, v15
 
@@ -10634,18 +11050,18 @@
 
     move-object/from16 v12, p1
 
-    invoke-direct/range {v0 .. v12}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda73;-><init>(Lcn/hongguo/tv/MainActivity;Ljava/lang/String;ILjava/lang/String;Lcn/hongguo/tv/Recommendations;Ljava/lang/String;JLjava/lang/String;Lcn/hongguo/tv/Api;ZLorg/json/JSONObject;)V
+    invoke-direct/range {v0 .. v12}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda76;-><init>(Lcn/hongguo/tv/MainActivity;Ljava/lang/String;ILjava/lang/String;Lcn/hongguo/tv/Recommendations;Ljava/lang/String;JLjava/lang/String;Lcn/hongguo/tv/Api;ZLorg/json/JSONObject;)V
 
     invoke-virtual {v14, v15}, Ljava/util/concurrent/ThreadPoolExecutor;->execute(Ljava/lang/Runnable;)V
 
-    .line 218
+    .line 232
     return-void
 .end method
 
 .method refreshSeekLabels()V
     .locals 4
 
-    .line 179
+    .line 193
     iget-object v0, p0, Lcn/hongguo/tv/MainActivity;->rewindButton:Landroid/widget/Button;
 
     const-string v1, " \u79d2"
@@ -10724,7 +11140,7 @@
 .method reloadVisibleCovers(Landroid/view/View;)V
     .locals 2
 
-    .line 141
+    .line 155
     instance-of v0, p1, Landroid/widget/ImageView;
 
     if-eqz v0, :cond_0
@@ -10783,7 +11199,7 @@
 .method rememberSearch(Ljava/lang/String;)V
     .locals 5
 
-    .line 185
+    .line 199
     invoke-virtual {p1}, Ljava/lang/String;->trim()Ljava/lang/String;
 
     move-result-object p1
@@ -10885,7 +11301,7 @@
 .method renderCards(Landroid/widget/LinearLayout;Lorg/json/JSONArray;Landroid/view/View;)V
     .locals 1
 
-    .line 122
+    .line 136
     const/4 v0, 0x0
 
     invoke-virtual {p0, p1, p2, p3, v0}, Lcn/hongguo/tv/MainActivity;->renderCards(Landroid/widget/LinearLayout;Lorg/json/JSONArray;Landroid/view/View;I)V
@@ -10896,7 +11312,7 @@
 .method renderCards(Landroid/widget/LinearLayout;Lorg/json/JSONArray;Landroid/view/View;I)V
     .locals 22
 
-    .line 124
+    .line 138
     move-object/from16 v6, p0
 
     move-object/from16 v7, p1
@@ -11037,7 +11453,7 @@
 
     move-result-object v12
 
-    .line 125
+    .line 139
     const/4 v2, 0x0
 
     move/from16 v3, p4
@@ -11055,7 +11471,7 @@
 
     if-ge v3, v4, :cond_7
 
-    .line 126
+    .line 140
     move-object/from16 v4, p2
 
     invoke-virtual {v4, v3}, Lorg/json/JSONArray;->optJSONObject(I)Lorg/json/JSONObject;
@@ -11124,9 +11540,9 @@
 
     invoke-virtual {v6, v15, v4}, Lcn/hongguo/tv/MainActivity;->focusStyle(Landroid/view/View;Z)V
 
-    new-instance v4, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda30;
+    new-instance v4, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda32;
 
-    invoke-direct {v4, v6, v13}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda30;-><init>(Lcn/hongguo/tv/MainActivity;Lorg/json/JSONObject;)V
+    invoke-direct {v4, v6, v13}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda32;-><init>(Lcn/hongguo/tv/MainActivity;Lorg/json/JSONObject;)V
 
     invoke-virtual {v15, v4}, Landroid/widget/LinearLayout;->setOnClickListener(Landroid/view/View$OnClickListener;)V
 
@@ -11156,7 +11572,7 @@
 
     invoke-virtual {v15, v4}, Landroid/widget/LinearLayout;->setContentDescription(Ljava/lang/CharSequence;)V
 
-    .line 127
+    .line 141
     new-instance v4, Landroid/widget/FrameLayout;
 
     invoke-direct {v4, v6}, Landroid/widget/FrameLayout;-><init>(Landroid/content/Context;)V
@@ -11315,7 +11731,7 @@
 
     invoke-virtual {v15, v4, v3}, Landroid/widget/LinearLayout;->addView(Landroid/view/View;Landroid/view/ViewGroup$LayoutParams;)V
 
-    .line 128
+    .line 142
     invoke-virtual {v13, v5}, Lorg/json/JSONObject;->optString(Ljava/lang/String;)Ljava/lang/String;
 
     move-result-object v3
@@ -11372,7 +11788,7 @@
 
     invoke-virtual {v15, v3}, Landroid/widget/LinearLayout;->addView(Landroid/view/View;)V
 
-    .line 129
+    .line 143
     const-string v5, "episode"
 
     invoke-virtual {v13, v5}, Lorg/json/JSONObject;->has(Ljava/lang/String;)Z
@@ -11482,19 +11898,19 @@
 
     invoke-virtual {v15, v7}, Landroid/widget/LinearLayout;->addView(Landroid/view/View;)V
 
-    .line 130
+    .line 144
     :cond_6
     invoke-virtual {v15}, Landroid/widget/LinearLayout;->getOnFocusChangeListener()Landroid/view/View$OnFocusChangeListener;
 
     move-result-object v4
 
-    new-instance v5, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda31;
+    new-instance v5, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda33;
 
-    invoke-direct {v5, v6, v4, v12, v3}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda31;-><init>(Lcn/hongguo/tv/MainActivity;Landroid/view/View$OnFocusChangeListener;Lcn/hongguo/tv/MainActivity$PageUi;Landroid/widget/TextView;)V
+    invoke-direct {v5, v6, v4, v12, v3}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda33;-><init>(Lcn/hongguo/tv/MainActivity;Landroid/view/View$OnFocusChangeListener;Lcn/hongguo/tv/MainActivity$PageUi;Landroid/widget/TextView;)V
 
     invoke-virtual {v15, v5}, Landroid/widget/LinearLayout;->setOnFocusChangeListener(Landroid/view/View$OnFocusChangeListener;)V
 
-    .line 131
+    .line 145
     new-instance v3, Landroid/widget/LinearLayout$LayoutParams;
 
     const/4 v4, -0x2
@@ -11541,7 +11957,7 @@
 
     invoke-virtual {v6, v3, v4}, Lcn/hongguo/tv/MainActivity;->loadCover(Ljava/lang/String;Landroid/widget/ImageView;)V
 
-    .line 125
+    .line 139
     :goto_4
     add-int/lit8 v3, v20, 0x1
 
@@ -11555,7 +11971,7 @@
 
     goto/16 :goto_1
 
-    .line 133
+    .line 147
     :cond_7
     move/from16 v18, v9
 
@@ -11606,7 +12022,7 @@
 
     const/4 v9, 0x0
 
-    .line 134
+    .line 148
     invoke-virtual/range {p2 .. p2}, Lorg/json/JSONArray;->length()I
 
     move-result v0
@@ -11619,7 +12035,7 @@
 
     move-result-object v11
 
-    new-instance v14, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda32;
+    new-instance v14, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda34;
 
     move-object v0, v14
 
@@ -11637,7 +12053,7 @@
 
     move/from16 v5, p4
 
-    invoke-direct/range {v0 .. v5}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda32;-><init>(Lcn/hongguo/tv/MainActivity;Landroid/widget/LinearLayout;Lorg/json/JSONArray;Landroid/view/View;I)V
+    invoke-direct/range {v0 .. v5}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda34;-><init>(Lcn/hongguo/tv/MainActivity;Landroid/widget/LinearLayout;Lorg/json/JSONArray;Landroid/view/View;I)V
 
     const-string v0, "\u4e0a\u4e00\u9875"
 
@@ -11645,7 +12061,7 @@
 
     move-result-object v14
 
-    new-instance v5, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda33;
+    new-instance v5, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda35;
 
     move-object v0, v5
 
@@ -11653,7 +12069,7 @@
 
     move/from16 v5, p4
 
-    invoke-direct/range {v0 .. v5}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda33;-><init>(Lcn/hongguo/tv/MainActivity;Landroid/widget/LinearLayout;Lorg/json/JSONArray;Landroid/view/View;I)V
+    invoke-direct/range {v0 .. v5}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda35;-><init>(Lcn/hongguo/tv/MainActivity;Landroid/widget/LinearLayout;Lorg/json/JSONArray;Landroid/view/View;I)V
 
     const-string v0, "\u4e0b\u4e00\u9875"
 
@@ -11827,9 +12243,9 @@
 
     aget-object v0, v4, v5
 
-    new-instance v7, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda34;
+    new-instance v7, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda36;
 
-    invoke-direct {v7, v2}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda34;-><init>(Landroid/view/View;)V
+    invoke-direct {v7, v2}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda36;-><init>(Landroid/view/View;)V
 
     invoke-virtual {v0, v7}, Landroid/widget/Button;->setOnKeyListener(Landroid/view/View$OnKeyListener;)V
 
@@ -11842,7 +12258,7 @@
 
     move-object/from16 v1, p3
 
-    .line 135
+    .line 149
     :cond_11
     move-object/from16 v4, p3
 
@@ -11881,7 +12297,7 @@
 
     check-cast v7, Landroid/view/View;
 
-    new-instance v8, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda35;
+    new-instance v8, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda37;
 
     move-object v0, v8
 
@@ -11893,7 +12309,7 @@
 
     move-object v5, v10
 
-    invoke-direct/range {v0 .. v5}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda35;-><init>(Lcn/hongguo/tv/MainActivity;Landroid/view/View;ZLandroid/view/View;Ljava/util/ArrayList;)V
+    invoke-direct/range {v0 .. v5}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda37;-><init>(Lcn/hongguo/tv/MainActivity;Landroid/view/View;ZLandroid/view/View;Ljava/util/ArrayList;)V
 
     invoke-virtual {v7, v8}, Landroid/view/View;->post(Ljava/lang/Runnable;)Z
 
@@ -11904,7 +12320,7 @@
 
     iput-object v4, v12, Lcn/hongguo/tv/MainActivity$PageUi;->content:Landroid/view/View;
 
-    .line 136
+    .line 150
     :cond_14
     :goto_c
     return-void
@@ -11913,7 +12329,7 @@
 .method renderEpisodePage(Landroid/widget/LinearLayout;Lorg/json/JSONObject;Lorg/json/JSONArray;IIZ)V
     .locals 23
 
-    .line 153
+    .line 167
     move-object/from16 v8, p0
 
     move-object/from16 v9, p1
@@ -11948,7 +12364,7 @@
 
     return-void
 
-    .line 154
+    .line 168
     :cond_0
     invoke-virtual/range {p0 .. p0}, Lcn/hongguo/tv/MainActivity;->row()Landroid/widget/LinearLayout;
 
@@ -11964,7 +12380,7 @@
 
     div-int/lit8 v15, v0, 0x14
 
-    .line 155
+    .line 169
     new-instance v7, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda48;
 
     move-object v0, v7
@@ -11993,7 +12409,7 @@
 
     move-result-object v14
 
-    .line 156
+    .line 170
     new-instance v7, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda49;
 
     move-object v0, v7
@@ -12010,7 +12426,7 @@
 
     move-result-object v6
 
-    .line 157
+    .line 171
     const/4 v7, 0x2
 
     new-array v0, v7, [Landroid/widget/Button;
@@ -12052,7 +12468,7 @@
 
     goto :goto_0
 
-    .line 158
+    .line 172
     :cond_1
     if-lez v10, :cond_2
 
@@ -12109,7 +12525,7 @@
     :cond_5
     invoke-virtual {v6, v1}, Landroid/widget/Button;->setAlpha(F)V
 
-    .line 159
+    .line 173
     invoke-virtual {v8, v13, v14}, Lcn/hongguo/tv/MainActivity;->addButton(Landroid/widget/LinearLayout;Landroid/widget/Button;)V
 
     new-instance v0, Ljava/lang/StringBuilder;
@@ -12198,12 +12614,12 @@
 
     invoke-virtual {v9, v13}, Landroid/widget/LinearLayout;->addView(Landroid/view/View;)V
 
-    .line 160
+    .line 174
     new-instance v13, Ljava/util/ArrayList;
 
     invoke-direct {v13}, Ljava/util/ArrayList;-><init>()V
 
-    .line 161
+    .line 175
     const/16 v17, 0x0
 
     move v0, v10
@@ -12221,7 +12637,7 @@
 
     if-ge v0, v2, :cond_e
 
-    .line 162
+    .line 176
     rem-int/lit8 v2, v0, 0x5
 
     if-nez v2, :cond_7
@@ -12237,7 +12653,7 @@
 
     add-int/lit8 v2, v0, 0x1
 
-    .line 163
+    .line 177
     new-instance v0, Ljava/lang/StringBuilder;
 
     invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
@@ -12304,7 +12720,7 @@
 
     move-result-object v0
 
-    .line 164
+    .line 178
     new-instance v1, Ljava/lang/StringBuilder;
 
     invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
@@ -12401,7 +12817,7 @@
 
     invoke-virtual {v0, v3, v11, v4, v11}, Landroid/widget/Button;->setPadding(IIII)V
 
-    .line 165
+    .line 179
     new-instance v3, Landroid/widget/LinearLayout$LayoutParams;
 
     const/high16 v4, 0x42500000    # 52.0f
@@ -12440,7 +12856,7 @@
 
     invoke-virtual {v13, v0}, Ljava/util/ArrayList;->add(Ljava/lang/Object;)Z
 
-    .line 161
+    .line 175
     move v0, v2
 
     move/from16 v5, v22
@@ -12451,7 +12867,7 @@
 
     goto/16 :goto_5
 
-    .line 167
+    .line 181
     :cond_e
     move/from16 v7, p5
 
@@ -12498,7 +12914,7 @@
 
     goto :goto_a
 
-    .line 168
+    .line 182
     :cond_f
     if-le v7, v10, :cond_10
 
@@ -12528,7 +12944,7 @@
 
     check-cast v0, Landroid/view/View;
 
-    .line 169
+    .line 183
     invoke-virtual {v14}, Landroid/widget/Button;->isEnabled()Z
 
     move-result v1
@@ -12564,11 +12980,11 @@
 
     iget-object v1, v1, Lcn/hongguo/tv/MainActivity$PageUi;->top:Landroid/view/View;
 
-    .line 170
+    .line 184
     :goto_c
     invoke-virtual {v8, v13, v2, v1}, Lcn/hongguo/tv/MainActivity;->wireGrid(Ljava/util/ArrayList;ILandroid/view/View;)V
 
-    .line 171
+    .line 185
     const/4 v1, 0x2
 
     new-array v2, v1, [Landroid/widget/Button;
@@ -12594,7 +13010,7 @@
 
     goto :goto_d
 
-    .line 172
+    .line 186
     :cond_14
     invoke-virtual/range {p0 .. p0}, Lcn/hongguo/tv/MainActivity;->currentUi()Lcn/hongguo/tv/MainActivity$PageUi;
 
@@ -12607,14 +13023,14 @@
     :cond_15
     invoke-virtual {v0}, Landroid/view/View;->requestFocusFromTouch()Z
 
-    .line 173
+    .line 187
     return-void
 .end method
 
 .method request(Ljava/lang/String;Landroid/widget/TextView;Lcn/hongguo/tv/MainActivity$Done;)V
     .locals 9
 
-    .line 74
+    .line 75
     iget v2, p0, Lcn/hongguo/tv/MainActivity;->generation:I
 
     iget-object v3, p0, Lcn/hongguo/tv/MainActivity;->api:Lcn/hongguo/tv/Api;
@@ -12632,7 +13048,7 @@
     :cond_0
     iget-object v7, p0, Lcn/hongguo/tv/MainActivity;->io:Ljava/util/concurrent/ThreadPoolExecutor;
 
-    new-instance v8, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda92;
+    new-instance v8, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda97;
 
     move-object v0, v8
 
@@ -12644,7 +13060,7 @@
 
     move-object v6, p2
 
-    invoke-direct/range {v0 .. v6}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda92;-><init>(Lcn/hongguo/tv/MainActivity;ILcn/hongguo/tv/Api;Ljava/lang/String;Lcn/hongguo/tv/MainActivity$Done;Landroid/widget/TextView;)V
+    invoke-direct/range {v0 .. v6}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda97;-><init>(Lcn/hongguo/tv/MainActivity;ILcn/hongguo/tv/Api;Ljava/lang/String;Lcn/hongguo/tv/MainActivity$Done;Landroid/widget/TextView;)V
 
     invoke-virtual {v7, v8}, Ljava/util/concurrent/ThreadPoolExecutor;->execute(Ljava/lang/Runnable;)V
 
@@ -12662,7 +13078,7 @@
 .method restore()V
     .locals 5
 
-    .line 71
+    .line 72
     invoke-virtual {p0}, Lcn/hongguo/tv/MainActivity;->hideKeyboard()V
 
     iget v0, p0, Lcn/hongguo/tv/MainActivity;->generation:I
@@ -12794,9 +13210,9 @@
 
     if-eqz v1, :cond_5
 
-    new-instance v2, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda0;
+    new-instance v2, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda1;
 
-    invoke-direct {v2, p0, v0, v1}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda0;-><init>(Lcn/hongguo/tv/MainActivity;Lcn/hongguo/tv/MainActivity$Screen;Landroid/view/View;)V
+    invoke-direct {v2, p0, v0, v1}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda1;-><init>(Lcn/hongguo/tv/MainActivity;Lcn/hongguo/tv/MainActivity$Screen;Landroid/view/View;)V
 
     invoke-virtual {v1, v2}, Landroid/view/View;->post(Ljava/lang/Runnable;)Z
 
@@ -12807,7 +13223,7 @@
 .method resumePausedPlayer()V
     .locals 5
 
-    .line 266
+    .line 281
     iget-object v0, p0, Lcn/hongguo/tv/MainActivity;->player:Landroid/media/MediaPlayer;
 
     if-eqz v0, :cond_5
@@ -12818,7 +13234,7 @@
 
     goto/16 :goto_0
 
-    .line 267
+    .line 282
     :cond_0
     iget-object v0, p0, Lcn/hongguo/tv/MainActivity;->pauseButton:Landroid/widget/Button;
 
@@ -12832,7 +13248,7 @@
 
     invoke-virtual {v0, v1}, Landroid/os/Handler;->removeCallbacks(Ljava/lang/Runnable;)V
 
-    .line 268
+    .line 283
     iget-boolean v0, p0, Lcn/hongguo/tv/MainActivity;->activityVisible:Z
 
     if-eqz v0, :cond_1
@@ -12849,7 +13265,7 @@
 
     invoke-virtual {v0, v1, v2, v3}, Landroid/os/Handler;->postDelayed(Ljava/lang/Runnable;J)Z
 
-    .line 269
+    .line 284
     :cond_1
     iget-boolean v0, p0, Lcn/hongguo/tv/MainActivity;->resuming:Z
 
@@ -12857,7 +13273,7 @@
 
     return-void
 
-    .line 272
+    .line 287
     :cond_2
     sget v0, Landroid/os/Build$VERSION;->SDK_INT:I
 
@@ -12884,7 +13300,7 @@
 
     return-void
 
-    .line 273
+    .line 288
     :cond_4
     iget-object v0, p0, Lcn/hongguo/tv/MainActivity;->player:Landroid/media/MediaPlayer;
 
@@ -12900,7 +13316,7 @@
 
     iput-boolean v1, p0, Lcn/hongguo/tv/MainActivity;->resuming:Z
 
-    .line 274
+    .line 289
     iget-object v1, p0, Lcn/hongguo/tv/MainActivity;->status:Landroid/widget/TextView;
 
     new-instance v2, Ljava/lang/StringBuilder;
@@ -12943,22 +13359,22 @@
 
     invoke-virtual {v1, v2}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V
 
-    .line 275
-    new-instance v1, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda81;
+    .line 290
+    new-instance v1, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda87;
 
-    invoke-direct {v1, p0}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda81;-><init>(Lcn/hongguo/tv/MainActivity;)V
+    invoke-direct {v1, p0}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda87;-><init>(Lcn/hongguo/tv/MainActivity;)V
 
     invoke-virtual {v0, v1}, Landroid/media/MediaPlayer;->setOnSeekCompleteListener(Landroid/media/MediaPlayer$OnSeekCompleteListener;)V
 
-    .line 281
+    .line 296
     iget-wide v0, p0, Lcn/hongguo/tv/MainActivity;->pendingSeek:J
 
     invoke-virtual {p0, v0, v1}, Lcn/hongguo/tv/MainActivity;->seekToPosition(J)V
 
-    .line 282
+    .line 297
     return-void
 
-    .line 266
+    .line 281
     :cond_5
     :goto_0
     return-void
@@ -12967,7 +13383,7 @@
 .method resumeSeries(Lorg/json/JSONObject;Lorg/json/JSONArray;)V
     .locals 9
 
-    .line 150
+    .line 164
     const-string v0, "history"
 
     invoke-virtual {p0, v0}, Lcn/hongguo/tv/MainActivity;->bucket(Ljava/lang/String;)Lorg/json/JSONObject;
@@ -13044,7 +13460,7 @@
 .method row()Landroid/widget/LinearLayout;
     .locals 2
 
-    .line 65
+    .line 66
     new-instance v0, Landroid/widget/LinearLayout;
 
     invoke-direct {v0, p0}, Landroid/widget/LinearLayout;-><init>(Landroid/content/Context;)V
@@ -13063,7 +13479,7 @@
 .method sampleRecommendation(II)V
     .locals 16
 
-    .line 192
+    .line 206
     move-object/from16 v0, p0
 
     iget-object v1, v0, Lcn/hongguo/tv/MainActivity;->current:Lorg/json/JSONObject;
@@ -13186,7 +13602,7 @@
 .method saveProgress()V
     .locals 1
 
-    .line 316
+    .line 331
     const/4 v0, 0x1
 
     invoke-virtual {p0, v0}, Lcn/hongguo/tv/MainActivity;->saveProgress(Z)V
@@ -13197,7 +13613,7 @@
 .method saveProgress(Z)V
     .locals 11
 
-    .line 317
+    .line 332
     const-string v0, "history"
 
     iget-object v1, p0, Lcn/hongguo/tv/MainActivity;->prefs:Landroid/content/SharedPreferences;
@@ -13382,7 +13798,7 @@
 .method scaleMode()I
     .locals 3
 
-    .line 177
+    .line 191
     iget-object v0, p0, Lcn/hongguo/tv/MainActivity;->prefs:Landroid/content/SharedPreferences;
 
     const-string v1, "scale_mode"
@@ -13409,7 +13825,7 @@
 .method scheduleHide()V
     .locals 6
 
-    .line 289
+    .line 304
     iget-object v0, p0, Lcn/hongguo/tv/MainActivity;->ui:Landroid/os/Handler;
 
     iget-object v1, p0, Lcn/hongguo/tv/MainActivity;->hideChrome:Ljava/lang/Runnable;
@@ -13475,7 +13891,7 @@
 .method search()V
     .locals 16
 
-    .line 142
+    .line 156
     move-object/from16 v0, p0
 
     iget-object v1, v0, Lcn/hongguo/tv/MainActivity;->catalogMode:Ljava/lang/String;
@@ -13640,9 +14056,9 @@
 
     move-result-object v6
 
-    new-instance v7, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda3;
+    new-instance v7, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda5;
 
-    invoke-direct {v7, v0, v4}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda3;-><init>(Lcn/hongguo/tv/MainActivity;Landroid/widget/EditText;)V
+    invoke-direct {v7, v0, v4}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda5;-><init>(Lcn/hongguo/tv/MainActivity;Landroid/widget/EditText;)V
 
     const-string v8, "\u641c\u7d22"
 
@@ -13743,9 +14159,9 @@
 
     aget-object v12, v2, v11
 
-    new-instance v14, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda4;
+    new-instance v14, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda6;
 
-    invoke-direct {v14, v0, v12}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda4;-><init>(Lcn/hongguo/tv/MainActivity;Ljava/lang/String;)V
+    invoke-direct {v14, v0, v12}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda6;-><init>(Lcn/hongguo/tv/MainActivity;Ljava/lang/String;)V
 
     invoke-virtual {v0, v12, v14, v5}, Lcn/hongguo/tv/MainActivity;->button(Ljava/lang/String;Ljava/lang/Runnable;Z)Landroid/widget/Button;
 
@@ -13814,9 +14230,9 @@
 
     move-result-object v12
 
-    new-instance v14, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda5;
+    new-instance v14, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda7;
 
-    invoke-direct {v14, v0, v12}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda5;-><init>(Lcn/hongguo/tv/MainActivity;Ljava/lang/String;)V
+    invoke-direct {v14, v0, v12}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda7;-><init>(Lcn/hongguo/tv/MainActivity;Ljava/lang/String;)V
 
     invoke-virtual {v0, v12, v14, v5}, Lcn/hongguo/tv/MainActivity;->button(Ljava/lang/String;Ljava/lang/Runnable;Z)Landroid/widget/Button;
 
@@ -13890,9 +14306,9 @@
 
     invoke-virtual {v0, v1, v8, v4, v2}, Lcn/hongguo/tv/MainActivity;->show(Landroid/view/View;Ljava/lang/String;Landroid/view/View;Z)V
 
-    new-instance v1, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda6;
+    new-instance v1, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda8;
 
-    invoke-direct {v1, v7}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda6;-><init>(Landroid/widget/Button;)V
+    invoke-direct {v1, v7}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda8;-><init>(Landroid/widget/Button;)V
 
     invoke-virtual {v4, v1}, Landroid/widget/EditText;->setOnEditorActionListener(Landroid/widget/TextView$OnEditorActionListener;)V
 
@@ -13902,7 +14318,7 @@
 .method searchFor(Ljava/lang/String;)V
     .locals 1
 
-    .line 186
+    .line 200
     invoke-virtual {p1}, Ljava/lang/String;->trim()Ljava/lang/String;
 
     move-result-object p1
@@ -13926,7 +14342,7 @@
 .method searchHistory()Lorg/json/JSONArray;
     .locals 4
 
-    .line 184
+    .line 198
     :try_start_0
     new-instance v0, Lorg/json/JSONArray;
 
@@ -13959,7 +14375,7 @@
 .method seekBy(I)V
     .locals 2
 
-    .line 262
+    .line 277
     iget-object v0, p0, Lcn/hongguo/tv/MainActivity;->player:Landroid/media/MediaPlayer;
 
     if-eqz v0, :cond_0
@@ -14009,7 +14425,7 @@
 .method seekSeconds()I
     .locals 3
 
-    .line 178
+    .line 192
     iget-object v0, p0, Lcn/hongguo/tv/MainActivity;->prefs:Landroid/content/SharedPreferences;
 
     const-string v1, "seek_seconds"
@@ -14038,7 +14454,7 @@
 .method seekToPosition(J)V
     .locals 2
 
-    .line 148
+    .line 162
     iget-object v0, p0, Lcn/hongguo/tv/MainActivity;->recommendations:Lcn/hongguo/tv/Recommendations;
 
     invoke-virtual {v0}, Lcn/hongguo/tv/Recommendations;->resetSample()V
@@ -14069,7 +14485,7 @@
 .method selectedStyle(Landroid/widget/Button;Z)V
     .locals 1
 
-    .line 84
+    .line 85
     invoke-virtual {p1, p2}, Landroid/widget/Button;->setSelected(Z)V
 
     if-eqz p2, :cond_0
@@ -14151,7 +14567,7 @@
 .method setSleepMinutes(I)V
     .locals 6
 
-    .line 180
+    .line 194
     iget-object v0, p0, Lcn/hongguo/tv/MainActivity;->ui:Landroid/os/Handler;
 
     iget-object v1, p0, Lcn/hongguo/tv/MainActivity;->sleepStop:Ljava/lang/Runnable;
@@ -14199,7 +14615,7 @@
 .method settings()V
     .locals 7
 
-    .line 175
+    .line 189
     iget-object v0, p0, Lcn/hongguo/tv/MainActivity;->api:Lcn/hongguo/tv/Api;
 
     if-eqz v0, :cond_0
@@ -14339,9 +14755,9 @@
 
     invoke-virtual {v4, v2}, Landroid/widget/LinearLayout;->addView(Landroid/view/View;)V
 
-    new-instance v4, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda82;
+    new-instance v4, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda91;
 
-    invoke-direct {v4, p0, v1, v3, v2}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda82;-><init>(Lcn/hongguo/tv/MainActivity;Landroid/widget/EditText;Landroid/widget/EditText;Landroid/widget/TextView;)V
+    invoke-direct {v4, p0, v1, v3, v2}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda91;-><init>(Lcn/hongguo/tv/MainActivity;Landroid/widget/EditText;Landroid/widget/EditText;Landroid/widget/TextView;)V
 
     const-string v1, "\u4fdd\u5b58\u5e76\u68c0\u67e5\u8fde\u63a5"
 
@@ -14395,17 +14811,17 @@
 
     move-result-object v3
 
-    new-instance v4, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda83;
+    new-instance v4, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda92;
 
-    invoke-direct {v4}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda83;-><init>()V
+    invoke-direct {v4}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda92;-><init>()V
 
     invoke-virtual {p0, v3, v4, v2}, Lcn/hongguo/tv/MainActivity;->button(Ljava/lang/String;Ljava/lang/Runnable;Z)Landroid/widget/Button;
 
     move-result-object v2
 
-    new-instance v3, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda84;
+    new-instance v3, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda93;
 
-    invoke-direct {v3, p0, v2}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda84;-><init>(Lcn/hongguo/tv/MainActivity;Landroid/widget/Button;)V
+    invoke-direct {v3, p0, v2}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda93;-><init>(Lcn/hongguo/tv/MainActivity;Landroid/widget/Button;)V
 
     invoke-virtual {v2, v3}, Landroid/widget/Button;->setOnClickListener(Landroid/view/View$OnClickListener;)V
 
@@ -14443,7 +14859,7 @@
 .method shell(Ljava/lang/String;)Landroid/widget/LinearLayout;
     .locals 16
 
-    .line 86
+    .line 87
     move-object/from16 v0, p0
 
     move-object/from16 v1, p1
@@ -14462,7 +14878,7 @@
 
     invoke-virtual {v2, v3}, Landroid/widget/LinearLayout;->setTag(Ljava/lang/Object;)V
 
-    .line 87
+    .line 88
     const-string v4, "\u6536\u85cf"
 
     invoke-virtual {v1, v4}, Ljava/lang/String;->contains(Ljava/lang/CharSequence;)Z
@@ -14562,7 +14978,7 @@
     :goto_2
     iput-object v5, v3, Lcn/hongguo/tv/MainActivity$PageUi;->section:Ljava/lang/String;
 
-    .line 88
+    .line 89
     invoke-virtual/range {p0 .. p0}, Lcn/hongguo/tv/MainActivity;->column()Landroid/widget/LinearLayout;
 
     move-result-object v5
@@ -14629,7 +15045,7 @@
 
     invoke-virtual {v2, v5, v10}, Landroid/widget/LinearLayout;->addView(Landroid/view/View;Landroid/view/ViewGroup$LayoutParams;)V
 
-    .line 89
+    .line 90
     const-string v5, "\u25b6"
 
     const/16 v10, 0x1b
@@ -14680,7 +15096,7 @@
 
     invoke-virtual {v12, v5, v11}, Landroid/widget/LinearLayout;->addView(Landroid/view/View;Landroid/view/ViewGroup$LayoutParams;)V
 
-    .line 90
+    .line 91
     filled-new-array {v6, v7, v4, v8, v9}, [Ljava/lang/String;
 
     move-result-object v4
@@ -14689,7 +15105,7 @@
 
     invoke-direct {v5}, Ljava/util/ArrayList;-><init>()V
 
-    .line 91
+    .line 92
     const/4 v6, 0x0
 
     :goto_4
@@ -14720,9 +15136,9 @@
     invoke-virtual {v11, v12, v15}, Landroid/widget/LinearLayout;->addView(Landroid/view/View;Landroid/view/ViewGroup$LayoutParams;)V
 
     :cond_7
-    new-instance v7, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda40;
+    new-instance v7, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda38;
 
-    invoke-direct {v7, v0, v8}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda40;-><init>(Lcn/hongguo/tv/MainActivity;Ljava/lang/String;)V
+    invoke-direct {v7, v0, v8}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda38;-><init>(Lcn/hongguo/tv/MainActivity;Ljava/lang/String;)V
 
     invoke-virtual {v0, v8, v7, v14}, Lcn/hongguo/tv/MainActivity;->button(Ljava/lang/String;Ljava/lang/Runnable;Z)Landroid/widget/Button;
 
@@ -14781,7 +15197,7 @@
 
     goto :goto_4
 
-    .line 92
+    .line 93
     :cond_9
     const/16 v4, 0xa
 
@@ -14805,7 +15221,7 @@
 
     invoke-virtual {v6, v4}, Landroid/widget/LinearLayout;->addView(Landroid/view/View;)V
 
-    .line 93
+    .line 94
     invoke-virtual/range {p0 .. p0}, Lcn/hongguo/tv/MainActivity;->column()Landroid/widget/LinearLayout;
 
     move-result-object v4
@@ -14848,7 +15264,7 @@
 
     invoke-virtual {v2, v4, v6}, Landroid/widget/LinearLayout;->addView(Landroid/view/View;Landroid/view/ViewGroup$LayoutParams;)V
 
-    .line 94
+    .line 95
     invoke-virtual/range {p0 .. p0}, Lcn/hongguo/tv/MainActivity;->row()Landroid/widget/LinearLayout;
 
     move-result-object v4
@@ -14869,10 +15285,10 @@
 
     invoke-virtual {v4, v6}, Landroid/widget/LinearLayout;->addView(Landroid/view/View;)V
 
-    .line 95
-    new-instance v6, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda41;
+    .line 96
+    new-instance v6, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda39;
 
-    invoke-direct {v6, v0}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda41;-><init>(Lcn/hongguo/tv/MainActivity;)V
+    invoke-direct {v6, v0}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda39;-><init>(Lcn/hongguo/tv/MainActivity;)V
 
     const-string v9, "\u771f\u4eba\u5267"
 
@@ -14880,9 +15296,9 @@
 
     move-result-object v6
 
-    new-instance v9, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda42;
+    new-instance v9, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda40;
 
-    invoke-direct {v9, v0}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda42;-><init>(Lcn/hongguo/tv/MainActivity;)V
+    invoke-direct {v9, v0}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda40;-><init>(Lcn/hongguo/tv/MainActivity;)V
 
     const-string v11, "\u6f2b\u5267"
 
@@ -14914,9 +15330,9 @@
 
     invoke-virtual {v0, v4, v9}, Lcn/hongguo/tv/MainActivity;->addButton(Landroid/widget/LinearLayout;Landroid/widget/Button;)V
 
-    new-instance v11, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda43;
+    new-instance v11, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda41;
 
-    invoke-direct {v11, v0}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda43;-><init>(Lcn/hongguo/tv/MainActivity;)V
+    invoke-direct {v11, v0}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda41;-><init>(Lcn/hongguo/tv/MainActivity;)V
 
     const-string v15, "AI\u5267"
 
@@ -14965,7 +15381,7 @@
     :goto_5
     iput-object v9, v3, Lcn/hongguo/tv/MainActivity$PageUi;->top:Landroid/view/View;
 
-    .line 96
+    .line 97
     new-instance v9, Landroid/view/View;
 
     invoke-direct {v9, v0}, Landroid/view/View;-><init>(Landroid/content/Context;)V
@@ -14992,9 +15408,9 @@
     const-string v8, "\u641c\u7d22\u77ed\u5267\u6216\u6f14\u5458"
 
     :goto_6
-    new-instance v9, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda44;
+    new-instance v9, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda42;
 
-    invoke-direct {v9, v0}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda44;-><init>(Lcn/hongguo/tv/MainActivity;)V
+    invoke-direct {v9, v0}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda42;-><init>(Lcn/hongguo/tv/MainActivity;)V
 
     invoke-virtual {v0, v8, v9, v14}, Lcn/hongguo/tv/MainActivity;->button(Ljava/lang/String;Ljava/lang/Runnable;Z)Landroid/widget/Button;
 
@@ -15010,7 +15426,7 @@
 
     invoke-virtual {v8, v4}, Landroid/widget/LinearLayout;->addView(Landroid/view/View;)V
 
-    .line 97
+    .line 98
     new-instance v4, Landroid/view/View;
 
     invoke-direct {v4, v0}, Landroid/view/View;-><init>(Landroid/content/Context;)V
@@ -15057,7 +15473,7 @@
 
     invoke-virtual {v7, v4, v8}, Landroid/widget/LinearLayout;->addView(Landroid/view/View;Landroid/view/ViewGroup$LayoutParams;)V
 
-    .line 98
+    .line 99
     const/16 v4, 0x18
 
     invoke-virtual/range {p0 .. p0}, Lcn/hongguo/tv/MainActivity;->ink()I
@@ -15092,7 +15508,7 @@
 
     invoke-virtual {v1, v4}, Landroid/widget/LinearLayout;->addView(Landroid/view/View;)V
 
-    .line 99
+    .line 100
     nop
 
     :goto_8
@@ -15108,9 +15524,9 @@
 
     check-cast v1, Landroid/view/View;
 
-    new-instance v4, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda45;
+    new-instance v4, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda43;
 
-    invoke-direct {v4, v5, v14, v3}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda45;-><init>(Ljava/util/ArrayList;ILcn/hongguo/tv/MainActivity$PageUi;)V
+    invoke-direct {v4, v5, v14, v3}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda43;-><init>(Ljava/util/ArrayList;ILcn/hongguo/tv/MainActivity$PageUi;)V
 
     invoke-virtual {v1, v4}, Landroid/view/View;->setOnKeyListener(Landroid/view/View$OnKeyListener;)V
 
@@ -15118,22 +15534,22 @@
 
     goto :goto_8
 
-    .line 100
+    .line 101
     :cond_e
-    new-instance v1, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda46;
+    new-instance v1, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda44;
 
-    invoke-direct {v1, v3}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda46;-><init>(Lcn/hongguo/tv/MainActivity$PageUi;)V
+    invoke-direct {v1, v3}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda44;-><init>(Lcn/hongguo/tv/MainActivity$PageUi;)V
 
     invoke-virtual {v6, v1}, Landroid/widget/Button;->setOnKeyListener(Landroid/view/View$OnKeyListener;)V
 
-    .line 101
+    .line 102
     return-object v2
 .end method
 
 .method show(Landroid/view/View;Ljava/lang/String;Landroid/view/View;Z)V
     .locals 2
 
-    .line 69
+    .line 70
     invoke-virtual {p0}, Lcn/hongguo/tv/MainActivity;->hideKeyboard()V
 
     iget v0, p0, Lcn/hongguo/tv/MainActivity;->generation:I
@@ -15227,9 +15643,9 @@
     :cond_1
     if-eqz p3, :cond_2
 
-    new-instance p2, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda74;
+    new-instance p2, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda77;
 
-    invoke-direct {p2, p0, p1, p3}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda74;-><init>(Lcn/hongguo/tv/MainActivity;Landroid/view/View;Landroid/view/View;)V
+    invoke-direct {p2, p0, p1, p3}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda77;-><init>(Lcn/hongguo/tv/MainActivity;Landroid/view/View;Landroid/view/View;)V
 
     invoke-virtual {p3, p2}, Landroid/view/View;->post(Ljava/lang/Runnable;)Z
 
@@ -15240,25 +15656,27 @@
 .method showControls()V
     .locals 2
 
-    .line 285
-    iget-object v0, p0, Lcn/hongguo/tv/MainActivity;->chrome:Landroid/widget/LinearLayout;
+    .line 300
+    const/4 v0, 0x0
 
-    if-eqz v0, :cond_1
+    iput-boolean v0, p0, Lcn/hongguo/tv/MainActivity;->quietTransition:Z
+
+    iget-object v1, p0, Lcn/hongguo/tv/MainActivity;->chrome:Landroid/widget/LinearLayout;
+
+    if-eqz v1, :cond_1
 
     invoke-virtual {p0}, Lcn/hongguo/tv/MainActivity;->playerOverlay()Landroid/view/View;
 
-    move-result-object v0
+    move-result-object v1
 
-    if-eqz v0, :cond_0
+    if-eqz v1, :cond_0
 
     goto :goto_0
 
     :cond_0
-    iget-object v0, p0, Lcn/hongguo/tv/MainActivity;->chrome:Landroid/widget/LinearLayout;
+    iget-object v1, p0, Lcn/hongguo/tv/MainActivity;->chrome:Landroid/widget/LinearLayout;
 
-    const/4 v1, 0x0
-
-    invoke-virtual {v0, v1}, Landroid/widget/LinearLayout;->setVisibility(I)V
+    invoke-virtual {v1, v0}, Landroid/widget/LinearLayout;->setVisibility(I)V
 
     const/4 v0, 0x1
 
@@ -15294,7 +15712,7 @@
 .method sleepLabel()Ljava/lang/String;
     .locals 6
 
-    .line 181
+    .line 195
     new-instance v0, Ljava/lang/StringBuilder;
 
     invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
@@ -15373,7 +15791,7 @@
 .method sourceFailure(Landroid/media/MediaPlayer;)V
     .locals 1
 
-    .line 231
+    .line 245
     const/4 v0, 0x0
 
     invoke-virtual {p0, p1, v0}, Lcn/hongguo/tv/MainActivity;->sourceFailure(Landroid/media/MediaPlayer;Ljava/lang/Exception;)V
@@ -15384,7 +15802,7 @@
 .method sourceFailure(Landroid/media/MediaPlayer;Ljava/lang/Exception;)V
     .locals 1
 
-    .line 232
+    .line 246
     iget-object v0, p0, Lcn/hongguo/tv/MainActivity;->player:Landroid/media/MediaPlayer;
 
     if-ne p1, v0, :cond_1
@@ -15438,7 +15856,7 @@
 .method standaloneSettings()V
     .locals 2
 
-    .line 176
+    .line 190
     new-instance v0, Lcn/hongguo/tv/TvSettings;
 
     const/4 v1, 0x0
@@ -15453,7 +15871,7 @@
 .method startPlayer(Lorg/json/JSONObject;Lorg/json/JSONArray;IJ)V
     .locals 16
 
-    .line 236
+    .line 250
     move-object/from16 v0, p0
 
     move-object/from16 v1, p1
@@ -15466,7 +15884,7 @@
 
     invoke-virtual {v2}, Lcn/hongguo/tv/TvUpdater;->pause()V
 
-    .line 237
+    .line 251
     :cond_0
     iget-object v2, v0, Lcn/hongguo/tv/MainActivity;->recommendations:Lcn/hongguo/tv/Recommendations;
 
@@ -15488,7 +15906,7 @@
 
     iput v1, v0, Lcn/hongguo/tv/MainActivity;->seekPreview:I
 
-    .line 238
+    .line 252
     new-instance v2, Landroid/widget/FrameLayout;
 
     invoke-direct {v2, v0}, Landroid/widget/FrameLayout;-><init>(Landroid/content/Context;)V
@@ -15507,16 +15925,16 @@
 
     invoke-virtual {v2, v3}, Landroid/widget/FrameLayout;->setKeepScreenOn(Z)V
 
-    .line 239
+    .line 253
     iget-object v2, v0, Lcn/hongguo/tv/MainActivity;->playback:Landroid/widget/FrameLayout;
 
-    new-instance v4, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda52;
+    new-instance v4, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda54;
 
-    invoke-direct {v4, v0}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda52;-><init>(Lcn/hongguo/tv/MainActivity;)V
+    invoke-direct {v4, v0}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda54;-><init>(Lcn/hongguo/tv/MainActivity;)V
 
     invoke-virtual {v2, v4}, Landroid/widget/FrameLayout;->addOnLayoutChangeListener(Landroid/view/View$OnLayoutChangeListener;)V
 
-    .line 240
+    .line 254
     new-instance v2, Landroid/view/SurfaceView;
 
     invoke-direct {v2, v0}, Landroid/view/SurfaceView;-><init>(Landroid/content/Context;)V
@@ -15533,9 +15951,9 @@
 
     iget-object v2, v0, Lcn/hongguo/tv/MainActivity;->surface:Landroid/view/SurfaceView;
 
-    new-instance v4, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda53;
+    new-instance v4, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda55;
 
-    invoke-direct {v4, v0}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda53;-><init>(Lcn/hongguo/tv/MainActivity;)V
+    invoke-direct {v4, v0}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda55;-><init>(Lcn/hongguo/tv/MainActivity;)V
 
     invoke-virtual {v2, v4}, Landroid/view/SurfaceView;->setOnClickListener(Landroid/view/View$OnClickListener;)V
 
@@ -15551,7 +15969,7 @@
 
     invoke-virtual {v2, v4, v5}, Landroid/widget/FrameLayout;->addView(Landroid/view/View;Landroid/view/ViewGroup$LayoutParams;)V
 
-    .line 241
+    .line 255
     invoke-virtual/range {p0 .. p0}, Lcn/hongguo/tv/MainActivity;->column()Landroid/widget/LinearLayout;
 
     move-result-object v2
@@ -15590,7 +16008,7 @@
 
     invoke-virtual {v2, v5}, Landroid/widget/LinearLayout;->setBackgroundColor(I)V
 
-    .line 242
+    .line 256
     invoke-virtual/range {p0 .. p0}, Lcn/hongguo/tv/MainActivity;->row()Landroid/widget/LinearLayout;
 
     move-result-object v2
@@ -15647,7 +16065,7 @@
 
     invoke-virtual {v7, v2}, Landroid/widget/LinearLayout;->addView(Landroid/view/View;)V
 
-    .line 243
+    .line 257
     new-instance v2, Landroid/widget/SeekBar;
 
     invoke-direct {v2, v0}, Landroid/widget/SeekBar;-><init>(Landroid/content/Context;)V
@@ -15682,7 +16100,7 @@
 
     invoke-virtual {v2, v7, v8}, Landroid/widget/LinearLayout;->addView(Landroid/view/View;Landroid/view/ViewGroup$LayoutParams;)V
 
-    .line 244
+    .line 258
     invoke-virtual/range {p0 .. p0}, Lcn/hongguo/tv/MainActivity;->row()Landroid/widget/LinearLayout;
 
     move-result-object v2
@@ -15691,10 +16109,10 @@
 
     invoke-direct {v7}, Ljava/util/ArrayList;-><init>()V
 
-    .line 245
-    new-instance v8, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda54;
+    .line 259
+    new-instance v8, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda56;
 
-    invoke-direct {v8, v0}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda54;-><init>(Lcn/hongguo/tv/MainActivity;)V
+    invoke-direct {v8, v0}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda56;-><init>(Lcn/hongguo/tv/MainActivity;)V
 
     const-string v12, "\u6682\u505c"
 
@@ -15704,9 +16122,9 @@
 
     iput-object v8, v0, Lcn/hongguo/tv/MainActivity;->pauseButton:Landroid/widget/Button;
 
-    new-instance v8, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda55;
+    new-instance v8, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda57;
 
-    invoke-direct {v8, v0}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda55;-><init>(Lcn/hongguo/tv/MainActivity;)V
+    invoke-direct {v8, v0}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda57;-><init>(Lcn/hongguo/tv/MainActivity;)V
 
     const-string v12, "\u4e0b\u4e00\u96c6"
 
@@ -15716,7 +16134,7 @@
 
     iput-object v8, v0, Lcn/hongguo/tv/MainActivity;->nextButton:Landroid/widget/Button;
 
-    .line 246
+    .line 260
     new-instance v8, Ljava/lang/StringBuilder;
 
     invoke-direct {v8}, Ljava/lang/StringBuilder;-><init>()V
@@ -15737,9 +16155,9 @@
 
     move-result-object v8
 
-    new-instance v12, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda56;
+    new-instance v12, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda58;
 
-    invoke-direct {v12, v0}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda56;-><init>(Lcn/hongguo/tv/MainActivity;)V
+    invoke-direct {v12, v0}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda58;-><init>(Lcn/hongguo/tv/MainActivity;)V
 
     invoke-virtual {v0, v8, v12, v3}, Lcn/hongguo/tv/MainActivity;->button(Ljava/lang/String;Ljava/lang/Runnable;Z)Landroid/widget/Button;
 
@@ -15747,14 +16165,14 @@
 
     iput-object v8, v0, Lcn/hongguo/tv/MainActivity;->rateButton:Landroid/widget/Button;
 
-    .line 247
+    .line 261
     iget-object v8, v0, Lcn/hongguo/tv/MainActivity;->pauseButton:Landroid/widget/Button;
 
     iget-object v12, v0, Lcn/hongguo/tv/MainActivity;->nextButton:Landroid/widget/Button;
 
-    new-instance v13, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda57;
+    new-instance v13, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda59;
 
-    invoke-direct {v13, v0}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda57;-><init>(Lcn/hongguo/tv/MainActivity;)V
+    invoke-direct {v13, v0}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda59;-><init>(Lcn/hongguo/tv/MainActivity;)V
 
     const-string v14, "\u6362\u4e00\u90e8"
 
@@ -15762,9 +16180,9 @@
 
     move-result-object v13
 
-    new-instance v14, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda58;
+    new-instance v14, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda60;
 
-    invoke-direct {v14, v0}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda58;-><init>(Lcn/hongguo/tv/MainActivity;)V
+    invoke-direct {v14, v0}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda60;-><init>(Lcn/hongguo/tv/MainActivity;)V
 
     const-string v15, "\u9009\u96c6"
 
@@ -15774,9 +16192,9 @@
 
     iget-object v15, v0, Lcn/hongguo/tv/MainActivity;->rateButton:Landroid/widget/Button;
 
-    new-instance v4, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda59;
+    new-instance v4, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda61;
 
-    invoke-direct {v4, v0}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda59;-><init>(Lcn/hongguo/tv/MainActivity;)V
+    invoke-direct {v4, v0}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda61;-><init>(Lcn/hongguo/tv/MainActivity;)V
 
     const-string v5, "\u8bbe\u7f6e"
 
@@ -15815,7 +16233,7 @@
 
     aget-object v8, v6, v4
 
-    .line 248
+    .line 262
     const/high16 v12, 0x41800000    # 16.0f
 
     invoke-virtual {v8, v12}, Landroid/widget/Button;->setTextSize(F)V
@@ -15864,14 +16282,14 @@
 
     invoke-virtual {v7, v8}, Ljava/util/ArrayList;->add(Ljava/lang/Object;)Z
 
-    .line 247
+    .line 261
     add-int/lit8 v4, v4, 0x1
 
     const/4 v5, 0x6
 
     goto :goto_0
 
-    .line 250
+    .line 264
     :cond_1
     const/4 v4, 0x0
 
@@ -15888,9 +16306,9 @@
 
     check-cast v5, Landroid/view/View;
 
-    new-instance v6, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda60;
+    new-instance v6, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda62;
 
-    invoke-direct {v6, v0, v4, v7}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda60;-><init>(Lcn/hongguo/tv/MainActivity;ILjava/util/ArrayList;)V
+    invoke-direct {v6, v0, v4, v7}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda62;-><init>(Lcn/hongguo/tv/MainActivity;ILjava/util/ArrayList;)V
 
     invoke-virtual {v5, v6}, Landroid/view/View;->setOnKeyListener(Landroid/view/View$OnKeyListener;)V
 
@@ -15898,7 +16316,7 @@
 
     goto :goto_1
 
-    .line 251
+    .line 265
     :cond_2
     iget-object v4, v0, Lcn/hongguo/tv/MainActivity;->chrome:Landroid/widget/LinearLayout;
 
@@ -15994,7 +16412,7 @@
 
     invoke-virtual {v0, v1, v2, v4, v3}, Lcn/hongguo/tv/MainActivity;->show(Landroid/view/View;Ljava/lang/String;Landroid/view/View;Z)V
 
-    .line 252
+    .line 266
     iget-object v1, v0, Lcn/hongguo/tv/MainActivity;->seek:Landroid/widget/SeekBar;
 
     new-instance v2, Lcn/hongguo/tv/MainActivity$3;
@@ -16003,16 +16421,16 @@
 
     invoke-virtual {v1, v2}, Landroid/widget/SeekBar;->setOnSeekBarChangeListener(Landroid/widget/SeekBar$OnSeekBarChangeListener;)V
 
-    .line 253
+    .line 267
     iget-object v1, v0, Lcn/hongguo/tv/MainActivity;->seek:Landroid/widget/SeekBar;
 
-    new-instance v2, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda61;
+    new-instance v2, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda63;
 
-    invoke-direct {v2, v0}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda61;-><init>(Lcn/hongguo/tv/MainActivity;)V
+    invoke-direct {v2, v0}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda63;-><init>(Lcn/hongguo/tv/MainActivity;)V
 
     invoke-virtual {v1, v2}, Landroid/widget/SeekBar;->setOnKeyListener(Landroid/view/View$OnKeyListener;)V
 
-    .line 255
+    .line 269
     iget-object v1, v0, Lcn/hongguo/tv/MainActivity;->surface:Landroid/view/SurfaceView;
 
     invoke-virtual {v1}, Landroid/view/SurfaceView;->getHolder()Landroid/view/SurfaceHolder;
@@ -16029,14 +16447,14 @@
 
     invoke-interface {v1, v2}, Landroid/view/SurfaceHolder;->addCallback(Landroid/view/SurfaceHolder$Callback;)V
 
-    .line 256
+    .line 270
     return-void
 .end method
 
 .method stopPlayer()V
     .locals 4
 
-    .line 318
+    .line 333
     invoke-virtual {p0}, Lcn/hongguo/tv/MainActivity;->cancelConfirmHold()V
 
     const/4 v0, 0x0
@@ -16116,7 +16534,7 @@
 .method text(Ljava/lang/String;II)Landroid/widget/TextView;
     .locals 2
 
-    .line 63
+    .line 64
     new-instance v0, Landroid/widget/TextView;
 
     invoke-direct {v0, p0}, Landroid/widget/TextView;-><init>(Landroid/content/Context;)V
@@ -16205,7 +16623,7 @@
 .method togglePause()V
     .locals 4
 
-    .line 263
+    .line 278
     invoke-virtual {p0}, Lcn/hongguo/tv/MainActivity;->cancelConfirmHold()V
 
     iget-object v0, p0, Lcn/hongguo/tv/MainActivity;->failure:Ljava/lang/String;
@@ -16378,7 +16796,7 @@
 .method topTarget(Landroid/view/View;)Landroid/view/View;
     .locals 1
 
-    .line 82
+    .line 83
     invoke-virtual {p0}, Lcn/hongguo/tv/MainActivity;->currentUi()Lcn/hongguo/tv/MainActivity$PageUi;
 
     move-result-object v0
@@ -16407,7 +16825,7 @@
         }
     .end annotation
 
-    .line 137
+    .line 151
     const/4 v0, 0x0
 
     invoke-virtual {p0, p1, p2, p3, v0}, Lcn/hongguo/tv/MainActivity;->wireGrid(Ljava/util/ArrayList;ILandroid/view/View;Landroid/view/View;)V
@@ -16429,7 +16847,7 @@
         }
     .end annotation
 
-    .line 138
+    .line 152
     invoke-virtual {p0}, Lcn/hongguo/tv/MainActivity;->currentUi()Lcn/hongguo/tv/MainActivity$PageUi;
 
     move-result-object v7
@@ -16453,7 +16871,7 @@
 
     check-cast v9, Landroid/view/View;
 
-    new-instance v10, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda78;
+    new-instance v10, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda79;
 
     move-object v0, v10
 
@@ -16469,7 +16887,7 @@
 
     move-object v6, p4
 
-    invoke-direct/range {v0 .. v6}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda78;-><init>(ILjava/util/ArrayList;ILcn/hongguo/tv/MainActivity$PageUi;Landroid/view/View;Landroid/view/View;)V
+    invoke-direct/range {v0 .. v6}, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda79;-><init>(ILjava/util/ArrayList;ILcn/hongguo/tv/MainActivity$PageUi;Landroid/view/View;Landroid/view/View;)V
 
     invoke-virtual {v9, v10}, Landroid/view/View;->setOnKeyListener(Landroid/view/View$OnKeyListener;)V
 

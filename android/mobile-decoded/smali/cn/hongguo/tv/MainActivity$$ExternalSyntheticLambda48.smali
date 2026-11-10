@@ -66,7 +66,7 @@
 
     iget-boolean v6, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda48;->f$6:Z
 
-    invoke-virtual/range {v0 .. v6}, Lcn/hongguo/tv/MainActivity;->lambda$renderEpisodePage$53$cn-hongguo-tv-MainActivity(Landroid/widget/LinearLayout;Lorg/json/JSONObject;Lorg/json/JSONArray;IIZ)V
+    invoke-virtual/range {v0 .. v6}, Lcn/hongguo/tv/MainActivity;->lambda$renderEpisodePage$58$cn-hongguo-tv-MainActivity(Landroid/widget/LinearLayout;Lorg/json/JSONObject;Lorg/json/JSONArray;IIZ)V
 
     return-void
 .end method

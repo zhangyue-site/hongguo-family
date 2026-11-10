@@ -25,7 +25,7 @@
 .method constructor <init>(Lcn/hongguo/tv/MainActivity;)V
     .locals 0
 
-    .line 252
+    .line 266
     iput-object p1, p0, Lcn/hongguo/tv/MainActivity$3;->this$0:Lcn/hongguo/tv/MainActivity;
 
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
@@ -38,7 +38,7 @@
 .method public onProgressChanged(Landroid/widget/SeekBar;IZ)V
     .locals 2
 
-    .line 252
+    .line 266
     if-eqz p3, :cond_0
 
     iget-object p1, p0, Lcn/hongguo/tv/MainActivity$3;->this$0:Lcn/hongguo/tv/MainActivity;
@@ -106,7 +106,7 @@
 .method public onStartTrackingTouch(Landroid/widget/SeekBar;)V
     .locals 1
 
-    .line 252
+    .line 266
     iget-object p1, p0, Lcn/hongguo/tv/MainActivity$3;->this$0:Lcn/hongguo/tv/MainActivity;
 
     iget-object p1, p1, Lcn/hongguo/tv/MainActivity;->ui:Landroid/os/Handler;
@@ -123,7 +123,7 @@
 .method public onStopTrackingTouch(Landroid/widget/SeekBar;)V
     .locals 0
 
-    .line 252
+    .line 266
     iget-object p1, p0, Lcn/hongguo/tv/MainActivity$3;->this$0:Lcn/hongguo/tv/MainActivity;
 
     invoke-virtual {p1}, Lcn/hongguo/tv/MainActivity;->commitSeekPreview()V

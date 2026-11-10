@@ -3,40 +3,34 @@
 .source "D8$$SyntheticClass"
 
 # interfaces
-.implements Ljava/lang/Runnable;
+.implements Landroid/view/View$OnClickListener;
 
 
 # instance fields
-.field public final synthetic f$0:Lcn/hongguo/tv/MainActivity;
-
-.field public final synthetic f$1:Ljava/lang/String;
+.field public final synthetic f$0:Ljava/lang/Runnable;
 
 
 # direct methods
-.method public synthetic constructor <init>(Lcn/hongguo/tv/MainActivity;Ljava/lang/String;)V
+.method public synthetic constructor <init>(Ljava/lang/Runnable;)V
     .locals 0
 
     .line 0
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
-    iput-object p1, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda4;->f$0:Lcn/hongguo/tv/MainActivity;
-
-    iput-object p2, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda4;->f$1:Ljava/lang/String;
+    iput-object p1, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda4;->f$0:Ljava/lang/Runnable;
 
     return-void
 .end method
 
 
 # virtual methods
-.method public final run()V
-    .locals 2
+.method public final onClick(Landroid/view/View;)V
+    .locals 1
 
     .line 0
-    iget-object v0, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda4;->f$0:Lcn/hongguo/tv/MainActivity;
+    iget-object v0, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda4;->f$0:Ljava/lang/Runnable;
 
-    iget-object v1, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda4;->f$1:Ljava/lang/String;
-
-    invoke-virtual {v0, v1}, Lcn/hongguo/tv/MainActivity;->lambda$search$41$cn-hongguo-tv-MainActivity(Ljava/lang/String;)V
+    invoke-static {v0, p1}, Lcn/hongguo/tv/MainActivity;->lambda$button$7(Ljava/lang/Runnable;Landroid/view/View;)V
 
     return-void
 .end method

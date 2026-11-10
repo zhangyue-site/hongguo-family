@@ -559,13 +559,101 @@
 .end method
 
 .method check(Z)V
-    .locals 2
-    iget-object v0, p0, Lcn/hongguo/tv/TvUpdater;->a:Lcn/hongguo/tv/MainActivity;
-    const-string v1, "个人适配版请手动安装更新；原版入口见关于与帮助"
-    const/4 p1, 0x1
-    invoke-static {v0, v1, p1}, Landroid/widget/Toast;->makeText(Landroid/content/Context;Ljava/lang/CharSequence;I)Landroid/widget/Toast;
+    .locals 5
+
+    .line 26
+    iget-boolean v0, p0, Lcn/hongguo/tv/TvUpdater;->busy:Z
+
+    if-nez v0, :cond_2
+
+    iget-boolean v0, p0, Lcn/hongguo/tv/TvUpdater;->destroyed:Z
+
+    if-eqz v0, :cond_0
+
+    goto :goto_0
+
+    :cond_0
+    iget-object v0, p0, Lcn/hongguo/tv/TvUpdater;->abi:Ljava/lang/String;
+
+    if-nez v0, :cond_1
+
+    const-string p1, "\u672c\u66f4\u65b0\u901a\u9053\u9700\u8981 Android 5.0 \u4ee5\u4e0a\u53ca\u5339\u914d\u7684 ARM \u7cfb\u7edf\u5b89\u88c5\u5305"
+
+    iput-object p1, p0, Lcn/hongguo/tv/TvUpdater;->status:Ljava/lang/String;
+
+    invoke-virtual {p0}, Lcn/hongguo/tv/TvUpdater;->render()V
+
+    return-void
+
+    .line 27
+    :cond_1
+    const/4 v0, 0x1
+
+    iput-boolean v0, p0, Lcn/hongguo/tv/TvUpdater;->busy:Z
+
+    const/4 v1, 0x0
+
+    iput-boolean v1, p0, Lcn/hongguo/tv/TvUpdater;->downloading:Z
+
+    const-string v1, "\u6b63\u5728\u68c0\u67e5\u66f4\u65b0\u2026"
+
+    iput-object v1, p0, Lcn/hongguo/tv/TvUpdater;->status:Ljava/lang/String;
+
+    iget-object v1, p0, Lcn/hongguo/tv/TvUpdater;->a:Lcn/hongguo/tv/MainActivity;
+
+    iget-object v1, v1, Lcn/hongguo/tv/MainActivity;->prefs:Landroid/content/SharedPreferences;
+
+    invoke-interface {v1}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
+
+    move-result-object v1
+
+    const-string v2, "update_attempt_at"
+
+    invoke-static {}, Ljava/lang/System;->currentTimeMillis()J
+
+    move-result-wide v3
+
+    invoke-interface {v1, v2, v3, v4}, Landroid/content/SharedPreferences$Editor;->putLong(Ljava/lang/String;J)Landroid/content/SharedPreferences$Editor;
+
+    move-result-object v1
+
+    invoke-interface {v1}, Landroid/content/SharedPreferences$Editor;->apply()V
+
+    invoke-virtual {p0}, Lcn/hongguo/tv/TvUpdater;->render()V
+
+    iget v1, p0, Lcn/hongguo/tv/TvUpdater;->serial:I
+
+    add-int/2addr v1, v0
+
+    iput v1, p0, Lcn/hongguo/tv/TvUpdater;->serial:I
+
+    invoke-virtual {p0}, Lcn/hongguo/tv/TvUpdater;->createClient()Lcn/hongguo/tv/UpdateClient;
+
     move-result-object v0
-    invoke-virtual {v0}, Landroid/widget/Toast;->show()V
+
+    iput-object v0, p0, Lcn/hongguo/tv/TvUpdater;->client:Lcn/hongguo/tv/UpdateClient;
+
+    iget-object v0, p0, Lcn/hongguo/tv/TvUpdater;->client:Lcn/hongguo/tv/UpdateClient;
+
+    .line 28
+    iget-object v2, p0, Lcn/hongguo/tv/TvUpdater;->worker:Ljava/util/concurrent/ThreadPoolExecutor;
+
+    new-instance v3, Lcn/hongguo/tv/TvUpdater$$ExternalSyntheticLambda17;
+
+    invoke-direct {v3, p0, v0, v1, p1}, Lcn/hongguo/tv/TvUpdater$$ExternalSyntheticLambda17;-><init>(Lcn/hongguo/tv/TvUpdater;Lcn/hongguo/tv/UpdateClient;IZ)V
+
+    invoke-virtual {v2, v3}, Ljava/util/concurrent/ThreadPoolExecutor;->submit(Ljava/lang/Runnable;)Ljava/util/concurrent/Future;
+
+    move-result-object p1
+
+    iput-object p1, p0, Lcn/hongguo/tv/TvUpdater;->job:Ljava/util/concurrent/Future;
+
+    .line 29
+    return-void
+
+    .line 26
+    :cond_2
+    :goto_0
     return-void
 .end method
 

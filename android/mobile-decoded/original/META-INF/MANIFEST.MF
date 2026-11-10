@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 
 Name: AndroidManifest.xml
-SHA-256-Digest: sGyNZgJYCaj57RZP0LpWUNygMmI2FFy/FqJtJwHWg3I=
+SHA-256-Digest: VFU/C97RAYfqSp71/kb5xaFajfQmT+7ZDSDrEqjXzA8=
 
 Name: assets/APACHE-2.0.txt
 SHA-256-Digest: z8d0m5b2O9McPEK1xHG/dWgUBT6EfBDz6wA0F7xSPTA=
@@ -16,7 +16,7 @@ Name: assets/signer-cert.bin
 SHA-256-Digest: xEtPHiE0kONRj4X6jazh59Urd9PTYO8GzCe2Virftiw=
 
 Name: classes.dex
-SHA-256-Digest: VQOCnDjCb83dGAhEyMfsbtUnaxU+zS7HDCDZOEUJseA=
+SHA-256-Digest: JVMW4e1DVZ7mVwRODKNcfEYitYSFaT5yjtxsFqxkhEc=
 
 Name: lib/arm64-v8a/libhongguo_jnidispatch.so
 SHA-256-Digest: lupBBwK1L7N/8hnnpfq6QZRbF+laoRGT3uDJUAOqSZY=

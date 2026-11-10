@@ -3,34 +3,36 @@
 .source "D8$$SyntheticClass"
 
 # interfaces
-.implements Ljava/lang/Runnable;
+.implements Landroid/view/View$OnKeyListener;
 
 
 # instance fields
-.field public final synthetic f$0:Lcn/hongguo/tv/MainActivity;
+.field public final synthetic f$0:Lcn/hongguo/tv/MainActivity$PageUi;
 
 
 # direct methods
-.method public synthetic constructor <init>(Lcn/hongguo/tv/MainActivity;)V
+.method public synthetic constructor <init>(Lcn/hongguo/tv/MainActivity$PageUi;)V
     .locals 0
 
     .line 0
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
-    iput-object p1, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda44;->f$0:Lcn/hongguo/tv/MainActivity;
+    iput-object p1, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda44;->f$0:Lcn/hongguo/tv/MainActivity$PageUi;
 
     return-void
 .end method
 
 
 # virtual methods
-.method public final run()V
+.method public final onKey(Landroid/view/View;ILandroid/view/KeyEvent;)Z
     .locals 1
 
     .line 0
-    iget-object v0, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda44;->f$0:Lcn/hongguo/tv/MainActivity;
+    iget-object v0, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda44;->f$0:Lcn/hongguo/tv/MainActivity$PageUi;
 
-    invoke-virtual {v0}, Lcn/hongguo/tv/MainActivity;->lambda$shell$18$cn-hongguo-tv-MainActivity()V
+    invoke-static {v0, p1, p2, p3}, Lcn/hongguo/tv/MainActivity;->lambda$shell$20(Lcn/hongguo/tv/MainActivity$PageUi;Landroid/view/View;ILandroid/view/KeyEvent;)Z
 
-    return-void
+    move-result p1
+
+    return p1
 .end method

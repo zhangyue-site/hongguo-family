@@ -3,54 +3,76 @@
 .source "D8$$SyntheticClass"
 
 # interfaces
-.implements Landroid/view/View$OnKeyListener;
+.implements Ljava/lang/Runnable;
 
 
 # instance fields
-.field public final synthetic f$0:Ljava/util/ArrayList;
+.field public final synthetic f$0:Lcn/hongguo/tv/MainActivity;
 
 .field public final synthetic f$1:I
 
-.field public final synthetic f$2:Lcn/hongguo/tv/MainActivity$PageUi;
+.field public final synthetic f$2:Landroid/widget/LinearLayout;
+
+.field public final synthetic f$3:Lcn/hongguo/tv/Catalog$Result;
+
+.field public final synthetic f$4:Landroid/widget/Button;
+
+.field public final synthetic f$5:Ljava/lang/String;
+
+.field public final synthetic f$6:Landroid/widget/TextView;
+
+.field public final synthetic f$7:Landroid/widget/LinearLayout;
 
 
 # direct methods
-.method public synthetic constructor <init>(Ljava/util/ArrayList;ILcn/hongguo/tv/MainActivity$PageUi;)V
+.method public synthetic constructor <init>(Lcn/hongguo/tv/MainActivity;ILandroid/widget/LinearLayout;Lcn/hongguo/tv/Catalog$Result;Landroid/widget/Button;Ljava/lang/String;Landroid/widget/TextView;Landroid/widget/LinearLayout;)V
     .locals 0
 
     .line 0
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
-    iput-object p1, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda45;->f$0:Ljava/util/ArrayList;
+    iput-object p1, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda45;->f$0:Lcn/hongguo/tv/MainActivity;
 
     iput p2, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda45;->f$1:I
 
-    iput-object p3, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda45;->f$2:Lcn/hongguo/tv/MainActivity$PageUi;
+    iput-object p3, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda45;->f$2:Landroid/widget/LinearLayout;
+
+    iput-object p4, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda45;->f$3:Lcn/hongguo/tv/Catalog$Result;
+
+    iput-object p5, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda45;->f$4:Landroid/widget/Button;
+
+    iput-object p6, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda45;->f$5:Ljava/lang/String;
+
+    iput-object p7, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda45;->f$6:Landroid/widget/TextView;
+
+    iput-object p8, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda45;->f$7:Landroid/widget/LinearLayout;
 
     return-void
 .end method
 
 
 # virtual methods
-.method public final onKey(Landroid/view/View;ILandroid/view/KeyEvent;)Z
-    .locals 6
+.method public final run()V
+    .locals 8
 
     .line 0
-    iget-object v0, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda45;->f$0:Ljava/util/ArrayList;
+    iget-object v0, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda45;->f$0:Lcn/hongguo/tv/MainActivity;
 
     iget v1, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda45;->f$1:I
 
-    iget-object v2, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda45;->f$2:Lcn/hongguo/tv/MainActivity$PageUi;
+    iget-object v2, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda45;->f$2:Landroid/widget/LinearLayout;
 
-    move-object v3, p1
+    iget-object v3, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda45;->f$3:Lcn/hongguo/tv/Catalog$Result;
 
-    move v4, p2
+    iget-object v4, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda45;->f$4:Landroid/widget/Button;
 
-    move-object v5, p3
+    iget-object v5, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda45;->f$5:Ljava/lang/String;
 
-    invoke-static/range {v0 .. v5}, Lcn/hongguo/tv/MainActivity;->lambda$shell$19(Ljava/util/ArrayList;ILcn/hongguo/tv/MainActivity$PageUi;Landroid/view/View;ILandroid/view/KeyEvent;)Z
+    iget-object v6, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda45;->f$6:Landroid/widget/TextView;
 
-    move-result p1
+    iget-object v7, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda45;->f$7:Landroid/widget/LinearLayout;
 
-    return p1
+    invoke-virtual/range {v0 .. v7}, Lcn/hongguo/tv/MainActivity;->lambda$home$33$cn-hongguo-tv-MainActivity(ILandroid/widget/LinearLayout;Lcn/hongguo/tv/Catalog$Result;Landroid/widget/Button;Ljava/lang/String;Landroid/widget/TextView;Landroid/widget/LinearLayout;)V
+
+    return-void
 .end method

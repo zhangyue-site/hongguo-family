@@ -70,7 +70,7 @@
 .method static allowedCover(Ljava/lang/String;)Ljava/lang/String;
     .locals 8
 
-    .line 180
+    .line 187
     const-string v0, ""
 
     :try_start_0
@@ -78,12 +78,12 @@
 
     invoke-direct {v1, p0}, Ljava/net/URI;-><init>(Ljava/lang/String;)V
 
-    .line 181
+    .line 188
     invoke-virtual {v1}, Ljava/net/URI;->getHost()Ljava/lang/String;
 
     move-result-object v2
 
-    .line 182
+    .line 189
     if-eqz v2, :cond_5
 
     invoke-virtual {v1}, Ljava/net/URI;->getUserInfo()Ljava/lang/String;
@@ -110,7 +110,7 @@
 
     goto :goto_3
 
-    .line 183
+    .line 190
     :cond_0
     const-string v3, "https"
 
@@ -138,7 +138,7 @@
 
     return-object v0
 
-    .line 184
+    .line 191
     :cond_1
     const-string v1, "byteimg.com"
 
@@ -161,7 +161,7 @@
 
     aget-object v5, v1, v4
 
-    .line 185
+    .line 192
     invoke-virtual {v2, v5}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
     move-result v6
@@ -194,13 +194,13 @@
 
     goto :goto_1
 
-    .line 184
+    .line 191
     :cond_2
     add-int/lit8 v4, v4, 0x1
 
     goto :goto_0
 
-    .line 186
+    .line 193
     :cond_3
     :goto_1
     const-string v1, "^http:"
@@ -211,14 +211,14 @@
 
     move-result-object p0
 
-    .line 187
+    .line 194
     const/16 v1, 0x23
 
     invoke-virtual {p0, v1}, Ljava/lang/String;->indexOf(I)I
 
     move-result v1
 
-    .line 188
+    .line 195
     if-gez v1, :cond_4
 
     goto :goto_2
@@ -233,19 +233,19 @@
     :goto_2
     return-object p0
 
-    .line 182
+    .line 189
     :cond_5
     :goto_3
     return-object v0
 
-    .line 191
+    .line 198
     :catch_0
     move-exception p0
 
     :cond_6
     nop
 
-    .line 192
+    .line 199
     return-object v0
 .end method
 
@@ -269,22 +269,22 @@
         }
     .end annotation
 
-    .line 140
+    .line 147
     const/16 v0, 0x10
 
     if-gt p2, v0, :cond_13
 
-    .line 141
+    .line 148
     instance-of v0, p1, Lorg/json/JSONArray;
 
     const/4 v1, 0x0
 
     if-eqz v0, :cond_0
 
-    .line 142
+    .line 149
     check-cast p1, Lorg/json/JSONArray;
 
-    .line 143
+    .line 150
     nop
 
     :goto_0
@@ -306,16 +306,16 @@
 
     goto :goto_0
 
-    .line 144
+    .line 151
     :cond_0
     instance-of v0, p1, Lorg/json/JSONObject;
 
     if-eqz v0, :cond_11
 
-    .line 145
+    .line 152
     check-cast p1, Lorg/json/JSONObject;
 
-    .line 146
+    .line 153
     const-string v0, "book_id"
 
     invoke-virtual {p1, v0}, Lorg/json/JSONObject;->has(Ljava/lang/String;)Z
@@ -332,21 +332,21 @@
 
     if-eqz v0, :cond_e
 
-    .line 147
+    .line 154
     const-string p2, "book_id"
 
     invoke-virtual {p1, p2}, Lorg/json/JSONObject;->getString(Ljava/lang/String;)Ljava/lang/String;
 
     move-result-object p2
 
-    .line 148
+    .line 155
     const-string v0, "book_name"
 
     invoke-virtual {p1, v0}, Lorg/json/JSONObject;->get(Ljava/lang/String;)Ljava/lang/Object;
 
     move-result-object v0
 
-    .line 149
+    .line 156
     const-string v2, "[0-9]{8,24}"
 
     invoke-virtual {p2, v2}, Ljava/lang/String;->matches(Ljava/lang/String;)Z
@@ -359,14 +359,14 @@
 
     if-eqz v2, :cond_d
 
-    .line 150
+    .line 157
     check-cast v0, Ljava/lang/String;
 
     invoke-virtual {v0}, Ljava/lang/String;->trim()Ljava/lang/String;
 
     move-result-object v0
 
-    .line 151
+    .line 158
     invoke-virtual {v0}, Ljava/lang/String;->isEmpty()Z
 
     move-result v2
@@ -381,7 +381,7 @@
 
     if-gt v2, v3, :cond_c
 
-    .line 152
+    .line 159
     invoke-interface {p4, p2}, Ljava/util/Set;->add(Ljava/lang/Object;)Z
 
     move-result p4
@@ -390,7 +390,7 @@
 
     return-void
 
-    .line 153
+    .line 160
     :cond_1
     const-string p4, "chapter_number"
 
@@ -398,7 +398,7 @@
 
     move-result-object p4
 
-    .line 154
+    .line 161
     if-eqz p4, :cond_2
 
     sget-object v2, Lorg/json/JSONObject;->NULL:Ljava/lang/Object;
@@ -434,7 +434,7 @@
 
     move-result-object p4
 
-    .line 155
+    .line 162
     :cond_3
     if-eqz p4, :cond_5
 
@@ -455,7 +455,7 @@
     :goto_1
     const-string p4, "0"
 
-    .line 156
+    .line 163
     :goto_2
     const-string v2, "[0-9]{1,5}"
 
@@ -465,19 +465,19 @@
 
     if-eqz v2, :cond_b
 
-    .line 157
+    .line 164
     invoke-static {p4}, Ljava/lang/Integer;->parseInt(Ljava/lang/String;)I
 
     move-result p4
 
-    .line 158
+    .line 165
     if-ltz p4, :cond_a
 
     const/16 v2, 0x2710
 
     if-gt p4, v2, :cond_a
 
-    .line 159
+    .line 166
     const-string v2, "abstract"
 
     const-string v3, ""
@@ -486,7 +486,7 @@
 
     move-result-object v2
 
-    .line 160
+    .line 167
     invoke-virtual {v2}, Ljava/lang/String;->length()I
 
     move-result v3
@@ -499,7 +499,7 @@
 
     move-result-object v2
 
-    .line 161
+    .line 168
     :cond_6
     const-string v3, "thumb_url"
 
@@ -519,12 +519,12 @@
 
     move-result-object v3
 
-    .line 162
+    .line 169
     iget-object v4, p0, Lcn/hongguo/tv/Catalog;->coverAddresses:Ljava/util/Map;
 
     monitor-enter v4
 
-    .line 163
+    .line 170
     :try_start_0
     iget-object v5, p0, Lcn/hongguo/tv/Catalog;->coverAddresses:Ljava/util/Map;
 
@@ -540,7 +540,7 @@
 
     invoke-interface {v5}, Ljava/util/Map;->clear()V
 
-    .line 164
+    .line 171
     :cond_7
     invoke-virtual {v3}, Ljava/lang/String;->isEmpty()Z
 
@@ -552,13 +552,13 @@
 
     invoke-interface {v5, p2, v3}, Ljava/util/Map;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
 
-    .line 165
+    .line 172
     :cond_8
     monitor-exit v4
     :try_end_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
 
-    .line 166
+    .line 173
     const-string v3, "tags"
 
     const-string v4, ""
@@ -588,7 +588,7 @@
 
     move-result-wide v4
 
-    .line 167
+    .line 174
     new-instance p1, Lorg/json/JSONObject;
 
     invoke-direct {p1}, Lorg/json/JSONObject;-><init>()V
@@ -631,10 +631,10 @@
 
     invoke-virtual {p3, p1}, Lorg/json/JSONArray;->put(Ljava/lang/Object;)Lorg/json/JSONArray;
 
-    .line 168
+    .line 175
     goto :goto_4
 
-    .line 165
+    .line 172
     :catchall_0
     move-exception p1
 
@@ -645,7 +645,7 @@
 
     throw p1
 
-    .line 158
+    .line 165
     :cond_a
     new-instance p1, Ljava/lang/Exception;
 
@@ -655,7 +655,7 @@
 
     throw p1
 
-    .line 156
+    .line 163
     :cond_b
     new-instance p1, Ljava/lang/Exception;
 
@@ -665,7 +665,7 @@
 
     throw p1
 
-    .line 151
+    .line 158
     :cond_c
     new-instance p1, Ljava/lang/Exception;
 
@@ -675,7 +675,7 @@
 
     throw p1
 
-    .line 149
+    .line 156
     :cond_d
     new-instance p1, Ljava/lang/Exception;
 
@@ -685,13 +685,13 @@
 
     throw p1
 
-    .line 169
+    .line 176
     :cond_e
     invoke-virtual {p1}, Lorg/json/JSONObject;->keys()Ljava/util/Iterator;
 
     move-result-object v0
 
-    .line 170
+    .line 177
     :goto_3
     invoke-interface {v0}, Ljava/util/Iterator;->hasNext()Z
 
@@ -699,7 +699,7 @@
 
     if-eqz v1, :cond_12
 
-    .line 171
+    .line 178
     invoke-interface {v0}, Ljava/util/Iterator;->next()Ljava/lang/Object;
 
     move-result-object v1
@@ -710,7 +710,7 @@
 
     move-result-object v1
 
-    .line 172
+    .line 179
     instance-of v2, v1, Lorg/json/JSONArray;
 
     if-nez v2, :cond_f
@@ -724,20 +724,20 @@
 
     invoke-direct {p0, v1, v2, p3, p4}, Lcn/hongguo/tv/Catalog;->collect(Ljava/lang/Object;ILorg/json/JSONArray;Ljava/util/Set;)V
 
-    .line 173
+    .line 180
     :cond_10
     goto :goto_3
 
-    .line 144
+    .line 151
     :cond_11
     nop
 
-    .line 176
+    .line 183
     :cond_12
     :goto_4
     return-void
 
-    .line 140
+    .line 147
     :cond_13
     new-instance p1, Ljava/lang/Exception;
 
@@ -756,7 +756,7 @@
         }
     .end annotation
 
-    .line 207
+    .line 214
     new-instance v0, Ljava/net/URL;
 
     invoke-direct {v0, p0}, Ljava/net/URL;-><init>(Ljava/lang/String;)V
@@ -767,25 +767,96 @@
 
     check-cast p0, Ljava/net/HttpURLConnection;
 
-    .line 208
+    .line 215
     invoke-static {p0}, Lcn/hongguo/tv/LegacyTls;->configure(Ljava/net/HttpURLConnection;)V
 
-    .line 209
+    .line 216
     const/16 v0, 0x2710
 
     invoke-virtual {p0, v0}, Ljava/net/HttpURLConnection;->setConnectTimeout(I)V
 
-    .line 210
+    .line 217
     const/16 v0, 0x4e20
 
     invoke-virtual {p0, v0}, Ljava/net/HttpURLConnection;->setReadTimeout(I)V
 
-    .line 211
+    .line 218
     const/4 v0, 0x0
 
     invoke-virtual {p0, v0}, Ljava/net/HttpURLConnection;->setInstanceFollowRedirects(Z)V
 
-    .line 212
+    .line 219
+    return-object p0
+.end method
+
+.method static local(Landroid/content/Context;Ljava/io/File;)Lcn/hongguo/tv/Catalog;
+    .locals 6
+
+    .line 28
+    :try_start_0
+    const-string v0, "cn.hongguo.tv.AppSearchCatalog"
+
+    invoke-static {v0}, Ljava/lang/Class;->forName(Ljava/lang/String;)Ljava/lang/Class;
+
+    move-result-object v0
+
+    const/4 v1, 0x2
+
+    new-array v2, v1, [Ljava/lang/Class;
+
+    const-class v3, Landroid/content/Context;
+
+    const/4 v4, 0x0
+
+    aput-object v3, v2, v4
+
+    const-class v3, Ljava/io/File;
+
+    const/4 v5, 0x1
+
+    aput-object v3, v2, v5
+
+    invoke-virtual {v0, v2}, Ljava/lang/Class;->getConstructor([Ljava/lang/Class;)Ljava/lang/reflect/Constructor;
+
+    move-result-object v0
+
+    new-array v1, v1, [Ljava/lang/Object;
+
+    aput-object p0, v1, v4
+
+    aput-object p1, v1, v5
+
+    invoke-virtual {v0, v1}, Ljava/lang/reflect/Constructor;->newInstance([Ljava/lang/Object;)Ljava/lang/Object;
+
+    move-result-object p0
+
+    check-cast p0, Lcn/hongguo/tv/Catalog;
+    :try_end_0
+    .catch Ljava/lang/ClassNotFoundException; {:try_start_0 .. :try_end_0} :catch_1
+    .catch Ljava/lang/Exception; {:try_start_0 .. :try_end_0} :catch_0
+
+    return-object p0
+
+    .line 30
+    :catch_0
+    move-exception p0
+
+    new-instance p1, Ljava/lang/IllegalStateException;
+
+    const-string v0, "Search initialization failed"
+
+    invoke-direct {p1, v0, p0}, Ljava/lang/IllegalStateException;-><init>(Ljava/lang/String;Ljava/lang/Throwable;)V
+
+    throw p1
+
+    .line 29
+    :catch_1
+    move-exception p0
+
+    new-instance p0, Lcn/hongguo/tv/Catalog;
+
+    invoke-direct {p0, p1}, Lcn/hongguo/tv/Catalog;-><init>(Ljava/io/File;)V
+
     return-object p0
 .end method
 
@@ -797,7 +868,7 @@
         }
     .end annotation
 
-    .line 216
+    .line 223
     invoke-virtual {p0}, Ljava/net/HttpURLConnection;->getInputStream()Ljava/io/InputStream;
 
     move-result-object p0
@@ -809,13 +880,13 @@
     :try_end_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_2
 
-    .line 217
+    .line 224
     const/16 v1, 0x2000
 
     :try_start_1
     new-array v1, v1, [B
 
-    .line 219
+    .line 226
     :goto_0
     invoke-virtual {p0, v1}, Ljava/io/InputStream;->read([B)I
 
@@ -825,7 +896,7 @@
 
     if-eq v2, v3, :cond_2
 
-    .line 220
+    .line 227
     invoke-static {}, Ljava/lang/Thread;->currentThread()Ljava/lang/Thread;
 
     move-result-object v3
@@ -836,7 +907,7 @@
 
     if-nez v3, :cond_1
 
-    .line 221
+    .line 228
     invoke-virtual {v0}, Ljava/io/ByteArrayOutputStream;->size()I
 
     move-result v3
@@ -845,14 +916,14 @@
 
     if-gt v3, p1, :cond_0
 
-    .line 222
+    .line 229
     const/4 v3, 0x0
 
     invoke-virtual {v0, v1, v3, v2}, Ljava/io/ByteArrayOutputStream;->write([BII)V
 
     goto :goto_0
 
-    .line 221
+    .line 228
     :cond_0
     new-instance p1, Ljava/lang/Exception;
 
@@ -862,7 +933,7 @@
 
     throw p1
 
-    .line 220
+    .line 227
     :cond_1
     new-instance p1, Ljava/io/InterruptedIOException;
 
@@ -872,7 +943,7 @@
 
     throw p1
 
-    .line 224
+    .line 231
     :cond_2
     invoke-virtual {v0}, Ljava/io/ByteArrayOutputStream;->toByteArray()[B
 
@@ -880,7 +951,7 @@
     :try_end_1
     .catchall {:try_start_1 .. :try_end_1} :catchall_0
 
-    .line 225
+    .line 232
     :try_start_2
     invoke-virtual {v0}, Ljava/io/ByteArrayOutputStream;->close()V
     :try_end_2
@@ -890,11 +961,11 @@
 
     invoke-virtual {p0}, Ljava/io/InputStream;->close()V
 
-    .line 224
+    .line 231
     :cond_3
     return-object p1
 
-    .line 216
+    .line 223
     :catchall_0
     move-exception p1
 
@@ -940,6 +1011,18 @@
 
 
 # virtual methods
+.method activateSearch()V
+    .locals 0
+    .annotation system Ldalvik/annotation/Throws;
+        value = {
+            Ljava/lang/Exception;
+        }
+    .end annotation
+
+    .line 33
+    return-void
+.end method
+
 .method declared-synchronized browsePage(Ljava/lang/String;Ljava/lang/String;Z)Lcn/hongguo/tv/Catalog$Result;
     .locals 8
     .annotation system Ldalvik/annotation/Throws;
@@ -950,7 +1033,7 @@
 
     monitor-enter p0
 
-    .line 34
+    .line 41
     :try_start_0
     invoke-static {p1, p2}, Lcn/hongguo/tv/PublicCategories;->path(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
 
@@ -958,7 +1041,7 @@
 
     if-eqz v0, :cond_6
 
-    .line 35
+    .line 42
     new-instance v1, Ljava/lang/StringBuilder;
 
     invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
@@ -985,7 +1068,7 @@
 
     move-result-wide v1
 
-    .line 36
+    .line 43
     invoke-static {}, Ljava/lang/Thread;->currentThread()Ljava/lang/Thread;
 
     move-result-object v3
@@ -996,14 +1079,14 @@
 
     if-nez v3, :cond_5
 
-    .line 37
+    .line 44
     iget-object v3, p0, Lcn/hongguo/tv/Catalog;->cache:Lcn/hongguo/tv/CatalogCache;
 
     invoke-virtual {v3, p1, v1, v2}, Lcn/hongguo/tv/CatalogCache;->get(Ljava/lang/String;J)Lcn/hongguo/tv/CatalogCache$Entry;
 
     move-result-object v3
 
-    .line 38
+    .line 45
     const/4 v4, 0x1
 
     const/4 v5, 0x0
@@ -1040,14 +1123,14 @@
 
     return-object p1
 
-    .line 40
+    .line 47
     :cond_0
     :try_start_1
     invoke-virtual {p0, v0, p2}, Lcn/hongguo/tv/Catalog;->fetchBrowse(Ljava/lang/String;Ljava/lang/String;)Lorg/json/JSONArray;
 
     move-result-object p2
 
-    .line 41
+    .line 48
     invoke-static {}, Ljava/lang/Thread;->currentThread()Ljava/lang/Thread;
 
     move-result-object p3
@@ -1058,7 +1141,7 @@
 
     if-nez p3, :cond_1
 
-    .line 42
+    .line 49
     iget-object p3, p0, Lcn/hongguo/tv/Catalog;->cache:Lcn/hongguo/tv/CatalogCache;
 
     invoke-virtual {p0}, Lcn/hongguo/tv/Catalog;->now()J
@@ -1086,7 +1169,7 @@
 
     return-object p3
 
-    .line 41
+    .line 48
     :cond_1
     :try_start_2
     new-instance p2, Ljava/io/InterruptedIOException;
@@ -1100,11 +1183,11 @@
     .catch Ljava/lang/Exception; {:try_start_2 .. :try_end_2} :catch_0
     .catchall {:try_start_2 .. :try_end_2} :catchall_0
 
-    .line 43
+    .line 50
     :catch_0
     move-exception p2
 
-    .line 44
+    .line 51
     :try_start_3
     instance-of p3, p2, Ljava/lang/InterruptedException;
 
@@ -1129,7 +1212,7 @@
 
     if-nez p3, :cond_4
 
-    .line 45
+    .line 52
     iget-object p3, p0, Lcn/hongguo/tv/Catalog;->cache:Lcn/hongguo/tv/CatalogCache;
 
     invoke-virtual {p0}, Lcn/hongguo/tv/Catalog;->now()J
@@ -1160,11 +1243,11 @@
     :try_start_4
     throw p2
 
-    .line 44
+    .line 51
     :cond_4
     throw p2
 
-    .line 36
+    .line 43
     :cond_5
     new-instance p1, Ljava/io/InterruptedIOException;
 
@@ -1174,7 +1257,7 @@
 
     throw p1
 
-    .line 34
+    .line 41
     :cond_6
     new-instance p1, Ljava/lang/IllegalArgumentException;
 
@@ -1186,7 +1269,7 @@
     :try_end_4
     .catchall {:try_start_4 .. :try_end_4} :catchall_0
 
-    .line 33
+    .line 40
     :catchall_0
     move-exception p1
 
@@ -1203,7 +1286,7 @@
         }
     .end annotation
 
-    .line 197
+    .line 204
     iget-object v0, p0, Lcn/hongguo/tv/Catalog;->coverAddresses:Ljava/util/Map;
 
     monitor-enter v0
@@ -1221,20 +1304,20 @@
     :try_end_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_3
 
-    .line 198
+    .line 205
     const/4 v0, 0x0
 
     if-nez p1, :cond_0
 
     return-object v0
 
-    .line 199
+    .line 206
     :cond_0
     invoke-static {p1}, Lcn/hongguo/tv/Catalog;->connection(Ljava/lang/String;)Ljava/net/HttpURLConnection;
 
     move-result-object p1
 
-    .line 201
+    .line 208
     :try_start_1
     invoke-virtual {p1}, Ljava/net/HttpURLConnection;->getResponseCode()I
 
@@ -1246,13 +1329,13 @@
 
     if-eq v1, v2, :cond_1
 
-    .line 203
+    .line 210
     invoke-virtual {p1}, Ljava/net/HttpURLConnection;->disconnect()V
 
-    .line 201
+    .line 208
     return-object v0
 
-    .line 202
+    .line 209
     :cond_1
     :try_start_2
     invoke-virtual {p1}, Ljava/net/HttpURLConnection;->getInputStream()Ljava/io/InputStream;
@@ -1275,11 +1358,11 @@
     :try_end_4
     .catchall {:try_start_4 .. :try_end_4} :catchall_2
 
-    .line 203
+    .line 210
     :cond_2
     invoke-virtual {p1}, Ljava/net/HttpURLConnection;->disconnect()V
 
-    .line 202
+    .line 209
     return-object p2
 
     :catchall_0
@@ -1306,7 +1389,7 @@
     :try_end_6
     .catchall {:try_start_6 .. :try_end_6} :catchall_2
 
-    .line 203
+    .line 210
     :catchall_2
     move-exception p2
 
@@ -1314,7 +1397,7 @@
 
     throw p2
 
-    .line 197
+    .line 204
     :catchall_3
     move-exception p1
 
@@ -1334,14 +1417,14 @@
         }
     .end annotation
 
-    .line 94
+    .line 101
     const-string v0, "application/json"
 
     invoke-static {}, Landroid/os/SystemClock;->elapsedRealtime()J
 
     move-result-wide v1
 
-    .line 95
+    .line 102
     iget-wide v3, p0, Lcn/hongguo/tv/Catalog;->lastRequest:J
 
     sub-long/2addr v1, v3
@@ -1362,7 +1445,7 @@
 
     invoke-static {v3, v4}, Ljava/lang/Thread;->sleep(J)V
 
-    .line 96
+    .line 103
     :cond_0
     invoke-static {}, Landroid/os/SystemClock;->elapsedRealtime()J
 
@@ -1370,7 +1453,7 @@
 
     iput-wide v1, p0, Lcn/hongguo/tv/Catalog;->lastRequest:J
 
-    .line 97
+    .line 104
     const-string v1, "manju"
 
     invoke-virtual {p2, v1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
@@ -1388,7 +1471,7 @@
     :cond_1
     const/16 p2, 0xa
 
-    .line 98
+    .line 105
     :goto_0
     new-instance v2, Lorg/json/JSONObject;
 
@@ -1410,7 +1493,7 @@
 
     move-result-object v2
 
-    .line 99
+    .line 106
     const-string v3, "default_tab_type"
 
     invoke-virtual {v2, v3, v1}, Lorg/json/JSONObject;->put(Ljava/lang/String;I)Lorg/json/JSONObject;
@@ -1429,7 +1512,7 @@
 
     move-result-object v1
 
-    .line 100
+    .line 107
     new-instance v2, Lorg/json/JSONObject;
 
     invoke-direct {v2}, Lorg/json/JSONObject;-><init>()V
@@ -1456,7 +1539,7 @@
 
     move-result-object p1
 
-    .line 101
+    .line 108
     const-string v2, "search_ctx_info"
 
     const-string v3, ""
@@ -1475,7 +1558,7 @@
 
     move-result-object p1
 
-    .line 102
+    .line 109
     const-string v1, "search_id"
 
     invoke-virtual {p1, v1, v3}, Lorg/json/JSONObject;->put(Ljava/lang/String;Ljava/lang/Object;)Lorg/json/JSONObject;
@@ -1494,40 +1577,40 @@
 
     move-result-object p1
 
-    .line 103
+    .line 110
     const-string p2, "https://api5-sinfonlinea.novelfm.com/novelfm/bookmall/search/page/v1/?device_platform=android&aid=3040&manifest_version_code=628&update_version_code=62832"
 
     invoke-static {p2}, Lcn/hongguo/tv/Catalog;->connection(Ljava/lang/String;)Ljava/net/HttpURLConnection;
 
     move-result-object p2
 
-    .line 105
+    .line 112
     :try_start_0
     const-string v1, "POST"
 
     invoke-virtual {p2, v1}, Ljava/net/HttpURLConnection;->setRequestMethod(Ljava/lang/String;)V
 
-    .line 106
+    .line 113
     invoke-virtual {p2, v4}, Ljava/net/HttpURLConnection;->setDoOutput(Z)V
 
-    .line 107
+    .line 114
     const-string v1, "Content-Type"
 
     invoke-virtual {p2, v1, v0}, Ljava/net/HttpURLConnection;->setRequestProperty(Ljava/lang/String;Ljava/lang/String;)V
 
-    .line 108
+    .line 115
     const-string v1, "Accept"
 
     invoke-virtual {p2, v1, v0}, Ljava/net/HttpURLConnection;->setRequestProperty(Ljava/lang/String;Ljava/lang/String;)V
 
-    .line 109
+    .line 116
     const-string v0, "User-Agent"
 
     const-string v1, "HongguoTV-MetadataValidation/0.1"
 
     invoke-virtual {p2, v0, v1}, Ljava/net/HttpURLConnection;->setRequestProperty(Ljava/lang/String;Ljava/lang/String;)V
 
-    .line 110
+    .line 117
     invoke-virtual {p1}, Lorg/json/JSONObject;->toString()Ljava/lang/String;
 
     move-result-object p1
@@ -1538,12 +1621,12 @@
 
     move-result-object p1
 
-    .line 111
+    .line 118
     array-length v0, p1
 
     invoke-virtual {p2, v0}, Ljava/net/HttpURLConnection;->setFixedLengthStreamingMode(I)V
 
-    .line 112
+    .line 119
     invoke-virtual {p2}, Ljava/net/HttpURLConnection;->getOutputStream()Ljava/io/OutputStream;
 
     move-result-object v0
@@ -1560,7 +1643,7 @@
     :try_start_2
     invoke-virtual {v0}, Ljava/io/OutputStream;->close()V
 
-    .line 113
+    .line 120
     :cond_2
     invoke-virtual {p2}, Ljava/net/HttpURLConnection;->getResponseCode()I
 
@@ -1570,7 +1653,7 @@
 
     if-ne p1, v0, :cond_3
 
-    .line 114
+    .line 121
     new-instance p1, Lorg/json/JSONObject;
 
     new-instance v0, Ljava/lang/String;
@@ -1589,16 +1672,16 @@
     :try_end_2
     .catchall {:try_start_2 .. :try_end_2} :catchall_2
 
-    .line 115
+    .line 122
     nop
 
-    .line 117
+    .line 124
     invoke-virtual {p2}, Ljava/net/HttpURLConnection;->disconnect()V
 
-    .line 115
+    .line 122
     return-object p1
 
-    .line 113
+    .line 120
     :cond_3
     :try_start_3
     new-instance p1, Ljava/lang/Exception;
@@ -1611,7 +1694,7 @@
     :try_end_3
     .catchall {:try_start_3 .. :try_end_3} :catchall_2
 
-    .line 112
+    .line 119
     :catchall_0
     move-exception p1
 
@@ -1636,13 +1719,13 @@
     :try_end_5
     .catchall {:try_start_5 .. :try_end_5} :catchall_2
 
-    .line 117
+    .line 124
     :catchall_2
     move-exception p1
 
     invoke-virtual {p2}, Ljava/net/HttpURLConnection;->disconnect()V
 
-    .line 118
+    .line 125
     throw p1
 .end method
 
@@ -1654,7 +1737,7 @@
         }
     .end annotation
 
-    .line 79
+    .line 86
     invoke-static {}, Landroid/os/SystemClock;->elapsedRealtime()J
 
     move-result-wide v0
@@ -1679,7 +1762,7 @@
 
     invoke-static {v2, v3}, Ljava/lang/Thread;->sleep(J)V
 
-    .line 80
+    .line 87
     :cond_0
     invoke-static {}, Landroid/os/SystemClock;->elapsedRealtime()J
 
@@ -1687,12 +1770,12 @@
 
     iput-wide v0, p0, Lcn/hongguo/tv/Catalog;->lastRequest:J
 
-    .line 81
+    .line 88
     invoke-static {p1}, Lcn/hongguo/tv/AiCatalog;->path(Ljava/lang/String;)Ljava/lang/String;
 
     move-result-object v0
 
-    .line 82
+    .line 89
     new-instance v1, Ljava/lang/StringBuilder;
 
     invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
@@ -1715,7 +1798,7 @@
 
     move-result-object v1
 
-    .line 84
+    .line 91
     :try_start_0
     const-string v2, "User-Agent"
 
@@ -1723,7 +1806,7 @@
 
     invoke-virtual {v1, v2, v3}, Ljava/net/HttpURLConnection;->setRequestProperty(Ljava/lang/String;Ljava/lang/String;)V
 
-    .line 85
+    .line 92
     invoke-virtual {v1}, Ljava/net/HttpURLConnection;->getResponseCode()I
 
     move-result v2
@@ -1732,12 +1815,12 @@
 
     if-ne v2, v3, :cond_6
 
-    .line 86
+    .line 93
     new-instance v2, Ljava/util/HashMap;
 
     invoke-direct {v2}, Ljava/util/HashMap;-><init>()V
 
-    .line 87
+    .line 94
     new-instance v3, Ljava/lang/String;
 
     const/high16 v4, 0x200000
@@ -1754,7 +1837,7 @@
 
     move-result-object v3
 
-    .line 88
+    .line 95
     iget-object v4, p0, Lcn/hongguo/tv/Catalog;->coverAddresses:Ljava/util/Map;
 
     monitor-enter v4
@@ -1785,7 +1868,7 @@
     :try_end_1
     .catchall {:try_start_1 .. :try_end_1} :catchall_0
 
-    .line 89
+    .line 96
     :try_start_2
     invoke-virtual {v0}, Ljava/lang/String;->isEmpty()Z
 
@@ -1803,7 +1886,7 @@
 
     goto :goto_1
 
-    .line 90
+    .line 97
     :cond_2
     new-instance v0, Lorg/json/JSONArray;
 
@@ -1865,22 +1948,22 @@
 
     goto :goto_0
 
-    .line 91
+    .line 98
     :cond_4
     invoke-virtual {v1}, Ljava/net/HttpURLConnection;->disconnect()V
 
-    .line 90
+    .line 97
     return-object v0
 
-    .line 91
+    .line 98
     :cond_5
     :goto_1
     invoke-virtual {v1}, Ljava/net/HttpURLConnection;->disconnect()V
 
-    .line 89
+    .line 96
     return-object v3
 
-    .line 88
+    .line 95
     :catchall_0
     move-exception p1
 
@@ -1892,7 +1975,7 @@
     :try_start_4
     throw p1
 
-    .line 85
+    .line 92
     :cond_6
     new-instance p1, Ljava/lang/Exception;
 
@@ -1904,7 +1987,7 @@
     :try_end_4
     .catchall {:try_start_4 .. :try_end_4} :catchall_1
 
-    .line 91
+    .line 98
     :catchall_1
     move-exception p1
 
@@ -1921,7 +2004,7 @@
         }
     .end annotation
 
-    .line 49
+    .line 56
     invoke-static {}, Landroid/os/SystemClock;->elapsedRealtime()J
 
     move-result-wide v0
@@ -1946,7 +2029,7 @@
 
     invoke-static {v2, v3}, Ljava/lang/Thread;->sleep(J)V
 
-    .line 50
+    .line 57
     :cond_0
     invoke-static {}, Landroid/os/SystemClock;->elapsedRealtime()J
 
@@ -1954,7 +2037,7 @@
 
     iput-wide v0, p0, Lcn/hongguo/tv/Catalog;->lastRequest:J
 
-    .line 51
+    .line 58
     new-instance v0, Ljava/lang/StringBuilder;
 
     invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
@@ -1977,7 +2060,7 @@
 
     move-result-object p1
 
-    .line 53
+    .line 60
     :try_start_0
     const-string v0, "User-Agent"
 
@@ -1985,7 +2068,7 @@
 
     invoke-virtual {p1, v0, v1}, Ljava/net/HttpURLConnection;->setRequestProperty(Ljava/lang/String;Ljava/lang/String;)V
 
-    .line 54
+    .line 61
     invoke-virtual {p1}, Ljava/net/HttpURLConnection;->getResponseCode()I
 
     move-result v0
@@ -1994,12 +2077,12 @@
 
     if-ne v0, v1, :cond_2
 
-    .line 55
+    .line 62
     new-instance v0, Ljava/util/HashMap;
 
     invoke-direct {v0}, Ljava/util/HashMap;-><init>()V
 
-    .line 56
+    .line 63
     new-instance v1, Ljava/lang/String;
 
     const/high16 v2, 0x200000
@@ -2016,7 +2099,7 @@
 
     move-result-object p2
 
-    .line 57
+    .line 64
     iget-object v1, p0, Lcn/hongguo/tv/Catalog;->coverAddresses:Ljava/util/Map;
 
     monitor-enter v1
@@ -2047,16 +2130,16 @@
     :try_end_1
     .catchall {:try_start_1 .. :try_end_1} :catchall_0
 
-    .line 58
+    .line 65
     nop
 
-    .line 59
+    .line 66
     invoke-virtual {p1}, Ljava/net/HttpURLConnection;->disconnect()V
 
-    .line 58
+    .line 65
     return-object p2
 
-    .line 57
+    .line 64
     :catchall_0
     move-exception p2
 
@@ -2068,7 +2151,7 @@
     :try_start_3
     throw p2
 
-    .line 54
+    .line 61
     :cond_2
     new-instance p2, Ljava/lang/Exception;
 
@@ -2080,7 +2163,7 @@
     :try_end_3
     .catchall {:try_start_3 .. :try_end_3} :catchall_1
 
-    .line 59
+    .line 66
     :catchall_1
     move-exception p2
 
@@ -2092,7 +2175,7 @@
 .method now()J
     .locals 2
 
-    .line 32
+    .line 39
     invoke-static {}, Ljava/lang/System;->currentTimeMillis()J
 
     move-result-wide v0
@@ -2108,7 +2191,7 @@
         }
     .end annotation
 
-    .line 122
+    .line 129
     const-string v0, "code"
 
     invoke-virtual {p1, v0}, Lorg/json/JSONObject;->opt(Ljava/lang/String;)Ljava/lang/Object;
@@ -2135,14 +2218,14 @@
 
     if-nez v4, :cond_5
 
-    .line 125
+    .line 132
     const-string v0, "data"
 
     invoke-virtual {p1, v0}, Lorg/json/JSONObject;->optJSONObject(Ljava/lang/String;)Lorg/json/JSONObject;
 
     move-result-object p1
 
-    .line 126
+    .line 133
     const-string v0, "\u76ee\u5f55\u6570\u636e\u4e0d\u5b8c\u6574"
 
     if-eqz p1, :cond_4
@@ -2155,14 +2238,14 @@
 
     if-eqz v2, :cond_4
 
-    .line 127
+    .line 134
     const-string v2, "has_more"
 
     invoke-virtual {p1, v2}, Lorg/json/JSONObject;->opt(Ljava/lang/String;)Ljava/lang/Object;
 
     move-result-object v2
 
-    .line 128
+    .line 135
     instance-of v3, v2, Ljava/lang/Boolean;
 
     const/4 v4, 0x1
@@ -2191,7 +2274,7 @@
 
     goto :goto_0
 
-    .line 129
+    .line 136
     :cond_0
     new-instance p1, Ljava/lang/Exception;
 
@@ -2201,14 +2284,14 @@
 
     throw p1
 
-    .line 131
+    .line 138
     :cond_1
     :goto_0
     new-instance v3, Lorg/json/JSONArray;
 
     invoke-direct {v3}, Lorg/json/JSONArray;-><init>()V
 
-    .line 132
+    .line 139
     invoke-virtual {p1, v1}, Lorg/json/JSONObject;->getJSONArray(Ljava/lang/String;)Lorg/json/JSONArray;
 
     move-result-object p1
@@ -2221,7 +2304,7 @@
 
     invoke-direct {p0, p1, v5, v3, v1}, Lcn/hongguo/tv/Catalog;->collect(Ljava/lang/Object;ILorg/json/JSONArray;Ljava/util/Set;)V
 
-    .line 133
+    .line 140
     invoke-virtual {v3}, Lorg/json/JSONArray;->length()I
 
     move-result p1
@@ -2254,11 +2337,11 @@
 
     if-nez p1, :cond_3
 
-    .line 136
+    .line 143
     :cond_2
     return-object v3
 
-    .line 134
+    .line 141
     :cond_3
     new-instance p1, Ljava/lang/Exception;
 
@@ -2266,7 +2349,7 @@
 
     throw p1
 
-    .line 126
+    .line 133
     :cond_4
     new-instance p1, Ljava/lang/Exception;
 
@@ -2274,7 +2357,7 @@
 
     throw p1
 
-    .line 123
+    .line 130
     :cond_5
     new-instance p1, Ljava/lang/Exception;
 
@@ -2283,6 +2366,15 @@
     invoke-direct {p1, v0}, Ljava/lang/Exception;-><init>(Ljava/lang/String;)V
 
     throw p1
+.end method
+
+.method requiresSearchSetup()Z
+    .locals 1
+
+    .line 32
+    const/4 v0, 0x0
+
+    return v0
 .end method
 
 .method declared-synchronized search(Ljava/lang/String;Ljava/lang/String;)Lorg/json/JSONArray;
@@ -2295,7 +2387,7 @@
 
     monitor-enter p0
 
-    .line 61
+    .line 68
     const/4 v0, 0x0
 
     :try_start_0
@@ -2311,7 +2403,7 @@
 
     return-object p1
 
-    .line 61
+    .line 68
     :catchall_0
     move-exception p1
 
@@ -2330,7 +2422,7 @@
 
     monitor-enter p0
 
-    .line 63
+    .line 70
     :try_start_0
     invoke-static {p1, p2}, Lcn/hongguo/tv/CatalogCache;->key(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
 
@@ -2340,7 +2432,7 @@
 
     move-result-object p1
 
-    .line 64
+    .line 71
     invoke-static {}, Ljava/lang/Thread;->currentThread()Ljava/lang/Thread;
 
     move-result-object v1
@@ -2351,7 +2443,7 @@
 
     if-nez v1, :cond_7
 
-    .line 65
+    .line 72
     invoke-virtual {p0}, Lcn/hongguo/tv/Catalog;->now()J
 
     move-result-wide v1
@@ -2362,7 +2454,7 @@
 
     move-result-object v3
 
-    .line 67
+    .line 74
     const/4 v4, 0x1
 
     const/4 v5, 0x0
@@ -2399,7 +2491,7 @@
 
     return-object p1
 
-    .line 69
+    .line 76
     :cond_0
     :try_start_1
     const-string p3, "ai"
@@ -2447,7 +2539,7 @@
 
     goto :goto_1
 
-    .line 70
+    .line 77
     :cond_2
     invoke-static {}, Ljava/lang/Thread;->currentThread()Ljava/lang/Thread;
 
@@ -2459,7 +2551,7 @@
 
     if-nez p2, :cond_3
 
-    .line 71
+    .line 78
     iget-object p2, p0, Lcn/hongguo/tv/Catalog;->cache:Lcn/hongguo/tv/CatalogCache;
 
     invoke-virtual {p0}, Lcn/hongguo/tv/Catalog;->now()J
@@ -2487,7 +2579,7 @@
 
     return-object p2
 
-    .line 70
+    .line 77
     :cond_3
     :try_start_2
     new-instance p1, Ljava/io/InterruptedIOException;
@@ -2501,11 +2593,11 @@
     .catch Ljava/lang/Exception; {:try_start_2 .. :try_end_2} :catch_0
     .catchall {:try_start_2 .. :try_end_2} :catchall_0
 
-    .line 72
+    .line 79
     :catch_0
     move-exception p1
 
-    .line 73
+    .line 80
     :try_start_3
     instance-of p2, p1, Ljava/lang/InterruptedException;
 
@@ -2530,7 +2622,7 @@
 
     if-nez p2, :cond_6
 
-    .line 74
+    .line 81
     iget-object p2, p0, Lcn/hongguo/tv/Catalog;->cache:Lcn/hongguo/tv/CatalogCache;
 
     invoke-virtual {p0}, Lcn/hongguo/tv/Catalog;->now()J
@@ -2557,16 +2649,16 @@
 
     return-object p1
 
-    .line 75
+    .line 82
     :cond_5
     :try_start_4
     throw p1
 
-    .line 73
+    .line 80
     :cond_6
     throw p1
 
-    .line 64
+    .line 71
     :cond_7
     new-instance p1, Ljava/io/InterruptedIOException;
 
@@ -2578,7 +2670,7 @@
     :try_end_4
     .catchall {:try_start_4 .. :try_end_4} :catchall_0
 
-    .line 62
+    .line 69
     :catchall_0
     move-exception p1
 

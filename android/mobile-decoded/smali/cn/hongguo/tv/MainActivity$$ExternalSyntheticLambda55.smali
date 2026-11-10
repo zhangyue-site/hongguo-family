@@ -3,7 +3,7 @@
 .source "D8$$SyntheticClass"
 
 # interfaces
-.implements Ljava/lang/Runnable;
+.implements Landroid/view/View$OnClickListener;
 
 
 # instance fields
@@ -24,13 +24,13 @@
 
 
 # virtual methods
-.method public final run()V
+.method public final onClick(Landroid/view/View;)V
     .locals 1
 
     .line 0
     iget-object v0, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda55;->f$0:Lcn/hongguo/tv/MainActivity;
 
-    invoke-virtual {v0}, Lcn/hongguo/tv/MainActivity;->lambda$startPlayer$79$cn-hongguo-tv-MainActivity()V
+    invoke-virtual {v0, p1}, Lcn/hongguo/tv/MainActivity;->lambda$startPlayer$82$cn-hongguo-tv-MainActivity(Landroid/view/View;)V
 
     return-void
 .end method

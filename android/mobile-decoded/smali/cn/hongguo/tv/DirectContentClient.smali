@@ -67,14 +67,14 @@
         }
     .end annotation
 
-    .line 93
+    .line 98
     const-string v0, "video_model"
 
     invoke-virtual {p0, v0}, Lorg/json/JSONObject;->opt(Ljava/lang/String;)Ljava/lang/Object;
 
     move-result-object v0
 
-    .line 95
+    .line 100
     instance-of v1, v0, Lorg/json/JSONObject;
 
     if-eqz v1, :cond_0
@@ -85,7 +85,7 @@
 
     goto :goto_1
 
-    .line 96
+    .line 101
     :cond_0
     instance-of v1, v0, Ljava/lang/String;
 
@@ -99,10 +99,10 @@
 
     if-nez v1, :cond_2
 
-    .line 97
+    .line 102
     nop
 
-    .line 98
+    .line 103
     invoke-virtual {v0}, Ljava/lang/String;->length()I
 
     move-result p0
@@ -111,7 +111,7 @@
 
     if-gt p0, v1, :cond_1
 
-    .line 99
+    .line 104
     :try_start_0
     new-instance p0, Lorg/json/JSONObject;
 
@@ -119,14 +119,14 @@
     :try_end_0
     .catch Lorg/json/JSONException; {:try_start_0 .. :try_end_0} :catch_0
 
-    .line 101
+    .line 106
     goto :goto_0
 
-    .line 99
+    .line 104
     :catch_0
     move-exception p0
 
-    .line 100
+    .line 105
     new-instance p0, Lorg/json/JSONObject;
 
     new-instance v1, Ljava/lang/String;
@@ -145,7 +145,7 @@
 
     goto :goto_0
 
-    .line 98
+    .line 103
     :cond_1
     new-instance p0, Ljava/lang/IllegalStateException;
 
@@ -155,12 +155,12 @@
 
     throw p0
 
-    .line 102
+    .line 107
     :cond_2
     :goto_0
     nop
 
-    .line 103
+    .line 108
     :goto_1
     if-nez p0, :cond_3
 
@@ -175,7 +175,7 @@
 
     move-result-object v0
 
-    .line 104
+    .line 109
     :goto_2
     instance-of v1, v0, Lorg/json/JSONArray;
 
@@ -198,18 +198,18 @@
 
     check-cast v0, Lorg/json/JSONObject;
 
-    .line 105
+    .line 110
     invoke-virtual {v0}, Lorg/json/JSONObject;->length()I
 
     move-result v0
 
     if-lez v0, :cond_6
 
-    .line 107
+    .line 112
     :cond_5
     return-object p0
 
-    .line 106
+    .line 111
     :cond_6
     new-instance p0, Ljava/lang/IllegalStateException;
 
@@ -384,7 +384,7 @@
 
     if-eqz v3, :cond_1
 
-    const-string v3, "/novel/player/video_model/v1/"
+    const-string v3, "/novel/player/multi_video_model/v1/"
 
     invoke-virtual {p1, v3}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
@@ -396,6 +396,14 @@
     iget-object p1, p0, Lcn/hongguo/tv/DirectContentClient;->playerProfile:Lcn/hongguo/tv/PlayerRequestProfile;
 
     invoke-virtual {p1}, Lcn/hongguo/tv/PlayerRequestProfile;->url()Ljava/lang/String;
+
+    move-result-object p1
+
+    const-string v1, "/video_model/"
+
+    const-string v3, "/multi_video_model/"
+
+    invoke-virtual {p1, v1, v3}, Ljava/lang/String;->replace(Ljava/lang/CharSequence;Ljava/lang/CharSequence;)Ljava/lang/String;
 
     move-result-object v1
 
@@ -1007,7 +1015,7 @@
 .end method
 
 .method public mediaModel(Ljava/lang/String;)Lorg/json/JSONObject;
-    .locals 4
+    .locals 5
     .annotation system Ldalvik/annotation/Throws;
         value = {
             Ljava/lang/Exception;
@@ -1021,22 +1029,22 @@
 
     move-result v0
 
-    if-eqz v0, :cond_0
+    if-eqz v0, :cond_1
 
     .line 87
     new-instance v0, Lorg/json/JSONObject;
 
     invoke-direct {v0}, Lorg/json/JSONObject;-><init>()V
 
-    const-string v1, "need_all_video_definition"
+    const-string v1, "detail_page_version"
 
-    const/4 v2, 0x1
+    const/4 v2, 0x0
 
-    invoke-virtual {v0, v1, v2}, Lorg/json/JSONObject;->put(Ljava/lang/String;Z)Lorg/json/JSONObject;
+    invoke-virtual {v0, v1, v2}, Lorg/json/JSONObject;->put(Ljava/lang/String;I)Lorg/json/JSONObject;
 
     move-result-object v0
 
-    const-string v1, "video_platform"
+    const-string v1, "device_level"
 
     const/4 v3, 0x3
 
@@ -1045,45 +1053,124 @@
     move-result-object v0
 
     .line 88
+    const-string v1, "disable_digg_stat"
+
+    invoke-virtual {v0, v1, v2}, Lorg/json/JSONObject;->put(Ljava/lang/String;Z)Lorg/json/JSONObject;
+
+    move-result-object v0
+
+    const-string v1, "disable_video_relate_book"
+
+    invoke-virtual {v0, v1, v2}, Lorg/json/JSONObject;->put(Ljava/lang/String;Z)Lorg/json/JSONObject;
+
+    move-result-object v0
+
+    .line 89
+    const-string v1, "need_all_video_definition"
+
+    const/4 v3, 0x1
+
+    invoke-virtual {v0, v1, v3}, Lorg/json/JSONObject;->put(Ljava/lang/String;Z)Lorg/json/JSONObject;
+
+    move-result-object v0
+
+    const-string v1, "need_mp4_align"
+
+    invoke-virtual {v0, v1, v2}, Lorg/json/JSONObject;->put(Ljava/lang/String;Z)Lorg/json/JSONObject;
+
+    move-result-object v0
+
+    .line 90
+    const-string v1, "use_os_player"
+
+    invoke-virtual {v0, v1, v2}, Lorg/json/JSONObject;->put(Ljava/lang/String;Z)Lorg/json/JSONObject;
+
+    move-result-object v0
+
+    const-string v1, "use_server_dns"
+
+    invoke-virtual {v0, v1, v2}, Lorg/json/JSONObject;->put(Ljava/lang/String;Z)Lorg/json/JSONObject;
+
+    move-result-object v0
+
+    const-string v1, "video_platform"
+
+    const/16 v2, 0x400
+
+    invoke-virtual {v0, v1, v2}, Lorg/json/JSONObject;->put(Ljava/lang/String;I)Lorg/json/JSONObject;
+
+    move-result-object v0
+
+    .line 91
     new-instance v1, Lorg/json/JSONObject;
 
     invoke-direct {v1}, Lorg/json/JSONObject;-><init>()V
 
-    const-string v3, "video_id"
+    new-instance v2, Lorg/json/JSONObject;
 
-    invoke-virtual {v1, v3, p1}, Lorg/json/JSONObject;->put(Ljava/lang/String;Ljava/lang/Object;)Lorg/json/JSONObject;
+    invoke-direct {v2}, Lorg/json/JSONObject;-><init>()V
+
+    new-instance v3, Lorg/json/JSONArray;
+
+    invoke-direct {v3}, Lorg/json/JSONArray;-><init>()V
+
+    .line 92
+    invoke-virtual {v3, p1}, Lorg/json/JSONArray;->put(Ljava/lang/Object;)Lorg/json/JSONArray;
+
+    move-result-object v3
+
+    const-string v4, "1"
+
+    invoke-virtual {v2, v4, v3}, Lorg/json/JSONObject;->put(Ljava/lang/String;Ljava/lang/Object;)Lorg/json/JSONObject;
+
+    move-result-object v2
+
+    const-string v3, "mixed_video_id_map"
+
+    invoke-virtual {v1, v3, v2}, Lorg/json/JSONObject;->put(Ljava/lang/String;Ljava/lang/Object;)Lorg/json/JSONObject;
+
+    move-result-object v1
+
+    const-string v2, "biz_param"
+
+    invoke-virtual {v1, v2, v0}, Lorg/json/JSONObject;->put(Ljava/lang/String;Ljava/lang/Object;)Lorg/json/JSONObject;
+
+    move-result-object v0
+
+    .line 91
+    const-string v1, "/novel/player/multi_video_model/v1/"
+
+    invoke-direct {p0, v1, v0}, Lcn/hongguo/tv/DirectContentClient;->post(Ljava/lang/String;Lorg/json/JSONObject;)Lorg/json/JSONObject;
+
+    move-result-object v0
+
+    .line 93
+    invoke-virtual {v0, p1}, Lorg/json/JSONObject;->optJSONObject(Ljava/lang/String;)Lorg/json/JSONObject;
 
     move-result-object p1
 
-    .line 89
-    const-string v1, "content_type"
+    .line 94
+    if-eqz p1, :cond_0
 
-    invoke-virtual {p1, v1, v2}, Lorg/json/JSONObject;->put(Ljava/lang/String;I)Lorg/json/JSONObject;
-
-    move-result-object p1
-
-    const-string v1, "biz_param"
-
-    invoke-virtual {p1, v1, v0}, Lorg/json/JSONObject;->put(Ljava/lang/String;Ljava/lang/Object;)Lorg/json/JSONObject;
-
-    move-result-object p1
-
-    .line 88
-    const-string v0, "/novel/player/video_model/v1/"
-
-    invoke-direct {p0, v0, p1}, Lcn/hongguo/tv/DirectContentClient;->post(Ljava/lang/String;Lorg/json/JSONObject;)Lorg/json/JSONObject;
-
-    move-result-object p1
-
-    .line 90
+    .line 95
     invoke-static {p1}, Lcn/hongguo/tv/DirectContentClient;->parseMediaModel(Lorg/json/JSONObject;)Lorg/json/JSONObject;
 
     move-result-object p1
 
     return-object p1
 
-    .line 85
+    .line 94
     :cond_0
+    new-instance p1, Ljava/lang/IllegalStateException;
+
+    const-string v0, "Requested episode media missing"
+
+    invoke-direct {p1, v0}, Ljava/lang/IllegalStateException;-><init>(Ljava/lang/String;)V
+
+    throw p1
+
+    .line 85
+    :cond_1
     new-instance p1, Ljava/lang/IllegalArgumentException;
 
     const-string v0, "Invalid video identity"

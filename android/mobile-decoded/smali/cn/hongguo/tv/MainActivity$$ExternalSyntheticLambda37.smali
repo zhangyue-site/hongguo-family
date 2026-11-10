@@ -9,15 +9,17 @@
 # instance fields
 .field public final synthetic f$0:Lcn/hongguo/tv/MainActivity;
 
-.field public final synthetic f$1:I
+.field public final synthetic f$1:Landroid/view/View;
 
-.field public final synthetic f$2:Landroid/media/MediaPlayer;
+.field public final synthetic f$2:Z
 
-.field public final synthetic f$3:Ljava/lang/Exception;
+.field public final synthetic f$3:Landroid/view/View;
+
+.field public final synthetic f$4:Ljava/util/ArrayList;
 
 
 # direct methods
-.method public synthetic constructor <init>(Lcn/hongguo/tv/MainActivity;ILandroid/media/MediaPlayer;Ljava/lang/Exception;)V
+.method public synthetic constructor <init>(Lcn/hongguo/tv/MainActivity;Landroid/view/View;ZLandroid/view/View;Ljava/util/ArrayList;)V
     .locals 0
 
     .line 0
@@ -25,11 +27,13 @@
 
     iput-object p1, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda37;->f$0:Lcn/hongguo/tv/MainActivity;
 
-    iput p2, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda37;->f$1:I
+    iput-object p2, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda37;->f$1:Landroid/view/View;
 
-    iput-object p3, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda37;->f$2:Landroid/media/MediaPlayer;
+    iput-boolean p3, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda37;->f$2:Z
 
-    iput-object p4, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda37;->f$3:Ljava/lang/Exception;
+    iput-object p4, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda37;->f$3:Landroid/view/View;
+
+    iput-object p5, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda37;->f$4:Ljava/util/ArrayList;
 
     return-void
 .end method
@@ -37,18 +41,20 @@
 
 # virtual methods
 .method public final run()V
-    .locals 4
+    .locals 5
 
     .line 0
     iget-object v0, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda37;->f$0:Lcn/hongguo/tv/MainActivity;
 
-    iget v1, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda37;->f$1:I
+    iget-object v1, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda37;->f$1:Landroid/view/View;
 
-    iget-object v2, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda37;->f$2:Landroid/media/MediaPlayer;
+    iget-boolean v2, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda37;->f$2:Z
 
-    iget-object v3, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda37;->f$3:Ljava/lang/Exception;
+    iget-object v3, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda37;->f$3:Landroid/view/View;
 
-    invoke-virtual {v0, v1, v2, v3}, Lcn/hongguo/tv/MainActivity;->lambda$prepareSource$74$cn-hongguo-tv-MainActivity(ILandroid/media/MediaPlayer;Ljava/lang/Exception;)V
+    iget-object v4, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda37;->f$4:Ljava/util/ArrayList;
+
+    invoke-virtual {v0, v1, v2, v3, v4}, Lcn/hongguo/tv/MainActivity;->lambda$renderCards$41$cn-hongguo-tv-MainActivity(Landroid/view/View;ZLandroid/view/View;Ljava/util/ArrayList;)V
 
     return-void
 .end method

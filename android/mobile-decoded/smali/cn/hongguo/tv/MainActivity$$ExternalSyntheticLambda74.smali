@@ -9,13 +9,15 @@
 # instance fields
 .field public final synthetic f$0:Lcn/hongguo/tv/MainActivity;
 
-.field public final synthetic f$1:Landroid/view/View;
+.field public final synthetic f$1:Ljava/lang/String;
 
-.field public final synthetic f$2:Landroid/view/View;
+.field public final synthetic f$2:I
+
+.field public final synthetic f$3:Ljava/util/ArrayList;
 
 
 # direct methods
-.method public synthetic constructor <init>(Lcn/hongguo/tv/MainActivity;Landroid/view/View;Landroid/view/View;)V
+.method public synthetic constructor <init>(Lcn/hongguo/tv/MainActivity;Ljava/lang/String;ILjava/util/ArrayList;)V
     .locals 0
 
     .line 0
@@ -23,9 +25,11 @@
 
     iput-object p1, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda74;->f$0:Lcn/hongguo/tv/MainActivity;
 
-    iput-object p2, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda74;->f$1:Landroid/view/View;
+    iput-object p2, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda74;->f$1:Ljava/lang/String;
 
-    iput-object p3, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda74;->f$2:Landroid/view/View;
+    iput p3, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda74;->f$2:I
+
+    iput-object p4, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda74;->f$3:Ljava/util/ArrayList;
 
     return-void
 .end method
@@ -33,16 +37,18 @@
 
 # virtual methods
 .method public final run()V
-    .locals 3
+    .locals 4
 
     .line 0
     iget-object v0, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda74;->f$0:Lcn/hongguo/tv/MainActivity;
 
-    iget-object v1, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda74;->f$1:Landroid/view/View;
+    iget-object v1, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda74;->f$1:Ljava/lang/String;
 
-    iget-object v2, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda74;->f$2:Landroid/view/View;
+    iget v2, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda74;->f$2:I
 
-    invoke-virtual {v0, v1, v2}, Lcn/hongguo/tv/MainActivity;->lambda$show$8$cn-hongguo-tv-MainActivity(Landroid/view/View;Landroid/view/View;)V
+    iget-object v3, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda74;->f$3:Ljava/util/ArrayList;
+
+    invoke-virtual {v0, v1, v2, v3}, Lcn/hongguo/tv/MainActivity;->lambda$manageSaved$72$cn-hongguo-tv-MainActivity(Ljava/lang/String;ILjava/util/ArrayList;)V
 
     return-void
 .end method

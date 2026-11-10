@@ -54,6 +54,7 @@ public class MainActivity extends Activity {
     // playback engine entry points
     void startPlayer(JSONObject series, JSONArray eps, int index, long positionMs) {}
     void playEpisode(int index, long positionMs) {}
+    void playEpisode(int index, long positionMs, boolean quietTransition) {}
     void stopPlayer() {}
     void prepareSource(android.media.MediaPlayer p, int episodeIndex) {}
     void recommendNext(JSONObject finished) {}
@@ -117,6 +118,8 @@ void addButton(LinearLayout row, Button button) {}
 // Compile-only signatures. Runtime implementations remain in the original dex.
 class Catalog {
  static class Result { org.json.JSONArray items; boolean stale,fromCache; }
+ boolean requiresSearchSetup() { return false; }
+ void activateSearch() throws Exception {}
  Result browsePage(String genre,String mode,boolean refresh) throws Exception {return null;}
  Result searchPage(String query,String mode,boolean refresh) throws Exception {return null;}
  android.graphics.Bitmap cover(String id,MemoryProfile memory)throws Exception{return null;}

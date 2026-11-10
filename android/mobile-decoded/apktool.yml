@@ -1,5 +1,5 @@
 version: 3.0.3
-apkFileName: HongguoTV-0.5.8-arm64.apk
+apkFileName: HongguoTV-0.5.9-arm64.apk
 usesFramework:
   ids:
   - 1
@@ -7,8 +7,8 @@ sdkInfo:
   minSdkVersion: 21
   targetSdkVersion: 35
 versionInfo:
-  versionCode: 1
-  versionName: 0.1.0-personal-mobile
+  versionCode: 19
+  versionName: 0.5.9-standalone-arm64
 resourcesInfo:
   packageId: 127
 doNotCompress:

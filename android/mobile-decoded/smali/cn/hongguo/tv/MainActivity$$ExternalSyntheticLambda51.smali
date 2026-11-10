@@ -30,7 +30,7 @@
     .line 0
     iget-object v0, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda51;->f$0:Landroid/view/View;
 
-    invoke-static {v0, p1, p2, p3}, Lcn/hongguo/tv/MainActivity;->lambda$renderEpisodePage$56(Landroid/view/View;Landroid/view/View;ILandroid/view/KeyEvent;)Z
+    invoke-static {v0, p1, p2, p3}, Lcn/hongguo/tv/MainActivity;->lambda$renderEpisodePage$61(Landroid/view/View;Landroid/view/View;ILandroid/view/KeyEvent;)Z
 
     move-result p1
 

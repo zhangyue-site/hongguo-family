@@ -3,72 +3,70 @@
 .source "D8$$SyntheticClass"
 
 # interfaces
-.implements Landroid/view/View$OnKeyListener;
+.implements Ljava/lang/Runnable;
 
 
 # instance fields
-.field public final synthetic f$0:I
+.field public final synthetic f$0:Lcn/hongguo/tv/MainActivity;
 
-.field public final synthetic f$1:Ljava/util/ArrayList;
+.field public final synthetic f$1:Lcn/hongguo/tv/Api;
 
-.field public final synthetic f$2:I
+.field public final synthetic f$2:Ljava/lang/String;
 
-.field public final synthetic f$3:Lcn/hongguo/tv/MainActivity$PageUi;
+.field public final synthetic f$3:I
 
-.field public final synthetic f$4:Landroid/view/View;
+.field public final synthetic f$4:I
 
-.field public final synthetic f$5:Landroid/view/View;
+.field public final synthetic f$5:I
+
+.field public final synthetic f$6:Landroid/media/MediaPlayer;
 
 
 # direct methods
-.method public synthetic constructor <init>(ILjava/util/ArrayList;ILcn/hongguo/tv/MainActivity$PageUi;Landroid/view/View;Landroid/view/View;)V
+.method public synthetic constructor <init>(Lcn/hongguo/tv/MainActivity;Lcn/hongguo/tv/Api;Ljava/lang/String;IIILandroid/media/MediaPlayer;)V
     .locals 0
 
     .line 0
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
-    iput p1, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda78;->f$0:I
+    iput-object p1, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda78;->f$0:Lcn/hongguo/tv/MainActivity;
 
-    iput-object p2, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda78;->f$1:Ljava/util/ArrayList;
+    iput-object p2, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda78;->f$1:Lcn/hongguo/tv/Api;
 
-    iput p3, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda78;->f$2:I
+    iput-object p3, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda78;->f$2:Ljava/lang/String;
 
-    iput-object p4, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda78;->f$3:Lcn/hongguo/tv/MainActivity$PageUi;
+    iput p4, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda78;->f$3:I
 
-    iput-object p5, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda78;->f$4:Landroid/view/View;
+    iput p5, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda78;->f$4:I
 
-    iput-object p6, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda78;->f$5:Landroid/view/View;
+    iput p6, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda78;->f$5:I
+
+    iput-object p7, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda78;->f$6:Landroid/media/MediaPlayer;
 
     return-void
 .end method
 
 
 # virtual methods
-.method public final onKey(Landroid/view/View;ILandroid/view/KeyEvent;)Z
-    .locals 9
+.method public final run()V
+    .locals 7
 
     .line 0
-    iget v0, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda78;->f$0:I
+    iget-object v0, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda78;->f$0:Lcn/hongguo/tv/MainActivity;
 
-    iget-object v1, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda78;->f$1:Ljava/util/ArrayList;
+    iget-object v1, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda78;->f$1:Lcn/hongguo/tv/Api;
 
-    iget v2, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda78;->f$2:I
+    iget-object v2, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda78;->f$2:Ljava/lang/String;
 
-    iget-object v3, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda78;->f$3:Lcn/hongguo/tv/MainActivity$PageUi;
+    iget v3, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda78;->f$3:I
 
-    iget-object v4, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda78;->f$4:Landroid/view/View;
+    iget v4, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda78;->f$4:I
 
-    iget-object v5, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda78;->f$5:Landroid/view/View;
+    iget v5, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda78;->f$5:I
 
-    move-object v6, p1
+    iget-object v6, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda78;->f$6:Landroid/media/MediaPlayer;
 
-    move v7, p2
+    invoke-virtual/range {v0 .. v6}, Lcn/hongguo/tv/MainActivity;->lambda$prepareSource$80$cn-hongguo-tv-MainActivity(Lcn/hongguo/tv/Api;Ljava/lang/String;IIILandroid/media/MediaPlayer;)V
 
-    move-object v8, p3
-
-    invoke-static/range {v0 .. v8}, Lcn/hongguo/tv/MainActivity;->lambda$wireGrid$37(ILjava/util/ArrayList;ILcn/hongguo/tv/MainActivity$PageUi;Landroid/view/View;Landroid/view/View;Landroid/view/View;ILandroid/view/KeyEvent;)Z
-
-    move-result p1
-
-    return p1
+    return-void
 .end method

@@ -18,7 +18,7 @@
 
 .field private clock:J
 
-.field private publicUntil:J
+.field private volatile prefetchDisabledUntil:J
 
 .field private series:Lorg/json/JSONObject;
 
@@ -194,7 +194,7 @@
         }
     .end annotation
 
-    .line 58
+    .line 63
     invoke-static {p0}, Lcn/hongguo/tv/StandaloneApi;->clearMediaFiles(Ljava/io/File;)V
 
     const/4 v0, 0x0
@@ -709,7 +709,7 @@
         }
     .end annotation
 
-    .line 57
+    .line 62
     iget-object v0, p0, Lcn/hongguo/tv/StandaloneApi;->client:Lcn/hongguo/tv/DirectContentClient;
 
     invoke-virtual {v0, p1}, Lcn/hongguo/tv/DirectContentClient;->mediaModel(Ljava/lang/String;)Lorg/json/JSONObject;
@@ -726,7 +726,7 @@
 .method synthetic lambda$media$2$cn-hongguo-tv-StandaloneApi(Ljava/io/IOException;)V
     .locals 4
 
-    .line 59
+    .line 64
     instance-of p1, p1, Lcn/hongguo/tv/ReadRetry$TemporaryResponse;
 
     if-eqz p1, :cond_0
@@ -739,7 +739,7 @@
 
     add-long/2addr v0, v2
 
-    iput-wide v0, p0, Lcn/hongguo/tv/StandaloneApi;->publicUntil:J
+    iput-wide v0, p0, Lcn/hongguo/tv/StandaloneApi;->prefetchDisabledUntil:J
 
     :cond_0
     return-void
@@ -764,14 +764,14 @@
 .end method
 
 .method media(Ljava/lang/String;II)Lcn/hongguo/tv/Api$Source;
-    .locals 17
+    .locals 16
     .annotation system Ldalvik/annotation/Throws;
         value = {
             Ljava/lang/Exception;
         }
     .end annotation
 
-    .line 47
+    .line 52
     move-object/from16 v1, p0
 
     move/from16 v0, p2
@@ -785,13 +785,13 @@
 
     const/4 v3, 0x1
 
-    if-lt v0, v3, :cond_8
+    if-lt v0, v3, :cond_7
 
     iget-object v4, v1, Lcn/hongguo/tv/StandaloneApi;->videoIds:[Ljava/lang/String;
 
     array-length v4, v4
 
-    if-gt v0, v4, :cond_8
+    if-gt v0, v4, :cond_7
 
     iget-object v4, v1, Lcn/hongguo/tv/StandaloneApi;->videoIds:[Ljava/lang/String;
 
@@ -803,12 +803,12 @@
     :try_end_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_1
 
-    .line 48
+    .line 53
     sget-object v4, Lcn/hongguo/tv/StandaloneApi;->MEDIA_LOCK:Ljava/lang/Object;
 
     monitor-enter v4
 
-    .line 49
+    .line 54
     :try_start_1
     invoke-static {}, Ljava/lang/Thread;->currentThread()Ljava/lang/Thread;
 
@@ -818,9 +818,9 @@
 
     move-result v5
 
-    if-nez v5, :cond_7
+    if-nez v5, :cond_6
 
-    .line 50
+    .line 55
     new-instance v5, Ljava/lang/StringBuilder;
 
     invoke-direct {v5}, Ljava/lang/StringBuilder;-><init>()V
@@ -843,7 +843,7 @@
 
     move-result-object v5
 
-    .line 51
+    .line 56
     const/4 v6, 0x0
 
     const/4 v7, 0x0
@@ -975,7 +975,7 @@
 
     goto :goto_0
 
-    .line 52
+    .line 57
     :cond_2
     iget-object v7, v1, Lcn/hongguo/tv/StandaloneApi;->used:[J
 
@@ -1021,7 +1021,7 @@
 
     invoke-direct {v8, v11, v12}, Ljava/io/File;-><init>(Ljava/io/File;Ljava/lang/String;)V
 
-    .line 54
+    .line 59
     iget-object v11, v1, Lcn/hongguo/tv/StandaloneApi;->cache:Ljava/io/File;
 
     invoke-static {v11}, Lcn/hongguo/tv/StandaloneApi;->clearMediaFiles(Ljava/io/File;)V
@@ -1034,56 +1034,38 @@
 
     aput-object v12, v11, v7
 
-    .line 55
+    .line 60
     new-array v11, v3, [Z
 
     aput-boolean v6, v11, v6
 
-    .line 56
-    invoke-static {}, Landroid/os/SystemClock;->elapsedRealtime()J
+    .line 61
+    new-instance v12, Lcn/hongguo/tv/StandaloneApi$$ExternalSyntheticLambda0;
 
-    move-result-wide v12
-
-    iget-wide v14, v1, Lcn/hongguo/tv/StandaloneApi;->publicUntil:J
-
-    cmp-long v16, v12, v14
-
-    if-gez v16, :cond_4
-
-    const/4 v12, 0x1
-
-    goto :goto_2
-
-    :cond_4
-    const/4 v12, 0x0
-
-    :goto_2
-    new-instance v13, Lcn/hongguo/tv/StandaloneApi$$ExternalSyntheticLambda0;
-
-    invoke-direct {v13, v1, v0, v8, v2}, Lcn/hongguo/tv/StandaloneApi$$ExternalSyntheticLambda0;-><init>(Lcn/hongguo/tv/StandaloneApi;Ljava/lang/String;Ljava/io/File;I)V
+    invoke-direct {v12, v1, v0, v8, v2}, Lcn/hongguo/tv/StandaloneApi$$ExternalSyntheticLambda0;-><init>(Lcn/hongguo/tv/StandaloneApi;Ljava/lang/String;Ljava/io/File;I)V
 
     new-instance v2, Lcn/hongguo/tv/StandaloneApi$$ExternalSyntheticLambda1;
 
-    move-object/from16 v14, p1
+    move-object/from16 v13, p1
 
-    invoke-direct {v2, v8, v11, v14, v0}, Lcn/hongguo/tv/StandaloneApi$$ExternalSyntheticLambda1;-><init>(Ljava/io/File;[ZLjava/lang/String;Ljava/lang/String;)V
+    invoke-direct {v2, v8, v11, v13, v0}, Lcn/hongguo/tv/StandaloneApi$$ExternalSyntheticLambda1;-><init>(Ljava/io/File;[ZLjava/lang/String;Ljava/lang/String;)V
 
-    new-instance v14, Lcn/hongguo/tv/StandaloneApi$$ExternalSyntheticLambda2;
+    new-instance v13, Lcn/hongguo/tv/StandaloneApi$$ExternalSyntheticLambda2;
 
-    invoke-direct {v14, v1}, Lcn/hongguo/tv/StandaloneApi$$ExternalSyntheticLambda2;-><init>(Lcn/hongguo/tv/StandaloneApi;)V
+    invoke-direct {v13, v1}, Lcn/hongguo/tv/StandaloneApi$$ExternalSyntheticLambda2;-><init>(Lcn/hongguo/tv/StandaloneApi;)V
 
-    invoke-static {v12, v13, v2, v14}, Lcn/hongguo/tv/MediaFallback;->load(ZLcn/hongguo/tv/ReadRetry$Operation;Lcn/hongguo/tv/ReadRetry$Operation;Lcn/hongguo/tv/MediaFallback$Failure;)Ljava/lang/Object;
+    invoke-static {v12, v2, v13}, Lcn/hongguo/tv/MediaFallback;->load(Lcn/hongguo/tv/ReadRetry$Operation;Lcn/hongguo/tv/ReadRetry$Operation;Lcn/hongguo/tv/MediaFallback$Failure;)Ljava/lang/Object;
 
     move-result-object v2
 
     check-cast v2, Lcn/hongguo/tv/DirectMediaSource$Prepared;
 
-    .line 60
+    .line 65
     const-string v12, ""
 
     aget-boolean v6, v11, v6
 
-    if-eqz v6, :cond_5
+    if-eqz v6, :cond_4
 
     new-instance v5, Ljava/lang/StringBuilder;
 
@@ -1105,8 +1087,8 @@
 
     const-string v12, "\u516c\u5f00\u5907\u7528\u7247\u6e90 \u00b7 360p"
 
-    .line 61
-    :cond_5
+    .line 66
+    :cond_4
     invoke-static {}, Ljava/lang/Thread;->currentThread()Ljava/lang/Thread;
 
     move-result-object v0
@@ -1115,9 +1097,9 @@
 
     move-result v0
 
-    if-nez v0, :cond_6
+    if-nez v0, :cond_5
 
-    .line 62
+    .line 67
     iget-object v0, v1, Lcn/hongguo/tv/StandaloneApi;->cachedKeys:[Ljava/lang/String;
 
     aput-object v5, v0, v7
@@ -1136,7 +1118,7 @@
 
     aput-wide v5, v0, v7
 
-    .line 63
+    .line 68
     new-instance v0, Lcn/hongguo/tv/Api$Source;
 
     iget-object v2, v2, Lcn/hongguo/tv/DirectMediaSource$Prepared;->file:Ljava/io/File;
@@ -1155,8 +1137,8 @@
 
     return-object v0
 
-    .line 61
-    :cond_6
+    .line 66
+    :cond_5
     invoke-static {v8}, Lcn/hongguo/tv/StandaloneApi;->clearMediaFiles(Ljava/io/File;)V
 
     new-instance v0, Ljava/io/InterruptedIOException;
@@ -1165,15 +1147,15 @@
 
     throw v0
 
-    .line 49
-    :cond_7
+    .line 54
+    :cond_6
     new-instance v0, Ljava/io/InterruptedIOException;
 
     invoke-direct {v0}, Ljava/io/InterruptedIOException;-><init>()V
 
     throw v0
 
-    .line 64
+    .line 69
     :catchall_0
     move-exception v0
 
@@ -1183,8 +1165,8 @@
 
     throw v0
 
-    .line 47
-    :cond_8
+    .line 52
+    :cond_7
     :try_start_2
     new-instance v0, Ljava/lang/Exception;
 
@@ -1205,16 +1187,31 @@
 .end method
 
 .method prefetch(Ljava/lang/String;II)V
-    .locals 0
+    .locals 5
     .annotation system Ldalvik/annotation/Throws;
         value = {
             Ljava/lang/Exception;
         }
     .end annotation
 
-    .line 44
+    .line 47
+    invoke-static {}, Landroid/os/SystemClock;->elapsedRealtime()J
+
+    move-result-wide v0
+
+    iget-wide v2, p0, Lcn/hongguo/tv/StandaloneApi;->prefetchDisabledUntil:J
+
+    cmp-long v4, v0, v2
+
+    if-gez v4, :cond_0
+
+    return-void
+
+    .line 48
+    :cond_0
     invoke-virtual {p0, p1, p2, p3}, Lcn/hongguo/tv/StandaloneApi;->media(Ljava/lang/String;II)Lcn/hongguo/tv/Api$Source;
 
+    .line 49
     return-void
 .end method
 

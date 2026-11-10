@@ -30,7 +30,7 @@
     .line 0
     iget-object v0, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda41;->f$0:Lcn/hongguo/tv/MainActivity;
 
-    invoke-virtual {v0}, Lcn/hongguo/tv/MainActivity;->lambda$shell$15$cn-hongguo-tv-MainActivity()V
+    invoke-virtual {v0}, Lcn/hongguo/tv/MainActivity;->lambda$shell$17$cn-hongguo-tv-MainActivity()V
 
     return-void
 .end method

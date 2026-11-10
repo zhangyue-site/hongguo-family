@@ -9,13 +9,9 @@
 # instance fields
 .field public final synthetic f$0:Lcn/hongguo/tv/MainActivity;
 
-.field public final synthetic f$1:Lorg/json/JSONObject;
-
-.field public final synthetic f$2:Lorg/json/JSONArray;
-
 
 # direct methods
-.method public synthetic constructor <init>(Lcn/hongguo/tv/MainActivity;Lorg/json/JSONObject;Lorg/json/JSONArray;)V
+.method public synthetic constructor <init>(Lcn/hongguo/tv/MainActivity;)V
     .locals 0
 
     .line 0
@@ -23,26 +19,18 @@
 
     iput-object p1, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda17;->f$0:Lcn/hongguo/tv/MainActivity;
 
-    iput-object p2, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda17;->f$1:Lorg/json/JSONObject;
-
-    iput-object p3, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda17;->f$2:Lorg/json/JSONArray;
-
     return-void
 .end method
 
 
 # virtual methods
 .method public final run()V
-    .locals 3
+    .locals 1
 
     .line 0
     iget-object v0, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda17;->f$0:Lcn/hongguo/tv/MainActivity;
 
-    iget-object v1, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda17;->f$1:Lorg/json/JSONObject;
-
-    iget-object v2, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda17;->f$2:Lorg/json/JSONArray;
-
-    invoke-virtual {v0, v1, v2}, Lcn/hongguo/tv/MainActivity;->lambda$detail$47$cn-hongguo-tv-MainActivity(Lorg/json/JSONObject;Lorg/json/JSONArray;)V
+    invoke-virtual {v0}, Lcn/hongguo/tv/MainActivity;->lambda$home$30$cn-hongguo-tv-MainActivity()V
 
     return-void
 .end method

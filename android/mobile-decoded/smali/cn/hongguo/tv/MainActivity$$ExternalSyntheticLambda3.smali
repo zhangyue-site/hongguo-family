@@ -9,11 +9,11 @@
 # instance fields
 .field public final synthetic f$0:Lcn/hongguo/tv/MainActivity;
 
-.field public final synthetic f$1:Landroid/widget/EditText;
+.field public final synthetic f$1:I
 
 
 # direct methods
-.method public synthetic constructor <init>(Lcn/hongguo/tv/MainActivity;Landroid/widget/EditText;)V
+.method public synthetic constructor <init>(Lcn/hongguo/tv/MainActivity;I)V
     .locals 0
 
     .line 0
@@ -21,7 +21,7 @@
 
     iput-object p1, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda3;->f$0:Lcn/hongguo/tv/MainActivity;
 
-    iput-object p2, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda3;->f$1:Landroid/widget/EditText;
+    iput p2, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda3;->f$1:I
 
     return-void
 .end method
@@ -34,9 +34,9 @@
     .line 0
     iget-object v0, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda3;->f$0:Lcn/hongguo/tv/MainActivity;
 
-    iget-object v1, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda3;->f$1:Landroid/widget/EditText;
+    iget v1, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda3;->f$1:I
 
-    invoke-virtual {v0, v1}, Lcn/hongguo/tv/MainActivity;->lambda$search$40$cn-hongguo-tv-MainActivity(Landroid/widget/EditText;)V
+    invoke-virtual {v0, v1}, Lcn/hongguo/tv/MainActivity;->lambda$onCreate$4$cn-hongguo-tv-MainActivity(I)V
 
     return-void
 .end method

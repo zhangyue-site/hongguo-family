@@ -54,7 +54,7 @@
 
     iget-object v4, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda50;->f$4:Lorg/json/JSONArray;
 
-    invoke-virtual {v0, v1, v2, v3, v4}, Lcn/hongguo/tv/MainActivity;->lambda$renderEpisodePage$55$cn-hongguo-tv-MainActivity(ZILorg/json/JSONObject;Lorg/json/JSONArray;)V
+    invoke-virtual {v0, v1, v2, v3, v4}, Lcn/hongguo/tv/MainActivity;->lambda$renderEpisodePage$60$cn-hongguo-tv-MainActivity(ZILorg/json/JSONObject;Lorg/json/JSONArray;)V
 
     return-void
 .end method

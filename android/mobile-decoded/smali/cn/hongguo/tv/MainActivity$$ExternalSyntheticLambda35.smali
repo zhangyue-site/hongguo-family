@@ -9,17 +9,17 @@
 # instance fields
 .field public final synthetic f$0:Lcn/hongguo/tv/MainActivity;
 
-.field public final synthetic f$1:Landroid/view/View;
+.field public final synthetic f$1:Landroid/widget/LinearLayout;
 
-.field public final synthetic f$2:Z
+.field public final synthetic f$2:Lorg/json/JSONArray;
 
 .field public final synthetic f$3:Landroid/view/View;
 
-.field public final synthetic f$4:Ljava/util/ArrayList;
+.field public final synthetic f$4:I
 
 
 # direct methods
-.method public synthetic constructor <init>(Lcn/hongguo/tv/MainActivity;Landroid/view/View;ZLandroid/view/View;Ljava/util/ArrayList;)V
+.method public synthetic constructor <init>(Lcn/hongguo/tv/MainActivity;Landroid/widget/LinearLayout;Lorg/json/JSONArray;Landroid/view/View;I)V
     .locals 0
 
     .line 0
@@ -27,13 +27,13 @@
 
     iput-object p1, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda35;->f$0:Lcn/hongguo/tv/MainActivity;
 
-    iput-object p2, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda35;->f$1:Landroid/view/View;
+    iput-object p2, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda35;->f$1:Landroid/widget/LinearLayout;
 
-    iput-boolean p3, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda35;->f$2:Z
+    iput-object p3, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda35;->f$2:Lorg/json/JSONArray;
 
     iput-object p4, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda35;->f$3:Landroid/view/View;
 
-    iput-object p5, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda35;->f$4:Ljava/util/ArrayList;
+    iput p5, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda35;->f$4:I
 
     return-void
 .end method
@@ -46,15 +46,15 @@
     .line 0
     iget-object v0, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda35;->f$0:Lcn/hongguo/tv/MainActivity;
 
-    iget-object v1, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda35;->f$1:Landroid/view/View;
+    iget-object v1, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda35;->f$1:Landroid/widget/LinearLayout;
 
-    iget-boolean v2, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda35;->f$2:Z
+    iget-object v2, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda35;->f$2:Lorg/json/JSONArray;
 
     iget-object v3, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda35;->f$3:Landroid/view/View;
 
-    iget-object v4, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda35;->f$4:Ljava/util/ArrayList;
+    iget v4, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda35;->f$4:I
 
-    invoke-virtual {v0, v1, v2, v3, v4}, Lcn/hongguo/tv/MainActivity;->lambda$renderCards$36$cn-hongguo-tv-MainActivity(Landroid/view/View;ZLandroid/view/View;Ljava/util/ArrayList;)V
+    invoke-virtual {v0, v1, v2, v3, v4}, Lcn/hongguo/tv/MainActivity;->lambda$renderCards$39$cn-hongguo-tv-MainActivity(Landroid/widget/LinearLayout;Lorg/json/JSONArray;Landroid/view/View;I)V
 
     return-void
 .end method

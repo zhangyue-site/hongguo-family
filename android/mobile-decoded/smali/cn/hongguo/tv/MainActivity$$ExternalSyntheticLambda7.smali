@@ -36,7 +36,7 @@
 
     iget-object v1, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda7;->f$1:Ljava/lang/String;
 
-    invoke-virtual {v0, v1}, Lcn/hongguo/tv/MainActivity;->lambda$home$21$cn-hongguo-tv-MainActivity(Ljava/lang/String;)V
+    invoke-virtual {v0, v1}, Lcn/hongguo/tv/MainActivity;->lambda$search$47$cn-hongguo-tv-MainActivity(Ljava/lang/String;)V
 
     return-void
 .end method

@@ -1,10 +1,10 @@
 Signature-Version: 1.0
 Created-By: 1.0 (Android)
-SHA-256-Digest-Manifest: 9u9fbQ012HxL1rsd8L5zKFeZjOf9dIYILm429mcMFrY=
+SHA-256-Digest-Manifest: f3b/nd8jxaEbrOmzgzNprmninj8NfBmV4Wu8V45j0D0=
 X-Android-APK-Signed: 2, 3
 
 Name: AndroidManifest.xml
-SHA-256-Digest: oZvKjwY8h9HE92PFUdqPVpB/xfXxxQv2ryr+I/H5mAc=
+SHA-256-Digest: EHUIURnzXtRN5bWu6tdaoh7yHptco+vuZHpWyU4Zr1g=
 
 Name: assets/APACHE-2.0.txt
 SHA-256-Digest: V4YSzuGZ3ZKaPlSfWjeBbvLnMW9YPLs/ht+ZEyKcB4Q=
@@ -19,7 +19,7 @@ Name: assets/signer-cert.bin
 SHA-256-Digest: YdlFgFnv/k7bXclhhpoB+okg1AUelzl+j4SocriHUWE=
 
 Name: classes.dex
-SHA-256-Digest: u9D8Z+eRaqJBtpPlqFPod99OgdhJra/3l5/8pYLXFQs=
+SHA-256-Digest: Ng4+qvmtZ4/HDy60nFNVWYFuUwXxaYzOWdtpV1i2N4c=
 
 Name: lib/arm64-v8a/libhongguo_jnidispatch.so
 SHA-256-Digest: 0Q2FhREAl0Ech6C4CRAbcmgZdfSwOkCSjppSlOtf5VU=

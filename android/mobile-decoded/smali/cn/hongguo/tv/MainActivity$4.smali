@@ -34,7 +34,7 @@
         }
     .end annotation
 
-    .line 255
+    .line 269
     iput-object p1, p0, Lcn/hongguo/tv/MainActivity$4;->this$0:Lcn/hongguo/tv/MainActivity;
 
     iput p2, p0, Lcn/hongguo/tv/MainActivity$4;->val$ep:I
@@ -51,14 +51,14 @@
 .method public surfaceChanged(Landroid/view/SurfaceHolder;III)V
     .locals 0
 
-    .line 255
+    .line 269
     return-void
 .end method
 
 .method public surfaceCreated(Landroid/view/SurfaceHolder;)V
     .locals 3
 
-    .line 255
+    .line 269
     iget-object v0, p0, Lcn/hongguo/tv/MainActivity$4;->this$0:Lcn/hongguo/tv/MainActivity;
 
     iget-object v0, v0, Lcn/hongguo/tv/MainActivity;->player:Landroid/media/MediaPlayer;
@@ -89,7 +89,7 @@
 .method public surfaceDestroyed(Landroid/view/SurfaceHolder;)V
     .locals 1
 
-    .line 255
+    .line 269
     iget-object p1, p0, Lcn/hongguo/tv/MainActivity$4;->this$0:Lcn/hongguo/tv/MainActivity;
 
     iget-object p1, p1, Lcn/hongguo/tv/MainActivity;->player:Landroid/media/MediaPlayer;

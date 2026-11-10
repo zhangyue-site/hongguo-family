@@ -3,7 +3,7 @@
 .source "D8$$SyntheticClass"
 
 # interfaces
-.implements Landroid/media/MediaPlayer$OnVideoSizeChangedListener;
+.implements Landroid/view/View$OnKeyListener;
 
 
 # instance fields
@@ -24,13 +24,15 @@
 
 
 # virtual methods
-.method public final onVideoSizeChanged(Landroid/media/MediaPlayer;II)V
+.method public final onKey(Landroid/view/View;ILandroid/view/KeyEvent;)Z
     .locals 1
 
     .line 0
     iget-object v0, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda63;->f$0:Lcn/hongguo/tv/MainActivity;
 
-    invoke-virtual {v0, p1, p2, p3}, Lcn/hongguo/tv/MainActivity;->lambda$playEpisode$88$cn-hongguo-tv-MainActivity(Landroid/media/MediaPlayer;II)V
+    invoke-virtual {v0, p1, p2, p3}, Lcn/hongguo/tv/MainActivity;->lambda$startPlayer$90$cn-hongguo-tv-MainActivity(Landroid/view/View;ILandroid/view/KeyEvent;)Z
 
-    return-void
+    move-result p1
+
+    return p1
 .end method

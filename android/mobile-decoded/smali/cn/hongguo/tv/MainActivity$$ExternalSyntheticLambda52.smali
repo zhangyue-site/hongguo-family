@@ -3,15 +3,21 @@
 .source "D8$$SyntheticClass"
 
 # interfaces
-.implements Landroid/view/View$OnLayoutChangeListener;
+.implements Ljava/lang/Runnable;
 
 
 # instance fields
 .field public final synthetic f$0:Lcn/hongguo/tv/MainActivity;
 
+.field public final synthetic f$1:I
+
+.field public final synthetic f$2:Landroid/media/MediaPlayer;
+
+.field public final synthetic f$3:Lcn/hongguo/tv/Api$Source;
+
 
 # direct methods
-.method public synthetic constructor <init>(Lcn/hongguo/tv/MainActivity;)V
+.method public synthetic constructor <init>(Lcn/hongguo/tv/MainActivity;ILandroid/media/MediaPlayer;Lcn/hongguo/tv/Api$Source;)V
     .locals 0
 
     .line 0
@@ -19,38 +25,30 @@
 
     iput-object p1, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda52;->f$0:Lcn/hongguo/tv/MainActivity;
 
+    iput p2, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda52;->f$1:I
+
+    iput-object p3, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda52;->f$2:Landroid/media/MediaPlayer;
+
+    iput-object p4, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda52;->f$3:Lcn/hongguo/tv/Api$Source;
+
     return-void
 .end method
 
 
 # virtual methods
-.method public final onLayoutChange(Landroid/view/View;IIIIIIII)V
-    .locals 11
+.method public final run()V
+    .locals 4
 
     .line 0
-    move-object v0, p0
+    iget-object v0, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda52;->f$0:Lcn/hongguo/tv/MainActivity;
 
-    iget-object v1, v0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda52;->f$0:Lcn/hongguo/tv/MainActivity;
+    iget v1, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda52;->f$1:I
 
-    move-object v2, p1
+    iget-object v2, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda52;->f$2:Landroid/media/MediaPlayer;
 
-    move v3, p2
+    iget-object v3, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda52;->f$3:Lcn/hongguo/tv/Api$Source;
 
-    move v4, p3
-
-    move v5, p4
-
-    move/from16 v6, p5
-
-    move/from16 v7, p6
-
-    move/from16 v8, p7
-
-    move/from16 v9, p8
-
-    move/from16 v10, p9
-
-    invoke-virtual/range {v1 .. v10}, Lcn/hongguo/tv/MainActivity;->lambda$startPlayer$76$cn-hongguo-tv-MainActivity(Landroid/view/View;IIIIIIII)V
+    invoke-virtual {v0, v1, v2, v3}, Lcn/hongguo/tv/MainActivity;->lambda$prepareSource$78$cn-hongguo-tv-MainActivity(ILandroid/media/MediaPlayer;Lcn/hongguo/tv/Api$Source;)V
 
     return-void
 .end method

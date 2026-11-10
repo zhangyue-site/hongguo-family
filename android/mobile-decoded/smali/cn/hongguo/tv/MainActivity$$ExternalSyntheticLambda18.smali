@@ -9,13 +9,11 @@
 # instance fields
 .field public final synthetic f$0:Lcn/hongguo/tv/MainActivity;
 
-.field public final synthetic f$1:Lorg/json/JSONObject;
-
-.field public final synthetic f$2:Landroid/widget/Button;
+.field public final synthetic f$1:Ljava/lang/String;
 
 
 # direct methods
-.method public synthetic constructor <init>(Lcn/hongguo/tv/MainActivity;Lorg/json/JSONObject;Landroid/widget/Button;)V
+.method public synthetic constructor <init>(Lcn/hongguo/tv/MainActivity;Ljava/lang/String;)V
     .locals 0
 
     .line 0
@@ -23,9 +21,7 @@
 
     iput-object p1, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda18;->f$0:Lcn/hongguo/tv/MainActivity;
 
-    iput-object p2, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda18;->f$1:Lorg/json/JSONObject;
-
-    iput-object p3, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda18;->f$2:Landroid/widget/Button;
+    iput-object p2, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda18;->f$1:Ljava/lang/String;
 
     return-void
 .end method
@@ -33,16 +29,14 @@
 
 # virtual methods
 .method public final run()V
-    .locals 3
+    .locals 2
 
     .line 0
     iget-object v0, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda18;->f$0:Lcn/hongguo/tv/MainActivity;
 
-    iget-object v1, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda18;->f$1:Lorg/json/JSONObject;
+    iget-object v1, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda18;->f$1:Ljava/lang/String;
 
-    iget-object v2, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda18;->f$2:Landroid/widget/Button;
-
-    invoke-virtual {v0, v1, v2}, Lcn/hongguo/tv/MainActivity;->lambda$detail$48$cn-hongguo-tv-MainActivity(Lorg/json/JSONObject;Landroid/widget/Button;)V
+    invoke-virtual {v0, v1}, Lcn/hongguo/tv/MainActivity;->lambda$home$31$cn-hongguo-tv-MainActivity(Ljava/lang/String;)V
 
     return-void
 .end method

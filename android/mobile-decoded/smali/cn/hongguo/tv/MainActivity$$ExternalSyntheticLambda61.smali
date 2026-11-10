@@ -3,7 +3,7 @@
 .source "D8$$SyntheticClass"
 
 # interfaces
-.implements Landroid/view/View$OnKeyListener;
+.implements Ljava/lang/Runnable;
 
 
 # instance fields
@@ -24,15 +24,13 @@
 
 
 # virtual methods
-.method public final onKey(Landroid/view/View;ILandroid/view/KeyEvent;)Z
+.method public final run()V
     .locals 1
 
     .line 0
     iget-object v0, p0, Lcn/hongguo/tv/MainActivity$$ExternalSyntheticLambda61;->f$0:Lcn/hongguo/tv/MainActivity;
 
-    invoke-virtual {v0, p1, p2, p3}, Lcn/hongguo/tv/MainActivity;->lambda$startPlayer$85$cn-hongguo-tv-MainActivity(Landroid/view/View;ILandroid/view/KeyEvent;)Z
+    invoke-virtual {v0}, Lcn/hongguo/tv/MainActivity;->lambda$startPlayer$88$cn-hongguo-tv-MainActivity()V
 
-    move-result p1
-
-    return p1
+    return-void
 .end method

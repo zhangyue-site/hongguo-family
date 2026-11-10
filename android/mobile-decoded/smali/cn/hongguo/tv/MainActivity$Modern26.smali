@@ -18,7 +18,7 @@
 .method constructor <init>()V
     .locals 0
 
-    .line 334
+    .line 369
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
     return-void
@@ -27,7 +27,7 @@
 .method static seek(Landroid/media/MediaPlayer;J)V
     .locals 1
 
-    .line 334
+    .line 369
     const/4 v0, 0x3
 
     invoke-virtual {p0, p1, p2, v0}, Landroid/media/MediaPlayer;->seekTo(JI)V
