@@ -30,12 +30,20 @@
 6. 验收：redroid API31 装包冷启动；签名接口从 106 出口实测搜索与批量取源（SSR 出口受限不影响）；实体手机/投影覆盖升级与真实播放由用户验收。
 7. 文档与知识库：更新 repo README/release/VERIFICATION.md，rea-knowledge-inbox 写脱敏报告（自动同步），本文件与滴答同步。
 
+## 已完成（2026-11-10 深夜）
+
+- [x] 基座更换 0.5.8→0.5.9 + 手补丁重放（AppOrigin/UpdateClient.architecture；sourceFailure 双参上游已自带）
+- [x] 构建脚本锚点动态化（playEpisode 首帧 lambda 按函数体定位；arm32 指向 0.5.9）
+- [x] stub 扩面（Catalog.requiresSearchSetup/activateSearch、playEpisode(IJZ)）+ UnifiedActivity 覆写迁移到 (IJZ) + 搜索登记一次性同意 UX
+- [x] 0.8.5-unified vc24 构建 + B5 签名 + dex 接线验证 + OTA 发布（含 0.8.4 回滚与下载页）
+- [x] rebase-tv059 分支推送 GitHub
+
 ## 还缺什么
 
-- 0.5.9 相对 0.5.8 的 smali 级变更清单（解码后 diff）。
-- 我方 mobile-decoded 相对 pristine 0.5.8 的补丁清单（解码后 diff）。
-- NAS 红果 OTA 目录的恢复（nasdav 公共空间/红果，含 0.8.4 两包与 latest.json）。
-- 0.5.9 新增"设备登记"同意流程 UI 在统一包里的呈现（沿用上游 Activity 即可，不改协议）。
+- [ ] 用户实体手机 0.8.4→0.8.5 覆盖升级 + 真实搜索/播放验收（OTA 已就绪）
+- [ ] 124 商店两渠道从 0.8.2(vc21) 同步到 0.8.5(vc24)
+- [ ] iOS Flutter client（client/lib/data/content.dart）同样受益于上游协议修复，另行立项
+- [ ] 澄清：OTA 由 106 本地 /opt/hongguo-analysis/family-ota/public 直接服务（非 NAS），磁盘清理时不得再删该目录
 
 ## 边界
 

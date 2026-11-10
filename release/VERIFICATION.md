@@ -59,3 +59,12 @@ SHA256：`25b53f0e4a7f56c0461437cc3a4d0bf711354352aa83a0b6eb9d1e39be2b8679`
 - iOS：106找到其他项目ASC受控配置，直连GET /v1/apps返回200，当前无红果App；默认代理超时。红果没有iOS源码/构建/签名/描述文件/IPA或TestFlight条目。本轮不能把安卓发布当作iOS发布完成。
 
 - 最终0.8.2第一帧日志：17:32:41.395，第2集实际解码。最终截图 docs/screenshots/082-playing-sheet.png 来自暂停真实视频后的选集面板。
+
+## 0.8.5 引擎跟版上游 tv-0.5.9 / vc24（2026-11-10）
+
+- 背景：上游桌面版 10-21（1.0.18）修复搜索空结果与播放地址解析，安卓线 tv-0.5.9（10-24）同步移植了"按本集请求批量接口并准确解析本集视频模型"与"设备登记关键词搜索"。本包把引擎基座从 0.5.8 原样换到 0.5.9，再重放我方适配（包名/统一入口/家族 OTA/B5 签名）。
+- 构建：106 全量 `HONGGUO_ANDROID_API=34 python3 build-family-106.py --family`，双包 5,005,873B 未签名；`tools/sign-family-106.py` B5 签名后各 5,014,856B。mobile SHA256 `dc124c700f20360d16fd204df4dad38c745cd66946e173ca9181fa67dc577fc1`；tv `d204ab038b002d14941618d6de0d27c573713de5f7dc196bac55e5540283615f`。
+- 接线验证：成品 classes.dex 含 `onVideoInfo` 首帧钩子、`FamilyOta` attach/knownFamily、AppSearchCatalog/SearchRegistration/新搜索端点 `reading/bookapi/search/tab`；classes2.dex 含 `maybeSearchSetup`/`activateSearchNow`。包名 `site.zhangyue.hongguo.{mobile,tv}`、versionCode 24、证书 b5aaac0e… 签名校验通过。
+- OTA：`/opt/hongguo-analysis/family-ota/public/`（nginx alias 直接服务，2026-11-10 重建）已置 0.8.5 双包 + latest.json + 0.8.4 回滚副本（latest-0.8.4.json）+ 下载页 index.html；公网 latest.json 与 APK Range 206 验证通过。
+- 源码参照（只读）：106 /opt/hongguo-up26/（1.0.26 setup.exe 已验官方 SHA256SUMS、backend/*.py、tv-0.5.9 arm32/arm64 APK、dec-058/dec-059/dec-084 反编译）。
+- 边界（如实）：本轮 106 无可用模拟器（redroid 容器已在磁盘清理中移除），未做运行时冒烟；编译、锚点存活、方法表 diff、dex 接线均通过，但"启动—浏览—播放"真机验收仍待用户实体手机/投影。覆盖升级路径（vc23→vc24、同包名同签名）静态成立。商店两渠道仍为 0.8.2(vc21)，未同步。上游登记接口服务端行为不受本仓库控制。
